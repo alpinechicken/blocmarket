@@ -32,6 +32,8 @@ class TestMarketObjectSQL(unittest.TestCase):
     @unittest.skipIf(False)
     def test_createUser(self):
         # Added thing
+        # another added  thing
+        # added third  thing
 
         # m = marketObjectSQL()
         # m.createUser(traderId='haresh', password='hareshpass')
