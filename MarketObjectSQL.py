@@ -14,7 +14,7 @@ from sqlalchemy.sql import select
 #TODO could combine some select/apply combos with grouping functions
 
 class MarketObject(object):
-    #'Market object class' thing
+    #'Market object class' 
 
     def __init__(self):
         # self.useSqlTables = 1;
