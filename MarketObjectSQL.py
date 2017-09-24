@@ -11,77 +11,60 @@ from sqlalchemy import create_engine, Table, Column, Integer, String, Float, \
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.sql import select
 
-# TODO could combine some select/apply combos with grouping functions
-# TODO implement something bettere for moving rows between tables
+# TODO could combine some select/apply combos with grouping functions (OR in SQL)
+# TODO: Sign each trade with user hashing all trade info (store public key in user table)
+# TODO: Combine transactions/trades
+# TODO: Convert dict literals to dict constructors DONE
+# TODO: Type assignments on functions
 
 class MarketObject(object):
-    #'Market object class' 
+    #'Market object class'
 
     def __init__(self):
-        # self.useSqlTables = 1;
-        # self.sqlConnection = 0;
-        # self.sqlTableRoot = 'Exchange.dbo';
-        self.engine = create_engine('sqlite:///:memory:', echo=True)
-        #self.engine = create_engine('sqlite:///pmarket.db')
+        # self.engine = create_engine('sqlite:///:memory:', echo=True)
+        self.engine = create_engine('sqlite:///pmarket.db')
         self.engine.echo = False
         self.metadata = MetaData(self.engine)
-        # Create session bound to engine
-        # Session = sessionmaker(bind=self.engine)
-        # self.session = Session()
         self.userTable = Table('userTable', self.metadata,
-                      Column('traderInd', Integer, primary_key=True),
+                      Column('traderInd', Integer, primary_key=True, autoincrement=True),
                       Column('traderId', String(40)),
                       Column('hashedPassword', String(40)),
                       Column('apiKey', String(40)),
                       )
 
         self.orderBook = Table('orderBook', self.metadata,
-                      Column('tradeNum', Integer),
+                      Column('tradeNum', Integer, primary_key=True, autoincrement=True),
                       Column('price', Float),
                       Column('quantity', Float),
                       Column('marketId', Integer),
                       Column('traderId', String(40)),
                       Column('timeStamp', String),
+                      Column('isMatched', Integer),
+                      Column('signature', String),
                         )
 
-        self.matchedTrades = Table('matchedTrades', self.metadata,
-                      Column('tradeNum', Integer),
-                      Column('price', Float),
-                      Column('quantity', Float),
-                      Column('marketId', Integer),
-                      Column('traderId', String(40)),
-                      Column('timeStamp', String),
-                        )
 
         self.underlyingData = Table('underlyingData', self.metadata,
-                      Column('outcomeNum', Integer, primary_key=True),
+                      Column('outcomeNum', Integer, primary_key=True, autoincrement=True),
                       Column('outcome', Float),
                       Column('underlying', String(40)),
                       Column('traderId', String(40)),
                         )
 
         self.openMarketData = Table('openMarketData', self.metadata,
-                      Column('marketId', Integer, primary_key=True),
+                      Column('marketId', Integer, primary_key=True, autoincrement=True),
                       Column('marketMin', Float),
                       Column('marketMax', Float),
                       Column('expiry', String),
                       Column('outcome', Float),
                       Column('underlying', String),
                       Column('traderId', String),
-                        )
-
-        self.settledMarketData = Table('settledMarketData', self.metadata,
-                      Column('marketId', Integer, primary_key=True),
-                      Column('marketMin', Float),
-                      Column('marketMax', Float),
-                      Column('expiry', String),
-                      Column('outcome', Float),
-                      Column('underlying', String),
-                      Column('traderId', String),
+                      Column('isSettled', Integer),
+                      Column('signature')
                         )
 
         self.transactionTable = Table('transactionTable', self.metadata,
-                      Column('transactionNum', Integer),
+                      Column('transactionNum', Integer, primary_key=True, autoincrement=True),
                       Column('value', Float),
                       Column('traderId', String),
                       Column('underlying', String),
@@ -90,35 +73,46 @@ class MarketObject(object):
         self.metadata.create_all(self.engine)
         self.conn = self.engine.connect()
 
+    def purgeTables(self):
+        # Development function to purge all tables before starting a test
+        self.userTable.delete().execute()
+        self.orderBook.delete().execute()
+        self.underlyingData.delete().execute()
+        self.openMarketData.delete().execute()
+        self.transactionTable.delete().execute()
+
     def createUser(self, traderId, password):
         """Create user with traderId and password"""
         hashedPassword = hl.md5(password.encode('utf-8')).hexdigest()
         apiKey = hl.md5(hashedPassword.encode('utf-8')).hexdigest()
         # TODO: No need to get whole userTable.
-        # userTable = pd.read_sql_query(
-        #     "SELECT * FROM userTable WHERE\
-        #                           traderId = '%s'" %(traderId) , self.conn)
-        userTable = pd.read_sql_table('userTable', self.conn)
-        if any(userTable.traderId.astype('object') == traderId):
+        userTable = pd.read_sql_query(
+            "SELECT * FROM userTable WHERE\
+                                  traderId = '%s'" %(traderId) , self.conn)
+        if not userTable.empty:
             print('Username already exists, sorry buddy.')
         else:
             # TODO: Use autoincrement for traderId
-            traderInd = len(userTable.traderId)+1
-            newUsr = {'traderInd': traderInd, 'traderId': traderId,
-                      'hashedPassword': hashedPassword, 'apiKey': apiKey}
+            # traderInd = len(userTable.traderId)+1
+            newUsr = dict(traderId=traderId,
+                          hashedPassword=hashedPassword,
+                          apiKey=apiKey)
             # self.userTable.insert().execute(newUsr)
             self.conn.execute(self.userTable.insert(), [newUsr,])
 
     def createUnderlying(self, underlying, traderId, apiKey):
         """Create underlying market providing a traderId and apiKey"""
         apiChk = self.checkApiKey(traderId, apiKey);
-        utTmp = pd.read_sql_table('underlyingData', self.conn)
-        if any(utTmp.underlying.astype('object') == underlying):
+        utTmp = pd.read_sql_query(
+            "SELECT * FROM underlyingData WHERE\
+                                  underlying = '%s'" %(underlying) , self.conn)
+        if not utTmp.empty:
             print('Underlying already exists. Try another.')
         else:
             if apiChk:
-                newUnderlying = {'outcome': np.nan, 'underlying': underlying,
-                                 'traderId': traderId}
+                newUnderlying = dict(outcome=np.nan,
+                                     underlying=underlying,
+                                     traderId=traderId)
                 self.conn.execute(self.underlyingData.insert(),
                                   [newUnderlying,])
             else:
@@ -133,10 +127,12 @@ class MarketObject(object):
             # TODO: marketNum = max(omdTmp.marketId)+1 ->
             # get rid of extra line
             numMarkets = len(omdTmp)
-            newMarket = {'marketId': numMarkets+1, 'marketMin': marketMin,
-                         'marketMax':marketMax, 'expiry': expiry,
-                         'outcome': np.nan, 'underlying': underlying,
-                         'traderId': traderId}
+            newMarket = dict(marketMin=marketMin,
+                             marketMax=marketMax,
+                             expiry=expiry,
+                             outcome=np.nan,
+                             underlying=underlying,
+                             traderId=traderId)
             self.conn.execute(self.openMarketData.insert(), [newMarket, ])
         else:
             print('Bad key. You lose.')
@@ -151,7 +147,7 @@ class MarketObject(object):
     def proposeRemoveTrade(self, tdNum,  traderId, apiKey):
         apiChk = self.checkApiKey(traderId, apiKey)
         obTmp = pd.read_sql_query("SELECT * FROM orderBook WHERE tradeNum ="\
-                                  " %d"% (tdNum), self.conn)
+                                  " %d AND isMatched = 0"% (tdNum), self.conn)
         tradeOwnerChk = obTmp.traderId == traderId
         if apiChk & tradeOwnerChk[0]:
             self.killTrade(tdNum=tdNum)
@@ -178,7 +174,7 @@ class MarketObject(object):
             else:
                 print('Underlying not expired yet or outcome already set')
         else:
-            print('Incorrect API key oryou do now own this market.')
+            print('Incorrect API key or you do now own this market.')
 
 
 
@@ -194,7 +190,7 @@ class MarketObject(object):
 
         return (chkPass, apiKey)
 
-    def checkApiKey(self, traderId, apiKey):
+    def checkApiKey(self, traderId: object, apiKey: object) -> object:
         utTmp = pd.read_sql_query("SELECT * FROM userTable WHERE\
                                   traderId = '%s'" % (traderId), self.conn)
         chkKey = utTmp.apiKey[0] == apiKey
@@ -203,42 +199,24 @@ class MarketObject(object):
     # Following were private functions in Matlab
 
     def addTransaction(self, value, traderId, underlying):
+        # TODO: oauth for authentication
         # TODO: tNum = max(self.transactionTable.transactionNum)+1
         ttTmp = pd.read_sql_table('transactionTable', self.conn)
-        if ttTmp.empty:
-            tNum = 1
-        else:
-            tNum = max(ttTmp.transactionNum)+1
-
         # Create new transaction entry
         # TODO: chuck in time  stamp here
-        transactionEntry = {'transactionNum': int(tNum), 'value': value,
-                            'traderId': traderId, 'underlying': underlying,
-                            'timeStamp': date.today() }
+        transactionEntry = dict(value=value, traderId=traderId,
+                                underlying=underlying, timeStamp=date.today())
         self.conn.execute(self.transactionTable.insert(),
                           [transactionEntry, ])
 
     def addTrade(self, price, quantity, traderId, marketId):
         # TODO Needs authentication or to be private (or pass apiKey)
         # TODO Get rid of  unnecessary line
-        obTmp = pd.read_sql_table('orderBook', self.conn)
-        if obTmp.empty:
-            tNum = 1
-        else:
-            tNum = max(obTmp.tradeNum)+1
-
-        trade = {'tradeNum': int(tNum), 'price': price, 'quantity': quantity,
-                 'marketId': int(marketId), 'traderId': traderId,
-                 'timeStamp': date.today() }
+        trade = dict(price=price, quantity=quantity,
+                     marketId=int(marketId), traderId=traderId,
+                     timeStamp=date.today(), isMatched=0)
         self.conn.execute(self.orderBook.insert(), [trade, ])
         self.matchTrades()
-
-    def removeTrade(self, tdNum):
-        # Adds offsetting trade (will match with own trade)
-        ob = pd.read_sql_query("SELECT * FROM orderBook WHERE\
-                               tradeNum = %d" % (tdNum), self.conn)
-        self.addTrade(ob.price[0], ob.quantity[0]*-1, ob.traderId[0],
-                      ob.marketId[0])
 
     def killTrade(self, tdNum):
         self.orderBook.delete(self.orderBook.c.tradeNum == int(tdNum))\
@@ -255,11 +233,11 @@ class MarketObject(object):
             allMatched = False
             while allMatched == False:
                 # Make a copy of current order book
-                # TODO: Select orderedBids/orderedAsks with select pulling only mID and quantity </> 0
-                ob = pd.read_sql_table('orderBook', self.conn)
+                ob = pd.read_sql_query("SELECT * FROM orderBook WHERE\
+                                       marketId = %d AND isMatched = 0" % (mId), self.conn)
                 # Order bids  and offers by price  then by tradNum
-                orderedBids = ob[(ob.quantity > 0) &  (ob.marketId == mId)].sort_values(by =['price', 'tradeNum'], ascending=[False, True])
-                orderedAsks = ob[(ob.quantity < 0) &  (ob.marketId == mId)].sort_values(by = ['price', 'tradeNum'], ascending=[True, True])
+                orderedBids = ob[(ob.quantity > 0)].sort_values(by =['price', 'tradeNum'], ascending=[False, True])
+                orderedAsks = ob[(ob.quantity < 0)].sort_values(by = ['price', 'tradeNum'], ascending=[True, True])
                 # Bids  have positive quantities, asks have negative
                 # quantities
                # Is there a bid and offer?
@@ -284,14 +262,6 @@ class MarketObject(object):
                                             abs(minAsk.quantity))
                         # Trade number increment
                         # TODO: get tradeNum from autoincrement
-                        mtTmp = pd.read_sql_table('matchedTrades', self.conn)
-                        # Below is slightly out of order with ml version that
-                        # checks tNum 3 lines down
-                        if mtTmp.empty:
-                            tNum = 1
-                        else:
-                            tNum = max(mtTmp.tradeNum)+1
-
                         # Find long and short trader
                         longTrader, shortTrader = maxBid.traderId,\
                                                   minAsk.traderId
@@ -309,19 +279,19 @@ class MarketObject(object):
                         if cCheckLong & cCheckShort:
                             #TODO: Put proper timestamps  in here
                             # Create trades
-                            newLongTrade =  {'tradeNum': int(tNum),
-                                             'price': price,
-                                             'quantity': tradeQuantity,
-                                             'marketId': int(mRow.marketId),
-                                             'traderId': longTrader,
-                                             'timeStamp': date.today() }
-                            newShortTrade = {'tradeNum': int(tNum),
-                                             'price': price,
-                                             'quantity': -tradeQuantity,
-                                             'marketId': int(mRow.marketId),
-                                             'traderId': shortTrader,
-                                             'timeStamp': date.today()}
-                            self.conn.execute(self.matchedTrades.insert(),
+                            newLongTrade = dict(price=price,
+                                                quantity=tradeQuantity,
+                                                marketId=int(mRow.marketId),
+                                                traderId=longTrader,
+                                                timeStamp=date.today(),
+                                                isMatched=int(1))
+                            newShortTrade = dict(price=price,
+                                                 quantity=-tradeQuantity,
+                                                 marketId=int(mRow.marketId),
+                                                 traderId=shortTrader,
+                                                 timeStamp=date.today(),
+                                                 isMatched=int(1))
+                            self.conn.execute(self.orderBook.insert(),
                                               [newLongTrade, newShortTrade] )
                             # Adjust quantities  in order book
                             # TODO could convert these into one  line each but
@@ -342,33 +312,25 @@ class MarketObject(object):
                             # Kill any zeros
                             zeroQorders = pd.read_sql_query(
                                 "SELECT * FROM orderBook WHERE\
-                                quantity = 0", self.conn)
-                            #TODO convert loop to list comprehension
+                                quantity = 0 AND isMatched = 0", self.conn)
                             for i, row in zeroQorders.iterrows():
                                 self.killTrade(tdNum=row.tradeNum)
-                        # TODO: Change  these != True  to nots without
-                        #  angering the Python gods
-                        elif (cCheckLong!=True) & cCheckShort:
+
+                        elif (not cCheckLong) and cCheckShort:
                             # Long trader doesn't have enough collateral
                             # Kill marginal open order of long trader\
                             #  (kills earlier trades first)
                             self.removeMarginalTrade(longTrader)
-                        elif cCheckLong & (cCheckShort !=True):
+                        elif cCheckLong and (not cCheckShort):
                             # Short trader doesn't have enough collateral
                             self.removeMarginalTrade(shortTrader)
-                        elif (cCheckLong!=True) & (cCheckShort!=True):
+                        elif ( not cCheckLong ) and ( not cCheckShort):
                             self.removeMarginalTrade(traderId=longTrader)
                             self.removeMarginalTrade(traderId=shortTrader)
                     else:
                         allMatched = True
 
     def settleMarket(self, outcome, marketId):
-        # TODO don't need omdTmp here, can just reference directly and save\
-        # a few lines
-        # TODO: to wit - finalPrice = min(max(outcome, self.openMarketData.\
-        # loc[self.openMarketData.marketId == marketId].marketMin[0]), \
-        # self.openMarketData.loc[self.openMarketData.marketId == marketId]\
-        # .marketMax[0])
         # Choose market outcome
         omdTmp = pd.read_sql_query(
             "SELECT * FROM openMarketData WHERE\
@@ -381,11 +343,11 @@ class MarketObject(object):
         finalPrice = min(max(outcome, omdTmp.marketMin[0]),
                          omdTmp.marketMax[0])
         # Get all market participants
-        mt = pd.read_sql_table('matchedTrades', self.conn)
+        mt = pd.read_sql_query("SELECT * FROM orderBook WHERE\
+                                   marketId = '%s' AND isMatched == 1 " % (marketId),
+                                   self.conn)
         # Get  unique values in an indexable list
         traders = list(set(mt.traderId))
-        # Market index
-        marketInd = mt.marketId == marketId
         # Distribute profit to traders
         for i, trader in enumerate(traders):
             # Calculate  profit and loss
@@ -393,8 +355,8 @@ class MarketObject(object):
             traderInd = mt.traderId == trader
             # Profit/loss is
             # sum((finalPrice - matched price(i,j) *quantity(i,j))
-            value = sum(finalPrice-mt.loc[traderInd & marketInd, ('price')])\
-                    * mt.loc[traderInd & marketInd, 'quantity']
+            value = sum(finalPrice-mt.loc[traderInd, ('price')])\
+                    * mt.loc[traderInd , 'quantity']
             # Add profit/loss ot transaction ledger
             self.addTransaction(
                 value=value, traderId=trader, underlying= \
@@ -403,30 +365,15 @@ class MarketObject(object):
         # Remove orders  in open market
         # TODO don't need obTmp here
         obTmp = pd.read_sql_query("SELECT * FROM orderBook WHERE\
-                                  marketId = '%s'" %(marketId) , self.conn)
+                                  marketId = '%s' AND isMatched = 0" %(marketId) , self.conn)
         for i, row in obTmp.iterrows():
             self.killTrade(tdNum=row.tradeNum)
         #TODO: don't really need a separate table for settled markets, can\
-        #  just set a flag in market data... too much hassle to change
-        # Move market to settled market
-        settledMarket = pd.read_sql_query("SELECT * FROM openMarketData WHERE\
-                                          marketId = '%s'" %(marketId) ,
-                                          self.conn)
-        # Insert into settled market table by converting row to dictionary
-        smTmp = settledMarket.loc[0].to_dict()
-        # Convert floats and ints
-        sMarket = {'expiry': smTmp['expiry'] ,
-                   'marketId': int(smTmp['marketId']),
-                   'marketMin': float(smTmp['marketMin']),
-                   'marketMax': float(smTmp['marketMax']),
-                   'outcome': float(smTmp['outcome']),
-                   'traderId': smTmp['traderId'],
-                   'underlying': smTmp['underlying']}
-        self.conn.execute(self.settledMarketData.insert(),
-                          [sMarket, ])
-        # Remove market from open markets
-        self.openMarketData.delete(
-                    self.openMarketData.c.marketId == marketId).execute()
+        #  just set a flag in market data...
+        update(self.openMarketData).where(
+            self.openMarketData.c.marketId == marketId).values \
+            (isSettled=1).execute()
+
 
     def checkCollateralCrossMarket(self, price, quantity, traderId, marketId):
         # Checks if trader has sufficient collateral to covr a new  trade \
@@ -458,9 +405,13 @@ class MarketObject(object):
             self.constructOutcomeCombinations()
         # number of combinations
         numCombinations = len(marketOutcomes)
-        ob, mt, omd = pd.read_sql_table('orderBook', self.conn),\
-                      pd.read_sql_table('matchedTrades', self.conn),\
-                      pd.read_sql_table('openMarketData', self.conn)
+        ob = pd.read_sql_query("SELECT * FROM orderBook WHERE\
+                                  traderId = '%s' AND\
+                                   isMatched = 0" %(traderId) , self.conn)
+        mt = pd.read_sql_query("SELECT * FROM orderBook WHERE\
+                                  traderId = '%s' AND\
+                                   isMatched = 1" %(traderId) , self.conn)
+        omd = pd.read_sql_table('openMarketData', self.conn)
         # Current transactions index for current  trader and  market
         ownTransactions = pd.read_sql_query("SELECT * FROM transactionTable\
                                             WHERE traderId = '%s'"\
@@ -479,11 +430,9 @@ class MarketObject(object):
             # Market id
             mId = market.marketId
             # Open orders  index for current trader and market
-            indOpenOrders = (ob.traderId == traderId) &\
-                            (ob.marketId == marketId)
+            indOpenOrders = (ob.marketId == marketId)
             # Matched trades index for current trader  and market
-            indMatchedTrades = (mt.traderId == traderId) &\
-                               (mt.marketId == mId)
+            indMatchedTrades = (mt.marketId == mId)
             # Current transactions for current trader and market
             # Open orders for current trader and market
             ownOpenOrders = ob.loc[indOpenOrders]
@@ -501,11 +450,19 @@ class MarketObject(object):
             # all possible combinations of cases)
             for comboInd in range(numCombinations):
                 outcomeTmp = marketOutcomes[comboInd][marketIndex]
-                matchedOutcome = sum((outcomeTmp - ownMatchedTrades.price) *
-                                     ownMatchedTrades.quantity)
+                if not ownMatchedTrades.empty:
+                    matchedOutcome = sum((outcomeTmp - ownMatchedTrades.price) *
+                                         ownMatchedTrades.quantity)
+                else:
+                    matchedOutcome = 0
+
                 # Worst  open trade outcome
-                openOutcome = min((outcomeTmp-ownOpenOrders.price) *\
-                                  ownOpenOrders.quantity)
+                if not ownOpenOrders.empty:
+                    openOutcome = min((outcomeTmp-ownOpenOrders.price) *\
+                                      ownOpenOrders.quantity)
+                else:
+                    openOutcome = 0
+
                 # New order outcome (only count new order for target market)
                 newOrderOutcome[mInd] =\
                     (outcomeTmp - priceAllMarkets[marketIndex]) *\
@@ -514,6 +471,7 @@ class MarketObject(object):
                 #  Worst case outcome  for market min case (matched orders\
                 #  settled at market min and worst of any open trade\
                 #  or new order)
+                # TODO: first condition redundant since openOutcome set to zero in this case
                 if not openOutcome:
                     testMarket[comboInd][mInd] = np.sum(matchedOutcome) +\
                                                  np.sum(newOrderOutcome[mInd])
@@ -539,7 +497,7 @@ class MarketObject(object):
         # up worst case collateral
         # TODO: Could find better marginal trade to kill
         openOrdersTradeNum = pd.read_sql_query(
-            "SELECT tradeNum FROM orderBook WHERE traderId = '%s'"
+            "SELECT tradeNum FROM orderBook WHERE traderId = '%s' AND isMatched = 0"
                                               %(traderId) , self.conn)
         self.killTrade(tdNum=openOrdersTradeNum.loc[0].tradeNum)
 
@@ -560,7 +518,6 @@ class MarketObject(object):
             ind = underlyings.index(row)
             underlyingMin, underlyingMax = np.min(marketMins[ind]),\
                                            np.max(marketMaxes[ind])
-            #TODO: not sure this is correctly translateed from ml
             tmp.append(list({underlyingMin, underlyingMax}))
 
         # Construct all possible combinations of min/max, e.g. for two\
@@ -592,17 +549,8 @@ class MarketObject(object):
         return "Limit order book. With great power comes great responsibility."
 
 
-# Set up sql
-# engine = create_engine('sqlite:///:memory:', echo=True)
-# conn = engine.connect()
-# metadata = MetaData()
-# metadata.create_all(engine)
 
-# TODO implement as unit tests
 
-# m = MarketObject()
-# m.sqlConnection = conn
-# m.useSqlTables = 1
 
 
 # m.createUser(traderId='haresh', password='hareshpass')
