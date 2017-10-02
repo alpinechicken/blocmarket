@@ -1,28 +1,33 @@
 import hashlib as hl
-import pandas as pd
-import DateTime as dt
-import numpy as np
 import itertools
-from datetime import datetime, date
+from datetime import date
 
-# Sql imports
+import numpy as np
+import pandas as pd
 from sqlalchemy import create_engine, Table, Column, Integer, String, Float, \
-    Date, MetaData, ForeignKey, update
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.sql import select
+    MetaData, update
+
+# Crypto imports
+import nacl.encoding
+import nacl.signing
+
 
 # TODO could combine some select/apply combos with grouping functions (OR in SQL)
 # TODO: Sign each trade with user hashing all trade info (store public key in user table)
 # TODO: Combine transactions/trades
+# TODO: Settlement transactions are currently redundant because they can be determined as an outcome of all signed trades
+# Could really ignore these values and instead look at settled settled trades in the order book
 # TODO: Convert dict literals to dict constructors DONE
-# TODO: Type assignments on functions
+# TODO: Type assignments on functions (annotate types in the lightbulb help)
+# TODO: Check signatures for underlyingTable, openMarketData, orderBook
+# TODO: Temporarily expose signing methods from NACL
 
 class MarketObject(object):
     #'Market object class'
 
     def __init__(self):
         # self.engine = create_engine('sqlite:///:memory:', echo=True)
-        self.engine = create_engine('sqlite:///pmarket.db')
+        self.engine = create_engine('sqlite:///pmarket4.db')
         self.engine.echo = False
         self.metadata = MetaData(self.engine)
         self.userTable = Table('userTable', self.metadata,
@@ -30,6 +35,8 @@ class MarketObject(object):
                       Column('traderId', String(40)),
                       Column('hashedPassword', String(40)),
                       Column('apiKey', String(40)),
+                      Column('signatureKey', String), # JUST FOR DEV. In production signature key not stored
+                      Column('verifyKey', String),
                       )
 
         self.orderBook = Table('orderBook', self.metadata,
@@ -40,6 +47,7 @@ class MarketObject(object):
                       Column('traderId', String(40)),
                       Column('timeStamp', String),
                       Column('isMatched', Integer),
+                      Column('signatureMsg', String),
                       Column('signature', String),
                         )
 
@@ -49,7 +57,10 @@ class MarketObject(object):
                       Column('outcome', Float),
                       Column('underlying', String(40)),
                       Column('traderId', String(40)),
-                        )
+                      Column('signatureMsg', String),
+                      Column('signature', String),
+
+                                    )
 
         self.openMarketData = Table('openMarketData', self.metadata,
                       Column('marketId', Integer, primary_key=True, autoincrement=True),
@@ -60,7 +71,8 @@ class MarketObject(object):
                       Column('underlying', String),
                       Column('traderId', String),
                       Column('isSettled', Integer),
-                      Column('signature')
+                      Column('signatureMsg', String),
+                      Column('signature', String),
                         )
 
         self.transactionTable = Table('transactionTable', self.metadata,
@@ -69,7 +81,10 @@ class MarketObject(object):
                       Column('traderId', String),
                       Column('underlying', String),
                       Column('timeStamp', String),
+                      Column('signatureMsg', String),
+                      Column('signature', String),
                         )
+
         self.metadata.create_all(self.engine)
         self.conn = self.engine.connect()
 
@@ -81,7 +96,39 @@ class MarketObject(object):
         self.openMarketData.delete().execute()
         self.transactionTable.delete().execute()
 
-    def createUser(self, traderId, password):
+    def generateSignatureKeys(self):
+        # Dev function to generate signature key pairs.
+        # In production this MUST be client side (javascript).
+
+        # Create signing key
+        signingKey = nacl.signing.SigningKey.generate()
+        # Obtain the verify key for a given signing key
+        verifyKey = signingKey.verify_key
+
+        # Serialize the verify key to send it to a third party
+        signingKey_hex = signingKey.encode(encoder=nacl.encoding.HexEncoder)
+        verifyKey_hex = verifyKey.encode(encoder=nacl.encoding.HexEncoder)
+        return signingKey_hex, verifyKey_hex
+
+    def signMessage(self, msg, signingKey_hex):
+        # Dev function to sign a message
+        # Convert hex key to bytes
+        signingKey_bytes = b'%s' % str.encode(signingKey_hex)
+        # Generate signing key
+        signingKey = nacl.signing.SigningKey(signingKey_bytes,
+                                             encoder=nacl.encoding.HexEncoder)
+        # Sign message
+        signed = signingKey.sign(msg)
+        return signed
+
+    def verifyMessage(self, signed, verifyKey_hex):
+        # Dev function to verify a signed message
+        verifyKey = nacl.signing.VerifyKey(verifyKey_hex,
+                                             encoder=nacl.encoding.HexEncoder)
+        verified = verifyKey.verify(signed)
+        return verified
+
+    def createUser(self, traderId, password, signatureKey_hex ='None', verifyKey_hex = 'None'):
         """Create user with traderId and password"""
         hashedPassword = hl.md5(password.encode('utf-8')).hexdigest()
         apiKey = hl.md5(hashedPassword.encode('utf-8')).hexdigest()
@@ -94,35 +141,43 @@ class MarketObject(object):
         else:
             # TODO: Use autoincrement for traderId
             # traderInd = len(userTable.traderId)+1
+            # Note: Signature key will NOT be present in production.
             newUsr = dict(traderId=traderId,
                           hashedPassword=hashedPassword,
-                          apiKey=apiKey)
+                          apiKey=apiKey, signatureKey=signatureKey_hex,
+                          verifyKey=verifyKey_hex)
             # self.userTable.insert().execute(newUsr)
             self.conn.execute(self.userTable.insert(), [newUsr,])
 
-    def createUnderlying(self, underlying, traderId, apiKey):
+    def createUnderlying(self, underlying, traderId, apiKey,
+                         signatureMsg='None', signature='None'):
         """Create underlying market providing a traderId and apiKey"""
         apiChk = self.checkApiKey(traderId, apiKey);
         utTmp = pd.read_sql_query(
             "SELECT * FROM underlyingData WHERE\
                                   underlying = '%s'" %(underlying) , self.conn)
+        # TODO: Signature check for underlying
         if not utTmp.empty:
             print('Underlying already exists. Try another.')
         else:
             if apiChk:
                 newUnderlying = dict(outcome=np.nan,
                                      underlying=underlying,
-                                     traderId=traderId)
+                                     traderId=traderId,
+                                     signatureMsg=signatureMsg,
+                                     signature=signature)
                 self.conn.execute(self.underlyingData.insert(),
                                   [newUnderlying,])
             else:
                 print('Bad API key, bucko.')
 
     def createMarket(self, marketMin, marketMax, expiry,
-                     underlying, traderId, apiKey):
+                     underlying, traderId, apiKey,
+                     signatureMsg='None', signature='None'):
         """ Creat market based on underlying """
         apiChk = self.checkApiKey(traderId, apiKey)
         omdTmp = pd.read_sql_table('openMarketData', self.conn)
+        # TODO: signature check for market
         if apiChk:
             # TODO: marketNum = max(omdTmp.marketId)+1 ->
             # get rid of extra line
@@ -132,15 +187,18 @@ class MarketObject(object):
                              expiry=expiry,
                              outcome=np.nan,
                              underlying=underlying,
-                             traderId=traderId)
+                             traderId=traderId,
+                             signatureMsg=signatureMsg,
+                             signature=signature)
             self.conn.execute(self.openMarketData.insert(), [newMarket, ])
         else:
             print('Bad key. You lose.')
 
-    def proposeTransaction(self, value, underlying, traderId, apiKey):
+    def proposeTransaction(self, value, underlying, traderId, apiKey,
+                           signatureMsg = 'None', signature='None'):
         apiChk = self.checkApiKey(traderId, apiKey)
         if apiChk:
-            self.addTransaction(value, traderId, underlying)
+            self.addTransaction(value, traderId, underlying, signature)
         else:
             print('API key is bad.')
 
@@ -154,7 +212,8 @@ class MarketObject(object):
         else:
             print('Incorrect API key or you do not own this trade.')
 
-    def proposeSettlement(self, outcome, underlying, traderId, apiKey):
+    def proposeSettlement(self, outcome, underlying, traderId,
+                          apiKey, signatureMsg='None', signature='None'):
         apiChk = self.checkApiKey(traderId, apiKey)
         undTmp = pd.read_sql_query("SELECT * FROM underlyingData WHERE\
                                    underlying = '%s'" % (underlying),
@@ -163,6 +222,7 @@ class MarketObject(object):
                                    underlying = '%s'" % (underlying),
                                    self.conn)
         underlyingOwnerChk = undTmp.traderId[0] == traderId
+        # TODO: Check signature
         if apiChk & underlyingOwnerChk:
             if pd.isnull(undTmp.outcome[0]):
                 update(self.underlyingData).where(
@@ -170,7 +230,7 @@ class MarketObject(object):
                     (outcome = outcome).execute()
                 for i, row in omdTmp.iterrows():
                     marketId = omdTmp.marketId.loc[i]
-                    self.settleMarket(outcome, marketId)
+                    self.settleMarket(outcome, marketId, signatureMsg, signature)
             else:
                 print('Underlying not expired yet or outcome already set')
         else:
@@ -198,23 +258,27 @@ class MarketObject(object):
 
     # Following were private functions in Matlab
 
-    def addTransaction(self, value, traderId, underlying):
+    def addTransaction(self, value, traderId, underlying, signatureMsg='None', signature='None'):
         # TODO: oauth for authentication
         # TODO: tNum = max(self.transactionTable.transactionNum)+1
         ttTmp = pd.read_sql_table('transactionTable', self.conn)
         # Create new transaction entry
         # TODO: chuck in time  stamp here
         transactionEntry = dict(value=value, traderId=traderId,
-                                underlying=underlying, timeStamp=date.today())
+                                underlying=underlying, timeStamp=date.today(),
+                                signatureMsg=signatureMsg,
+                                signature=signature)
         self.conn.execute(self.transactionTable.insert(),
                           [transactionEntry, ])
 
-    def addTrade(self, price, quantity, traderId, marketId):
+    def addTrade(self, price, quantity, traderId, marketId, signature='None'):
         # TODO Needs authentication or to be private (or pass apiKey)
         # TODO Get rid of  unnecessary line
         trade = dict(price=price, quantity=quantity,
                      marketId=int(marketId), traderId=traderId,
-                     timeStamp=date.today(), isMatched=0)
+                     timeStamp=date.today(), isMatched=0,
+                     signatureMsg=signature,
+                     signature=signature)
         self.conn.execute(self.orderBook.insert(), [trade, ])
         self.matchTrades()
 
@@ -330,11 +394,13 @@ class MarketObject(object):
                     else:
                         allMatched = True
 
-    def settleMarket(self, outcome, marketId):
+    def settleMarket(self, outcome, marketId, signatureMsg='None',signature='None'):
         # Choose market outcome
         omdTmp = pd.read_sql_query(
             "SELECT * FROM openMarketData WHERE\
                                   marketId = '%s'" %(marketId) , self.conn)
+        # TODO: Check signature
+
         # Set  market  outcome
         update(self.openMarketData).where(
             self.openMarketData.c.marketId == int(marketId)).values(
@@ -357,7 +423,7 @@ class MarketObject(object):
             # sum((finalPrice - matched price(i,j) *quantity(i,j))
             value = sum(finalPrice-mt.loc[traderInd, ('price')])\
                     * mt.loc[traderInd , 'quantity']
-            # Add profit/loss ot transaction ledger
+            # Add profit/loss ot transaction ledger (convert to trade)
             self.addTransaction(
                 value=value, traderId=trader, underlying= \
                     'Settlement for market ' + str(marketId) )
@@ -368,8 +434,7 @@ class MarketObject(object):
                                   marketId = '%s' AND isMatched = 0" %(marketId) , self.conn)
         for i, row in obTmp.iterrows():
             self.killTrade(tdNum=row.tradeNum)
-        #TODO: don't really need a separate table for settled markets, can\
-        #  just set a flag in market data...
+
         update(self.openMarketData).where(
             self.openMarketData.c.marketId == marketId).values \
             (isSettled=1).execute()
@@ -493,7 +558,7 @@ class MarketObject(object):
 
 
     def removeMarginalTrade(self, traderId):
-        # Kill marginal trade of trader (earliesst trade, any market) to free
+        # Kill marginal trade of trader (earliest trade, any market) to free
         # up worst case collateral
         # TODO: Could find better marginal trade to kill
         openOrdersTradeNum = pd.read_sql_query(
