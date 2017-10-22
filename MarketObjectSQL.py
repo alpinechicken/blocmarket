@@ -27,7 +27,7 @@ class MarketObject(object):
 
     def __init__(self):
         # self.engine = create_engine('sqlite:///:memory:', echo=True)
-        self.engine = create_engine('sqlite:///pmarket4.db')
+        self.engine = create_engine('sqlite:///pmarket1.db')
         self.engine.echo = False
         self.metadata = MetaData(self.engine)
         self.userTable = Table('userTable', self.metadata,
@@ -110,7 +110,7 @@ class MarketObject(object):
         verifyKey_hex = verifyKey.encode(encoder=nacl.encoding.HexEncoder)
         return signingKey_hex, verifyKey_hex
 
-    def signMessage(self, msg, signingKey_hex):
+    def signMessage(self, msg: object, signingKey_hex: object) -> object:
         # Dev function to sign a message
         # Convert hex key to bytes
         signingKey_bytes = b'%s' % str.encode(signingKey_hex)
@@ -121,14 +121,14 @@ class MarketObject(object):
         signed = signingKey.sign(msg)
         return signed
 
-    def verifyMessage(self, signed, verifyKey_hex):
+    def verifyMessage(self, signature: bytes, message: bytes, verifyKey_hex: str) -> object:
         # Dev function to verify a signed message
         verifyKey = nacl.signing.VerifyKey(verifyKey_hex,
                                              encoder=nacl.encoding.HexEncoder)
-        verified = verifyKey.verify(signed)
+        verified = verifyKey.verify(message, signature=signature)
         return verified
 
-    def createUser(self, traderId, password, signatureKey_hex ='None', verifyKey_hex = 'None'):
+    def createUser(self, traderId, password, signatureKey_hex ='None', verifyKey_hex ='None'):
         """Create user with traderId and password"""
         hashedPassword = hl.md5(password.encode('utf-8')).hexdigest()
         apiKey = hl.md5(hashedPassword.encode('utf-8')).hexdigest()
@@ -142,15 +142,16 @@ class MarketObject(object):
             # TODO: Use autoincrement for traderId
             # traderInd = len(userTable.traderId)+1
             # Note: Signature key will NOT be present in production.
-            newUsr = dict(traderId=traderId,
-                          hashedPassword=hashedPassword,
-                          apiKey=apiKey, signatureKey=signatureKey_hex,
-                          verifyKey=verifyKey_hex)
+            # TODO: remove signature key in production
+            newUsr = dict(traderId = traderId,
+                          hashedPassword = hashedPassword,
+                          apiKey=apiKey, signatureKey = signatureKey_hex,
+                          verifyKey = verifyKey_hex)
             # self.userTable.insert().execute(newUsr)
             self.conn.execute(self.userTable.insert(), [newUsr,])
 
     def createUnderlying(self, underlying, traderId, apiKey,
-                         signatureMsg='None', signature='None'):
+                         signatureMsg='None', signature = 'None'):
         """Create underlying market providing a traderId and apiKey"""
         apiChk = self.checkApiKey(traderId, apiKey);
         utTmp = pd.read_sql_query(
@@ -198,7 +199,7 @@ class MarketObject(object):
                            signatureMsg = 'None', signature='None'):
         apiChk = self.checkApiKey(traderId, apiKey)
         if apiChk:
-            self.addTransaction(value, traderId, underlying, signature)
+            self.addTransaction(value, traderId, underlying, signatureMsg, signature)
         else:
             print('API key is bad.')
 
@@ -213,7 +214,7 @@ class MarketObject(object):
             print('Incorrect API key or you do not own this trade.')
 
     def proposeSettlement(self, outcome, underlying, traderId,
-                          apiKey, signatureMsg='None', signature='None'):
+                          apiKey, signatureMsg = 'None', signature = 'None'):
         apiChk = self.checkApiKey(traderId, apiKey)
         undTmp = pd.read_sql_query("SELECT * FROM underlyingData WHERE\
                                    underlying = '%s'" % (underlying),
@@ -271,13 +272,23 @@ class MarketObject(object):
         self.conn.execute(self.transactionTable.insert(),
                           [transactionEntry, ])
 
-    def addTrade(self, price, quantity, traderId, marketId, signature='None'):
+    def writeMatchedTrade(self, price, quantity, traderId, marketId, isMatched=1,  signatureMsg='None', signature='None'):
+        # Internal function to write trades from matchtrades
+        trade = dict(price=price, quantity=quantity,
+                     marketId=int(marketId), traderId=traderId,
+                     timeStamp=date.today(), isMatched=isMatched,
+                     signatureMsg=signatureMsg,
+                     signature=signature)
+        self.conn.execute(self.orderBook.insert(), [trade, ])
+
+
+    def addTrade(self, price, quantity, traderId, marketId, isMatched=0,  signatureMsg='None', signature='None'):
         # TODO Needs authentication or to be private (or pass apiKey)
         # TODO Get rid of  unnecessary line
         trade = dict(price=price, quantity=quantity,
                      marketId=int(marketId), traderId=traderId,
-                     timeStamp=date.today(), isMatched=0,
-                     signatureMsg=signature,
+                     timeStamp=date.today(), isMatched=isMatched,
+                     signatureMsg=signatureMsg,
                      signature=signature)
         self.conn.execute(self.orderBook.insert(), [trade, ])
         self.matchTrades()
@@ -342,23 +353,27 @@ class MarketObject(object):
                                 traderId=shortTrader, marketId=mRow.marketId)
                         if cCheckLong & cCheckShort:
                             #TODO: Put proper timestamps  in here
-                            # Create trades
-                            newLongTrade = dict(price=price,
-                                                quantity=tradeQuantity,
-                                                marketId=int(mRow.marketId),
-                                                traderId=longTrader,
-                                                timeStamp=date.today(),
-                                                isMatched=int(1))
-                            newShortTrade = dict(price=price,
-                                                 quantity=-tradeQuantity,
-                                                 marketId=int(mRow.marketId),
-                                                 traderId=shortTrader,
-                                                 timeStamp=date.today(),
-                                                 isMatched=int(1))
-                            self.conn.execute(self.orderBook.insert(),
-                                              [newLongTrade, newShortTrade] )
+                            self.writeMatchedTrade(price=price, quantity=tradeQuantity, traderId=longTrader, marketId=int(mRow.marketId),
+                                     isMatched=int(1),signatureMsg='Internal', signature='Internal')
+                            self.writeMatchedTrade(price=price, quantity=-tradeQuantity, traderId=shortTrader, marketId=int(mRow.marketId),
+                                     isMatched=int(1),signatureMsg='Internal', signature='Internal')
+                            # # Create trades
+                            # newLongTrade = dict(price=price,
+                            #                     quantity=tradeQuantity,
+                            #                     marketId=int(mRow.marketId),
+                            #                     traderId=longTrader,
+                            #                     timeStamp=date.today(),
+                            #                     isMatched=int(1))
+                            # newShortTrade = dict(price=price,
+                            #                      quantity=-tradeQuantity,
+                            #                      marketId=int(mRow.marketId),
+                            #                      traderId=shortTrader,
+                            #                      timeStamp=date.today(),
+                            #                      isMatched=int(1))
+                            # self.conn.execute(self.orderBook.insert(),
+                            #                   [newLongTrade, newShortTrade] )
                             # Adjust quantities  in order book
-                            # TODO could convert these into one  line each but
+                            # TODO Instead of changing quantities here, add internal signed trade and use something for cleanup?
                             # probably not worth  it
                             startQuantityMaxBid = maxBid.quantity
                             update(self.orderBook).where(
@@ -426,7 +441,7 @@ class MarketObject(object):
             # Add profit/loss ot transaction ledger (convert to trade)
             self.addTransaction(
                 value=value, traderId=trader, underlying= \
-                    'Settlement for market ' + str(marketId) )
+                    'Settlement for market ' + str(marketId), signatureMsg='None', signature='None' )
 
         # Remove orders  in open market
         # TODO don't need obTmp here
@@ -606,6 +621,102 @@ class MarketObject(object):
 
 
         return (marketOutcomes, underlyingOutcomes)
+
+    def getVerifyKey(self, traderId):
+        # Get verify key for trader
+        verifyKey =  pd.read_sql('SELECT verifyKey FROM userTable WHERE traderId = "%s"' %(traderId), self.conn).verifyKey[0]
+        return verifyKey
+
+    def getSignatureKey(self, traderId):
+        # Get signature key for trader (Not in production)
+        # TODO: Remove for production
+        signatureKey =  pd.read_sql('SELECT signatureKey FROM userTable WHERE traderId = "%s"' %(traderId), self.conn).signatureKey[0]
+        return signatureKey
+
+    # Method to get previous signatures for any table/index
+    def getPreviousSig(self, tableName, indexName):
+        # Get previous signature by choosing signature with maximum index value
+        prevSig = pd.read_sql(
+            'SELECT signature FROM %s  WHERE %s  = (SELECT max(%s) FROM %s)' %(tableName, indexName, indexName, tableName),
+            self.conn).signature
+
+        # Select signature or set to rootsig if empty
+        if not prevSig.empty:
+            prevSig = prevSig[0]
+        else:
+            prevSig = 'rootsig'.encode("utf-8")
+
+        return prevSig
+
+    # Methods to get previous signatures for particular tables
+    def getPreviousUnderlyingDataSig(self):
+        # Get previous signature from underlyingData
+        prevSig = self.getPreviousSig('underlyingData', 'outcomeNum')
+        return prevSig
+
+    def getPreviousOpenMarketDataSig(self):
+        # Get previous signature from openMarketData table
+        prevSig = self.getPreviousSig('openMarketData', 'marketId')
+        return prevSig
+
+    def getPreviousOrderBookSig(self):
+        # Get previous signature from previousOrderBook table
+        prevSig = self.getPreviousSig('orderBook', 'tradeNum')
+        return prevSig
+
+    def getPreviousTransactionTableSig(self):
+        # Get previous signature from transactionTable table
+        prevSig = self.getPreviousSig('transactionTable', 'transactionNum')
+        return prevSig
+
+    # Signatures (all need to be on client side eventually)
+    def signUnderlyingData(self, underlying, traderId, signatureKey_hex):
+        # Sign previous signature
+        prevSig = self.getPreviousUnderlyingDataSig()
+
+        # Encode signature message in bytes
+        msg = b'%s%s%s' % (prevSig, traderId.encode("utf-8"), underlying.encode("utf-8"))
+
+        signedUnderlyingData = self.signMessage(msg=msg,
+                                                   signingKey_hex=signatureKey_hex)
+        return signedUnderlyingData
+
+    def signOpenMarketData(self, traderId, underlying, marketMin, marketMax, expiry,  signatureKey_hex):
+        # Sign previous signature
+        prevSig = self.getPreviousOpenMarketDataSig()
+
+        # Encode signature message in bytes
+        msg = b'%s%s%s%s%s%s' % (prevSig, traderId.encode("utf-8"), underlying.encode("utf-8"),
+                           str(marketMin).encode("utf-8"), str(marketMax).encode("utf-8"), str(expiry).encode("utf-8"))
+
+        signedOpenMarketData = self.signMessage(msg=msg,
+                                                   signingKey_hex=signatureKey_hex)
+        return signedOpenMarketData
+
+
+    def signOrderBook(self, price, quantity, traderId, marketId, signatureKey_hex):
+        # Sign previous signature
+        prevSig = self.getPreviousOrderBookSig()
+
+        # Encode signature message in bytes
+        msg = b'%s%s%s%s%s' % (prevSig, traderId.encode("utf-8"), str(marketId).encode("utf-8"),
+                           str(price).encode("utf-8"), str(quantity).encode("utf-8"))
+
+        signedOrderBook = self.signMessage(msg=msg,
+                                                   signingKey_hex=signatureKey_hex)
+        return signedOrderBook
+
+    def signTransactionTable(self, value, traderId, underlying, signatureKey_hex):
+        # Sign previous signature
+        prevSig = self.getPreviousTransactionTableSig()
+
+        # Encode signature message in bytes
+        msg = b'%s%s%s%s' % (prevSig, traderId.encode("utf-8"), str(value).encode("utf-8"),
+                           underlying.encode("utf-8"))
+
+        signedTransactionTable = self.signMessage(msg=msg,
+                                                   signingKey_hex=signatureKey_hex)
+        return signedTransactionTable
 
     def __repr(self):
         return "MarketObject()"
