@@ -6,10 +6,13 @@ import pandas  as pd
 # import nacl.signing
 
 # TODO: Combine transactions and trades tables?
-# TODO: Add signature chain logic to openMarketData (DONE), orderBook, transactionTable (DONE) (sigs made on client side)
+# TODO: Add signature chain logic to marketData (DONE), orderBook, transactionTable (DONE) (sigs made on client side)
 # TODO: Think about verificataion on server side (maybe SQL script?)
 # TODO: Change transaction table with from/to and add balance verification
 
+
+# TODO: Check signatures for marketData
+# TODO: Figure out a solution for internal order book trades
 
 class TestMarketObjectSQL(unittest.TestCase):
 
@@ -30,14 +33,11 @@ class TestMarketObjectSQL(unittest.TestCase):
         signatureKey_zwif, verifyKey_zwif = self.market.generateSignatureKeys()
         signatureKey_zwif_hex = signatureKey_zwif.decode("utf-8")
         verifyKey_zwif_hex = verifyKey_zwif.decode("utf-8")
+        # Note signature key will not
         self.market.createUser(traderId='zwif', password='zwifpass',
                                signatureKey_hex=signatureKey_zwif_hex,
                                verifyKey_hex=verifyKey_zwif_hex)
 
-        # TODO: signUnderlying()
-        # TODO: signOpenMarketData()
-        # TODO: signOrderBook()
-        # TODO: signTransaction()
 
         # TODO: pull out all api/password calls and replace with signature verification
 
@@ -66,6 +66,7 @@ class TestMarketObjectSQL(unittest.TestCase):
                                      signatureMsg=signedUnderlying.message,
                                      signature=signedUnderlying.signature)
 
+        # Add transaction for 101 zwif
         signatureKey_hex = self.market.getSignatureKey("haresh")
         signedTransaction = self.market.signTransactionTable(value=101,
                                                              traderId='haresh',
@@ -77,6 +78,7 @@ class TestMarketObjectSQL(unittest.TestCase):
                                    signatureMsg=signedTransaction.message,
                                    signature=signedTransaction.signature)
 
+        # Add transaction for 101 for zwif
         signatureKey_hex = self.market.getSignatureKey("zwif")
         signedTransaction = self.market.signTransactionTable(value=101,
                                                              traderId='zwif',
@@ -103,21 +105,23 @@ class TestMarketObjectSQL(unittest.TestCase):
     def test_createUnderlying(self):
         undt = pd.read_sql_table('underlyingData', self.market.conn)
         # Get signature message
-        signatureMessage = undt[undt.underlying == 'broncos'].signatureMsg[0]
+        signatureMsg = undt[undt.underlying == 'broncos'].signatureMsg[0]
         # Get signature
         signature = undt[undt.underlying == 'broncos'].signature[0]
         traderId = undt[undt.underlying == 'broncos'].traderId[0]
         verifyKey_hex = self.market.getVerifyKey(traderId)
         # Get verify key from user table
         self.assertEqual(len(undt.index), 2)
-        checkBroncosSig = self.market.verifyMessage(signature=signature, message=signatureMessage,
+        checkBroncosSig = self.market.verifyMessage(signature=signature,
+                                                    signatureMsg=signatureMsg,
                                                     verifyKey_hex=verifyKey_hex)
         self.assertTrue(checkBroncosSig)
 
     def test_createMarket(self):
         # Create a market
         signatureKey_haresh_hex = self.market.getSignatureKey("haresh")
-        signedMarket = self.market.signOpenMarketData(marketMin=0, marketMax=1, expiry=date.today(),
+        signedMarket = self.market.signOpenMarketData(marketMin=0, marketMax=1,
+                                 expiry=date.today(),
                                  underlying='broncos', traderId='haresh',
                                  signatureKey_hex=signatureKey_haresh_hex)
         self.market.createMarket(marketMin=0, marketMax=1, expiry=date.today(),
@@ -129,7 +133,8 @@ class TestMarketObjectSQL(unittest.TestCase):
         # Create a second market on the same underlying
         signatureKey_haresh_hex = self.market.getSignatureKey("haresh")
 
-        signedMarket = self.market.signOpenMarketData(marketMin=1, marketMax=2, expiry=date.today(),
+        signedMarket = self.market.signOpenMarketData(marketMin=1, marketMax=2,
+                                 expiry=date.today(),
                                  underlying='broncos', traderId='haresh',
                                  signatureKey_hex=signatureKey_haresh_hex)
         self.market.createMarket(marketMin=1, marketMax=2, expiry=date.today(),
@@ -137,7 +142,7 @@ class TestMarketObjectSQL(unittest.TestCase):
                                  apiKey='f7b1b5f3d240e42c0805714d4799520b',
                                  signatureMsg=signedMarket.message,
                                  signature=signedMarket.signature)
-        mt = pd.read_sql_table('openMarketData', self.market.conn)
+        mt = pd.read_sql_table('marketData', self.market.conn)
         self.assertEqual(len(mt.index), 2)
 
     def test_addTransaction(self):
@@ -147,11 +152,15 @@ class TestMarketObjectSQL(unittest.TestCase):
     def test_addTrade(self):
         # Get signature  key
         signatureKey_haresh_hex = self.market.getSignatureKey("haresh")
-        signedTrade = self.market.signOrderBook(price=1, quantity=2, traderId='haresh',
-                                 marketId=1, signatureKey_hex=signatureKey_haresh_hex)
+        signedTrade = self.market.signOrderBook(price=1, quantity=2,
+                                                traderId='haresh',
+                                                marketId=1,
+                                                signatureKey_hex=signatureKey_haresh_hex)
 
         self.market.addTrade(price=0.5, quantity=10,
-                             traderId='haresh', marketId=1, isMatched=0, signatureMsg=signedTrade.message,
+                             traderId='haresh', marketId=1,
+                             isMatched=0, matchTrades=True,
+                             signatureMsg=signedTrade.message,
                              signature=signedTrade.signature)
         ob = pd.read_sql_table('orderBook', self.market.conn)
         self.assertEqual(any((ob.marketId == 1) &
@@ -172,7 +181,9 @@ class TestMarketObjectSQL(unittest.TestCase):
 
         # Basic signing
         signed = self.market.signMessage(b'attack at dawn', signatureKey.decode("utf-8"))
-        verified = self.market.verifyMessage(signature=signed.signature, message = signed.message, verifyKey_hex=verifyKey.decode("utf8"))
+        verified = self.market.verifyMessage(signature=signed.signature,
+                                             signatureMsg = signed.message,
+                                             verifyKey_hex=verifyKey.decode("utf8"))
         self.assertEqual(b'attack at dawn', verified)
 
         # Sign a trade
@@ -188,9 +199,9 @@ class TestMarketObjectSQL(unittest.TestCase):
         signedTrade = self.market.signMessage(tradeMsg, signatureKey.decode("utf-8"))
         print(signedTrade)
         # Verify trade with signature key
-        verified = self.market.verifyMessage(signature=signed.signature, message = signed.message, verifyKey_hex=verifyKey.decode("utf8"))
-
-        verified = self.market.verifyMessage(signedTrade.signature, signedTrade.message, verifyKey.decode("utf-8"))
+        verified = self.market.verifyMessage(signature=signedTrade.signature,
+                                             signatureMsg = signedTrade.message,
+                                             verifyKey_hex=verifyKey.decode("utf8"))
         # Check that trade is verified with verify key
         self.assertEqual(tradeMsg, verified)
 
@@ -228,20 +239,24 @@ class TestMarketObjectSQL(unittest.TestCase):
                                  apiKey='f7b1b5f3d240e42c0805714d4799520b',
                                  signatureMsg=signedMarket.message,
                                  signature=signedMarket.signature)
-
+        # Add first trade
         signatureKey_haresh_hex = self.market.getSignatureKey("haresh")
         signedTrade = self.market.signOrderBook(price=0.5, quantity=10, traderId='haresh',
                                  marketId=1, signatureKey_hex=signatureKey_haresh_hex)
         self.market.addTrade(price=0.5, quantity=10,
-                             traderId='haresh', marketId=1, isMatched=0, signatureMsg=signedTrade.message,
+                             traderId='haresh', marketId=1, isMatched=0,
+                             matchTrades=True, signatureMsg=signedTrade.message,
                              signature=signedTrade.signature)
 
+        # Add second trade
         signatureKey_zwif_hex = self.market.getSignatureKey("zwif")
         signedTrade = self.market.signOrderBook(price=0.4, quantity=-20, traderId='zwif',
                                  marketId=1, signatureKey_hex=signatureKey_zwif_hex)
         self.market.addTrade(price=0.4, quantity=-20,
-                             traderId='zwif', marketId=1, isMatched=0, signatureMsg=signedTrade.message,
+                             traderId='zwif', marketId=1, isMatched=0,
+                             matchTrades=True, signatureMsg=signedTrade.message,
                              signature=signedTrade.signature)
+        # Check trades
         orderBook = pd.read_sql_table('orderBook', self.market.conn)
         ob = orderBook[orderBook.isMatched == 0]
         mt = orderBook[orderBook.isMatched==1]
@@ -255,24 +270,20 @@ class TestMarketObjectSQL(unittest.TestCase):
         # Haresh has 10 matched at 0.5
         self.assertEqual(any((mt.traderId == 'haresh') & (mt.marketId == 1) &
                              (mt.price == 0.5) & (mt.quantity == 10) ), True)
+
         # Propose settlement of market with outcome  = 1
         self.market.proposeSettlement(
                               outcome=1,
                               underlying='broncos',
                               traderId='haresh',
                               apiKey='f7b1b5f3d240e42c0805714d4799520b')
+
+        # Check transaction table following settlement
         orderBook = pd.read_sql_table('orderBook', self.market.conn)
         ob = orderBook[orderBook.isMatched == 0]
         mt = orderBook[orderBook.isMatched==1]
         tt = pd.read_sql_table('transactionTable', self.market.conn)
-        # smd = pd.read_sql_table('settledMarketData', self.market.conn)
-        omd = pd.read_sql_table('openMarketData', self.market.conn)
-        # print(ob)
-        # print(mt)
-        # print(tt)
-        # print(smd)
-        # print(omd)
-        # Haresh wins 5
+        md = pd.read_sql_table('marketData', self.market.conn)
         self.assertEqual(any((tt.traderId == 'haresh') &
                              (tt.value == 5)), True)
         # Zwif loses 5
