@@ -1,4 +1,5 @@
 added text
-(source control -> push)
+> source control -> view and commit changes
+> source control -  push (prompts for password))
 
 
