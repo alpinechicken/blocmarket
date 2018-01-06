@@ -1,0 +1,422 @@
+classdef marketObject < handle
+    
+    %Bids are positive quantities. Asks are negative quantities
+    %** Database implementation (appendTable etc)
+    %** Add timestamps on trades DONE
+    %** Input checks
+    %** Access control (makeUser, password access for createMarket,
+    %proposeTransaction, proposeTrade, proposeRemoveTrade,
+    %proposeSettlement) DONE 
+    
+    properties (SetAccess=private)
+        %User details
+        userTable = table({}, {}, {}, 'VariableNames', {'traderId', 'hashedPassword', 'apiKey'});
+        %Order book for open bids and offers in all open markets (negative
+        %quantity = ask)
+        orderBook = table([], [], [], [], {}, [], 'VariableNames', {'tradeNum', 'Price', 'Quantity', 'marketId', 'traderId', 'timeStamp'});
+        %Book for matched trades in all markets
+        matchedTrades = table([], [], [], [], {}, [], 'VariableNames', {'tradeNum', 'Price', 'Quantity', 'marketId', 'traderId', 'timeStamp'});
+        %Market data for open markets
+        openMarketData = table([], [], [], [], [], {}, {}, 'VariableNames', {'marketId', 'marketMin', 'marketMax', 'expiry', 'outcome', 'description', 'traderId'});
+        %Market data for settled markets
+        settledMarketData = table([], [], [], [], [], {}, {}, 'VariableNames', {'marketId', 'marketMin', 'marketMax', 'expiry', 'outcome', 'description', 'traderId'});
+        %Transaction table (from settlement and deposits/withdrawals)
+        transactionTable = table([], [], {}, {}, [], 'VariableNames', {'transactionNum', 'Value', 'traderId', 'description', 'timeStamp'});
+        marketFile = 'marketData.mat'
+        %**allow outcome to be a function from some data on a trigger date
+    end
+    
+    methods(Access=public)     
+      
+        function [INST, apiKey] = createUser(INST, traderId, password)
+            %Create a user if table is empty or traderId doesn't exist yet
+            % - Anybody can make a user
+            if  isempty(INST.userTable)
+                %User password generated with MD5 hash
+                hashedPassword = DataHash(password);
+                %Permanent API key is double hashed password
+                apiKey = DataHash(hashedPassword);
+                %TODO: put this table into properties
+                INST.userTable = [ INST.userTable; table({traderId}, {hashedPassword}, {apiKey}, 'VariableNames',...
+                    {'traderId', 'hashedPassword', 'apiKey'})];
+            elseif ~any(strcmpi(INST.userTable.traderId, traderId))
+                 %User password generated with MD5 hash
+                hashedPassword = DataHash(password);
+                %Permanent API key is double hashed password
+                apiKey = DataHash(hashedPassword);
+                %TODO: put this table into properties
+                INST.userTable = [ INST.userTable; table({traderId}, {hashedPassword}, {apiKey}, 'VariableNames',...
+                    {'traderId', 'hashedPassword', 'apiKey'})];               
+            else
+                error('traderId already exists.');
+            end
+            INST.saveData();
+        end
+             
+        function INST  = createMarket(INST, marketMin, marketMax, expiry, description, traderId, apiKey)
+           %Initialize new market in openMarketData table with incremented
+           %number
+           %TODO: Input checks
+           apiChk = INST.checkApiKey(traderId, apiKey);
+           if apiChk         
+               numMarkets = height(INST.openMarketData);   
+               %Initialize market with empty outcome and append to market table
+               newMarket = table(numMarkets+1, marketMin, marketMax, expiry, NaN, {description}, {traderId}, 'VariableNames', INST.openMarketData.Properties.VariableNames); 
+               %Append new market to market data table
+               INST.openMarketData = [INST.openMarketData; newMarket];
+               %Save data
+               INST.saveData();
+           else
+               error('Incorrect API Key.');
+           end
+        end
+        
+        function INST = proposeTransaction(INST, Value, description, traderId, apiKey)
+           %Add transaction 
+           %TODO: Input checks
+           apiChk = INST.checkApiKey(traderId, apiKey);
+           if apiChk   
+               INST.addTransaction(Value, traderId, description);
+               INST.saveData();
+           end
+        end
+        
+        function INST = proposeTrade(INST, Price, Quantity, marketId, traderId, apiKey)
+            apiChk = INST.checkApiKey(traderId, apiKey);
+            if apiChk   
+                %Check trader has enough collateral to enter trade in market
+                colChk = INST.checkCollateral(Price, Quantity, traderId, marketId);
+                %Select market
+                marketIndex = INST.openMarketData.marketId == marketId;            
+                %Is market outcome not set and market not passed expiry
+                openChk = isnan(INST.openMarketData.outcome{marketIndex});
+                if ~openChk
+                    error('Market is expired.');
+                elseif colChk 
+                    %Add trade
+                    INST.addTrade(Price, Quantity, traderId, marketId);
+                    INST.saveData(); 
+
+                else
+                    error('Insufficient collateral for trade.');
+                end
+            else
+               error('Incorrect API Key.');
+            end
+        end
+        
+        function INST = proposeRemoveTrade(INST, tdNum, traderId, apiKey)
+            %TODO: Input checks
+            % Check API key and that traderId owns the trade
+            apiChk = INST.checkApiKey(traderId, apiKey);
+            tradeInd = INST.orderBook.tradeNum == tdNum;
+            tradeOwnerChk = strcmp(INST.orderBook(tradeInd, :).traderId, traderId)
+            if apiChk & tradeOwnerChk
+                INST.removeTrade(tdNum)
+                INST.saveData();
+            else
+                error('Incorrect API key or you do not own this trade.');
+            end
+        end
+        
+        function INST= proposeSettlement(INST, outcome, marketId, traderId, apiKey)
+            %Propose settlement outcome for market
+            %TODO: Input checks
+            apiChk = INST.checkApiKey(traderId, apiKey);
+            marketOwnerChk = strcmp(INST.openMarketData(marketId, :).traderId, traderId)
+            if apiChk & marketOwnerChk  
+                marketInd = INST.openMarketData.marketId == marketId;
+                %If market outcome is empty proceed to settlement
+                if isnan(INST.openMarketData.outcome{marketInd}) %& now>=INST.openMarketData.expiry(marketInd) %only allow settlement after expiry (later)
+                    %TODO maybe have flag for not settled market rather than
+                    %empty?
+                    settleMarket(INST, outcome, marketId);
+                    INST.saveData(); 
+                else
+                    error('Market not expired yet or outcome already set.');
+                end
+            else
+                error('Incorrect API key or you do not own this market.');
+            end
+        end
+        
+        
+        function [chkPass, apiKey] = checkPassword(INST, traderId, password)
+            %Check password and retrieve API key
+            hashedPassword = DataHash(password);
+            traderInd = strcmpi(INST.userTable.traderId, traderId);
+            chkPass = strcmp(INST.userTable(traderInd, :).hashedPassword, hashedPassword);
+            if chkPass
+               apiKey = INST.userTable(traderInd, :).apiKey;
+            else
+               apiKey = '';
+            end
+        end
+      
+        function chkKey = checkApiKey(INST, traderId, apiKey)
+          %Check apiKey in userTable
+          traderInd = strcmpi(INST.userTable.traderId, traderId);
+          chkKey = strcmp(INST.userTable(traderInd, :).apiKey, apiKey);
+        end
+        
+    end
+    
+    methods(Access=private)
+        
+        
+        function saveData(INST)
+            %Save down market file
+            marketData = INST;
+            save(INST.marketFile,'marketData');
+        end
+        
+        function INST = addTransaction(INST, Value, traderId, description)
+            %Add transaction for traderId (value, description)
+            tNum = max(INST.transactionTable.transactionNum)+1;
+            if isempty(tNum)
+                %If there are no current transactions initialize at 1
+                tNum = 1;
+            end
+            %Create new transaction entry
+            transactionEntry = table(tNum, Value, {traderId}, {description}, now, 'VariableNames', INST.transactionTable.Properties.VariableNames);
+            %Append transaction
+            INST.transactionTable = [INST.transactionTable; transactionEntry];
+            INST.saveData(); 
+        end
+        
+        function INST = addTrade(INST, Price, Quantity, traderId, marketId)
+            %Add  trade for traderId in marketId
+            tNum = max(INST.orderBook.tradeNum)+1;
+            if isempty(tNum)
+                %If there are no current transactions initialize at 1
+                tNum = 1;
+            end
+            %Append trade
+            trade = table(tNum, Price, Quantity, marketId, {traderId}, now, 'VariableNames', INST.orderBook.Properties.VariableNames);
+            INST.orderBook =[INST.orderBook; trade];
+            INST.saveData(); 
+            %Check for new trades to match
+            INST = INST.matchTrades();
+            INST.saveData(); 
+        end
+        
+        function INST = removeTrade(INST, tdNum)
+            %Remove an unmatched trade from the order book
+            targetOrderInd = INST.orderBook.tradeNum == tdNum;
+            INST.orderBook(targetOrderInd,:) = [];
+            INST.saveData(); 
+            %Target destroyed
+        end
+        
+        function INST = matchTrades(INST)
+            %Asks are -ve quantity
+            %Traverse through all markets and match trades
+            for mInd = 1:height(INST.openMarketData)
+                %Find market id for current
+                mId = INST.openMarketData.marketId(mInd);
+                allMatched = 0;
+                while ~allMatched 
+                    %Make a copy of the current order book
+                    ob = INST.orderBook;
+                    %Bids have positive quantities
+                    bidInd = ob.Quantity > 0 & ob.marketId == mId;
+                    %Asks have negative quantities
+                    askInd = ob.Quantity < 0 & ob.marketId == mId;
+                    %Is there a trade to match?
+                    if min(ob.Price(askInd, :)) <= max(ob.Price(bidInd, :))
+                        %Candiate bids
+                        maxBidInd = ob.Price == max(ob.Price(bidInd, :)) & ob.Quantity > 0;
+                        maxBid = ob(maxBidInd, :);
+                        maxBid = maxBid(1, :); %first come first served
+                        %Candidate asks
+                        minAskInd = ob.Price == min(ob.Price(askInd, :)) & ob.Quantity < 0;
+                        minAsk = ob(minAskInd, :);
+                        minAsk = minAsk(1, :); %first come first served
+                        if maxBid.tradeNum < minAsk.tradeNum
+                            %Bid was first
+                            Price = maxBid.Price;
+                        else
+                            %Ask was first
+                            Price = minAsk.Price;
+                        end
+                        %Trade quantity is minimum of bid and ask quantity
+                        tradeQuantity = min(abs(maxBid.Quantity), abs(minAsk.Quantity));
+                        %Trade number increment
+                        tNum = max(INST.matchedTrades.tradeNum)+1;
+                        %Market id
+                        mId = INST.openMarketData.marketId(mInd);
+                        if isempty(tNum)
+                            %If there are no current matched trades initialize at 1
+                            tNum = 1;
+                        end
+                        %Find long trader
+                        longTrader = maxBid.traderId;
+                        %Find short trader
+                        shortTrader = minAsk.traderId;
+                        %Check collateral for both traders and record
+                        %min and max market outcomes.
+                        [cCheckLong, minMarketLong, maxMarketLong] = INST.checkCollateral(Price, tradeQuantity, longTrader, mId);
+                        [cCheckShort, minMarketShort, maxMarketShort] = INST.checkCollateral(Price, -tradeQuantity, shortTrader, mId);
+                        if cCheckLong & cCheckShort %Both traders have enough collateral
+                            %Create trades
+                            newLongTrade = table(tNum, Price, tradeQuantity, mId, longTrader, now, 'VariableNames', INST.matchedTrades.Properties.VariableNames);
+                            newShortTrade = table(tNum, Price, -tradeQuantity, mId, shortTrader, now, 'VariableNames', INST.matchedTrades.Properties.VariableNames);
+                            INST.matchedTrades = [INST.matchedTrades;newLongTrade;newShortTrade];
+                            %Adjust quantities in order book
+                            INST.orderBook(ob.tradeNum == maxBid.tradeNum, :).Quantity = INST.orderBook(ob.tradeNum == maxBid.tradeNum, :).Quantity - tradeQuantity;
+                            INST.orderBook(ob.tradeNum == minAsk.tradeNum, :).Quantity = INST.orderBook(ob.tradeNum == minAsk.tradeNum, :).Quantity + tradeQuantity;
+                            %Kill any zeros
+                            zeroQIndex = INST.orderBook.Quantity == 0;
+                            INST.orderBook(zeroQIndex, :) = [];
+                        elseif ~cCheckLong & cCheckShort %Long trader doesn't have enough collateral
+                            %Kill marginal open order of long trader (kills
+                            %earlier trades first)
+                            INST.removeMarginalTrade(longTrader);
+                        elseif cCheckLong & ~cCheckShort
+                            %Kill marginal open order of short trader
+                            INST.removeMarginalTrade(shortTrader);
+                        elseif ~cCheckLong & ~cCheckShort %Short trader doesn't have enough collateral
+                            %Kill marginal open trades of long and short trader
+                            INST.removeMarginalTrade(longTrader);
+                            INST.removeMarginalTrade(shortTrader);
+                        end
+                    else
+                        %There are no trades to match
+                        allMatched = 1;
+                    end
+                end
+            end
+            INST.saveData(); 
+            
+        end
+        
+        function INST = settleMarket(INST, outcome, marketId)
+            %Choose market outcome
+            marketInd = INST.openMarketData.marketId == marketId;
+            %Set market outcome
+            INST.openMarketData.outcome{marketInd} = outcome;
+%             %Set market min/max to outcome (this avoids need for
+%             transaction table)
+%             INST.openMarketData.marketMin(marketInd) = outcome;
+%             INST.openMarketData.marketMax(marketInd) = outcome;
+            %Set final price (within market max/min)
+            finalPrice = min(max(outcome, INST.openMarketData.marketMin(marketInd)) , INST.openMarketData.marketMax(marketInd));
+            %Get all market participants
+            traders = unique(INST.matchedTrades.traderId);
+            %Copy of matchted trades
+            mt = INST.matchedTrades;
+            %Market Index
+            marketInd = mt.marketId == marketId;
+            %Distribute profit to traders
+            for i=1:length(traders)
+                %Calculate profit/loss for each trader 
+                %Trader index
+                traderInd = strcmpi(mt.traderId, traders{i});
+                %Profit/loss is sum((finalPrice - matched price(i,j))* quantity(i,j)) 
+                Value = sum((finalPrice - mt(traderInd & marketInd, :).Price) .* mt.Quantity(traderInd & marketInd, :));
+                %Add profit/loss to transaction ledger
+                INST.addTransaction(Value, traders{i}, ['market ' num2str(marketId) ' profit/loss']);
+            end
+            %Remove all open orders in market
+            marketInd = INST.orderBook.marketId == marketId;
+            INST.orderBook(marketInd, :) = [];   
+            %Move market to settled market
+            marketInd = INST.openMarketData.marketId == marketId 
+            INST.settledMarketData = [INST.settledMarketData; INST.openMarketData(marketInd, :)];
+            %Remove market from open markets
+            INST.openMarketData(marketInd, :) = [];
+            INST.saveData(); 
+        end
+        
+        function [colChk, minMarketOutcome, maxMarketOutcome] = checkCollateral(INST, Price, Quantity, traderId, marketId)           
+        %Is the maximum loss on *any one* unmatched trade plus the
+        %associated outcome of the matched trades greater than the
+        %amount of available collateral?
+        ob = INST.orderBook; % current order book
+        mt = INST.matchedTrades; %current matched trades
+        %Current transactions index for current trader and market
+        indTransactions = strcmpi(INST.transactionTable.traderId, traderId);
+        for mInd = 1:height(INST.openMarketData)
+            %Check across all markets that existing matched trades and
+            %worst case hit on open trade/new trade outcome is
+            %collateralised
+            
+            %Market id
+            mId = INST.openMarketData.marketId(mInd);
+            %Open orders index for current trader and market
+            indOpenOrders = strcmpi(ob.traderId, traderId) & ob.marketId == mId;
+            %Matched trades index for current trader and market
+            indMatchedTrades = strcmpi(mt.traderId, traderId) & mt.marketId == mId;
+            %Current transactions for current trader and market
+            ownTransactions = INST.transactionTable(indTransactions, :)
+            %Open orders for current trader and market
+            ownOpenOrders = ob(indOpenOrders, :);
+            %Matched trades for current trader and market
+            ownMatchedTrades = mt(indMatchedTrades, :);
+            %Market index
+            marketIndex = INST.openMarketData.marketId==mId;
+            
+            %Collateral test: current transaction cash + matched orders + worst single open
+            %order hit (in min/max market case)
+            
+            %Market min case
+            %Matched trades outcome
+            matchedOutcome = sum((INST.openMarketData(marketIndex, :).marketMin - ownMatchedTrades.Price) .* ownMatchedTrades.Quantity);
+            %Worst open trade outcome
+            openOutcome = min((INST.openMarketData(marketIndex, :).marketMin - ownOpenOrders.Price) .* ownOpenOrders.Quantity);
+            %New order outcome
+            newOrderOutcome(mInd) = (INST.openMarketData(marketIndex, :).marketMin - Price) .* Quantity * (mId == marketId); %only count new order for target market
+            %Worst case outcome for market min case (matched orders settled at market min and worst of any open trade or new order)
+            testMarketMin(mInd) = sum(matchedOutcome) + ...
+                                                       min(sum(openOutcome), sum(newOrderOutcome));
+            %Market max case
+            %Max trades outcome
+            matchedOutcome = sum((INST.openMarketData(marketIndex,:).marketMax - ownMatchedTrades.Price) .* ownMatchedTrades.Quantity);
+            %Worst open trade outcome
+            openOutcome = min((INST.openMarketData(marketIndex, :).marketMax - ownOpenOrders.Price) .* ownOpenOrders.Quantity);
+            %New order outcome (order is hit and market settles at max)
+            newOrderOutcome(mInd) = (INST.openMarketData(marketIndex, :).marketMax - Price) .* Quantity * (mId == marketId);
+            %Worst case outcome for market max case (matched orders settled at market max and worst of any open trade or new order)
+            testMarketMax(mInd) = sum(matchedOutcome) + ...
+                                                       min(sum(openOutcome), sum(newOrderOutcome));
+        end
+        minMarketOutcome = sum(testMarketMin) + sum(ownTransactions.Value);
+        maxMarketOutcome = sum(testMarketMax) + sum(ownTransactions.Value);
+        if minMarketOutcome >=0 & maxMarketOutcome >= 0
+            %Enough collateral. Good to go.
+            colChk = 1;
+        else
+            %No dice
+            colChk = 0;
+        end
+        end
+        
+        function INST = removeMarginalTrade(INST, traderId)
+        %Kill marginal trade of trader (earliest trade, any market) to free
+        %up worst case collateral
+   
+        %Create copy of order book
+        ob = INST.orderBook;
+        %Find open orders in this markeAladdt for this trader
+        indOpenOrders = strcmpi(ob.traderId,traderId);
+        %Find trade number 
+        openOrdersTradeNum = ob.tradeNum(indOpenOrders,:)
+        %Remove first open order from any market (this will be the oldest)
+        %TODO: only need to remove *some* of the open order. Maybe
+        %proportional reduction of all open orders or similar). For now
+        %just remove
+        INST.removeTrade(openOrdersTradeNum(1)) 
+        INST.saveData(); 
+        end
+        
+        function INST = saveMarket(INST)
+            %Save market in specified location
+            save(INST.marketFile,INST);            
+        end
+        
+    end
+               
+    end
+    
+
+

@@ -1,0 +1,42 @@
+classdef marketObject_newTest < matlab.unittest.TestCase
+    % test marketObject_new functionality
+    
+   properties
+        mo % market object
+    end
+ 
+    methods(TestMethodSetup)
+        function createMarketObject(testCase)
+            % Create market object
+            testCase.mo = marketObject_new();
+        end
+    end
+ 
+    methods(TestMethodTeardown)
+        function closeFigure(testCase)
+            testCase.mo = [];
+        end
+    end
+    
+    methods (Test)
+        function testCreateUser(testCase)
+            mo = testCase.mo.createUser('test_verifyKey')
+            testCase.verifyNotEmpty(testCase.mo.userTable)
+        end
+        function testCreateMarket(testCase)
+            testCase.mo.createUser('test_verifyKey')
+            marketRootId = 1;
+            marketBranchId = 1;
+            marketMin = 0;
+            marketMax = 1;
+            traderId = 1;
+            signatureMsg = 'test_signatureMsg';
+            signature = 'test_signature'
+            mo = mo.createMarket(marketRootId,marketBranchId, marketMin,...
+                marketMax, traderId, signatureMsg,signature)
+            
+            testCase.verifyNotEmpty(testCase.mo.userTable)
+        end
+    end
+    
+end 
