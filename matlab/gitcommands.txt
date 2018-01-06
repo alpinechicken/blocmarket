@@ -11,4 +11,5 @@ Powershell commit and push to  remote:
 Powershell pull from remote:
 > git pull
 
-EDIT FROM MATLAB
+EDIT FROM GITHUB
+
