@@ -1,4 +1,4 @@
-Powershell clone remote:
+Shell clone remote:
 > git clone https://github.com/alpinechicken/pmarket.git
 
 Matlab git commit and push to remote:
@@ -6,12 +6,12 @@ Matlab git commit and push to remote:
 > source control ->  push (prompts for password))
 
 
-Powershell commit and push to  remote:
+Shell commit and push to  remote:
 > git add .
 > git commit -m "this  is a commit message"
 > git push (prompts for github credentials)
 
-Powershell pull from remote:
+Shell pull from remote:
 > git pull
 
 
