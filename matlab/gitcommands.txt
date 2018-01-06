@@ -14,4 +14,4 @@ Shell commit and push to  remote:
 Shell pull from remote:
 > git pull
 
-
+change from windows.......
