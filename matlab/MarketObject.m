@@ -2,6 +2,7 @@ classdef MarketObject < handle
     % Version of market object  that only allows q=1 or q=-1
     
     % tradeBranchId:
+    %
     %           1 = Primary - default (trade initially in order book)
     %           2 = Offset (offset a primary trade => signature from primary)
     %           3 = Match (matched version of primary trade => signature from offset)
@@ -31,7 +32,7 @@ classdef MarketObject < handle
             'traderId', 'previousSig', 'signatureMsg', 'signature'});
         % TODO: apply collateral only for trader 0, everyone else  gets
         % from trades.
-        COLLATERAL_LIMIT = -100;
+        COLLATERAL_LIMIT = -2;
         
     end % Properties
     
@@ -175,24 +176,22 @@ classdef MarketObject < handle
             chk4 = oTrades.tradeBranchId == 2;
             chk5 = mTrades.tradeBranchId == 3;                      
             % - Same price for all
-            chk9 = pTrades.price == oTrades.price &...
+            chk6 = pTrades.price == oTrades.price &...
                 oTrades.price == mTrades.price;
             % - Same absolure quantity
-            chk10 = abs(pTrades.quantity) == abs(oTrades.quantity) &...
+            chk7 = abs(pTrades.quantity) == abs(oTrades.quantity) &...
                 abs(oTrades.quantity) == abs(mTrades.quantity);
             % - Opposite signs for primary and offset            
-            chk11 = sign(pTrades.quantity) == -1*sign(oTrades.quantity) &...
+            chk8 = sign(pTrades.quantity) == -1*sign(oTrades.quantity) &...
                 -1*sign(oTrades.quantity) == sign(mTrades.quantity);
             % - Same market root and branch
-            chk12 = pTrades.marketRootId == oTrades.marketRootId &...
+            chk9 = pTrades.marketRootId == oTrades.marketRootId &...
                 oTrades.marketRootId == mTrades.marketRootId;
-            chk13 = pTrades.marketBranchId == oTrades.marketBranchId &...
+            chk10 = pTrades.marketBranchId == oTrades.marketBranchId &...
                 oTrades.marketBranchId == mTrades.marketBranchId;
             
             primaryOffsetMatchChk = all(chk1 & chk2 & chk3 & chk4 & chk5 &...
-                chk9 & chk10 & chk11 & chk12 &...
-                chk13);
-            
+                chk6 & chk7 & chk8 & chk9 & chk10);            
             
             % Check quantity is -1 or 1
             validTradeQuantityChk = all(ismember(pTrades.quantity, [-1, 1]));
@@ -210,16 +209,14 @@ classdef MarketObject < handle
             for  iTrade = 1 : length(pTrades.traderId)
                 sigChkPrimary(iTrade) = this.verifyTradeSignature(pTrades(iTrade,:));
                 if ~isempty(this.orderBook)
-                    % Find previous trade
+                    % Find previous trade                    
                     prevTrade = this.orderBook(strcmp(this.orderBook.signature, pTrades{iTrade, 'previousSig'}), :);
-                    % Trades with the same root id
-                    prevTrades = this.orderBook(this.orderBook.tradeRootId == prevTrade.tradeRootId, :);
-                    % Check previous is furthest available branch on ajacent
-                    % root trade (-1)
-                    chainChkPrimary(iTrade) = prevTrade.tradeRootId == (pTrades{iTrade, 'tradeRootId'} - 1) &...
-                        (prevTrade.tradeBranchId == max(prevTrades.tradeBranchId));
+                    % Find previous valid trade
+                    prevValidTrade = this.getPreviousTrade;
+                    % Check signature matches
+                    chainChkPrimary(iTrade) = strcmp(prevTrade.signature, prevValidTrade.signature);
                 else
-                    % If it's the first trade the chain is ok
+                    % If it's the first trade it's ok
                     chainChkPrimary(iTrade) = true;
                 end
                 % Check signature of offset trade
@@ -235,7 +232,7 @@ classdef MarketObject < handle
             end
             
             % All signatures  check out
-            sigChk = all(sigChkPrimary & sigChkOffset& sigChkMatch);
+            sigChk = all(sigChkPrimary & sigChkOffset & sigChkMatch);
             
             % All chains check out
             chainChk = all(chainChkPrimary & chainChkOffset & chainChkMatch);
@@ -281,6 +278,21 @@ classdef MarketObject < handle
             [colChk, netCollateral] = this.checkCollateral(newTrade);
         end % checkCollateral_public
         
+        function previousTrade = getPreviousTrade(this)
+            % most recent signature is the highest number on the highest
+            % trade number in the order book
+            
+            if ~isempty(this.orderBook)
+                maxTrade = this.orderBook(this.orderBook.tradeRootId == max(this.orderBook.tradeRootId), :);
+                previousTrade = maxTrade(maxTrade.tradeBranchId == max(maxTrade.tradeBranchId), :);
+            else
+                % Return root trade
+                previousTrade = table(0, {'s'}, 'VariableNames', {'tradeRootId', 'signature'});
+            end
+
+            
+        end % getPreviousSignature
+        
     end % Public methods
     
     methods (Access = private) % Check collateral and match
@@ -318,8 +330,8 @@ classdef MarketObject < handle
                 marketTable_test = outerjoin(this.marketTable,...
                     outcomeCombinations{iComb}, 'MergeKeys', true);
                 % Construct payoffs for matched and unmatched trades
-                matchedTrades = ownTrades(ownTrades.tradeBranchId==3, :);
-                openTrades = ownTrades(ownTrades.tradeBranchId~=3, :);
+                matchedTrades = ownTrades(ownTrades.tradeBranchId == 3, :);
+                openTrades = ownTrades(ownTrades.tradeBranchId ~= 3, :);
                 
                 % Payoffs for matched trades
                 if ~isempty(matchedTrades)
@@ -427,13 +439,15 @@ classdef MarketObject < handle
                     % Get current unmatched trades for target market
                     ob = innerjoin(this.orderBook,...
                         marketTmp(:, {'marketRootId', 'marketBranchId'}));
-                    % Calculate net open orders for each trader
+                    % Calculate number of branches on trade 
                     numelOrderBook = varfun(@numel, ob, 'GroupingVariables',...
                         {'traderId', 'tradeRootId', 'price'},...
                         'InputVariables', {'quantity'});
-                    % Remove any trades that already have an offset or
-                    % match in the order book (numel>1)
-                    ob = innerjoin(ob, numelOrderBook(numelOrderBook.numel_quantity == 1, :));
+                    % Only consider trades without offsets in the order
+                    % book
+                    ob = innerjoin(ob, numelOrderBook(numelOrderBook.GroupCount == 1, :));
+                    % Remove GroupCount
+                    ob = ob(:, this.orderBook.Properties.VariableNames);
                     % Separate bids and asks 
                     bids = ob(ob.quantity ==1, :);
                     asks = ob(ob.quantity ==-1, :);
@@ -443,10 +457,25 @@ classdef MarketObject < handle
                                         
                     if minAsk.price <= maxBid.price
 
-                            % add both trades to matched and offset from
+                            % Add both trades to matched and offset from
                             % unmatched
-                            this = this.writeMatchedTrade(maxBid);
-                            this = this.writeMatchedTrade(minAsk);
+                            colChkMaxBid = this.checkCollateral(maxBid);
+                            colChkMinAsk = this.checkCollateral(minAsk);
+                            
+                            % If either of the collateral checks fail,
+                            % remove a trade and try again.
+                            if colChkMaxBid & colChkMinAsk
+                                this = this.writeMatchedTrade(maxBid);
+                                this = this.writeMatchedTrade(minAsk);
+                            elseif ~colChkMaxBid & colChkMinAsk
+                                this = this.removeMarginalTrade(maxBid);
+                            elseif colChkMaxBid & ~colChkMinAsk
+                                this = this.removeMarginalTrade(minAsk);
+                            else
+                                this = this.removeMarginalTrade(maxBid);
+                                this = this.removeMarginalTrade(minAsk);
+                            end
+                                
                     else
                         % No trades to match
                         allMatched = true;
@@ -466,20 +495,31 @@ classdef MarketObject < handle
         % reduceMarginalTrade
         
         function this = writeMatchedTrade(this, targetTrade)
-            % Add trade by finding closest valid offset and matched trade
+            % Add trade by finding valid offset and matched trade
             
             % Write offset to original unmatched trade (previous sig from root trade)
             % Find closest offset trade
-            offsetTrade = this.findValidOffsetTrade(targetTrade);
+            offsetTrade = this.findOffsetTrade(targetTrade);
             % Add offset trade  (TODO sig check in function and remove from cache)
             this.orderBook = vertcat(this.orderBook, offsetTrade);
-            % Write matched ( previous sig from offset trade)
+            % Write matched (previous sig from offset trade)
             % Find closest match trade 
-            matchedTrade = this.findValidMatchedTrade(offsetTrade);
+            matchedTrade = this.findMatchedTrade(offsetTrade);
             % Add match trade (TODO: sig check and remove from
             % cache)
             this.orderBook = vertcat(this.orderBook, matchedTrade);
         end % writeMatchedTrade
+        
+        function this = removeMarginalTrade(this, targetTrade)
+             % Remove 
+            
+            % Write offset to original unmatched trade (previous sig from root trade)
+            % Find closest offset trade
+            offsetTrade = this.findRemoveTrade(targetTrade);
+            % Add offset trade  (TODO sig check in function and remove from cache)
+            this.orderBook = vertcat(this.orderBook, offsetTrade);
+      
+        end
         
         
     end % methods (Access = private)
@@ -488,9 +528,9 @@ classdef MarketObject < handle
         
         % Find offset trade functions:
         % findValidOffseteTrade
-        % findValidMatchedTrade
+        % findMatchedTrade
         
-        function offsetTrade = findValidOffsetTrade(this, targetTrade)
+        function offsetTrade = findOffsetTrade(this, targetTrade)
             % Find offset
             isOffset = strcmp(this.cacheBook.previousSig, targetTrade.signature) &...
                 this.cacheBook.price == targetTrade.price & ...
@@ -499,9 +539,9 @@ classdef MarketObject < handle
                 this.cacheBook.traderId == targetTrade.traderId;
             offsetTrade = this.cacheBook(isOffset, :);
             
-        end % findValidMatchedTrade
+        end % findMatchedTrade
         
-        function matchedTrade = findValidMatchedTrade(this, offsetTrade)
+        function matchedTrade = findMatchedTrade(this, offsetTrade)
             % Return closest valid matched trade signed from offsset trade
             isMatch = strcmp(this.cacheBook.previousSig, offsetTrade.signature) &...
                             this.cacheBook.price == offsetTrade.price & ...                
@@ -511,7 +551,28 @@ classdef MarketObject < handle
                         
             matchedTrade = this.cacheBook(isMatch, :);
             
-        end % findValidMatchedTrade
+        end % findMatchedTrade
+        
+        function removeTrade = findRemoveTrade(this, targetTrade)
+            % Find an trade from the same traderId in the orderbook with no
+            % existing offset
+            ob = innerjoin(this.orderBook,...
+                targetTrade(:, {'marketRootId', 'traderId'}));
+            % Calculate number of branches on trade 
+            numelOrderBook = varfun(@numel, ob, 'GroupingVariables',...
+                {'traderId', 'tradeRootId', 'price'},...
+                'InputVariables', {'quantity'});
+            % Only consider trades with no offset in orderbook
+            ob = innerjoin(ob, numelOrderBook(numelOrderBook.GroupCount == 1, :));
+            
+            % Dont let a trade remove itself
+            ob = ob(ob.tradeRootId ~= targetTrade.tradeRootId, :);
+            
+            % Kill first trade that fits the criteria. 
+            removeTrade = ob(1,:);
+       
+            
+        end % findRemoveTrade
                         
     end % private methods
     
