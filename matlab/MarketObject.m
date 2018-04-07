@@ -29,7 +29,12 @@ classdef MarketObject < handle
         % Market table with minimum and maximum of each market.
         marketTable = table([], [], [], [], [], {}, {}, {}, 'VariableNames',...
             {'marketRootId', 'marketBranchId', 'marketMin', 'marketMax',...
-            'traderId', 'previousSig', 'signatureMsg', 'signature'});
+            'traderId', 'previousSig', 'signatureMsg', 'signature'});               
+        
+        % Cell array with all possible root market combinations (re-calcluated when a market is
+        % added or changed)
+        outcomeCombinations 
+        
         % TODO: apply collateral only for trader 0, everyone else  gets
         % from trades.
         COLLATERAL_LIMIT = -2;
@@ -132,6 +137,8 @@ classdef MarketObject < handle
             % Add market if checks pass
             if checks
                 this.marketTable = vertcat(this.marketTable, newMarket);
+                % Update all possible combinations of root markets
+                this.updateOutcomeCombinations;
             end
             
         end % createMarket
@@ -308,7 +315,9 @@ classdef MarketObject < handle
         function [colChk, netCollateral] = checkCollateral(this, newTrade)
             % Check if sufficient collateral exists for a newTrade by
             % constructing all output combinations for the trader. Returns
-            % colChk = 0/1 (1 = suffiient collateral  exists)
+            % colChk = 0/1 (1 = suffiient collateral  exists) and
+            % netCollateral which is the worst net collateral in each
+            % market case
             
             % Note that this should not be a public method because it could
             % be used to deduce information about the trader's positions.
@@ -317,19 +326,11 @@ classdef MarketObject < handle
             traderId = newTrade.traderId;
             % Get existing trades for trader
             ownTrades = this.orderBook((this.orderBook.traderId == traderId), :);
-            % Get all root markets (where marketBranchId == 1)
-            rootMarkets = this.marketTable(this.marketTable.marketBranchId == 1, :);
-            % Get own root  markets
-            ownRootMarkets = rootMarkets(ismember(rootMarkets.marketRootId,...
-                [ownTrades.marketRootId(:); newTrade.marketRootId(:)]), :);
-            
-            % Construct corner outcome combinations in root markets (cell array of marketTables)
-            outcomeCombinations = this.constructOutcomeCombinations(ownRootMarkets);
-            
-            for iComb = 1 : length(outcomeCombinations)
+           
+            for iComb = 1 : length(this.outcomeCombinations)
                 % Add fixed outcomes to market table
                 marketTable_test = outerjoin(this.marketTable,...
-                    outcomeCombinations{iComb}, 'MergeKeys', true);
+                    this.outcomeCombinations{iComb}, 'MergeKeys', true);
                 % Construct payoffs for matched and unmatched trades
                 matchedTrades = ownTrades(ownTrades.tradeBranchId == 3, :);
                 openTrades = ownTrades(ownTrades.tradeBranchId ~= 3, :);
@@ -364,6 +365,14 @@ classdef MarketObject < handle
             colChk = all(netCollateral>=this.COLLATERAL_LIMIT);
             
         end % checkCollateral
+        
+        
+        function updateOutcomeCombinations(this)
+            % Update outcome combinations (taking into account mins/maxes on branches)
+            rootMarkets = this.marketTable(this.marketTable.marketBranchId == 1, :);
+            this.outcomeCombinations = this.constructOutcomeCombinations(rootMarkets);
+            
+        end % updateOutcomeCombinations
         
         function marketOutcomes = constructOutcomeCombinations(this, marketTable)
             % Construct all possible outcome combinations root markets
@@ -625,7 +634,7 @@ classdef MarketObject < handle
             maxMin_test = outerjoin(orderBook, marketMaxMin,...
                 'Type', 'left', 'MergeKeys', true);
             
-            % Construct  payoff in both  casess
+            %Construct  payoff in both  casess
             minMax_payoff = (minMax_test.branchMarketMax -...
                 minMax_test.price) .* minMax_test.quantity;
             maxMin_payoff = (maxMin_test.branchMarketMin -...
@@ -656,7 +665,7 @@ classdef MarketObject < handle
     end % private methods
     
     methods (Access = public) % Signature methods (mock for matlab version)
-        
+         
         % generateSignatureKeys
         % signMessage
         % verifyMessage

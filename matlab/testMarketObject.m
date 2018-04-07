@@ -110,11 +110,12 @@ classdef testMarketObject < matlab.unittest.TestCase
 
             
             % Check collateral for a fourth trade (sign off last primary)
-            
+            prevTrade= testCase.mo.getPreviousTrade;
+            prevSig = prevTrade.signature{1};
             primaryTrade4 = struct('traderId', {2}, 'tradeRootId', {4}, 'tradeBranchId', {1},...
                                            'price', {0.8}, 'quantity', {-1}, 'marketRootId', {1},...
-                                           'marketBranchId', {1}, 'previousSig', {'ssssss'}, 'signatureMsg',...
-                                           {'ssssss'}, 'signature', {'sssssss'});
+                                           'marketBranchId', {1}, 'previousSig', prevSig, 'signatureMsg',...
+                                           prevSig, 'signature', [prevSig, 's']);
             
             
             [colChk, colNum]  = testCase.mo.checkCollateral_public(primaryTrade4);
