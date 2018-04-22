@@ -16,11 +16,13 @@ classdef testMarketObject < matlab.unittest.TestCase
         function testCreateMarket(testCase)
            % Create a market on (0, 1) and narrow it to (0.4, 1)
            
-           % Create a market
-            testCase.mo.createMarket(struct('marketRootId', 1, 'marketBranchId', 1,...
-                               'marketMin', 0, 'marketMax', 1,...
-                               'traderId', 1, 'previousSig', {'s'}, 'signatureMsg',{'s'},...
-                               'signature', {'ss'}));                                   
+           % Create market11            
+            testMarket = marketMaker(testCase.mo, 1, 1, 0, 1, 1)
+            testCase.mo.createMarket(testMarket);   
+             
+           % Create a branch of first market  
+           testMarket = marketMaker(testCase.mo, 1, 2, 0.1, 0.9, 1)
+           testCase.mo.createMarket(testMarket);                           
        
             testCase.verifyNotEmpty(testCase.mo.marketTable)
         end % testCreateMarket
@@ -46,82 +48,31 @@ classdef testMarketObject < matlab.unittest.TestCase
             % Add some trades and check a match for (q=1, p=0.5/0.4).
             % Signatures are [prevSig,s], [prevSig,ss], [prevSig,sss], 
             
-            prevTrade= testCase.mo.getPreviousTrade;
-            prevSig = prevTrade.signature{1};
-            tradeRootId = prevTrade.tradeRootId+1;             
+            tradePackage =  tradeMaker(testCase.mo, 1, 1, 1, [0.5; 0.4], 1);          
+            testCase.mo = testCase.mo.createTrade(tradePackage);
             
-            primaryTrades1 = struct('traderId', {1; 1}, 'tradeRootId', {tradeRootId;tradeRootId}, 'tradeBranchId', {1; 1},...
-                                           'price', {0.5;0.4}, 'quantity', {1; 1}, 'marketRootId', {1; 1},...
-                                           'marketBranchId', {1; 1}, 'previousSig', {prevSig; prevSig}, 'signatureMsg',...
-                                           {prevSig; prevSig}, 'signature', {[prevSig, 's']; [prevSig, 's']});
-            offsetTrades1 = struct('traderId', {1; 1}, 'tradeRootId', {tradeRootId; tradeRootId}, 'tradeBranchId', {2; 2},...
-                                           'price', {0.5; 0.4}, 'quantity', {-1; -1}, 'marketRootId', {1; 1},...
-                                           'marketBranchId', {1; 1}, 'previousSig', {[prevSig, 's']; [prevSig, 's']}, 'signatureMsg',...
-                                           {[prevSig, 's']; [prevSig, 's']}, 'signature', {[prevSig, 'ss']; [prevSig, 'ss']});
-            matchTrades1 =  struct('traderId', {1; 1}, 'tradeRootId', {tradeRootId; tradeRootId}, 'tradeBranchId', {3; 3},...
-                                           'price', {0.5; 0.4}, 'quantity', {1; 1}, 'marketRootId', {1; 1},...
-                                           'marketBranchId', {1; 1}, 'previousSig',{[prevSig, 'ss']; [prevSig, 'ss']}, 'signatureMsg',...
-                                           {[prevSig, 'ss']; [prevSig, 'ss']}, 'signature', {[prevSig, 'sss']; [prevSig, 'sss']});
-                                       
-            testCase.mo = testCase.mo.createTrade(primaryTrades1, offsetTrades1, matchTrades1);
+            % Add matching trade by for trader 2 in same market
+            tradePackage =  tradeMaker(testCase.mo, 2, 1, 1, [0.5; 0.6], -1);          
+       
+            testCase.mo = testCase.mo.createTrade(tradePackage);            
             
-            % Add matching trade
-            prevTrade= testCase.mo.getPreviousTrade;
-            prevSig = prevTrade.signature{1};
-            tradeRootId = prevTrade.tradeRootId+1;
-            
-            primaryTrades2 = struct('traderId', {2; 2}, 'tradeRootId', {tradeRootId;tradeRootId}, 'tradeBranchId', {1; 1},...
-                                           'price', {0.5;0.6}, 'quantity', {-1; -1}, 'marketRootId', {1; 1},...
-                                           'marketBranchId', {1; 1}, 'previousSig', {prevSig; prevSig}, 'signatureMsg',...
-                                           {prevSig; prevSig}, 'signature', {[prevSig, 's']; [prevSig, 's']});
-            offsetTrades2 = struct('traderId', {2; 2}, 'tradeRootId', {tradeRootId; tradeRootId}, 'tradeBranchId', {2; 2},...
-                                           'price', {0.5; 0.6}, 'quantity', {1; 1}, 'marketRootId', {1; 1},...
-                                           'marketBranchId', {1; 1}, 'previousSig', {[prevSig, 's']; [prevSig, 's']}, 'signatureMsg',...
-                                           {[prevSig, 's']; [prevSig, 's']}, 'signature', {[prevSig, 'ss']; [prevSig, 'ss']});
-            matchTrades2 =  struct('traderId', {2; 2}, 'tradeRootId', {tradeRootId; tradeRootId}, 'tradeBranchId', {3; 3},...
-                                           'price', {0.5; 0.6}, 'quantity', {-1; -1}, 'marketRootId', {1; 1},...
-                                           'marketBranchId', {1; 1},'previousSig', {[prevSig, 'ss']; [prevSig, 'ss']}, 'signatureMsg',...
-                                           {[prevSig, 'ss']; [prevSig, 'ss']}, 'signature', {[prevSig, 'sss']; [prevSig, 'sss']});                 
-
-            testCase.mo = testCase.mo.createTrade(primaryTrades2, offsetTrades2, matchTrades2);            
-            
-            % Add an unmatched trade (@0.8)
-            prevTrade= testCase.mo.getPreviousTrade;
-            prevSig = prevTrade.signature{1};
-            tradeRootId = prevTrade.tradeRootId+1;            
-            primaryTrades3 = struct('traderId', {2; 2}, 'tradeRootId', {tradeRootId;tradeRootId}, 'tradeBranchId', {1; 1},...
-                                           'price', {0.8;0.9}, 'quantity', {-1; -1}, 'marketRootId', {1; 1},...
-                                           'marketBranchId', {1; 1},'previousSig', {prevSig; prevSig}, 'signatureMsg',...
-                                           {prevSig; prevSig}, 'signature', {[prevSig, 's']; [prevSig, 's']});
-            offsetTrades3 = struct('traderId', {2; 2}, 'tradeRootId', {tradeRootId; tradeRootId}, 'tradeBranchId', {2; 2},...
-                                           'price', {0.8;0.9}, 'quantity', {1; 1}, 'marketRootId', {1; 1},...
-                                           'marketBranchId', {1; 1}, 'previousSig', {[prevSig, 's']; [prevSig, 's']}, 'signatureMsg',...
-                                           {[prevSig, 's']; [prevSig, 's']}, 'signature', {[prevSig, 'ss']; [prevSig, 'ss']});
-            matchTrades3 =  struct('traderId', {2; 2}, 'tradeRootId', {tradeRootId; tradeRootId}, 'tradeBranchId', {3; 3},...
-                                           'price', {0.8;0.9}, 'quantity', {-1; -1}, 'marketRootId', {1; 1},...
-                                           'marketBranchId', {1; 1}, 'previousSig',{[prevSig, 'ss']; [prevSig, 'ss']}, 'signatureMsg',...
-                                           {[prevSig, 'ss']; [prevSig, 'ss']}, 'signature', {[prevSig, 'sss']; [prevSig, 'sss']});
+            % Add an unmatched trade (@0.8/0.9)
+            tradePackage =  tradeMaker(testCase.mo, 2, 1, 1, [0.8; 0.9], -1);       
             
             % Create trade                           
-            testCase.mo = testCase.mo.createTrade(primaryTrades3, offsetTrades3, matchTrades3);   
+            testCase.mo = testCase.mo.createTrade(tradePackage);   
             
             % There should be three matched trades and one open trade
             testCase.verifyEqual(height(testCase.mo.orderBook),7);
-
             
-            % Check collateral for a fourth trade (sign off last primary)
-            prevTrade= testCase.mo.getPreviousTrade;
-            prevSig = prevTrade.signature{1};
-            primaryTrade4 = struct('traderId', {2}, 'tradeRootId', {4}, 'tradeBranchId', {1},...
-                                           'price', {0.8}, 'quantity', {-1}, 'marketRootId', {1},...
-                                           'marketBranchId', {1}, 'previousSig', prevSig, 'signatureMsg',...
-                                           prevSig, 'signature', [prevSig, 's']);
-            
-            
-            [colChk, colNum]  = testCase.mo.checkCollateral_public(primaryTrade4);
+            % Check collateral for a fourth trade (sign off last primary)            
+            tradePackage =  tradeMaker(testCase.mo, 2, 1, 1, [0.8], -1);    
+           
+            [colChk, colNum]  = testCase.mo.checkCollateral_public(tradePackage.primaryTrade);
             
             testCase.verifyTrue(colChk);
-            testCase.verifyEqual(colNum, [0.8; -1.2]);
+            testCase.verifyEqual(colNum, [2.1; -0.9], 'AbsTol', 1e-10);
+
                                        
             
         end % testMatchTrade
