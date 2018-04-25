@@ -35,10 +35,11 @@ classdef MarketObject < handle
         % added or changed)
         outcomeCombinations
         marketBounds % Lower and upper bounds of markets
+        marketOutcomes % Market outcome matrix
         
         % TODO: apply collateral only for trader 0, everyone else  gets
         % from trades.
-        COLLATERAL_LIMIT = -2;
+        COLLATERAL_LIMIT = -10;
         
     end % Properties
     
@@ -185,11 +186,13 @@ classdef MarketObject < handle
                 sigChkPrimary(iTrade) = this.verifyTradeSignature(pTrades(iTrade,:));
                 if ~isempty(this.orderBook)
                     % Find previous trade                    
-                    prevTrade = this.orderBook(strcmp(this.orderBook.signature, pTrades{iTrade, 'previousSig'}), :);
+                    prevTrade = this.orderBook(strcmp(this.orderBook.signature,...
+                        pTrades{iTrade, 'previousSig'}), :);
                     % Find previous valid trade
                     prevValidTrade = this.getPreviousTrade;
                     % Check signature matches
-                    chainChkPrimary(iTrade) = strcmp(prevTrade.signature, prevValidTrade.signature);
+                    chainChkPrimary(iTrade) = strcmp(prevTrade.signature,...
+                        prevValidTrade.signature);
                 else
                     % If it's the first trade it's ok
                     chainChkPrimary(iTrade) = true;
@@ -198,12 +201,14 @@ classdef MarketObject < handle
                 sigChkOffset(iTrade) = this.verifyTradeSignature(oTrades(iTrade,:));
                 % Check previous signature of offset is signature of
                 % primary
-                chainChkOffset(iTrade) = strcmp(oTrades{iTrade, 'previousSig'}, pTrades{iTrade, 'signature'});
+                chainChkOffset(iTrade) = strcmp(oTrades{iTrade, 'previousSig'},...
+                    pTrades{iTrade, 'signature'});
                 % Check signature of match trade
                 sigChkMatch(iTrade) = this.verifyTradeSignature(mTrades(iTrade, :));
                 % Check prepvious signature of matched trade is signature
                 % of offset
-                chainChkMatch(iTrade) = strcmp(mTrades{iTrade, 'previousSig'}, oTrades{iTrade, 'signature'});
+                chainChkMatch(iTrade) = strcmp(mTrades{iTrade, 'previousSig'},...
+                    oTrades{iTrade, 'signature'});
             end
             
             % All signatures  check out
@@ -213,7 +218,8 @@ classdef MarketObject < handle
             chainChk = all(chainChkPrimary & chainChkOffset & chainChkMatch);
             
             % If all checks pass, add new trade in orderBook and rest to cache.           
-            if primaryOffsetMatchChk & validTradeQuantityChk & validMarketChk & sigChk & chainChk
+            if primaryOffsetMatchChk & validTradeQuantityChk &...
+                    validMarketChk & sigChk & chainChk
                 primaryTrades = pTrades;
                 offsetTrade = oTrades;
                 matchTrade = mTrades;
@@ -279,6 +285,93 @@ classdef MarketObject < handle
             
         end % getPreviousTrade
         
+        
+        function [colChk, netCollateral] = checkCollateral(this, newTrade)
+            % Check if sufficient collateral exists for a newTrade by
+            % constructing all output combinations for the trader. Returns
+            % colChk = 0/1 (1 = sufficient collateral  exists) and
+            % netCollateral which is the worst net collateral in each
+            % market case
+
+            if isstruct(newTrade)
+                newTrade = struct2table(newTrade);
+            end
+            % Tack new trade onto order book
+            allTrades = vertcat(this.orderBook, newTrade);
+            
+            % Indicators:
+            
+            % Is the trade matched
+            allTrades.isMatched = allTrades.tradeBranchId == 3;
+            matchedTrades = allTrades(allTrades.isMatched, :); 
+            % Does a matching trade exist
+            unmatchedBranch = varfun(@max, allTrades, 'InputVariables',...
+                    'tradeBranchId', 'GroupingVariables', 'tradeRootId');
+            unmatchedRoots = unmatchedBranch.tradeRootId(unmatchedBranch.max_tradeBranchId <3, :);
+            allTrades.isOpen = arrayfun(@(x) ismember(x, unmatchedRoots), allTrades.tradeRootId);
+            
+                        
+            % Create IM matrix indicating which market trades belong to
+            numTrades = height(allTrades);
+            numOpenTrades = sum(allTrades.isOpen);
+            numMarkets = height(this.marketBounds);
+            numTraders = max(this.userTable.traderId);
+            numStates = length(this.marketOutcomes);
+            
+            IM = zeros(numMarkets, numTraders);
+            for iTrade = 1 : numTrades
+                % Find index in market bounds table
+                marketInd = find(allTrades.marketRootId(iTrade) == this.marketBounds.marketRootId & ...
+                    allTrades.marketBranchId(iTrade) == this.marketBounds.marketBranchId);
+                IM(:, iTrade) = makeUnitVector(numMarkets, marketInd)';
+            end % iTrade
+            
+            % Create IQ matrix indicating which trader trades belong to
+            IQ = zeros(numTrades, numTraders);
+            for iTrade = 1 : numTrades
+                IQ(iTrade, :) = makeUnitVector(numTraders, allTrades.traderId(iTrade));
+            end % iTrade
+            
+            % Get price and quantity
+            p = allTrades.price';
+            q = allTrades.quantity';
+            % Get market outcomes matrix
+            M = this.marketOutcomes;
+            
+            % Market outcomes (numStates * numTrades)
+            Mstar = M*IM;
+            % Quantities (numTrades * numTraders)
+            Qstar = repmat(q, numTraders, 1)'.*IQ;
+            % Prices (numStates x numTrades)
+            Pstar = repmat(p, numStates, 1);
+            
+            % Net collateral for matched trades (numStates * numTraders)
+            NC_matched = (Mstar(:, allTrades.isMatched) - Pstar(:,allTrades.isMatched))*Qstar(allTrades.isMatched, :);
+            
+            % Minimum collateral for open trades (including new trade)
+            Mstar_ = Mstar(:, allTrades.isOpen);
+            Pstar_  = Pstar(:,allTrades.isOpen);
+            NC_open = [];
+            if numOpenTrades > 0
+                for iTrader = 1 : numTraders
+                    Qstar_ = Qstar(allTrades.isOpen, iTrader);
+                    if isempty(Qstar_)
+                        Qstar_ = zeros(numOpenTrades, 1);
+                    end
+                    % Minimum payoff from open trades. TODO: neater way to
+                    % construct open trade payoffs? 
+                    NC_open(:, iTrader) = min((Mstar_ - Pstar_).*repmat(Qstar_', numStates, 1), [], 2);
+                end % iTrader
+            else
+                NC_open = zeros(size(NC_matched));
+            end 
+            
+            % Collateral available under all worst outcomes
+            netCollateral = NC_matched + NC_open;
+            % Indicator for which traders fail collateral check
+            colChk = all(netCollateral >= this.COLLATERAL_LIMIT);           
+        end % checkCollateral   
+        
     end % Public methods
     
     methods (Access = private) % Check collateral and match
@@ -290,7 +383,7 @@ classdef MarketObject < handle
         % constructPayoff
         % matchTrades
         
-        function [colChk, netCollateral] = checkCollateral(this, newTrade)
+        function [colChk, netCollateral] = checkCollateral_old(this, newTrade)
             % Check if sufficient collateral exists for a newTrade by
             % constructing all output combinations for the trader. Returns
             % colChk = 0/1 (1 = sufficient collateral  exists) and
@@ -356,8 +449,8 @@ classdef MarketObject < handle
             % Collateral available under all worst outcomes
             colChk = all(netCollateral>=this.COLLATERAL_LIMIT);
             
-        end % checkCollateral
-        
+        end % checkCollateral_old
+    
         
         function updateOutcomeCombinations(this)
             % Update outcome combinations (taking into account mins/maxes on branches)
@@ -369,6 +462,17 @@ classdef MarketObject < handle
 
             this.marketBounds = marketBounds(:, {'marketRootId', 'marketBranchId',...
                 'marketMin' , 'marketMax'});
+            
+            numMarkets = height(marketBounds);
+            numStates = length(this.outcomeCombinations);
+            M = zeros(numStates, numMarkets);
+            for iOutcome = 1 : numStates
+                outcome = this.outcomeCombinations{iOutcome};
+                % For outcomes min = max
+                marketSettle = outcome.marketMin;
+                M(iOutcome,:) = marketSettle';
+            end % iOutcome
+            this.marketOutcomes = M;
            
             
         end % updateOutcomeCombinations
@@ -446,6 +550,8 @@ classdef MarketObject < handle
                     % Get max bids/asks
                     maxBid = bids(bids.price == max(bids.price), :);
                     minAsk = asks(asks.price == min(asks.price), :);
+                    maxBid(2:end, :) = [];
+                    minAsk(2:end, :) = [];
                                         
                     if minAsk.price <= maxBid.price
 
@@ -546,7 +652,7 @@ classdef MarketObject < handle
         end % findMatchedTrade
         
         function removeTrade = findRemoveTrade(this, targetTrade)
-            % Find an trade from the same traderId in the orderbook with no
+            % Find a trade from the same traderId in the orderbook with no
             % existing offset
             ob = innerjoin(this.orderBook,...
                 targetTrade(:, {'marketRootId', 'traderId'}));
@@ -620,9 +726,10 @@ classdef MarketObject < handle
             end % updateBounds
             
         end % constructMarketBounds
- 
         
         function payoffs = constructPayoff(orderBook, marketBounds)
+            % DEPRECIATED: Only needed for old collateral construction
+            
             % Construct minimum payoffs for each trades given marketTable.
             % Output:
             % payoffs - vector of minimum calculated possible payoff for each trade
@@ -641,7 +748,7 @@ classdef MarketObject < handle
             % Worst possible payoffs for each trade in orderBook
             payoffs = min([minMax_payoff, maxMin_payoff], [], 2);
             
-        end % constructPayoff
+        end % constructPayoff (DEPRECIATED)
         
         % cartesianProduct - cartesianProduct product
         
