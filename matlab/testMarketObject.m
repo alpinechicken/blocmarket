@@ -3,6 +3,7 @@ classdef testMarketObject < matlab.unittest.TestCase
     
     properties
         mo % market object
+        mc % market client
     end % properties
  
     methods(TestMethodSetup)
@@ -11,17 +12,18 @@ classdef testMarketObject < matlab.unittest.TestCase
             
             % Create market object
             testCase.mo = MarketObject();
+            testCase.mc = MarketClient();
         end % createMarketObject
         
         function testCreateMarket(testCase)
            % Create a market on (0, 1) and a sub market (0.1, 0.9)
            
-           % Create market11            
-            testMarket = marketMaker(testCase.mo, 1, 1, 0, 1, 1)
+           % Create market11
+            testMarket = testCase.mc.marketMaker(testCase.mo.getPreviousMarket, 1, 1, 0, 1, 1)
             testCase.mo.createMarket(testMarket);   
              
            % Create a branch of first market  
-           testMarket = marketMaker(testCase.mo, 1, 2, 0.1, 0.9, 1)
+           testMarket = testCase.mc.marketMaker(testCase.mo.getPreviousMarket, 1, 2, 0.1, 0.9, 1)
            testCase.mo.createMarket(testMarket);                           
        
            testCase.verifyNotEmpty(testCase.mo.marketTable)
@@ -48,12 +50,13 @@ classdef testMarketObject < matlab.unittest.TestCase
             % Settle root market (1,1) at 1 and ensure that
             % - Market (1,1) settles at 1
             % - Market (1,2) settles at 0.9
-            settleMarket= marketMaker(testCase.mo, 1, 1, 1, 1, 1);
+            settleMarket= testCase.mc.marketMaker(testCase.mo.getPreviousMarket, 1, 1, 1, 1, 1);
             testCase.mo = testCase.mo.createMarket(settleMarket);
             marketBounds = testCase.mo.marketBounds;
             expectedBounds = table([1;1], [1;2], [1;0.9], [1;0.9],...
                 'VariableNames', {'marketRootId', 'marketBranchId',...
                 'marketMin', 'marketMax'});
+            % Import table comparer thing
             import matlab.unittest.constraints.TableComparator
             import matlab.unittest.constraints.NumericComparator
             import matlab.unittest.constraints.IsEqualTo
@@ -65,12 +68,13 @@ classdef testMarketObject < matlab.unittest.TestCase
             % Settle root market (1,1) at 0 and ensure that
             % - Market (1,1) settles at 0
             % - Market (1,2) settles at 0.1
-            settleMarket= marketMaker(testCase.mo, 1, 1, 0, 0, 1);
+            settleMarket= testCase.mc.marketMaker(testCase.mo.getPreviousMarket, 1, 1, 0, 0, 1);
             testCase.mo = testCase.mo.createMarket(settleMarket);
             marketBounds = testCase.mo.marketBounds;
             expectedBounds = table([1;1], [1;2], [0;0.1], [0;0.1],...
                 'VariableNames', {'marketRootId', 'marketBranchId',...
                 'marketMin', 'marketMax'});
+            % Import table comparer thing
             import matlab.unittest.constraints.TableComparator
             import matlab.unittest.constraints.NumericComparator
             import matlab.unittest.constraints.IsEqualTo
@@ -82,16 +86,16 @@ classdef testMarketObject < matlab.unittest.TestCase
             
             % Add some trades and check a match for (q=1, p=0.5/0.4).
             
-            tradePackage =  tradeMaker(testCase.mo, 1, 1, 1, [0.5; 0.4], 1);          
+            tradePackage =  testCase.mc.tradeMaker(testCase.mo.getPreviousTrade, 1, 1, 1, [0.5; 0.4], 1);          
             testCase.mo = testCase.mo.createTrade(tradePackage);
             
             % Add matching trade by for trader 2 in same market
-            tradePackage =  tradeMaker(testCase.mo, 2, 1, 1, [0.5; 0.6], -1);          
+            tradePackage =  testCase.mc.tradeMaker(testCase.mo.getPreviousTrade, 2, 1, 1, [0.5; 0.6], -1);          
        
             testCase.mo = testCase.mo.createTrade(tradePackage);            
             
             % Add an unmatched trade (@0.8/0.9)
-            tradePackage =  tradeMaker(testCase.mo, 2, 1, 1, [0.8; 0.9], -1);       
+            tradePackage =  testCase.mc.tradeMaker(testCase.mo.getPreviousTrade, 2, 1, 1, [0.8; 0.9], -1);       
             
             % Create trade                           
             testCase.mo = testCase.mo.createTrade(tradePackage);   

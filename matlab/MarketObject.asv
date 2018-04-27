@@ -1,11 +1,24 @@
 classdef MarketObject < handle
-    % Version of market object  that only allows q=1 or q=-1
-    
-    % tradeBranchId:
     %
-    %           1 = Primary - default (trade initially in order book)
-    %           2 = Offset (offset a primary trade => signature from primary)
+    % Version of market object that only allows q=1 or q=-1
+    %
+    % - Holds an order book (orderBook), user table( userTable), and list of markets (marketTable) for
+    % an contract settling beetween some minimum and maximum.
+    % - Interface for adding users (createUser), markets
+    % (createMarket), and orders (createTrade)
+    % - Market object handles collateral calculations and trade matching
+    % - Orders are signed from a previous valid orders. Orders can
+    % only be added to the order book. Public keys in the user table can
+    % verify trade and market chains.
+    % - Any root market can have any number of sub-markets that can only
+    % settle within the bounds of the previous markets. 
+    % - Each order has three components specified by tradeBranchId:
+    %
+    %           1 = Primary (trade initially in order book)
+    %           2 = Offset (offset to a primary trade => signature from primary)
     %           3 = Match (matched version of primary trade => signature from offset)
+    % - Each time a new market is added or new bounds are set for an
+    % existing market, the possible extreme market values are calculated.
     
     % Market object with simplified tables and mock signatures.
     
@@ -39,7 +52,7 @@ classdef MarketObject < handle
         
         % TODO: apply collateral only for trader 0, everyone else  gets
         % from trades.
-        COLLATERAL_LIMIT = -10;
+        COLLATERAL_LIMIT = -2;
         
     end % Properties
     
@@ -48,19 +61,39 @@ classdef MarketObject < handle
         % MarketObject (constructor)
         
         % Create functions:
+        %
         % createUser
         % createMarket
         % createTrade
+        %
+        % Get previous functions:
+        %
+        % getPreviousTrade
+        % getPreviousMarket
+        %
+        % Public access to collateralCheck:
+        %
+        % collateralCheck_public
         
         function this = MarketObject()
             % Constructor
         end  % MarketObject
         
-        function this = createUser(this, inputStruct)
+        function [this, traderId]  = createUser(this, inputStruct)
             % Create a new row in this.userTable
+            %
+            % In: 
+            % inputStruct (struct) - struct with verify key for
+            %                        this.userTable
+            % 
+            % Out:
+            % this.userTable (table) - add row
+            % traderId (integer) - assigned trader id
+            %
             % e.g. 
             % mo = mo.createUser(struct('verifyKey','a'));
             % mo = mo.createUser(struct('verifyKey','b'));
+            
             newUser = struct2table(inputStruct);
             
             % Number of users in table
@@ -78,12 +111,29 @@ classdef MarketObject < handle
         end % createUser
         
         function this = createMarket(this, newMarket)
-            % Create a new row in this.marketTable (check signature)
+            % Create a new row in this.marketTable
+            %
+            % In: 
+            % newMarket (struct) - new market to add 
+            %
+            % Out:
+            % this.MarketTable (table) - add row
+            % this.outputCombinations (cell array) - possible extreme market outcomes 
+            % this.marketOutcomes (numStates* numMarkets matrix) - market
+            %                                                      outcomes
+            %                                                      across
+            %                                                      states 
+            % this.marketBounds (table) - table with bounds for all markets
+            %
             % e.g. 
             %   mo.createMarket(struct('marketRootId', 1, 'marketBranchId', 1,...
             %                                'marketMin', 0, 'marketMax', 1,...
             %                                'traderId', 1, 'previousSig', 's', 'signatureMsg','s',...
-            %                                'signature', 'ss'))   
+            %                                'signature', 'ss'))
+            %
+            %   The signature logic is automated with createMarket:
+            %
+            %   mo.createMarket(marketMaker(mo, 1, 1, 0, 1, 1))            
             %
             
             % New market from input structure
@@ -130,10 +180,20 @@ classdef MarketObject < handle
             % - Add primary trade to this.orderBook
             % - Add all other trades to this.cacheBook
             % 
-            %  Example input:
-            %  tradePackage = tradeMaker(mo, 1, 1, 1, [0.5, 0.4], 1)
+            % In:
+            % tradePackage (trade package) - trade package with
+            %                                primary/offset/match and backup trades (from tradeMaker)
             %
-            %  this.createTrade(tradePackage)
+            % Out:
+            % this.orderBook (table) - add rows 
+            % this.cacheBook (table) - add rows
+            %
+            %  Example:
+            %  tradePackage = tradeMaker(mo, 1, 1, 1, [0.5, 0.4], 1)
+            %  mo = mo.createTrade(tradePackage)
+            %
+            %  Note: tradeMaker constructs the package with primary/offset/match
+            %  and adds the correct signatures given the market object mo
             
             
             pTrades = struct2table(tradePackage.primaryTrade);
@@ -242,26 +302,30 @@ classdef MarketObject < handle
                     disp(['Failed. Signature check ' num2str(sigChk) ...
                         ', valid market  check ' num2str(validMarketChk)...
                         ', valid quantity  check ' num2str(validTradeQuantityChk)...
-                        ', valid input combination  check ' num2str(primaryOffsetMatchChk) ]);
+                        ', valid input combination check ' num2str(primaryOffsetMatchChk)...
+                        ', collateral check' num2str(colChk)]);
                 end % colChk
             end % checks
             
         end % createTrade
         
-        % Public collateral check for testing: 
-        
-        function [colChk, netCollateral] = checkCollateral_public(this, newTrade)
-            % Public check collateral method
-            
-            if isstruct(newTrade)
-                newTrade = struct2table(newTrade);
-            end
-            [colChk, netCollateral] = this.checkCollateral(newTrade);
-        end % checkCollateral_public
-        
+        % TODO: These can be held as properties and updated when
+        % new trades are added to this.orderBook. 
+        % - Modify the this.previousTrade, this.previousMarketSig properies
+        % - call updatePreviousTrade and updatePreviousMarket from
+        % createMarket and createTrade
+        % - Find calls to getPreviousTrade and getPreviousMarket and change
+        % to access the propreties instead
+                
         function previousTrade = getPreviousTrade(this)
-            % most recent signature is the highest number on the highest
+            % Most recent signature is the highest number on the highest
             % trade number in the order book
+            %
+            % In:
+            % (nothing)
+            % Out:
+            % previousTrade (table row) - most recent valid trade from
+            %                             which to append signature chain
             
             if ~isempty(this.orderBook)
                 maxTrade = this.orderBook(this.orderBook.tradeRootId == max(this.orderBook.tradeRootId), :);
@@ -273,28 +337,86 @@ classdef MarketObject < handle
             
         end % getPreviousTrade
 
-        function previousMarketSig = getPreviousMarketSig(this)
-            % Most recent market relative to some market root
+        function previousMarket = getPreviousMarket(this)
+            % Most recent market signature relative to some market root
+            %
+            % In: 
+            %
+            % Out: 
+            % previousMarketSig (string) - signature from previous market
             
-            if ~isempty(this.marketTable)
-                previousMarketSig = this.marketTable{end, 'signature'};
-            else
-                % Return root trade
-                previousMarketSig = {'s'};
+            
+            if isempty(this.marketTable)
+                % Sign from last trade in market table
+                previousMarket = table(    {'marketRootId','marketBranchId',...
+                    'marketMin', 'marketMax', 'traderId'    'previousSig'    'signatureMsg'}
+
+    'signature');
+                previousMarket.signature = {'s'};
             end
+            prevMarket = this.marketTable(end, :);
             
         end % getPreviousTrade
         
+        % Public collateral check: 
         
-        function [colChk, netCollateral] = checkCollateral(this, newTrade)
+        function [colChk, netCollateral] = checkCollateral_public(this, newTrade)
+            % Public check collateral method. Gets current collateral if
+            % there is no newTrade input
+            %
+            % In: newTrade (table row) - new trade to check (can be empty)
+            % 
+            % Out:
+            % colChk (numTraders * 1 logical) - collateral check indicator
+            %                                   for each trader
+            % netCollateral (numStates * numTraders matrix) - collateral outcomes for each trader in each state 
+            
+            if ~exist('newTrade', 'var')
+               % If there's no new trade just use current state
+               newTrade = table();
+            end
+            if isstruct(newTrade)
+                newTrade = struct2table(newTrade);
+            end
+            [colChk, netCollateral] = this.checkCollateral(newTrade);
+        end % checkCollateral_public
+                
+    end % Public methods
+    
+    methods (Access = private) % Check collateral and match trades
+                
+        % Check and match functions:
+        
+        % checkCollateral
+        % updateOutcomeCombinations
+        % constructMarketOutcomes
+        % matchTrades
+        
+        function [colChk, netCollateral, colChkAll] = checkCollateral(this, newTrade)
             % Check if sufficient collateral exists for a newTrade by
             % constructing all output combinations for the trader. Returns
             % colChk = 0/1 (1 = sufficient collateral  exists) and
             % netCollateral which is the worst net collateral in each
-            % market case
-            if ~exist(newTrade, 'var')
-               newTrade = table(); 
-            end
+            % market case.
+            %
+            % In: 
+            % newTrade - trade table row or struct
+            %
+            % Out:
+            % colChk (logical) - collateral check passs for trader from
+            % newTrade
+            % netCollateral (double numStates*numTraders) -  collateral
+            %                                                 outcome for
+            %                                                 each trader in each state   
+            %
+            % colChkAll (logical 1*numTraders) - collateral check pass
+            %                                 indicators
+            
+            % TODO: Some of this can be usefully refactored so only the new trade
+            % is checked, and the rest is held as state in netCollateral.
+            % In either case it there should be no change in how
+            % checkCollateral works.
+
             if isstruct(newTrade)
                 newTrade = struct2table(newTrade);
             end
@@ -325,13 +447,13 @@ classdef MarketObject < handle
                 % Find index in market bounds table
                 marketInd = find(allTrades.marketRootId(iTrade) == this.marketBounds.marketRootId & ...
                     allTrades.marketBranchId(iTrade) == this.marketBounds.marketBranchId);
-                IM(:, iTrade) = makeUnitVector(numMarkets, marketInd)';
+                IM(:, iTrade) = this.makeUnitVector(numMarkets, marketInd)';
             end % iTrade
             
             % Create IQ matrix indicating which trader trades belong to
             IQ = zeros(numTrades, numTraders);
             for iTrade = 1 : numTrades
-                IQ(iTrade, :) = makeUnitVector(numTraders, allTrades.traderId(iTrade));
+                IQ(iTrade, :) = this.makeUnitVector(numTraders, allTrades.traderId(iTrade));
             end % iTrade
             
             % Get price and quantity
@@ -340,12 +462,17 @@ classdef MarketObject < handle
             % Get market outcomes matrix
             M = this.marketOutcomes;
             
+            % Market outcomes (numStates * numTrades)
             Mstar = M*IM;
+            % Quantities (numTrades * numTraders)
             Qstar = repmat(q, numTraders, 1)'.*IQ;
+            % Prices (numStates x numTrades)
             Pstar = repmat(p, numStates, 1);
             
-            % Net collateral for matched trades
-            NC_matched = (Mstar(:, allTrades.isMatched) - Pstar(:,allTrades.isMatched))*Qstar(allTrades.isMatched, :);
+            % Net collateral for matched trades (numStates * numTraders)
+            NC_matched = (Mstar(:, allTrades.isMatched) -...
+                Pstar(:, allTrades.isMatched))*Qstar(allTrades.isMatched, :);
+            
             % Minimum collateral for open trades (including new trade)
             Mstar_ = Mstar(:, allTrades.isOpen);
             Pstar_  = Pstar(:,allTrades.isOpen);
@@ -357,8 +484,9 @@ classdef MarketObject < handle
                         Qstar_ = zeros(numOpenTrades, 1);
                     end
                     % Minimum payoff from open trades. TODO: neater way to
-                    % construct min.
-                    NC_open(:, iTrader) = min((Mstar_ - Pstar_).*repmat(Qstar_', numStates, 1), [], 2);
+                    % construct open trade payoffs? 
+                    NC_open(:, iTrader) = min((Mstar_ - Pstar_).*...
+                        repmat(Qstar_', numStates, 1), [], 2);
                 end % iTrader
             else
                 NC_open = zeros(size(NC_matched));
@@ -367,91 +495,28 @@ classdef MarketObject < handle
             % Collateral available under all worst outcomes
             netCollateral = NC_matched + NC_open;
             % Indicator for which traders fail collateral check
-            colChk = all(netCollateral >= this.COLLATERAL_LIMIT);           
+            colChkAll = all(netCollateral >= this.COLLATERAL_LIMIT);    
+            % Collateral check for trader
+            if ~isempty(newTrade)
+                colChk = colChkAll(newTrade.traderId);
+            else
+                colChk = colChkAll;
+            end
         end % checkCollateral   
         
-    end % Public methods
-    
-    methods (Access = private) % Check collateral and match
-                
-        % Check and match functions:
-        
-        % checkCollateral
-        % constructMarketOutcomes
-        % constructPayoff
-        % matchTrades
-        
-        function [colChk, netCollateral] = checkCollateral_old(this, newTrade)
-            % Check if sufficient collateral exists for a newTrade by
-            % constructing all output combinations for the trader. Returns
-            % colChk = 0/1 (1 = sufficient collateral  exists) and
-            % netCollateral which is the worst net collateral in each
-            % market case
-            
-            % Note that this should not be a public method because it could
-            % be used to deduce information about the trader's positions.
-            
-            % Select own trades
-            traderId = newTrade.traderId;
-            % Get existing trades for trader
-            ownTrades = this.orderBook((this.orderBook.traderId == traderId), :);
-            marketFields = {'marketBranchId',    'marketRootId'...
-                'traderId',    'marketMin',    'marketMax'};     
-            mT = this.marketTable(:, marketFields);
-            % Get matched trades
-            matchedTrades = ownTrades(ownTrades.tradeBranchId == 3, :);
-            % Get open trades
-            if ~isempty(ownTrades)
-                unmatchedBranch = varfun(@max, ownTrades, 'InputVariables',...
-                    'tradeBranchId', 'GroupingVariables', 'tradeRootId');
-                unmatchedBranch(unmatchedBranch.max_tradeBranchId == 3, :) = [];
-            else
-                unmatchedBranch = ownTrades;
-            end
-            % Remove any trades  with a match from open trades
-            openTrades = innerjoin(ownTrades, unmatchedBranch);
-            
-            for iComb = 1 : length(this.outcomeCombinations)
-                % Add fixed outcomes to market table
-                marketTable_test = vertcat(mT,...
-                    this.outcomeCombinations{iComb});
-                % Construct new market bounds given this additional outcome
-                newBounds = this.constructMarketBounds(marketTable_test);
-
-                
-                % Payoffs for matched trades
-                if ~isempty(matchedTrades)
-                    matchedTradePayoffs = this.constructPayoff(matchedTrades,...
-                        newBounds);
-                else
-                    matchedTradePayoffs = 0;
-                end
-                
-                % Payoff for open (unmatched) trades
-                if ~isempty(openTrades)
-                    openTradePayoffs =  this.constructPayoff(openTrades,...
-                        newBounds);
-                else
-                    openTradePayoffs = 0;
-                end
-                % Payoff for new trade
-                newTradePayoff = this.constructPayoff(newTrade, newBounds);
-                
-                % Collateral is all matched trades + worst open trade + worst
-                % outcome on new trade
-                netCollateral(iComb,:) = sum(matchedTradePayoffs) + min(openTradePayoffs) + ...
-                    min(newTradePayoff);
-                
-            end % iComb
-            
-            % Collateral available under all worst outcomes
-            colChk = all(netCollateral>=this.COLLATERAL_LIMIT);
-            
-        end % checkCollateral_old
-    
-        
-        function updateOutcomeCombinations(this)
+        function this = updateOutcomeCombinations(this)
             % Update outcome combinations (taking into account mins/maxes on branches)
+            % 
+            % In:
+            %
+            % Out:
+            % this.outputCombinations (cell array) - possible market outcomes 
+            % this.marketOutcomes (numStates* numMarkets matrix) - market
+            %                                                      outcomes
+            %                                                      across
+            %                                                      states 
+            % this.marketBounds (table) - table with bounds for all markets
+            
             mT = this.marketTable;
             rootMarkets = this.marketTable(mT.marketBranchId == 1, :);
             this.outcomeCombinations = this.constructOutcomeCombinations(rootMarkets);
@@ -462,6 +527,7 @@ classdef MarketObject < handle
                 'marketMin' , 'marketMax'});
             
             numMarkets = height(marketBounds);
+            %             numRootMarkets = sum(marketBounds.marketBranchId == 1);
             numStates = length(this.outcomeCombinations);
             M = zeros(numStates, numMarkets);
             for iOutcome = 1 : numStates
@@ -557,7 +623,6 @@ classdef MarketObject < handle
                             % unmatched
                             colChkMaxBid = this.checkCollateral(maxBid);
                             colChkMinAsk = this.checkCollateral(minAsk);
-                            
                             % If either of the collateral checks fail,
                             % remove a trade and try again.
                             if colChkMaxBid & colChkMinAsk
@@ -584,7 +649,7 @@ classdef MarketObject < handle
         
     end % methods (Access = private)
     
-    methods (Access = private) % Mutate trades (write/reduce marginal)
+    methods (Access = private) % Mutate trades (write/remove)
         
         % Trade mutation functions:
         % writeMatchedTrades
@@ -607,26 +672,35 @@ classdef MarketObject < handle
         end % writeMatchedTrade
         
         function this = removeMarginalTrade(this, targetTrade)
-             % Remove 
+             % Find an open trade  to reduce
             
             % Write offset to original unmatched trade (previous sig from root trade)
             % Find closest offset trade
-            offsetTrade = this.findRemoveTrade(targetTrade);
-            % Add offset trade  (TODO sig check in function and remove from cache)
-            this.orderBook = vertcat(this.orderBook, offsetTrade);
+            removeTrade = this.findRemoveTrade(targetTrade);
+            % Add remove trade  (TODO sig check in function and remove from cache)
+            this.orderBook = vertcat(this.orderBook, removeTrade);
       
-        end
-        
+        end % removeMarginalTrade        
         
     end % methods (Access = private)
     
-    methods (Access = private) % Find offset/matched
+    methods (Access = private) % Find offset/matched/removed
         
         % Find offset trade functions:
-        % findValidOffseteTrade
+        % findValidOffsetTrade
         % findMatchedTrade
+        % findRemoveTrade
          
         function offsetTrade = findOffsetTrade(this, targetTrade)
+            % Find match trade
+            %
+            % In: 
+            % targetTrade (table row) - target trade
+            %
+            % Out:
+            % offsetTrade (table row) - offset trade             
+            
+            
             % Find offset
             isOffset = strcmp(this.cacheBook.previousSig, targetTrade.signature) &...
                 this.cacheBook.price == targetTrade.price & ...
@@ -638,6 +712,14 @@ classdef MarketObject < handle
         end % findMatchedTrade
         
         function matchedTrade = findMatchedTrade(this, offsetTrade)
+            % Find match trade
+            %
+            % In: 
+            % offsetTrade (table row) - offset trade
+            %
+            % Out:
+            % matchedTrade (table row) - match trade            
+            
             % Return closest valid matched trade signed from offsset trade
             isMatch = strcmp(this.cacheBook.previousSig, offsetTrade.signature) &...
                             this.cacheBook.price == offsetTrade.price & ...                
@@ -652,6 +734,13 @@ classdef MarketObject < handle
         function removeTrade = findRemoveTrade(this, targetTrade)
             % Find a trade from the same traderId in the orderbook with no
             % existing offset
+            %
+            % In: 
+            % targetTrade (table row) - trade asking for removal 
+            %
+            % Out:
+            % removeTrade (table row) - trade identified for removal 
+            
             ob = innerjoin(this.orderBook,...
                 targetTrade(:, {'marketRootId', 'traderId'}));
             % Calculate number of branches on trade 
@@ -672,14 +761,24 @@ classdef MarketObject < handle
                         
     end % private methods
     
-    methods (Access = private, Static) % Utility functions
+    methods (Access = private, Static) % Static functions (marketBounds and cartesian product)
         
         % Utility functions:
+        %
+        % constructMarketBounds  - Current upper and lower bounds for some
+        %                         marketTable
+        % cartesianProduct  - Cartesian product of set
         
         function marketBounds = constructMarketBounds(marketTable)
             
             % Get upper and lower bounds for a particular market table by applying
             % marketMin and marketMax sequentially down branches
+            
+            % In:
+            % marketTable (table) -  marketTable table same format as root  
+            %
+            % Out:
+            % marketBounds (table) - Market bounds table with {'marketRootId', 'marketBranch', 'marketMin' , 'marketMax'}
 
             mT = unique(marketTable(:, {'marketRootId', 'marketBranchId'}), 'rows');
             mT.marketMin = nan(height(mT), 1);
@@ -693,7 +792,9 @@ classdef MarketObject < handle
                 % Get all markets on same or lower branch
                 mTmp = marketTable((marketTable.marketRootId == mRId) &...
                     (marketTable.marketBranchId <= mBId), :);
-                % Apply marketBounds iteratively 
+                % Apply marketBounds iteratively
+                L_ = [];
+                U_ = [];
                 for jMarket = 1 : height(mTmp)
                     L_tmp = mTmp.marketMin(jMarket);
                     U_tmp = mTmp.marketMax(jMarket);
@@ -724,36 +825,21 @@ classdef MarketObject < handle
             end % updateBounds
             
         end % constructMarketBounds
-        
-        function payoffs = constructPayoff(orderBook, marketBounds)
-            % DEPRECIATED: Only needed for old collateral construction
-            
-            % Construct minimum payoffs for each trades given marketTable.
-            % Output:
-            % payoffs - vector of minimum calculated possible payoff for each trade
-           
-            
-            % Add maxmin and minmax to orderBook
-            m = outerjoin(orderBook, marketBounds,...
-                'Type', 'left', 'MergeKeys', true);
-         
-            %Construct  payoff in both  casess
-            minMax_payoff = (m.marketMax -...
-                m.price) .* m.quantity;
-            maxMin_payoff = (m.marketMin -...
-                m.price) .* m.quantity;
-            
-            % Worst possible payoffs for each trade in orderBook
-            payoffs = min([minMax_payoff, maxMin_payoff], [], 2);
-            
-        end % constructPayoff (DEPRECIATED)
-        
+                
         % cartesianProduct - cartesianProduct product
+        % makeUnitVector - unit vector with one in some position and zeros
+        %                  otherwise
         
         function C = cartesianProduct(input)
             % Construct cartesianProduct product of e.g. {{[1 2]}, {[2 3]}, {[4,5]}}.
             % Used to create combination of min/max market outcomes across
             % multiple markets.
+            %
+            % In:
+            % input (set) - set of things
+            %
+            % Out:
+            % C (cell array) - cartesian product of input set
             
             args = input;
             n = length(input);
@@ -764,7 +850,21 @@ classdef MarketObject < handle
             C = unique(G , 'rows');
         end % cartesianProduct
         
-        
+        function u = makeUnitVector(L, x)
+            % Make unit vector
+            %
+            % In: 
+            % L - length of vector
+            % x - position for '1'
+            %
+            % Out: 
+            % u (1xL vector) - unit vector length L with 1 in x positions
+            %
+            % e.g. makeUnitVector(5,3) -> [0 0 1 0 0]
+            I = eye(L);
+            u = I(x, :);
+        end% makeUnitVector
+                
     end % private methods
     
     methods (Access = public) % Signature methods (mock for matlab version)
@@ -772,20 +872,27 @@ classdef MarketObject < handle
         % generateSignatureKeys
         % signMessage
         % verifyMessage
+        % signatureKey
+        % signedMarketTable
+        % signedOrderBook
+        % verifyTradeSignature
+        % verifyMarketSignature
+        % verifySignature
         
-        function [signingKey_hex, verifyKey_hex] = generateSignatureKeys(this)
-            % Generate modk sig/verify pairs
-            signingKey_hex = 'sk'
-            verifyKey_hex = 'vk';
-        end % generateSignatureKeys
+%         function [signingKey_hex, verifyKey_hex] = generateSignatureKeys(this)
+%             % Generate mock sig/verify pairs. (Client)
+%             signingKey_hex = 'sk'
+%             verifyKey_hex = 'vk';
+%         end % generateSignatureKeys
         
         function signed = signMessage(this, msg, signingKey_hex)
-            % Generate mock signature as message + an s
+            % Generate mock signature as message + an s (Client)
             signed = [msg, 's'];
         end %signMessage
         
         function verified = verifyMessage(this, signature, signatureMsg, verifyKey_hex)
-            % For mock just check that signature is correct
+            % For mock just check that signature is correct (Server  and
+            % client)
             if strcmp(signatureMsg, [msg, 's'])
                 verified = true;
             else
@@ -795,6 +902,7 @@ classdef MarketObject < handle
         end %verifyMessage
                     
         function verifyKey = getVerifyKey(this, traderId)
+            % (server and client)
             %         # Get verify key for trader
             %         verifyKey =  pd.read_sql('SELECT verifyKey FROM userTable WHERE'
             %                                  ' traderId = "%s"' %(traderId), this.conn
@@ -803,54 +911,59 @@ classdef MarketObject < handle
             verifyKey = 'vk';
         end % verifyKey
         
-        function signatureKey = getSignatureKey(this, traderId)
-            %         # Get signature key for trader (Not in production)
-            %         # TODO: Remove for production
-            %         signatureKey =  pd.read_sql('SELECT signatureKey FROM userTable WHERE'
-            %                                     ' traderId = "%s"' %(traderId), this.conn
-            %                                     ).signatureKey[0]
-            %         return signatureKey
-            signatureKey = 'sk';
-        end % signatureKey
-                       
-        %     # Chain signatures (all need to be on client side eventually)
-        
-        function signedMarketTable = signMarketTable(this, newMarket,  signatureKey_hex)
-
-            %         # Encode signature message in bytes
-            %         msg = b'%s%s%s%s%s%s' % (newMarket.prevSig, newMarket.traderId.encode("utf-8"), newMarket.underlying.encode("utf-8"),
-            %                            str(newMarket.marketMin).encode("utf-8"), str(newMarket.marketMax).encode("utf-8"), str(newMarket.expiry).encode("utf-8"))
-            %
-            %         signedOpenMarketData = this.signMessage(msg=msg,
-            %                                                    signingKey_hex=signatureKey_hex)
-            %         return signedOpenMarketData
-            signedMarketTable = 'signedMarket';
-        end % signedMarketTable
-        
-        function signedOrderBook = signOrderBook(this, newTrade, signatureKey_hex)
-            %         # Sign previous signature
-            %
-            %         # Encode signature message in bytes
-            %         msg = b'%s%s%s%s%s' % (newTrade.prevSig, newTrade.traderId.encode("utf-8"), str(newTrade.marketId).encode("utf-8"),
-            %                            str(newTrade.price).encode("utf-8"), str(newTrade.quantity).encode("utf-8"))
-            %
-            %         signedOrderBook = this.signMessage(msg=msg,
-            %                                                    signingKey_hex=signatureKey_hex)
-            %         return signedOrderBook
-            signedOrderBook = 'signedTrade';
-        end % signOrderBook       
+%         function signatureKey = getSignatureKey(this, traderId)
+%             % (client)
+%             %         # Get signature key for trader (Not in production)
+%             %         # TODO: Remove for production
+%             %         signatureKey =  pd.read_sql('SELECT signatureKey FROM userTable WHERE'
+%             %                                     ' traderId = "%s"' %(traderId), this.conn
+%             %                                     ).signatureKey[0]
+%             %         return signatureKey
+%             signatureKey = 'sk';
+%         end % signatureKey
+%                        
+%         %     # Chain signatures (all need to be on client side eventually)
+%         
+%         function signedMarketTable = signMarketTable(this, newMarket,  signatureKey_hex)
+%             % (client)
+%             %         # Encode signature message in bytes
+%             %         msg = b'%s%s%s%s%s%s' % (newMarket.prevSig, newMarket.traderId.encode("utf-8"), newMarket.underlying.encode("utf-8"),
+%             %                            str(newMarket.marketMin).encode("utf-8"), str(newMarket.marketMax).encode("utf-8"), str(newMarket.expiry).encode("utf-8"))
+%             %
+%             %         signedOpenMarketData = this.signMessage(msg=msg,
+%             %                                                    signingKey_hex=signatureKey_hex)
+%             %         return signedOpenMarketData
+%             signedMarketTable = 'signedMarket';
+%         end % signedMarketTable
+%         
+%         function signedOrderBook = signOrderBook(this, newTrade, signatureKey_hex)
+%             % (client)
+%             %         # Sign previous signature
+%             %
+%             %         # Encode signature message in bytes
+%             %         msg = b'%s%s%s%s%s' % (newTrade.prevSig, newTrade.traderId.encode("utf-8"), str(newTrade.marketId).encode("utf-8"),
+%             %                            str(newTrade.price).encode("utf-8"), str(newTrade.quantity).encode("utf-8"))
+%             %
+%             %         signedOrderBook = this.signMessage(msg=msg,
+%             %                                                    signingKey_hex=signatureKey_hex)
+%             %         return signedOrderBook
+%             signedOrderBook = 'signedTrade';
+%         end % signOrderBook       
         
         function verified = verifyTradeSignature(this, newTrade)
+            % (server and client)
             % Verify trade signature is correct
             verified = this.verifySignature(newTrade.traderId, newTrade.signature, newTrade.signatureMsg);
         end % verifyTradeSignature        
         
         function verified = verifyMarketSignature(this, newMarket)
+            % (server and client)
             % Verify market signature is correct
             verified = this.verifySignature(newMarket.traderId, newMarket.signature, newMarket.signatureMsg);
         end % verifyTradeSignature       
         
         function verified = verifySignature(this, traderId, signature, signatureMsg)
+            % (server and client)
             %         # Vefify a signature messsage by looking up the verify key and checking
             %         verifyKey_hex = this.getVerifyKey(traderId=traderId)
             %         # Verify the message against the signature and verify key

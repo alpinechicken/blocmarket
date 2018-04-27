@@ -1,4 +1,13 @@
+%% Sub-market settlement check bounds
 mo = MarketObject()
+
+% Create three traders
+mo = MarketObject()
+mo = mo.createUser(struct('verifyKey','a'));
+mo = mo.createUser(struct('verifyKey','b'));
+mo = mo.createUser(struct('verifyKey','c'));
+
+% Craete trades
 mo = mo.createMarket(marketMaker(mo, 1, 1, 0, 1, 1))
 % mo = mo.createMarket(marketMaker(mo, 2, 1, 0, 1, 1))
 mo = mo.createMarket(marketMaker(mo, 1, 2, 0.1, 0.9, 1))
@@ -6,9 +15,10 @@ mo = mo.createMarket(marketMaker(mo, 1, 2, 0.1, 0.9, 1))
 mo = mo.createMarket(marketMaker(mo, 1, 1, 1, 1, 1))
 mo.marketBounds
 
-%% 
+%% Three traders
 
 % Create three traders
+
 mo = MarketObject()
 mo = mo.createUser(struct('verifyKey','a'));
 mo = mo.createUser(struct('verifyKey','b'));
