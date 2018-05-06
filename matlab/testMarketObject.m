@@ -25,7 +25,12 @@ classdef testMarketObject < matlab.unittest.TestCase
            % Create a branch of first market  
            testMarket = testCase.mc.marketMaker(testCase.mo.getPreviousMarket, 1, 2, 0.1, 0.9, 1)
            testCase.mo.createMarket(testMarket);                           
-       
+            
+           % Create second root market
+           testMarket = testCase.mc.marketMaker(testCase.mo.getPreviousMarket, 2, 1, 0, 1, 1)
+           testCase.mo.createMarket(testMarket);    
+           
+           
            testCase.verifyNotEmpty(testCase.mo.marketTable)
         end % testCreateMarket
         
@@ -60,7 +65,7 @@ classdef testMarketObject < matlab.unittest.TestCase
             import matlab.unittest.constraints.TableComparator
             import matlab.unittest.constraints.NumericComparator
             import matlab.unittest.constraints.IsEqualTo
-            testCase.verifyThat(marketBounds,IsEqualTo(expectedBounds, ...
+            testCase.verifyThat(marketBounds(1:2, :),IsEqualTo(expectedBounds, ...
                 'Using',TableComparator(NumericComparator)));
         end % testSettleMarketUp
         
@@ -78,7 +83,7 @@ classdef testMarketObject < matlab.unittest.TestCase
             import matlab.unittest.constraints.TableComparator
             import matlab.unittest.constraints.NumericComparator
             import matlab.unittest.constraints.IsEqualTo
-            testCase.verifyThat(marketBounds,IsEqualTo(expectedBounds, ...
+            testCase.verifyThat(marketBounds(1:2,:),IsEqualTo(expectedBounds, ...
                 'Using',TableComparator(NumericComparator)));
         end % testSettleMarketDown        
         
@@ -104,14 +109,37 @@ classdef testMarketObject < matlab.unittest.TestCase
             testCase.verifyEqual(height(testCase.mo.orderBook),7);
             
             % Check collateral for a fourth trade (sign off last primary)            
-            tradePackage =  tradeMaker(testCase.mo, 2, 1, 1, [0.9], -1);    
+            tradePackage =  testCase.mc.tradeMaker(testCase.mo.getPreviousTrade, 2, 1, 1, [0.9], -1);    
            
             [colChk, colNum]  = testCase.mo.checkCollateral_public(tradePackage.primaryTrade);
             
             testCase.verifyTrue(all(colChk));
-            testCase.verifyEqual(colNum, [-0.5 1.3; 0.5 -0.7], 'AbsTol', 1e-10);                                     
+            testCase.verifyEqual(colNum, [-0.5 1.3; -0.5 1.3; 0.5 -0.7; 0.5 -0.7], 'AbsTol', 1e-10);                                     
             
         end % testMatchTrade
+        
+        function testRemoveTrade(testCase)
+            
+            % Put in five open trades in market  1
+            % Match five  trades in market 2
+            % Check that open trades are offset in market 1 as part of the
+            % final match
+
+            % Trader one puts in five orders in market 1
+            for i = 1 : 5
+                testCase.mo = testCase.mo.createTrade(testCase.mc.tradeMaker(testCase.mo.getPreviousTrade, 1, 1, 1, [0.4], 1))
+            end
+            % Five matched orders in market 2
+            for i = 1 : 5
+                testCase.mo = testCase.mo.createTrade(testCase.mc.tradeMaker(testCase.mo.getPreviousTrade, 1, 2, 1, [0.5], 1))
+                testCase.mo = testCase.mo.createTrade(testCase.mc.tradeMaker(testCase.mo.getPreviousTrade, 2, 2, 1, [0.5], -1))    
+            end % i
+            
+            % Run collateral checks
+            [c, t, a] = testCase.mo.checkCollateral_public;
+            testCase.verifyEqual(c, [true, true])
+            
+        end % testRemoveTrade 
         
         
     end % tests  

@@ -6,9 +6,9 @@ classdef MarketClient < handle
         verifyKey_hex
     end % properties
     
-    methods
+    methods (Access = public)
         
-        function this = marketClient()
+        function this = MarketClient()
             % Constructor
         end % marketClient
     
