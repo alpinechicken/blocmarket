@@ -19,15 +19,15 @@ classdef testMarketObject < matlab.unittest.TestCase
            % Create a market on (0, 1) and a sub market (0.1, 0.9)
            
            % Create market11
-            testMarket = testCase.mc.marketMaker(testCase.mo.getPreviousMarket, 1, 1, 0, 1, 1)
+            testMarket = testCase.mc.marketMaker(testCase.mo.getPreviousMarket, 1, 1, 0, 1, 1);
             testCase.mo.createMarket(testMarket);   
              
            % Create a branch of first market  
-           testMarket = testCase.mc.marketMaker(testCase.mo.getPreviousMarket, 1, 2, 0.1, 0.9, 1)
+           testMarket = testCase.mc.marketMaker(testCase.mo.getPreviousMarket, 1, 2, 0.1, 0.9, 1);
            testCase.mo.createMarket(testMarket);                           
             
            % Create second root market
-           testMarket = testCase.mc.marketMaker(testCase.mo.getPreviousMarket, 2, 1, 0, 1, 1)
+           testMarket = testCase.mc.marketMaker(testCase.mo.getPreviousMarket, 2, 1, 0, 1, 1);
            testCase.mo.createMarket(testMarket);    
            
            
@@ -38,7 +38,7 @@ classdef testMarketObject < matlab.unittest.TestCase
             % Create two traders
             testCase.mo = testCase.mo.createUser(struct('verifyKey','a'));
             testCase.mo = testCase.mo.createUser(struct('verifyKey','b'));
-            testCase.verifyNotEmpty(testCase.mo.userTable)
+            testCase.verifyNotEmpty(testCase.mo.userTable);
         end % testCreateUser        
         
     end % TestMethodSetup
@@ -137,7 +137,7 @@ classdef testMarketObject < matlab.unittest.TestCase
             
             % Run collateral checks
             [c, t, a] = testCase.mo.checkCollateral_public;
-            testCase.verifyEqual(c, [true, true])
+            testCase.verifyEqual(c, [true, true]);
             
         end % testRemoveTrade 
         

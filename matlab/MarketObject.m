@@ -18,7 +18,7 @@ classdef MarketObject < handle
     %           2 = Offset (offset to a primary trade => signature from primary)
     %           3 = Match (matched version of primary trade => signature from offset)
     % - Each time a new market is added or new bounds are set for an
-    % existing market, the possible extreme market values are calculated.
+    % existing market, the possible extreme market values are (re)calculated.
     
     % Market object with simplified tables and mock signatures.
     
@@ -44,11 +44,14 @@ classdef MarketObject < handle
             {'marketRootId', 'marketBranchId', 'marketMin', 'marketMax',...
             'traderId', 'previousSig', 'signatureMsg', 'signature'});               
         
-        % Cell array with all possible root market combinations (re-calcluated when a market is
-        % added or changed)
-        outcomeCombinations % Cell array with possible combinations of outcomes
-        marketBounds % Lower and upper bounds of markets
-        marketOutcomes % Market outcome matrix
+        % Market state
+        outcomeCombinations % (Cell array) Possible combinations of root market outcomes
+        marketBounds % (table) Lower and upper bounds  (all markets)
+        marketOutcomes % (table) Market outcome matrix across states (all markets) 
+        
+        % Trade state
+        tradeState = table([],[],[],[],[], 'VariableNames', {'tradeRootId',...
+            'tradeBranchId', 'isOpen', 'isOffset', 'isMatched'});
         
         % TODO (later): apply collateral only for trader 0, everyone else  gets
         % from trades.
@@ -131,9 +134,9 @@ classdef MarketObject < handle
             %                                'traderId', 1, 'previousSig', 's', 'signatureMsg','s',...
             %                                'signature', 'ss'))
             %
-            %   The signature logic is automated with createMarket:
+            %   The signature logic is automated with createMarket in MarketClient:
             %
-            %   mo.createMarket(marketMaker(mo, 1, 1, 0, 1, 1))            
+            %   mo = mo.createMarket(mc.marketMaker(mo.getPreviousMarket, 1, 2, 0.1, 0.7, 1))           
             %
             
             % New market from input structure
@@ -189,7 +192,7 @@ classdef MarketObject < handle
             % this.cacheBook (table) - add rows
             %
             %  Example:
-            %  tradePackage = tradeMaker(mo, 1, 1, 1, [0.5, 0.4], 1)
+            %  tradePackage =  tradeMaker(mo, 1, 1, 1, [0.5; 0.4], 1)
             %  mo = mo.createTrade(tradePackage)
             %
             %  Note: tradeMaker constructs the package with primary/offset/match
@@ -214,7 +217,7 @@ classdef MarketObject < handle
             % - Same price for all
             chk6 = pTrades.price == oTrades.price &...
                 oTrades.price == mTrades.price;
-            % - Same absolure quantity
+            % - Same absolute quantity
             chk7 = abs(pTrades.quantity) == abs(oTrades.quantity) &...
                 abs(oTrades.quantity) == abs(mTrades.quantity);
             % - Opposite signs for primary and offset            
@@ -255,7 +258,7 @@ classdef MarketObject < handle
                     chainChkPrimary(iTrade) = strcmp(prevTrade.signature,...
                         prevValidTrade.signature);
                 else
-                    % If it's the first trade it's ok
+                    % Chain valid if first trade
                     chainChkPrimary(iTrade) = true;
                 end
                 % Check signature of offset trade
@@ -292,7 +295,7 @@ classdef MarketObject < handle
                 colChk = this.checkCollateral(newTrade);
                 if colChk
                     % Add primary trade to order book
-                    this.orderBook = vertcat(this.orderBook, newTrade);
+                    this = this.writeNewTrade(newTrade)
                     % Add offset and match trades to cache order book
                     this.cacheBook = vertcat(this.cacheBook, altPrimaryTrades);                    
                     this.cacheBook = vertcat(this.cacheBook, offsetTrade);
@@ -402,8 +405,7 @@ classdef MarketObject < handle
             % newTrade - trade table row or struct
             %
             % Out:
-            % colChk (logical) - collateral check passs for trader from
-            % newTrade
+            % colChk (logical) - collateral check for newTrade  
             % netCollateral (double numStates*numTraders) -  collateral
             %                                                 outcome for
             %                                                 each trader in each state   
@@ -422,20 +424,23 @@ classdef MarketObject < handle
             if isstruct(newTrade)
                 newTrade = struct2table(newTrade);
             end
-            % Tack new trade onto order book
-            allTrades = vertcat(this.orderBook, newTrade);
             
-            % Indicators:
+            if ~isempty(newTrade)
+                % Add indicators onto new trade
+                newTrade.isOpen = newTrade.tradeBranchId == 1;
+                newTrade.isOffset = newTrade.tradeBranchId == 2;
+                newTrade.isMatched = newTrade.tradeBranchId == 3;
+            end
             
-            % Is the trade matched
-            allTrades.isMatched = allTrades.tradeBranchId == 3;
-            matchedTrades = allTrades(allTrades.isMatched, :); 
-            % Does a matching trade exist
-            unmatchedBranch = varfun(@max, allTrades, 'InputVariables',...
-                    'tradeBranchId', 'GroupingVariables', 'tradeRootId');
-            unmatchedRoots = unmatchedBranch.tradeRootId(unmatchedBranch.max_tradeBranchId <2, :);
-            allTrades.isOpen = arrayfun(@(x) ismember(x, unmatchedRoots), allTrades.tradeRootId);
             
+            % Add states onto order book
+            ob = join(this.orderBook, this.tradeState);
+            % Add new trade with state
+            allTrades = vertcat(ob, newTrade);
+            % Make indicators logical (TODO: they should be anyway)
+            allTrades.isMatched = logical(allTrades.isMatched);
+            allTrades.isOffset = logical(allTrades.isOffset);
+            allTrades.isOpen = logical(allTrades.isOpen);
                         
             % Create IM matrix indicating which market trades belong to
             numTrades = height(allTrades);
@@ -509,17 +514,36 @@ classdef MarketObject < handle
             end
         end % checkCollateral   
         
+        function this = updateTradeState(this)
+            ob = this.orderBook;
+              % Calculate number of branches on trade 
+            numelOrderBook = varfun(@numel, ob, 'GroupingVariables',...
+                {'traderId', 'tradeRootId', 'price'},...
+                'InputVariables', {'quantity'});
+            % Check the  number of components of the trade       
+            openOrders = numelOrderBook{numelOrderBook.GroupCount == 1, 'tradeRootId'};
+            offsetOrders = numelOrderBook{numelOrderBook.GroupCount == 2, 'tradeRootId'};
+            matchedOrders = numelOrderBook{numelOrderBook.GroupCount == 3, 'tradeRootId'};
+            
+            % Indicators for open/offset/matched
+
+            ob.isOpen=  ismember(ob.tradeRootId, openOrders);
+            ob.isOffset =  ismember(ob.tradeRootId, offsetOrders);
+            ob.isMatched = ismember(ob.tradeRootId, matchedOrders);
+            
+            % Keep tradk of open/offset/matched
+            this.tradeState = ob(:, {'tradeRootId', 'tradeBranchId', 'isOpen', 'isOffset', 'isMatched'});            
+            
+        end % updateTradeState
+        
         function this = updateOutcomeCombinations(this)
             % Update outcome combinations (taking into account mins/maxes on branches)
             % 
             % In:
             %
             % Out:
-            % this.outputCombinations (cell array) - possible market outcomes 
-            % this.marketOutcomes (numStates* numMarkets) - market
-            %                                                      outcomes
-            %                                                      across
-            %                                                      states 
+            % this.outputCombinations (cell array) - possible market states
+            % this.marketOutcomes (numStates* numMarkets) - outcomes/states                                                  
             % this.marketBounds (table) - table with bounds for all markets
             
             mT = this.marketTable;
@@ -546,8 +570,7 @@ classdef MarketObject < handle
                 M(iOutcome, :) = settleOutcome.marketMin';
             end % iOutcome
             % numStates * numMarkets matrix of extreme market outcomes
-            this.marketOutcomes = M;
-           
+            this.marketOutcomes = M;           
             
         end % updateOutcomeCombinations
                
@@ -580,7 +603,9 @@ classdef MarketObject < handle
                 {'marketMin', 'marketMax', 'signature',...
                 'signatureMsg', 'previousSig'})), 'rows');
 
-            marketIds = mT.marketRootId;            
+            marketIds = mT.marketRootId;
+            mT.marketMin = nan(height(mT), 1);
+            mT.marketMax = nan(height(mT), 1);
             for iOutcome = 1 : numCombinations
 
                 % Set market min/max to each outcome combination
@@ -608,15 +633,11 @@ classdef MarketObject < handle
                 while allMatched == false
                     % Get current unmatched trades for target market
                     ob = innerjoin(this.orderBook,...
-                        marketTmp(:, {'marketRootId', 'marketBranchId'}));
-                    % Calculate number of branches on trade 
-                    numelOrderBook = varfun(@numel, ob, 'GroupingVariables',...
-                        {'traderId', 'tradeRootId', 'price'},...
-                        'InputVariables', {'quantity'});
+                        marketTmp(:, {'marketRootId', 'marketBranchId'}));     
                     % Only consider trades without offsets in the order
                     % book
-                    ob = innerjoin(ob, numelOrderBook(numelOrderBook.GroupCount == 1, :));
-                    % Remove GroupCount
+                    ob = innerjoin(ob, this.tradeState(this.tradeState.isOpen, :));
+                    % Remove GroupCount and indicators
                     ob = ob(:, this.orderBook.Properties.VariableNames);
                     % Separate bids and asks 
                     bids = ob(ob.quantity ==1, :);
@@ -671,8 +692,21 @@ classdef MarketObject < handle
     methods (Access = private) % Mutate trades (write/remove)
         
         % Trade mutation functions:
+        % writeNewTrade
         % writeMatchedTrades
         % reduceMarginalTrade
+        
+        function this = writeNewTrade(this, newTrade)
+            % Write  new trade to order book
+            % In:
+            % - newTrade
+            %
+            % Out: 
+            % this.orderBook - updated order book
+            % this.tradeState - updated trade state
+            this.orderBook = vertcat(this.orderBook, newTrade);
+            this = this.updateTradeState();
+        end % writeNewTrade
         
         function this = writeMatchedTrade(this, targetTrade)
             % Add trade by finding valid offset and matched trade
@@ -688,6 +722,9 @@ classdef MarketObject < handle
             % Add match trade (TODO: sig check and remove from
             % cache)
             this.orderBook = vertcat(this.orderBook, matchedTrade);
+            
+            % Update trade state 
+            this = this.updateTradeState();
         end % writeMatchedTrade
         
         function this = removeMarginalTrade(this, traderId)
@@ -699,6 +736,9 @@ classdef MarketObject < handle
             offsetTrade = this.findOffsetTrade(removeTrade);
             % Add offset trade to order book 
             this.orderBook = vertcat(this.orderBook, offsetTrade);
+            
+            % Update trade state
+            this.updateTradeState();
       
         end % removeMarginalTrade        
         

@@ -12,7 +12,7 @@ mo = mo.createMarket(mc.marketMaker(mo.getPreviousMarket, 1, 2, 0.1, 0.9, 1))
 mo = mo.createMarket(mc.marketMaker(mo.getPreviousMarket, 1, 1, 1, 1, 1))
 mo.marketBounds
 
-%% Three traders two markets
+%% Three traders, two markets
 
 % Create three traders
 
