@@ -1,4 +1,4 @@
-classdef MarketClient < handle
+classdef MarketClient 
     % Market client
     
     properties
@@ -68,7 +68,7 @@ classdef MarketClient < handle
             % Create test trade package with dummy +s signatures
 
             % Example:
-            % tradePackage = tradeMaker(mo, 1, 1, 1, [0.5; 0.4], 1)
+            % tradePackage =  mc.tradeMaker(mo.getPreviousTrade, 1, 1, 1, [0.5; 0.4], 1)
 
             % prevTrade= mo.getPreviousTrade;
             prevSig = prevTrade.signature{1};

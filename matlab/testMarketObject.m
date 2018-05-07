@@ -111,7 +111,7 @@ classdef testMarketObject < matlab.unittest.TestCase
             % Check collateral for a fourth trade (sign off last primary)            
             tradePackage =  testCase.mc.tradeMaker(testCase.mo.getPreviousTrade, 2, 1, 1, [0.9], -1);    
            
-            [colChk, colNum]  = testCase.mo.checkCollateral_public(tradePackage.primaryTrade);
+            [colChk, colNum]  = testCase.mo.checkCollateral(tradePackage.primaryTrade);
             
             testCase.verifyTrue(all(colChk));
             testCase.verifyEqual(colNum, [-0.5 1.3; -0.5 1.3; 0.5 -0.7; 0.5 -0.7], 'AbsTol', 1e-10);                                     
@@ -136,7 +136,7 @@ classdef testMarketObject < matlab.unittest.TestCase
             end % i
             
             % Run collateral checks
-            [c, t, a] = testCase.mo.checkCollateral_public;
+            [c, t, a] = testCase.mo.checkCollateral(table());
             testCase.verifyEqual(c, [true, true]);
             
         end % testRemoveTrade 
