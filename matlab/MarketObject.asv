@@ -45,8 +45,12 @@ classdef MarketObject < handle
             'traderId', 'previousSig', 'signatureMsg', 'signature'});               
         
         % Market state:
-        outcomeCombinations % (Cell array) Possible combinations of root market outcomes
-        marketBounds % (table) Lower and upper bounds  (all markets)
+        outcomeCombinations = table([], [], [], [], [], 'VariableNames',...
+            {'outcomeId','marketRootId', 'marketBranchId', 'marketMin', 'marketMax'});   
+        
+        % (table) Possible combinations of root market outcomes
+        marketBounds 
+        % (table) Lower and upper bounds  (all markets)
         marketOutcomes % (table) Market outcome matrix across states (all markets)
         
         % Trade state:
@@ -118,14 +122,8 @@ classdef MarketObject < handle
             % this.marketBounds (table) - table with bounds for all markets
             %
             % e.g. 
-            %   mo.createMarket(struct('marketRootId', 1, 'marketBranchId', 1,...
-            %                                'marketMin', 0, 'marketMax', 1,...
-            %                                'traderId', 1, 'previousSig', 's', 'signatureMsg','s',...
-            %                                'signature', 'ss'))
-            %
-            %   The signature logic is automated with createMarket in MarketClient:
-            %
-            %   mo = mo.createMarket(mc.marketMaker(mo.getPreviousMarket, 1, 2, 0.1, 0.7, 1))           
+            %   newMarket = mc.marketMaker(mo.getPreviousMarket, 1, 2, 0.1, 0.7, 1)
+            %   mo = mo.createMarket(newMarket)           
             %
             
             % New market from input structure
@@ -303,21 +301,19 @@ classdef MarketObject < handle
               
     end % methods (Access = public)
     
-    methods (Access = public) % Get previous market/trade, check collateral   
+    methods (Access = public) % Get previous market/trade  
         
         % getPreviousTrade - previous valid trade (for chain)
         % getPreviousMarket - previous valid  market (for chain)
-        % collateralCheck - public access collateral check       
         
         function previousTrade = getPreviousTrade(this)
             % Most recent signature is the highest number on the highest
             % trade number in the order book
             %
             % In:
-            % (nothing)
+            % 
             % Out:
-            % previousTrade (table row) - most recent valid trade from
-            %                             which to append signature chain
+            % previousTrade (table row) - most recent valid trade 
             
             if ~isempty(this.orderBook)
                 maxTrade = this.orderBook(this.orderBook.tradeRootId == max(this.orderBook.tradeRootId), :);
@@ -330,7 +326,7 @@ classdef MarketObject < handle
         end % getPreviousTrade
 
         function previousMarket = getPreviousMarket(this)
-            % Most recent market signature relative to some market root
+            % Most recent market signature 
             %
             % In: 
             %
@@ -349,16 +345,99 @@ classdef MarketObject < handle
             end
             
         end % getPreviousMarket
-  
+            
+    end % methods (Access = public)
+    
+    methods (Access = private) % Construct and update state for market/trades
+                
+        % updateTradeState
+        % updateOutcomeCombinations
+        
+        function this = updateTradeState(this)
+            % Update trade state indicators (open/offset/matched)
+            %
+            % In:
+            %
+            % Out:
+            % this.tradeState (table with tradeRootId/tradeBranchId/isOpen/isOffset/isMatched)
+            
+            ob = this.orderBook;
+              % Calculate number of branches on trade 
+            numelOrderBook = varfun(@numel, ob, 'GroupingVariables',...
+                {'traderId', 'tradeRootId', 'price'},...
+                'InputVariables', {'quantity'});
+            % Check the  number of components of the trade       
+            openOrders = numelOrderBook{numelOrderBook.GroupCount == 1, 'tradeRootId'};
+            offsetOrders = numelOrderBook{numelOrderBook.GroupCount == 2, 'tradeRootId'};
+            matchedOrders = numelOrderBook{numelOrderBook.GroupCount == 3, 'tradeRootId'};
+            
+            % Indicators for open/offset/matched
+
+            ob.isOpen=  ismember(ob.tradeRootId, openOrders);
+            ob.isOffset =  ismember(ob.tradeRootId, offsetOrders);
+            ob.isMatched = ismember(ob.tradeRootId, matchedOrders);
+            
+            % Keep track of open/offset/matched
+            this.tradeState = ob(:, {'tradeRootId', 'tradeBranchId',...
+                'isOpen', 'isOffset', 'isMatched'});            
+            
+        end % updateTradeState
+        
+        function this = updateOutcomeCombinations(this)
+            % Update outcome combinations (taking into account mins/maxes on branches)
+            % 
+            % In:
+            %
+            % Out:
+            % this.outputCombinations (cell array) - possible market states
+            % (marketTable rows for root markets with minimum = maximum)
+            % this.marketOutcomes (numStates* numMarkets) - outcomes/states                                                  
+            % this.marketBounds (table) - table with bounds for all markets
+            
+            mT = this.marketTable;
+            
+            rootMarkets = this.marketTable(mT.marketBranchId == 1, :);
+            this.outcomeCombinations = this.constructOutcomeCombinations(rootMarkets);
+            
+            mB = this.constructMarketBounds(mT);
+
+            this.marketBounds = mB(:, {'marketRootId', 'marketBranchId',...
+                'marketMin' , 'marketMax'});
+            
+            numMarkets = height(this.marketBounds);
+            numStates = max(this.outcomeCombinations.outcomeId);
+            M = zeros(numStates, numMarkets);
+            for iOutcome = 1 : numStates
+                % Get outcome from root markets
+                outcome = this.outcomeCombinations(this.outcomeCombinations.outcomeId == iOutcome,:);
+                % Add outcome to market table
+                marketFields = {'marketRootId', 'marketBranchId', 'marketMin', 'marketMax'};
+                allOutcome = vertcat(mT(:, marketFields ), outcome(:, marketFields));
+                % Construct new bounds given outcome
+                settleOutcome  = this.constructMarketBounds(allOutcome);
+                % Market settles at min = max
+                M(iOutcome, :) = settleOutcome.marketMin';
+            end % iOutcome
+            % numStates * numMarkets matrix of extreme market outcomes
+            this.marketOutcomes = M;           
+            
+        end % updateOutcomeCombinations
+                       
+                
+    end %  methods (Access = private)
+    
+    methods (Access = public)
+        % checkCollateral        
+        
         function [colChk, netCollateral, colChkAll] = checkCollateral(this, newTrade)
             % Check if sufficient collateral exists for a newTrade by
             % constructing all output combinations for the trader. 
             %
             % In: 
-            % newTrade - trade table row or struct
+            % newTrade - (table row or struct) for this.orderBook
             %
             % Out:
-            % colChk (logical) - collateral check for newTrade  
+            % colChk (logical 1*1) - collateral check for newTrade  
             % netCollateral (double numStates*numTraders) -  collateral
             %                                                 outcome for
             %                                                 each trader in each state   
@@ -366,6 +445,10 @@ classdef MarketObject < handle
             % colChkAll (logical 1*numTraders) - collateral check pass
             %                                 indicators
             
+            if ~exist('newTrade', 'var')
+               % If there's no new trade just use current state
+               newTrade = table();
+            end       
             
             if ~isempty(newTrade)
                 
@@ -378,8 +461,6 @@ classdef MarketObject < handle
                 newTrade.isOffset = newTrade.tradeBranchId == 2;
                 newTrade.isMatched = newTrade.tradeBranchId == 3;
             end
-            
-     
             
             % Add states onto order book
             ob = join(this.orderBook, this.tradeState);
@@ -395,7 +476,7 @@ classdef MarketObject < handle
             numOpenTrades = sum(allTrades.isOpen);
             numMarkets = height(this.marketBounds);
             numTraders = max(this.userTable.traderId);
-            numStates = length(this.marketOutcomes);
+            numStates = max(this.outcomeCombinations.outcomeId);
             
             % Construct market indicator matrix IM indicating which market
             % trades belong to (numMarkets x numTrades)
@@ -404,14 +485,14 @@ classdef MarketObject < handle
                 % Find index in market bounds table
                 marketInd = find(allTrades.marketRootId(iTrade) == this.marketBounds.marketRootId & ...
                     allTrades.marketBranchId(iTrade) == this.marketBounds.marketBranchId);
-                IM(:, iTrade) = this.makeUnitVector(numMarkets, marketInd)';
+                IM(:, iTrade) = this.constructUnitVector(numMarkets, marketInd)';
             end % iTrade
             
             % Create trade indictor matrix IQ indicating which trader
             % trades belong to (numTrades * numTraders)
             IQ = zeros(numTrades, numTraders);
             for iTrade = 1 : numTrades
-                IQ(iTrade, :) = this.makeUnitVector(numTraders, allTrades.traderId(iTrade));
+                IQ(iTrade, :) = this.constructUnitVector(numTraders, allTrades.traderId(iTrade));
             end % iTrade
             
             % Get price and quantity
@@ -461,141 +542,25 @@ classdef MarketObject < handle
                 colChk = colChkAll;
             end
         end % checkCollateral    
-          
-    end % methods (Access = public)
-    
-    methods (Access = private) % Construct and update state for market/trades
-                
-        % updateTradeState
-        % updateOutcomeCombinations
-        % constructMarketOutcomes
         
-        function this = updateTradeState(this)
-            % Update trade state indicators (open/offset/matched)
-            %
-            % In:
-            %
-            % Out:
-            % this.tradeState (table same size as orderbook with isOpen/isOffset/isMatched)
-            
-            ob = this.orderBook;
-              % Calculate number of branches on trade 
-            numelOrderBook = varfun(@numel, ob, 'GroupingVariables',...
-                {'traderId', 'tradeRootId', 'price'},...
-                'InputVariables', {'quantity'});
-            % Check the  number of components of the trade       
-            openOrders = numelOrderBook{numelOrderBook.GroupCount == 1, 'tradeRootId'};
-            offsetOrders = numelOrderBook{numelOrderBook.GroupCount == 2, 'tradeRootId'};
-            matchedOrders = numelOrderBook{numelOrderBook.GroupCount == 3, 'tradeRootId'};
-            
-            % Indicators for open/offset/matched
-
-            ob.isOpen=  ismember(ob.tradeRootId, openOrders);
-            ob.isOffset =  ismember(ob.tradeRootId, offsetOrders);
-            ob.isMatched = ismember(ob.tradeRootId, matchedOrders);
-            
-            % Keep track of open/offset/matched
-            this.tradeState = ob(:, {'tradeRootId', 'tradeBranchId',...
-                'isOpen', 'isOffset', 'isMatched'});            
-            
-        end % updateTradeState
-        
-        function this = updateOutcomeCombinations(this)
-            % Update outcome combinations (taking into account mins/maxes on branches)
-            % 
-            % In:
-            %
-            % Out:
-            % this.outputCombinations (cell array) - possible market states
-            % this.marketOutcomes (numStates* numMarkets) - outcomes/states                                                  
-            % this.marketBounds (table) - table with bounds for all markets
-            
-            mT = this.marketTable;
-            
-            rootMarkets = this.marketTable(mT.marketBranchId == 1, :);
-            this.outcomeCombinations = this.constructOutcomeCombinations(rootMarkets);
-            
-            mB = this.constructMarketBounds(mT);
-
-            this.marketBounds = mB(:, {'marketRootId', 'marketBranchId',...
-                'marketMin' , 'marketMax'});
-            
-            numMarkets = height(this.marketBounds);
-            numStates = length(this.outcomeCombinations);
-            M = zeros(numStates, numMarkets);
-            for iOutcome = 1 : numStates
-                % Get outcome from root markets
-                outcome = this.outcomeCombinations{iOutcome};
-                % Add outcome to market table
-                allOutcome = vertcat(mT(:, outcome.Properties.VariableNames), outcome);
-                % Construct new bounds given outcome
-                settleOutcome  = this.constructMarketBounds(allOutcome);
-                % Market settles at min = max
-                M(iOutcome, :) = settleOutcome.marketMin';
-            end % iOutcome
-            % numStates * numMarkets matrix of extreme market outcomes
-            this.marketOutcomes = M;           
-            
-        end % updateOutcomeCombinations
-                       
-        function marketOutcomes = constructOutcomeCombinations(this, marketTable)
-            % Construct all possible outcome combinations root markets
-            % Output:
-            % marketOutcomes is a marketTable with each possible marketMin/marketMax combination of
-            % extrema for existing markets.
-            
-            % Construct extrema of marketTable
-            marketExtrema = this.constructMarketBounds(marketTable);           
-            marketExtrema = marketExtrema(:, {'marketRootId', 'marketMin',...
-                'marketMax'});
-            % Market min/max outcomes
-            % {[market 1 min, market 1 max], [market 2 min, market 2 max], ...}
-            for iMarket = 1 : height(marketExtrema)
-                exOutcome{iMarket} = marketExtrema{iMarket, {'marketMin',...
-                    'marketMax'}};
-            end % iMarket
-            
-            % Get all combinations
-            marketCombinations = this.cartesianProduct(exOutcome);
-            numCombinations = size(marketCombinations, 1);
-            numMarkets = size(marketCombinations, 2);
-
-            % Get unique markets
-            mT = unique(marketTable(:, setdiff(...
-                marketTable.Properties.VariableNames,...
-                {'marketMin', 'marketMax', 'signature',...
-                'signatureMsg', 'previousSig'})), 'rows');
-
-            marketIds = mT.marketRootId;
-            mT.marketMin = nan(height(mT), 1);
-            mT.marketMax = nan(height(mT), 1);
-            marketOutcomes = cell(1, numCombinations);
-            for iOutcome = 1 : numCombinations
-                % Set market min/max to each outcome combination
-                for iMarket = 1 : numMarkets
-                    mT{mT.marketRootId == marketIds(iMarket),...
-                        {'marketMin', 'marketMax'}} = ...
-                        [marketCombinations(iOutcome, iMarket),...
-                        marketCombinations(iOutcome, iMarket)];
-                end % jOutcome
-                marketOutcomes{iOutcome} = mT;
-            end % iMarket
-            
-        end % constructOutputCombinations
-                
-    end %  methods (Access = private)
+    end
     
     methods (Access = private) % Match trades
         
-        % matchTrades
+        % matchTrades       
                
-    function this = matchTrades(this)
+        function this = matchTrades(this)
             % Match trades in this.orderBook
             % - Checks if matchable trade exists
             % - Checks collateral for both sides
             % - Writes trade (adds offsetting unmatched trade and corresponding matched trade)
             
-            % TODO: don't need to match across all markets
+            % In:
+            %
+            % Out: 
+            % this.orderBook - matched trades
+            
+            % TODO: don't need to match across all markets every time
             
             % Iterate through markets
             for iMarket = 1 : height(this.marketTable)
@@ -656,7 +621,8 @@ classdef MarketObject < handle
                 
             end % iMarket
             
-        end % matchedTrades        
+        end % matchedTrades       
+        
     end %  methods (Access = private)
     
     methods (Access = private) % Mutate trades (write new/matched/remove trade)
@@ -669,7 +635,7 @@ classdef MarketObject < handle
         function this = writeNewTrade(this, newTrade)
             % Write  new trade to order book
             % In:
-            % - newTrade
+            % - newTrade (this.orderBook row)
             %
             % Out: 
             % this.orderBook - updated order book
@@ -682,7 +648,7 @@ classdef MarketObject < handle
             % Add trade by finding valid offset and matched trade
             %
             % In: 
-            % targetTrade - trade row
+            % targetTrade - (this.orderBook row)
             %
             % Out:
             % this.orderBook  (new order)
@@ -707,7 +673,7 @@ classdef MarketObject < handle
         function this = writeRemoveTrade(this, traderId)
             % Find an open trade and append its offset  to the order book
             % In: 
-            % traderId (integer) trader id to remove  trade frm
+            % traderId (integer) trader id to remove trade from
             %
             % Out:
             % this.orderBook  (new order)
@@ -735,13 +701,12 @@ classdef MarketObject < handle
             % this.cacheBook 
             
             this.cacheBook = vertcat(this.cacheBook, cacheTrades);
-        end
+        end % writeCacheTrades
         
     end % methods (Access = private)
     
     methods (Access = private) % Find offset/matched/removed
         
-        % Find offset trade functions:
         % findOffsetTrade
         % findMatchedTrade
         % findRemoveTrade
@@ -750,10 +715,10 @@ classdef MarketObject < handle
             % Find match trade
             %
             % In: 
-            % targetTrade (table row) - target trade
+            % targetTrade (this.orderBook row) - target trade
             %
             % Out:
-            % offsetTrade (table row) - offset trade             
+            % offsetTrade (this.orderBook row) - offset trade             
             
             
             % Find offset
@@ -791,10 +756,10 @@ classdef MarketObject < handle
             % existing offset
             %
             % In: 
-            % targetTrade (table row) - trade asking for removal 
+            % targetTrade (this.orderBook row) - trade asking for removal 
             %
             % Out:
-            % removeTrade (table row) - trade identified for removal 
+            % removeTrade (this.orderBook row) - trade identified for removal 
             
             ob = this.orderBook(this.orderBook.traderId == traderId, :);
             % Calculate number of branches on trade 
@@ -813,6 +778,62 @@ classdef MarketObject < handle
                         
     end % methods  (Access = private)
     
+    methods (Access = private) % Construct ouput combinations
+        
+        % constructOutcomeCombinations
+        
+        function marketOutcomes = constructOutcomeCombinations(this, marketTable)
+            % Construct all possible outcome combinations root markets
+            %
+            % In: 
+            % marketTable (marketTable table) - markets for combinations
+            %
+            % Out:
+            % marketOutcomes (marketTable table) - extreme outcomes
+            
+            % Construct extrema of marketTable
+            marketExtrema = this.constructMarketBounds(marketTable);           
+            marketExtrema = marketExtrema(:, {'marketRootId', 'marketMin',...
+                'marketMax'});
+            % Market min/max outcomes
+            % {[market 1 min, market 1 max], [market 2 min, market 2 max], ...}
+            for iMarket = 1 : height(marketExtrema)
+                exOutcome{iMarket} = marketExtrema{iMarket, {'marketMin',...
+                    'marketMax'}};
+            end % iMarket
+            
+            % Get all combinations
+            marketCombinations = this.constructCartesianProduct(exOutcome);
+            numCombinations = size(marketCombinations, 1);
+            numMarkets = size(marketCombinations, 2);
+
+            % Get unique markets
+            mT = unique(marketTable(:, setdiff(...
+                marketTable.Properties.VariableNames,...
+                {'marketMin', 'marketMax', 'signature',...
+                'signatureMsg', 'previousSig'})), 'rows');
+
+            marketIds = mT.marketRootId;
+            mT.marketMin = nan(height(mT), 1);
+            mT.marketMax = nan(height(mT), 1);
+            marketOutcomes = table();
+            for iOutcome = 1 : numCombinations
+                % Set market min/max to each outcome combination
+                for iMarket = 1 : numMarkets
+                    mT{mT.marketRootId == marketIds(iMarket),...
+                        {'marketMin', 'marketMax'}} = ...
+                        [marketCombinations(iOutcome, iMarket),...
+                        marketCombinations(iOutcome, iMarket)];
+                    mT.outcomeId = repmat(iOutcome, height(mT),1);
+                end % jOutcome
+                marketOutcomes = vertcat(marketOutcomes, mT);
+            end % iMarket
+            
+        end % constructOutputCombinations      
+        
+        
+    end % methods (Access = private)
+    
     methods (Access = private, Static) % Static functions (marketBounds and cartesian product)
         
         % Static functions:
@@ -820,8 +841,8 @@ classdef MarketObject < handle
         % constructMarketBounds  - Current upper and lower bounds for some
         %                         marketTable
                 
-        % cartesianProduct - cartesianProduct product
-        % makeUnitVector - unit vector with one in some position and zeros
+        % constructCartesianProduct - constructCartesianProduct product
+        % constructUnitVector - unit vector with one in some position and zeros
         %                  otherwise
         
         function marketBounds = constructMarketBounds(marketTable)
@@ -830,10 +851,10 @@ classdef MarketObject < handle
             % marketMin and marketMax sequentially down branches
             
             % In:
-            % marketTable (table) -  marketTable table same format as root  
+            % marketTable (this.marketTable table) -  marketTable table same format as root  
             %
             % Out:
-            % marketBounds (table) - Market bounds table with {'marketRootId', 'marketBranch', 'marketMin' , 'marketMax'}
+            % marketBounds ( table) -  {'marketRootId', 'marketBranch', 'marketMin' , 'marketMax'}
 
             mT = unique(marketTable(:, {'marketRootId', 'marketBranchId'}), 'rows');
             mT.marketMin = nan(height(mT), 1);
@@ -881,8 +902,8 @@ classdef MarketObject < handle
             
         end % constructMarketBounds
         
-        function C = cartesianProduct(input)
-            % Construct cartesianProduct product of e.g. {{[1 2]}, {[2 3]}, {[4,5]}}.
+        function C = constructCartesianProduct(input)
+            % Construct constructCartesianProduct product of e.g. {{[1 2]}, {[2 3]}, {[4,5]}}.
             % Used to create combination of min/max market outcomes across
             % multiple markets.
             %
@@ -899,22 +920,22 @@ classdef MarketObject < handle
                 G(:,i) = F{i}(:);
             end
             C = unique(G , 'rows');
-        end % cartesianProduct
+        end % constructCartesianProduct
         
-        function u = makeUnitVector(L, x)
+        function u = constructUnitVector(L, x)
             % Make unit vector
             %
             % In: 
-            % L - length of vector
-            % x - position for '1'
+            % L (integer) - length of vector
+            % x (integer) - position for '1'
             %
             % Out: 
             % u (1xL vector) - unit vector length L with 1 in x positions
             %
-            % e.g. makeUnitVector(5,3) -> [0 0 1 0 0]
+            % e.g. constructUnitVector(5,3) -> [0 0 1 0 0]
             I = eye(L);
             u = I(x, :);
-        end% makeUnitVector
+        end% constructUnitVector
                 
     end % methods  (Access = private, Static)
     
