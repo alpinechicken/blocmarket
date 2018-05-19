@@ -49,9 +49,9 @@ classdef MarketObject < handle
             {'outcomeId','marketRootId', 'marketBranchId', 'marketMin', 'marketMax'});   
         
         % (table) Possible combinations of root market outcomes
-        marketBounds 
-        % (table) Lower and upper bounds  (all markets)
-        marketOutcomes % (table) Market outcome matrix across states (all markets)
+        marketBounds = table([], [], [], [], 'VariableNames',...
+            {'marketRootId', 'marketBranchId', 'marketMin', 'marketMax'}); 
+        marketOutcomes % (matrix) Market outcome matrix across states (all markets)
         
         % Trade state:
         tradeState = table([],[],[],[],[], 'VariableNames', {'tradeRootId',...
@@ -182,10 +182,10 @@ classdef MarketObject < handle
             %  Note: tradeMaker constructs the package with primary/offset/match
             %  and adds the correct signatures given the market object mo
             
+            pTrades = tradePackage(tradePackage.tradeBranchId==1, :);
+            oTrades = tradePackage(tradePackage.tradeBranchId==2, :);
+            mTrades = tradePackage(tradePackage.tradeBranchId==3, :);
             
-            pTrades = struct2table(tradePackage.primaryTrade);
-            oTrades = struct2table(tradePackage.offsetTrade);
-            mTrades = struct2table(tradePackage.matchTrade);
             
             % Check trade package structure makes sense:
             
@@ -515,7 +515,7 @@ classdef MarketObject < handle
             % Minimum collateral for open trades (including new trade)
             Mstar_ = Mstar(:, allTrades.isOpen);
             Pstar_  = Pstar(:,allTrades.isOpen);
-            NC_open = [];
+            NC_open = zeros(size(NC_matched));
             if numOpenTrades > 0
                 for iTrader = 1 : numTraders
                     Qstar_ = Qstar(allTrades.isOpen, iTrader);
@@ -527,8 +527,6 @@ classdef MarketObject < handle
                     NC_open(:, iTrader) = min((Mstar_ - Pstar_).*...
                         repmat(Qstar_', numStates, 1), [], 2);
                 end % iTrader
-            else
-                NC_open = zeros(size(NC_matched));
             end 
             
             % Collateral available under all worst outcomes

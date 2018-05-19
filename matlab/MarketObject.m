@@ -182,10 +182,10 @@ classdef MarketObject < handle
             %  Note: tradeMaker constructs the package with primary/offset/match
             %  and adds the correct signatures given the market object mo
             
+            pTrades = tradePackage(tradePackage.tradeBranchId==1, :);
+            oTrades = tradePackage(tradePackage.tradeBranchId==2, :);
+            mTrades = tradePackage(tradePackage.tradeBranchId==3, :);
             
-            pTrades = struct2table(tradePackage.primaryTrade);
-            oTrades = struct2table(tradePackage.offsetTrade);
-            mTrades = struct2table(tradePackage.matchTrade);
             
             % Check trade package structure makes sense:
             
@@ -396,23 +396,22 @@ classdef MarketObject < handle
             
             mT = this.marketTable;
             
-            rootMarkets = this.marketTable(mT.marketBranchId == 1, :);
+            rootMarkets = mT(mT.marketBranchId == 1, :);
             this.outcomeCombinations = this.constructOutcomeCombinations(rootMarkets);
             
             mB = this.constructMarketBounds(mT);
+            marketFields = {'marketRootId', 'marketBranchId', 'marketMin', 'marketMax'};
 
-            this.marketBounds = mB(:, {'marketRootId', 'marketBranchId',...
-                'marketMin' , 'marketMax'});
+            this.marketBounds = mB(:, marketFields);
             
             numMarkets = height(this.marketBounds);
             numStates = max(this.outcomeCombinations.outcomeId);
             M = zeros(numStates, numMarkets);
             for iOutcome = 1 : numStates
                 % Get outcome from root markets
-                outcome = this.outcomeCombinations(this.outcomeCombinations.outcomeId == iOutcome,:);
+                outcomeRow = this.outcomeCombinations(this.outcomeCombinations.outcomeId == iOutcome,:);
                 % Add outcome to market table
-                marketFields = {'marketRootId', 'marketBranchId', 'marketMin', 'marketMax'};
-                allOutcome = vertcat(mT(:, marketFields ), outcome(:, marketFields));
+                allOutcome = vertcat(mT(:, marketFields ), outcomeRow(:, marketFields));
                 % Construct new bounds given outcome
                 settleOutcome  = this.constructMarketBounds(allOutcome);
                 % Market settles at min = max
@@ -515,7 +514,7 @@ classdef MarketObject < handle
             % Minimum collateral for open trades (including new trade)
             Mstar_ = Mstar(:, allTrades.isOpen);
             Pstar_  = Pstar(:,allTrades.isOpen);
-            NC_open = [];
+            NC_open = zeros(size(NC_matched));
             if numOpenTrades > 0
                 for iTrader = 1 : numTraders
                     Qstar_ = Qstar(allTrades.isOpen, iTrader);
@@ -527,8 +526,6 @@ classdef MarketObject < handle
                     NC_open(:, iTrader) = min((Mstar_ - Pstar_).*...
                         repmat(Qstar_', numStates, 1), [], 2);
                 end % iTrader
-            else
-                NC_open = zeros(size(NC_matched));
             end 
             
             % Collateral available under all worst outcomes
@@ -565,11 +562,11 @@ classdef MarketObject < handle
             % Iterate through markets
             for iMarket = 1 : height(this.marketTable)
                 allMatched = false;
-                marketTmp = this.marketTable(iMarket,:);
+                marketRow = this.marketTable(iMarket,:);
                 while allMatched == false
                     % Get current unmatched trades for target market
                     ob = innerjoin(this.orderBook,...
-                        marketTmp(:, {'marketRootId', 'marketBranchId'}));     
+                        marketRow(:, {'marketRootId', 'marketBranchId'}));     
                     % Only consider open trades
                     ob = innerjoin(ob, this.tradeState(this.tradeState.isOpen, :));
                     % Remove GroupCount and indicators
@@ -682,7 +679,7 @@ classdef MarketObject < handle
             % Write offset to original unmatched trade (previous sig from root trade)
             % Find closest offset trade
             removeTrade = this.findRemoveTrade(traderId);
-            offsetTrade = this.findOffsetTrade(removeTrade);
+            offsetTrade = this.findOffsetTrade(removeTrade);v 
             % Add offset trade to order book 
             this.orderBook = vertcat(this.orderBook, offsetTrade);
             
@@ -807,12 +804,9 @@ classdef MarketObject < handle
             numCombinations = size(marketCombinations, 1);
             numMarkets = size(marketCombinations, 2);
 
-            % Get unique markets
-            mT = unique(marketTable(:, setdiff(...
-                marketTable.Properties.VariableNames,...
-                {'marketMin', 'marketMax', 'signature',...
-                'signatureMsg', 'previousSig'})), 'rows');
-
+            mT = unique(marketTable(:, {'marketRootId', 'marketBranchId'}), 'rows');            
+            
+            
             marketIds = mT.marketRootId;
             mT.marketMin = nan(height(mT), 1);
             mT.marketMax = nan(height(mT), 1);
@@ -862,9 +856,9 @@ classdef MarketObject < handle
             % TODO: ensure these are in the order of the market
             % table (order matters). 
             for iMarket = 1 : height(mT)
-                tmpMarket = mT(iMarket, :);
-                mRId = tmpMarket.marketRootId;
-                mBId = tmpMarket.marketBranchId;
+                marketRow = mT(iMarket, :);
+                mRId = marketRow.marketRootId;
+                mBId = marketRow.marketBranchId;
                 % Get all markets on same or lower branch
                 mTmp = marketTable((marketTable.marketRootId == mRId) &...
                     (marketTable.marketBranchId <= mBId), :);
