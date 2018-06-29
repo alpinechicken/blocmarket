@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="dbSrc:///464e6843/ae27d7aa-7a97-4534-a230-c024fdfb144a" dialect="SQLite" />
+    <file url="dbSrc:///464e6843/bc0b302d-f925-4cfb-b83f-1ed5b8b2cb8b" dialect="SQLite" />
+    <file url="dbSrc:///464e6843/d04e8906-6b36-47c7-bc21-3009d90765d2" dialect="SQLite" />
+    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/1f80a102-25f0-45ac-a348-0b8f60673a1b/console.sql" dialect="SQLite" />
+    <file url="file://$PROJECT_DIR$/MarketObjectSQL.py" dialect="SQLite" />
+  </component>
+</project>
