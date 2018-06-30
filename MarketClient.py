@@ -100,7 +100,7 @@ class MarketClient(object):
         # Construct a signed trade package (primary/offset/match), possibly
         # for list of prices.
 
-        if isinstance(tradeRow['price'], list):
+        if isinstance(tradeRow['price'][0], list):
             numPrices = len(tradeRow['price'][0])
         else:
             numPrices = 1

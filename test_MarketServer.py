@@ -121,7 +121,7 @@ class TestMarketServer(unittest.TestCase):
         prevTrade = self.ms.getPreviousTrade()
         tradeRow = pd.DataFrame({'marketRootId': [1],
                                  'marketBranchId': [1],
-                                 'price': [0.5],
+                                 'price': [[0.5, 0.6]],
                                  'quantity': [-1],
                                  'traderId': [2]})
         tradePackage = self.mc2.tradeMaker(prevTrade=prevTrade,
@@ -131,7 +131,7 @@ class TestMarketServer(unittest.TestCase):
         prevTrade = self.ms.getPreviousTrade()
         tradeRow = pd.DataFrame({'marketRootId': [2],
                                  'marketBranchId': [1],
-                                 'price': [0.8],
+                                 'price': [[0.8, 0.9]],
                                  'quantity': [-1],
                                  'traderId': [1]})
         tradePackage = self.mc1.tradeMaker(prevTrade=prevTrade,
