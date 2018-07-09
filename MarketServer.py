@@ -139,13 +139,13 @@ class MarketServer(object):
             chainChk = True
         else:
             prevMarket = self.getPreviousMarket()
-            chainChk =  newMarket['previousSig'][0] == prevMarket['signature'][0]
+            chainChk =  newMarket.loc[0,'previousSig'] == prevMarket.loc[0,'signature']
 
         sigChk = self.verifyMarketSignature(newMarket)
         if isinstance(sigChk, bytes):
             sigChk=True
 
-        marketRangeChk = newMarket['marketMin'][0] <= newMarket['marketMax'][0]
+        marketRangeChk = newMarket.loc[0,'marketMin'] <= newMarket.loc[0,'marketMax']
 
         checks = marketRangeChk and sigChk and chainChk
 
@@ -166,30 +166,30 @@ class MarketServer(object):
         oTrades = tradePackage[tradePackage['tradeBranchId']==2].reset_index(drop=True)
         mTrades = tradePackage[tradePackage['tradeBranchId']==3].reset_index(drop=True)
 
-        chk1 = pTrades['traderId'][0] == oTrades['traderId'][0] and \
-               oTrades['traderId'][0] == mTrades['traderId'][0]
-        chk2 = pTrades['tradeRootId'][0] == oTrades['tradeRootId'][0] and\
-               oTrades['tradeRootId'][0] == mTrades['tradeRootId'][0]
-        chk3 = pTrades['tradeBranchId'][0] == 1
-        chk4 = oTrades['tradeBranchId'][0] == 2
-        chk5 = mTrades['tradeBranchId'][0] == 3
-        chk6 = pTrades['price'][0] == oTrades['price'][0] and oTrades['price'][0] ==\
-               mTrades['price'][0]
-        chk7 = abs(pTrades['quantity'][0]) == abs(oTrades['quantity'][0]) and\
-               abs(oTrades['quantity'][0]) == abs(mTrades['quantity'][0])
-        chk8 = np.sign(pTrades['quantity'][0]) == -1 * np.sign(oTrades['quantity'][0]) and\
-               -1 * np.sign(oTrades['quantity'][0]) == np.sign(mTrades['quantity'][0])
-        chk9 = pTrades['marketRootId'][0] == oTrades['marketRootId'][0] and \
-               oTrades['marketRootId'][0] == mTrades['marketRootId'][0]
-        chk10 = pTrades['marketBranchId'][0] == oTrades['marketBranchId'][0] and\
-                oTrades['marketBranchId'][0] == mTrades['marketBranchId'][0]
+        chk1 = pTrades.loc[0,'traderId'] == oTrades.loc[0,'traderId'] and \
+               oTrades.loc[0,'traderId'] == mTrades.loc[0,'traderId']
+        chk2 = pTrades.loc[0,'tradeRootId'] == oTrades.loc[0,'tradeRootId'] and\
+               oTrades.loc[0,'tradeRootId'] == mTrades.loc[0,'tradeRootId']
+        chk3 = pTrades.loc[0,'tradeBranchId'] == 1
+        chk4 = oTrades.loc[0,'tradeBranchId'] == 2
+        chk5 = mTrades.loc[0,'tradeBranchId'] == 3
+        chk6 = pTrades.loc[0,'price'] == oTrades.loc[0,'price'] and oTrades.loc[0,'price'] ==\
+               mTrades.loc[0,'price']
+        chk7 = abs(pTrades.loc[0,'quantity']) == abs(oTrades.loc[0,'quantity']) and\
+               abs(oTrades.loc[0,'quantity']) == abs(mTrades.loc[0,'quantity'])
+        chk8 = np.sign(pTrades.loc[0,'quantity']) == -1 * np.sign(oTrades.loc[0,'quantity']) and\
+               -1 * np.sign(oTrades.loc[0,'quantity']) == np.sign(mTrades.loc[0,'quantity'])
+        chk9 = pTrades.loc[0,'marketRootId'] == oTrades.loc[0,'marketRootId'] and \
+               oTrades.loc[0,'marketRootId'] == mTrades.loc[0,'marketRootId']
+        chk10 = pTrades.loc[0,'marketBranchId'] == oTrades.loc[0,'marketBranchId'] and\
+                oTrades.loc[0,'marketBranchId'] == mTrades.loc[0,'marketBranchId']
         primaryOffsetMatchChk = all([chk1, chk2 , chk3 , chk4 , chk5, \
                                      chk6 , chk7 , chk8 , chk9 , chk10])
 
-        validTradeQuantityChk = all(np.in1d(pTrades['quantity'][0], [-1, 1]))
+        validTradeQuantityChk = all(np.in1d(pTrades.loc[0,'quantity'], [-1, 1]))
 
-        if ((pTrades['marketRootId'][0] == mT['marketRootId']) &\
-               (pTrades['marketBranchId'][0] == mT['marketBranchId'])).any():
+        if ((pTrades.loc[0,'marketRootId'] == mT['marketRootId']) &\
+               (pTrades.loc[0,'marketBranchId'] == mT['marketBranchId'])).any():
             validMarketChk = True
         else:
             validMarketChk = False
@@ -206,10 +206,10 @@ class MarketServer(object):
             pTradeRow = pTrades.loc[[iTrade]].reset_index(drop=True)
             sigChkPrimary[iTrade] = self.verifyTradeSignature(pTradeRow)
             if not oB.empty:
-                prevTrade = oB[oB['signature'] == pTradeRow['previousSig'][0]]
+                prevTrade = oB[oB['signature'] == pTradeRow.loc[0,'previousSig']]
                 prevValidTrade = self.getPreviousTrade()
                 chainChkPrimary[iTrade] = prevTrade['signature'] ==\
-                                          prevValidTrade['signature'][0]
+                                          prevValidTrade.loc[0,'signature']
             else:
                 chainChkPrimary[iTrade] = True
 
@@ -325,9 +325,9 @@ class MarketServer(object):
         mO = self.marketOutcomes
 
         if not newTrade.empty:
-            newTrade['isOpen'] = newTrade.tradeBranchId == 1
-            newTrade['isOffset'] = newTrade.tradeBranchId == 2
-            newTrade['isMatched'] = newTrade.tradeBranchId == 3
+            newTrade.loc[:,'isOpen'] = newTrade.tradeBranchId == 1
+            newTrade.loc[:,'isOffset'] = newTrade.tradeBranchId == 2
+            newTrade.loc[:,'isMatched'] = newTrade.tradeBranchId == 3
 
         oB = pd.merge(oB, tS)
 
@@ -345,7 +345,7 @@ class MarketServer(object):
         for iTrade in range(numTrades):
             marketInd = np.where((allTrades.loc[iTrade,'marketRootId'] == mB['marketRootId']) &\
                      (allTrades.loc[iTrade, 'marketBranchId'] == mB['marketBranchId']))
-            IM[:,iTrade] = self.constructUnitVector(numMarkets, marketInd)
+            IM[:,iTrade] = self.constructUnitVector(numMarkets, marketInd[0][0])
 
         IQ = np.ndarray((numTrades, numTraders))
         for iTrade in range(numTrades):
@@ -378,9 +378,9 @@ class MarketServer(object):
 
 
         netCollateral = NC_matched + NC_open
-        colChkAll = (netCollateral > self.COLLATERAL_LIMIT).all(axis=0)
+        colChkAll = (netCollateral >= self.COLLATERAL_LIMIT).all(axis=0)
         if not newTrade.empty:
-            colChk = colChkAll[newTrade['traderId'][0]-1]
+            colChk = colChkAll[int(newTrade.loc[0,'traderId']-1)]
         else:
             colChk = colChkAll
 
@@ -406,8 +406,10 @@ class MarketServer(object):
                 minAsk = asks[asks['price'] == asks['price'].min()]
 
                 # Only take the first row
-                maxBid = np.delete(maxBid, np.s_[1:], 0)
-                minAsk = np.delete(minAsk, np.s_[1:], 0)
+                # maxBid = np.delete(maxBid, np.s_[1:], 0)
+                # minAsk = np.delete(minAsk, np.s_[1:], 0)
+                maxBid = maxBid[:1]
+                minAsk = minAsk[:1]
 
 
                 if minAsk.loc[:,'price'].values <= maxBid.loc[:,'price'].values:
@@ -422,9 +424,9 @@ class MarketServer(object):
             if np.all(colChk):
                 allClear = True
             else:
-                tIds = np.where(not colChk)[0]
-                for iTrader in tIds.size:
-                    self.writeRemoveTrade(tIds[iTrader])
+                tIds = np.where(~ colChk)[0]
+                for iTrader in range(tIds.size):
+                    self.writeRemoveTrade(tIds[iTrader]+1)
 
                 colChk, colChkAll = self.checkCollateral()
                 if np.all(colChk):
@@ -484,10 +486,11 @@ class MarketServer(object):
         cB = pd.read_sql_table('cacheBook', self.conn)
         isOffset = (cB.loc[:,'previousSig'] == targetTrade.loc[0,'signature']) &\
                    (cB.loc[:,'price'] == targetTrade.loc[0,'price']) &\
-                    (cB.loc[:,'tradeRootId'] == targetTrade.loc[0,'tradeRootId']) &\
-                     (cB.loc[:,'tradeBranchId'] == 2) &\
+                    (cB.loc[:,'tradeRootId'] == targetTrade.loc[0,'tradeRootId']) & \
+                   (cB.loc[:, 'tradeRootId'] == targetTrade.loc[
+                       0, 'tradeRootId']) &\
                       (cB.loc[:,'traderId'] == targetTrade.loc[0,'traderId'])
-        offsetTrade = cB[isOffset]
+        offsetTrade = cB.loc[isOffset,:]
         # cB = self.cacheBook
         #
         # isOffset = cB.previousSig == targetTrade.signature and\
@@ -510,7 +513,7 @@ class MarketServer(object):
                      (cB.loc[:,'tradeBranchId'] == 3) &\
                       (cB.loc[:,'traderId'] == offsetTrade.loc[0,'traderId'])
 
-        matchedTrade = cB.loc[isMatch]
+        matchedTrade = cB.loc[isMatch,:]
 
         # cB = self.cacheBook
         # isMatch = cB.previousSig == offsetTrade.signature and\
@@ -526,12 +529,12 @@ class MarketServer(object):
     def findRemoveTrade(self, traderId):
 
         oB = pd.read_sql_table('orderBook', self.conn)
-        oB = oB[oB.traderId == traderId]
+        oB = oB.loc[oB.traderId == traderId,: ]
         # TODO: Make sure this works
-        numelOrderBook = oB.groupby(['traderId', 'tradeRootId', 'price'])['quantity'].size().reset_index(drop=True)
-        oB = pd.merge(oB, numelOrderBook[numelOrderBook['quantity'] == 1])
+        numelOrderBook = oB.groupby(['traderId', 'tradeRootId', 'price'])['quantity'].size().reset_index()
+        oB = pd.merge(oB, numelOrderBook.loc[numelOrderBook.loc[:,0]== 1])
 
-        removeTrade = oB.loc[0]
+        removeTrade = oB.loc[[0],:]
 
         return removeTrade
 
@@ -623,7 +626,7 @@ class MarketServer(object):
         return cp
 
     def constructUnitVector(self, L, x):
-        u = np.eye(L)[x]
+        u = np.eye(int(L))[int(x)]
         return u
 
     def getVerifyKey(self, traderId):
@@ -653,17 +656,17 @@ class MarketServer(object):
 
     def verifyTradeSignature(self, trade):
 
-        sigChk = self.verifySignature(traderId=trade['traderId'][0],
-                                      signature=trade['signature'][0],
-                                      signatureMsg=trade['signatureMsg'][0])
+        sigChk = self.verifySignature(traderId=trade.loc[0,'traderId'],
+                                      signature=trade.loc[0,'signature'],
+                                      signatureMsg=trade.loc[0,'signatureMsg'])
 
         return sigChk
 
     def verifyMarketSignature(self, market):
 
-        sigChk = self.verifySignature(traderId=market['traderId'][0],
-                                      signature=market['signature'][0],
-                                      signatureMsg=market['signatureMsg'][0])
+        sigChk = self.verifySignature(traderId=market.loc[0,'traderId'],
+                                      signature=market.loc[0,'signature'],
+                                      signatureMsg=market.loc[0,'signatureMsg'])
         return sigChk
 
     def verifySignature(self, traderId, signature, signatureMsg):
