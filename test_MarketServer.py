@@ -32,7 +32,7 @@ class TestMarketServer(unittest.TestCase):
                                    'marketMin': [0],
                                    'marketMax': [1],
                                    'traderId': [1]})
-        testMarket = self.mc1.marketMaker(prevMarket, marketRow)
+        testMarket = self.mc1.marketMaker(previousMarketRow=prevMarket, marketRow=marketRow)
         self.ms.createMarket(newMarket=testMarket)
 
 
@@ -42,7 +42,7 @@ class TestMarketServer(unittest.TestCase):
                                    'marketMin': [0.1],
                                    'marketMax': [0.9],
                                    'traderId': [1]})
-        testMarket = self.mc1.marketMaker(prevMarket, marketRow)
+        testMarket = self.mc1.marketMaker(previousMarketRow=prevMarket, marketRow=marketRow)
         self.ms.createMarket(newMarket=testMarket)
 
 
@@ -52,14 +52,10 @@ class TestMarketServer(unittest.TestCase):
                                    'marketMin': [0],
                                    'marketMax': [1],
                                    'traderId': [1]})
-        testMarket = self.mc1.marketMaker(prevMarket, marketRow)
+        testMarket = self.mc1.marketMaker(previousMarketRow=prevMarket, marketRow=marketRow)
         self.ms.createMarket(newMarket=testMarket)
         mT = pd.read_sql_table('marketTable', self.ms.conn)
         assert mT.shape[0] == 3
-
-    # def tearDown(self):
-    #     pass
-    #     # self.market.purgeTables()
 
     # MarketClient tests
     # @unittest.skipIf(False)
@@ -154,6 +150,11 @@ class TestMarketServer(unittest.TestCase):
 
 
     def testRemoveTrade(self):
+        # Test trade removal:
+        # - Load up a bunch of open orders in market 1
+        # - Load up matched orders in market 2
+        # = Eventually the collateral limit is hit the market should try to
+        #   offset ALL trades in market one to free up collateral.
 
         # Trader 1 puts in five orders in market 1
         for iTrade in range(4):
@@ -168,7 +169,7 @@ class TestMarketServer(unittest.TestCase):
             self.ms.createTrade(tradePackage=tradePackage)
 
         # Five matched orders in market 2
-        for iTrade in range(4):
+        for iTrade in range(5):
             # Trader 1 bid at 0.5
             prevTrade = self.ms.getPreviousTrade()
             tradeRow = pd.DataFrame({'marketRootId': [2],
