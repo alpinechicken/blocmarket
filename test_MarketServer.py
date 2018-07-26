@@ -196,6 +196,61 @@ class TestMarketServer(unittest.TestCase):
         assert (colChkAll  == [[-2,2], [2,-2], [-2,2], [2,-2]]).all()
 
 
+    # def testManyTrades(self):
+    #     # Test trade removal:
+    #     # - Load up a bunch of open orders in market 1
+    #     # - Load up matched orders in market 2
+    #     # = Eventually the collateral limit is hit the market should try to
+    #     #   offset ALL trades in market one to free up collateral.
+    #
+    #     # Five matched orders in market 2
+    #     for iTrade in range(10):
+    #         # Trader 1 bid at 0.5
+    #         prevTrade = self.ms.getPreviousTrade()
+    #         tradeRow = pd.DataFrame({'marketRootId': [2],
+    #                                  'marketBranchId': [1],
+    #                                  'price': [0.5],
+    #                                  'quantity': [1],
+    #                                  'traderId': [1]})
+    #         tradePackage = self.mc1.tradeMaker(prevTrade=prevTrade,
+    #                                            tradeRow=tradeRow).reset_index(
+    #             drop=True)
+    #         self.ms.createTrade(tradePackage=tradePackage)
+    #         # Trader 2 offer at 0.5
+    #         prevTrade = self.ms.getPreviousTrade()
+    #         tradeRow = pd.DataFrame({'marketRootId': [2],
+    #                                  'marketBranchId': [1],
+    #                                  'price': [0.5],
+    #                                  'quantity': [-1],
+    #                                  'traderId': [2]})
+    #         tradePackage = self.mc2.tradeMaker(prevTrade=prevTrade,
+    #                                            tradeRow=tradeRow).reset_index(
+    #             drop=True)
+    #         self.ms.createTrade(tradePackage=tradePackage)
+    #         # Trader 2 bid at 0.5
+    #         prevTrade = self.ms.getPreviousTrade()
+    #         tradeRow = pd.DataFrame({'marketRootId': [2],
+    #                                  'marketBranchId': [1],
+    #                                  'price': [0.5],
+    #                                  'quantity': [1],
+    #                                  'traderId': [2]})
+    #         tradePackage = self.mc2.tradeMaker(prevTrade=prevTrade,
+    #                                            tradeRow=tradeRow).reset_index(
+    #             drop=True)
+    #         self.ms.createTrade(tradePackage=tradePackage)
+    #         # Trader 2 offer at 0.5
+    #         prevTrade = self.ms.getPreviousTrade()
+    #         tradeRow = pd.DataFrame({'marketRootId': [2],
+    #                                  'marketBranchId': [1],
+    #                                  'price': [0.5],
+    #                                  'quantity': [-1],
+    #                                  'traderId': [1]})
+    #         tradePackage = self.mc1.tradeMaker(prevTrade=prevTrade,
+    #                                            tradeRow=tradeRow).reset_index(
+    #             drop=True)
+    #         self.ms.createTrade(tradePackage=tradePackage)
+    #     assert 1==1
+
     # def test_marketMaker(self):
     #     pass
     #

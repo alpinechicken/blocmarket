@@ -37,9 +37,6 @@ class MarketServer(object):
     - Each time a new market is added or new bounds are set for an
     existing market, the possible extreme market values are (re)calculated.
 
-    Market object with simplified tables and mock signatures.
-
-
     """
 
     def __init__(self):
@@ -116,6 +113,7 @@ class MarketServer(object):
                       Column('isMatched', Integer)
                         )
 
+        # Collateral limit for each trader
         self.COLLATERAL_LIMIT = -2
 
         # Create all tables
@@ -141,8 +139,7 @@ class MarketServer(object):
         self.tradeState.delete().execute()
         self.outcomeCombinations.delete().execute()
 
-    # Creaate Functions:
-    #
+    # Function group:
     # createUser
     # createMarket
     # createTrade
@@ -151,8 +148,8 @@ class MarketServer(object):
 
         """ Create a new user and adds to userTable.
 
-        :param verifyKey_hex:
-        :return: self.userTable
+        :param verifyKey_hex: (str) verify key
+        :return: self.userTable: (sql table) new row of userTable
 
         :Example:
 
@@ -174,6 +171,7 @@ class MarketServer(object):
         else:
             # Create the new user
             newUsr = dict(verifyKey = verifyKey_hex)
+            # Insert to usertable (autoincrements traderId)
             self.conn.execute(self.userTable.insert(), [newUsr,])
 
     def createMarket(self, newMarket: object):
@@ -181,29 +179,33 @@ class MarketServer(object):
         Create a new row in marketTable. Update existing market
         with new bounds if market already exists.
 
-        :param newMarket: Pandas Dataframe with columns [traderId, marketMin,
+        :param newMarket: (DataFrame) columns [traderId, marketMin,
         marketMax, marketRootId, marketBranchId, previousSignature,
         signatureMsg, signature]
-        :return self.marketTable, self.outputCombinations, self.marketBounds
+        :return self.marketTable - new row in market table
+        :return self.outputCombinations - updated output combinations  table
+        :return: self.marketBounds - updated market bounds
 
         :Example:
-
+        ms = MarketServer()
+        mc = MarketClient()
+        ...
         prevMarket = ms.getPreviousMarket()
         marketRow = pd.DataFrame({'marketRootId': [1],
                                    'marketBranchId': [1],
                                    'marketMin': [0],
                                    'marketMax': [1],
                                    'traderId': [1]})
-        testMarket = mc.marketMaker(previousMarketRow=prevMarket, marketRow=marketRow)
+        testMarket = mc.marketMaker(previousMarketRow=prevMarket,
+                                    marketRow=marketRow)
         ms.createMarket(newMarket=testMarket)
 
         .. note::
-        Input dataframe constructed with MarketClient.marketMaker()
+        Input DataFrame constructed with MarketClient.marketMaker()
         Successful call:
-             * Adds new column to marketTable
-             * Creates outputCombinations (cell array) with extreme market
-              outcomes as marketTable rows
-             * Creates marketBounds (table) with upper and lower bounds for
+             * Adds new row to marketTable
+             * Updates outcomeCombinations table
+             * Updates marketBounds (table) with upper and lower bounds for
               all markets
         """
 
@@ -246,12 +248,14 @@ class MarketServer(object):
             - Check that sufficient collateral exists for primary trade
             (checkCollateral)
             - Add primary trade to this.orderBook
-            - Add all other trades to this.cacheBook
+            - Add all other (offset/match/better price) trades to this.cacheBook
+            - Match trades
 
 
              Example::
              ms = MarketServer()
              mc = MarketClient()
+             ...
              prevTrade = ms.getPreviousTrade()
              tradeRow = pd.DataFrame({'marketRootId': [1],
                               'marketBranchId': [1],
@@ -265,10 +269,11 @@ class MarketServer(object):
              and adds the correct signatures.
 
 
-        :param tradePackage: trade package dataframe with primary/offset/match
+        :param tradePackage: (DataFrame) trade package with primary/offset/match
             and backup trades (from tradeMaker in MarketClient)
 
-        :return: self.orderBook, self.cacheBook
+        :return: self.orderBook: (sql table)
+        :return: self.cacheBook: (sql table)
         """
 
         mT = pd.read_sql_table('marketTable', self.conn)
@@ -278,7 +283,7 @@ class MarketServer(object):
         oTrades = tradePackage[tradePackage['tradeBranchId']==2].reset_index(drop=True)
         mTrades = tradePackage[tradePackage['tradeBranchId']==3].reset_index(drop=True)
 
-        # Check  trade padckage structure makes sense
+        # Check that trade package structure makes sense
 
         # Same trader id and root id
         chk1 = pTrades.loc[0,'traderId'] == oTrades.loc[0,'traderId'] and \
@@ -369,7 +374,7 @@ class MarketServer(object):
             matchTrade = mTrades
             # New trade is first primary trade
             newTrade = primaryTrades.loc[[0],:]
-            # Alternative primary trades are eother primary trades in the package
+            # Alternative primary trades are other primary trades in the package
             altPrimaryTrades = primaryTrades.loc[1:,:]
             # Check collateral on first primary trade
             colChk, colChkAll = self.checkCollateral(newTrade)
@@ -389,7 +394,8 @@ class MarketServer(object):
     # getPreviousMarket - previous valid market (for chain)
 
     def getPreviousTrade(self):
-        """Previous trade is the highest trade branch on the highest trade root.
+        """Previous trade is the highest trade branch on the highest trade
+        root in the orderBook table
 
         Example::
              ms = MarketServer()
@@ -406,7 +412,7 @@ class MarketServer(object):
 
         :param None
 
-        :return: previousTrade: row of previous valid trade
+        :return: previousTrade: (DataFrame) row of previous valid trade
 
         """
         oB = pd.read_sql_table('orderBook', self.conn)
@@ -438,7 +444,7 @@ class MarketServer(object):
 
         :param None
 
-        :return: previousMarket: row of previous valid market
+        :return: previousMarket: (DataFrame) row of previous valid market
         """
 
         mT = pd.read_sql_table('marketTable', self.conn)
@@ -455,8 +461,8 @@ class MarketServer(object):
         return previousMarket.reset_index(drop=True)
 
     # Function group:
-    # - updateTradeState
-    # - updateOutcomeCombinations
+    # updateTradeState (update state of open/offset/matched trades)
+    # updateOutcomeCombinations
 
     def updateTradeState(self):
         """Update trade state indicators (open/offset/matched).
@@ -467,13 +473,13 @@ class MarketServer(object):
         ms = updateTradeState()
 
         :param None
-        :return self.tradeState: table with state of each trade (open/offset/matched)
+        :return self.tradeState: (sql table) columns [tradeRootId, tradeBranchId
+                                                      isOpen, isOffset, isMatched]
 
         Example::
         ms = MarketServer()
         ... set up trade users/markets/trades
         ms = ms.updateTradeState
-        .. :todo:: trade state should probably live as fields in orderBook
 
         """
 
@@ -501,9 +507,9 @@ class MarketServer(object):
         branches.
 
         :param: None
-        :return: self.outputCombinations:  Table of possible market states
-        :return: self.marketOutcomes: Matrix of market outcome in each state
-        :return: self.marketBounds: Upper and lower bounds for all markets
+        :return: self.outputCombinations:  (sql table) possible market states
+        :return: self.marketOutcomes: (numpy nd array) Matrix of market outcome in each state
+        :return: self.marketBounds: (sql table) Upper and lower bounds for all markets
 
         Example::
         ms = MarketServer()
@@ -551,9 +557,9 @@ class MarketServer(object):
         """ Check if sufficient collateral exists for a newTrade by
         constructing all output combinations for the trader.
 
-        :param: newTrade: Dataframe row with same fields as orderBook
-        :return: colChk:  Vector of logical for collateral check for each trader
-        :return: netCollateral: Matrix of net collateral to each trader in eacn
+        :param: newTrade: (DataFrame) row with same fields as orderBook
+        :return: colChk:  (ndarray) logical for collateral check for each trader
+        :return: netCollateral: (ndarray) Matrix of net collateral to each trader in eacn
         state
 
         Example::
@@ -661,7 +667,7 @@ class MarketServer(object):
          corresponding matched trade)
 
         :param: None
-        :return: self.orderBook: adds relevant trades to order book
+        :return: self.orderBook: (sql table)  adds relevant trades to order book
 
 
         Example::
@@ -734,8 +740,8 @@ class MarketServer(object):
 
     def writeNewTrade(self, newTrade):
         """Write new trade to order book.
-        :param: newTrade: trade with same columns as orderBook
-        :return: self.orderBook: adds relevant trades to order book
+        :param: newTrade: (DataFrame) trade with same columns as orderBook
+        :return: self.orderBook: (sql table) adds relevant trades to order book
 
 
         .. note:: Called from self.createTrade()
@@ -749,8 +755,8 @@ class MarketServer(object):
 
     def writeMatchedTrade(self, targetTrade):
         """Write matched trade to order book.
-        :param: targetTrade: trade with same columns as orderBook
-        :return: self.orderBook: adds relevant trades to order book
+        :param: targetTrade: (DataFrame) trade with same columns as orderBook
+        :return: self.orderBook: (sql table) adds relevant trades to order book
 
 
         .. note:: Called from self.matchTrades()
@@ -770,8 +776,8 @@ class MarketServer(object):
     def writeRemoveTrade(self, traderId):
         """Remove trade  by writing offsetting trade to orderBook.
 
-        :param: traderId: traderId to remove trade from
-        :return: self.orderBook: adds relevant trades to order book
+        :param: traderId: (int) traderId to remove trade from
+        :return: self.orderBook: (sql table) adds relevant trades to order book
 
 
         .. note:: Called from self.matchTrades()
@@ -798,8 +804,8 @@ class MarketServer(object):
         when the primary is in orderBook, and trades at better prices that
         might be crossed against an existing open order.
 
-        :param: cacheTrades: cache trades with same columns as cacheBook
-        :return: self.cacheBook: adds relevant trades to order book
+        :param: cacheTrades: (DataFrame) cache trades with same columns as cacheBook
+        :return: self.cacheBook: (sql table) adds relevant trades to order book
 
 
         .. note:: Called from self.createTrade()
@@ -813,11 +819,16 @@ class MarketServer(object):
                            index=False)
 
 
+    # Function group:
+    # findOffsetTrade
+    # findMatchedTrade
+    # findRemoveTrade
+
     def findOffsetTrade(self, targetTrade):
         """Find offsetting trade.
 
-        :param: targetTrade: trade to find offset from
-        :return: offsetTrade: offsetting trade to targetTrade
+        :param: targetTrade: (DataFrame) trade to find offset from
+        :return: offsetTrade: (DataFrame) offsetting trade to targetTrade
 
 
         .. note:: Called from self.writeRemoveTrade()
@@ -842,8 +853,8 @@ class MarketServer(object):
     def findMatchedTrade(self, offsetTrade):
         """Find matched trade.
 
-        :param: offsetTrade: trade to find match from
-        :return: matchedTrade: match trade
+        :param: offsetTrade: (DataFrame) trade to find match from
+        :return: matchedTrade: (DataFrame) match trade
 
 
         .. note:: Called from self.writeMatchedTrade()
@@ -864,12 +875,11 @@ class MarketServer(object):
 
         return matchedTrade
 
-
-    def findRemoveTrade(self, traderId):
+    def findRemoveTrade(self, traderId: int) -> object:
         """Find trade to remove.
 
-        :param: traderId: trader Id to reduce orders from
-        :return: removeTrade: trade to remove
+        :param: traderId: (int32) trader Id to reduce orders from
+        :return: removeTrade: (DataFrame) trade to remove
 
 
         .. note:: Called from self.writeRemoveTrade()
@@ -885,16 +895,19 @@ class MarketServer(object):
 
         return removeTrade
 
+    # Function group:
+    # constructOutcomeCombinations
+    # constructMarketBounds
 
-    def constructOutcomeCombinations(self, marketTable):
-        """Construct all possible outcome combinations for some table of markets
+    def constructOutcomeCombinations(self, marketTable: object) -> object:
+        """Construct all possible outcome combinations for some table of markets.
 
-        :param: marketTable: marketTable with same columns as the SQL table
-        :return: marketOutcomes: marketTable constructed with all possible
-                 extreme outcomes of the market indexed by outcomeId
+        :param: marketTable: (DataFrame) marketTable with same columns as the SQL table
+        :return: marketOutcomes: (DataFrame) [marketRootId, marketBranchId,
+                                              marketMin, marketMax, outcomeId]
 
 
-        .. note:: The market
+        .. note:: Market outcome ids created new when a new market is added.
 
         """
         marketExtrema = self.constructMarketBounds(marketTable)
@@ -930,13 +943,12 @@ class MarketServer(object):
 
         return marketOutcomes.reset_index(drop=True).drop_duplicates()
 
-
     def constructMarketBounds(self, marketTable):
         """Construct upper and lower bounds for all markets, taking into
         account the bounds of lower branchess.
 
-        :param: marketTable: marketTable with same columns as the SQL table
-        :return: marketBounds: table with [marketRootId, marketBranchId, marketMin, marketMax]
+        :param: marketTable: (DataFrame) marketTable with same columns as the SQL table
+        :return: marketBounds: (DataFrame) with [marketRootId, marketBranchId, marketMin, marketMax]
 
 
         .. note::
@@ -984,15 +996,16 @@ class MarketServer(object):
 
         return marketBounds.reset_index(drop=True)
 
-    def updateBounds(self, L, U, l, u):
+    def updateBounds(self, L: float, U:float, l:float, u:float)->object:
         """Update bounds from lower branches
 
-        :param: L: lower bound for current market
-        :param: U: upper bound for current market
-        :param: l: lower bound for lower branches
-        :param: u: upper bound for lower branches
+        :param: L: (ndarray) lower bound for current market
+        :param: U: (ndarray) upper bound for current market
+        :param: l: (float64) lower bound for lower branches
+        :param: u: (float64) upper bound for lower branches
 
-        :return: marketBounds: table with [marketRootId, marketBranchId, marketMin, marketMax]
+        :return: L_new: (float64) new lower bound
+        :return: U_new: (float64) new upper bound
 
 
         .. note::
@@ -1007,9 +1020,9 @@ class MarketServer(object):
     def constructCartesianProduct(self, input):
         """Construct all possible combinations of a set
 
-        :param: input: input set
+        :param: input: (ndarray) input set
 
-        :return: cp: set of  combinations
+        :return: cp: (list) combinations
         """
         cp = list(itertools.product(*input))
         return cp
@@ -1017,22 +1030,30 @@ class MarketServer(object):
     def constructUnitVector(self, L, x):
         """Make a vector of length L with a one in the x'th position
 
-        :param: L: Length of unit vector
-        :param: x: position of 1
+        :param: L: (int64) Length of unit vector
+        :param: x: (int64) position of 1
 
-        :return: u: unit vector
+        :return: u: (ndarray) unit vector
 
         """
         u = np.eye(int(L))[int(x)]
         return u
 
+    # Function group:
+    # getVerifyKey
+    # signMessage
+    # verifyMessage
+    # verifyTradeSignature
+    # verifyMarketSignature
+    # verifySignature
+
     def getVerifyKey(self, traderId):
 
         """Get verify key for trader
 
-        :param: traderId: traderId
+        :param: traderId: (int64) traderId
 
-        :return: verifyKey: verify key for traderId
+        :return: verifyKey: (str) verify key for traderId
 
         """
 
@@ -1063,11 +1084,11 @@ class MarketServer(object):
     def verifyMessage(self, signature: bytes, signatureMsg: bytes, verifyKey_hex: str) -> object:
         """Verify a signature
 
-        :param: signature: signature to check
-        :param: signatureMsg: message that signature is from
-        :param: verifyKey_hex: verification key as string
+        :param: signature: (bytes) signature to check
+        :param: signatureMsg: (bytes) message that signature is from
+        :param: verifyKey_hex: (str) verification key as string
 
-        :return: verified: returns if verified
+        :return: verified: (bytes) returns signatureMsg if verified
 
         """
 
@@ -1080,9 +1101,9 @@ class MarketServer(object):
     def verifyTradeSignature(self, trade):
         """Verify a trade
 
-        :param: trade (dataframe row): trade to check
+        :param: trade (DataFrame row): trade to check
 
-        :return: sigChk: returns if verified
+        :return: sigChk: (bytes) returns signatureMsg if verified
 
         """
 
@@ -1095,7 +1116,7 @@ class MarketServer(object):
     def verifyMarketSignature(self, market):
         """Verify a market
 
-        :param: market (dataframe row): market to check
+        :param: market (DataFrame): market to check
 
         :return: sigChk: returns if verified
 
@@ -1109,9 +1130,9 @@ class MarketServer(object):
     def verifySignature(self, traderId, signature, signatureMsg):
         """Vefify a signature message by looking up the verify key and checking
 
-        :param: traderId: trader id
-        :param: signature: signature
-        :param: signatureMsg: signature message
+        :param: traderId: (int64) trader id
+        :param: signature: (bytes) signature
+        :param: signatureMsg: (bytes) signature message
 
         :return: sigChk: returns if verified
 
@@ -1119,16 +1140,18 @@ class MarketServer(object):
 
         verifyKey_hex = self.getVerifyKey(traderId=traderId)
         # Verify the message against the signature and verify key
-        return self.verifyMessage(signature=signature,
+        sigChk = self.verifyMessage(signature=signature,
                                   signatureMsg=signatureMsg,
                                   verifyKey_hex=verifyKey_hex)
+        return sigChk
 
 
     def __repr(self):
         return "MarketServer()"
 
     def __str(self):
-        return "Limit order book server. With great power comes great responsibility."
+        return "bloc: binary limit order chain/bloc is a limit order chain"
 
 
 # M = MarketServer()
+
