@@ -2,6 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f748aadd-a74f-4691-aa32-65bb3faaf10c" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MarketClient.py" beforeDir="false" afterPath="$PROJECT_DIR$/MarketClient.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MarketServer.py" beforeDir="false" afterPath="$PROJECT_DIR$/MarketServer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pmarket.db" beforeDir="false" afterPath="$PROJECT_DIR$/pmarket.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test_MarketServer.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_MarketServer.py" afterDir="false" />
@@ -21,7 +25,7 @@
     <SUITE FILE_PATH="coverage/pmarket$Unittests_in_test_MarketClient_py.coverage" NAME="Unittests in test_MarketClient.py Coverage Results" MODIFIED="1527916815368" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pmarket$MarketObjectSQL.coverage" NAME="MarketObjectSQL Coverage Results" MODIFIED="1487486462183" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pmarket$MarketClient.coverage" NAME="MarketClient Coverage Results" MODIFIED="1527907311959" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/pmarket$Unittests_for_test_MarketServer_TestMarketServer.coverage" NAME="Unittests for test_MarketServer.TestMarketServer Coverage Results" MODIFIED="1532577782791" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pmarket$Unittests_for_test_MarketServer_TestMarketServer.coverage" NAME="Unittests for test_MarketServer.TestMarketServer Coverage Results" MODIFIED="1535969320366" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pmarket$tricks.coverage" NAME="tricks Coverage Results" MODIFIED="1481354581096" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pmarket$MarketObject.coverage" NAME="MarketObject Coverage Results" MODIFIED="1481374997762" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pmarket$Unittests_for_test_MarketServer_TestMarketServer_testMatchTrade.coverage" NAME="Unittests for test_MarketServer.TestMarketServer.testMatchTrade Coverage Results" MODIFIED="1530704993613" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -62,6 +66,21 @@
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="main: schema" type="90513b60:SqliteImplModel$Schema" />
       </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="pmarket3" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="pmarket3" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="pmarket3" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="main: schema" type="90513b60:SqliteImplModel$Schema" />
+      </path>
     </expand>
     <select />
   </component>
@@ -73,14 +92,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
-      <file leaf-file-name="MarketServer.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MarketServer.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MarketServer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3154">
-              <caret line="873" column="40" lean-forward="true" selection-start-line="873" selection-start-column="40" selection-end-line="873" selection-end-column="40" />
-              <folding>
-                <element signature="e#26#42#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="85">
+              <caret line="5" column="26" lean-forward="true" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MarketObjectSQL.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/python/MarketObjectSQL.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-374">
+              <caret line="23" column="36" lean-forward="true" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -88,8 +113,8 @@
       <file leaf-file-name="test_MarketServer.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test_MarketServer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3553">
-              <caret line="209" column="59" lean-forward="true" selection-start-line="209" selection-start-column="59" selection-end-line="209" selection-end-column="59" />
+            <state relative-caret-position="-85">
+              <caret line="13" column="31" lean-forward="true" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
               </folding>
@@ -97,29 +122,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cachebook" pinned="false" current-in-tab="false">
-        <entry file="das://2c4ff1e6-637c-41ba-88a1-49aca4fc9777/schema/main/table/cachebook">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="outcomecombinations" pinned="false" current-in-tab="false">
-        <entry file="das://2c4ff1e6-637c-41ba-88a1-49aca4fc9777/schema/main/table/outcomecombinations">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tradestate" pinned="false" current-in-tab="false">
-        <entry file="das://2c4ff1e6-637c-41ba-88a1-49aca4fc9777/schema/main/table/tradestate">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
+      <file leaf-file-name="MarketClient.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/MarketClient.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="225" column="17" lean-forward="true" selection-start-line="225" selection-start-column="17" selection-end-line="225" selection-end-column="17" />
+              <folding>
+                <element signature="e#1#20#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -135,16 +145,9 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Binary</find>
-      <find>purge</find>
-      <find>updateOut</find>
-      <find>iterows</find>
-      <find>if_e</find>
-      <find>getPrev</find>
       <find>marketB</find>
       <find>constructOutcomeCombinations</find>
       <find>outcomeCom</find>
-      <find>sql</find>
       <find>getPreviousTrad</find>
       <find>.drop</find>
       <find>.reset_index()</find>
@@ -165,6 +168,13 @@
       <find>.count</find>
       <find>merge</find>
       <find>outcomeId</find>
+      <find>outcomeCombin</find>
+      <find>oC =</find>
+      <find>matchTra</find>
+      <find>read_sql_query</find>
+      <find>matchT</find>
+      <find>1d</find>
+      <find>sql</find>
     </findStrings>
     <replaceStrings>
       <replace>value</replace>
@@ -211,8 +221,10 @@
         <option value="$PROJECT_DIR$/MarketObjectSQL.py" />
         <option value="$PROJECT_DIR$/test_MarketClient.py" />
         <option value="$PROJECT_DIR$/bob.py" />
-        <option value="$PROJECT_DIR$/MarketClient.py" />
         <option value="$PROJECT_DIR$/test_MarketServer.py" />
+        <option value="$PROJECT_DIR$/MarketClient.py" />
+        <option value="$PROJECT_DIR$/hello.py" />
+        <option value="$PROJECT_DIR$/../myflaskproject/hello.py" />
         <option value="$PROJECT_DIR$/MarketServer.py" />
       </list>
     </option>
@@ -223,11 +235,10 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="366" />
-    <option name="y" value="6" />
-    <option name="width" value="2138" />
-    <option name="height" value="1730" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-12" />
+    <option name="width" value="3220" />
+    <option name="height" value="1798" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -235,14 +246,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
-            <path>
-              <item name="pmarket" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pmarket" type="462c0819:PsiDirectoryNode" />
-            </path>
             <path>
               <item name="pmarket" type="b2602c69:ProjectViewProjectNode" />
               <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
@@ -251,6 +257,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -260,7 +267,7 @@
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$2/Languages" value="Python" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$2/SQL Dialects" value="SQLite" />
     <property name="js.eslint.eslintPackage" value="" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../myflaskproject/venv/Scripts" />
     <property name="settings.editor.selected.configurable" value="Errors" />
     <property name="settings.editor.splitter.proportion" value="0.2375852" />
   </component>
@@ -269,9 +276,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Joe\PycharmProjects\myflaskproject\venv\Scripts" />
+      <recent name="C:\Users\Joe\PycharmProjects\myflaskproject\" />
+      <recent name="C:\Users\Joe\PycharmProjects" />
       <recent name="C:\Users\Joe\PycharmProjects\pmarket\python" />
       <recent name="C:\Users\Joe\PycharmProjects\pmarket" />
-      <recent name="C:\Users\Joe\" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -720,34 +729,34 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_test_MarketServer_TestMarketServer - 2018.07.25 at 14h 44m 52s.xml">
+    <history-entry file="Unittests_for_test_MarketServer_TestMarketServer - 2018.08.18 at 16h 08m 27s.xml">
       <configuration name="Unittests for test_MarketServer.TestMarketServer" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_MarketServer_TestMarketServer - 2018.07.25 at 14h 45m 44s.xml">
+    <history-entry file="Unittests_for_test_MarketServer_TestMarketServer - 2018.08.18 at 16h 11m 03s.xml">
       <configuration name="Unittests for test_MarketServer.TestMarketServer" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_MarketServer_TestMarketServer - 2018.07.25 at 14h 46m 19s.xml">
+    <history-entry file="Unittests_for_test_MarketServer_TestMarketServer - 2018.08.18 at 16h 16m 37s.xml">
       <configuration name="Unittests for test_MarketServer.TestMarketServer" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_MarketServer_TestMarketServer - 2018.07.25 at 16h 22m 39s.xml">
+    <history-entry file="Unittests_for_test_MarketServer_TestMarketServer - 2018.08.18 at 16h 19m 35s.xml">
       <configuration name="Unittests for test_MarketServer.TestMarketServer" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_MarketServer_TestMarketServer - 2018.07.26 at 03h 07m 59s.xml">
+    <history-entry file="Unittests_for_test_MarketServer_TestMarketServer - 2018.08.18 at 16h 21m 01s.xml">
       <configuration name="Unittests for test_MarketServer.TestMarketServer" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_MarketServer_TestMarketServer - 2018.07.26 at 03h 08m 06s.xml">
+    <history-entry file="Unittests_for_test_MarketServer_TestMarketServer - 2018.08.18 at 16h 24m 08s.xml">
       <configuration name="Unittests for test_MarketServer.TestMarketServer" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_MarketServer_TestMarketServer - 2018.07.26 at 05h 06m 25s.xml">
+    <history-entry file="Unittests_for_test_MarketServer_TestMarketServer - 2018.08.19 at 19h 24m 17s.xml">
       <configuration name="Unittests for test_MarketServer.TestMarketServer" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_MarketServer_TestMarketServer - 2018.07.26 at 05h 07m 38s.xml">
+    <history-entry file="Unittests_for_test_MarketServer_TestMarketServer - 2018.08.19 at 19h 25m 41s.xml">
       <configuration name="Unittests for test_MarketServer.TestMarketServer" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_MarketServer_TestMarketServer - 2018.07.26 at 13h 26m 57s.xml">
+    <history-entry file="Unittests_for_test_MarketServer_TestMarketServer - 2018.08.26 at 16h 14m 58s.xml">
       <configuration name="Unittests for test_MarketServer.TestMarketServer" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_MarketServer_TestMarketServer - 2018.07.26 at 13h 58m 48s.xml">
+    <history-entry file="Unittests_for_test_MarketServer_TestMarketServer - 2018.09.03 at 20h 10m 07s.xml">
       <configuration name="Unittests for test_MarketServer.TestMarketServer" configurationId="tests" />
     </history-entry>
   </component>
@@ -761,23 +770,24 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="-6" width="1613" height="913" extended-state="6" />
+    <frame x="-6" y="0" width="1610" height="899" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49967846" weight="0.32720104" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.2881029" side_tool="true" visible="true" weight="0.44940868" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49839228" weight="0.325887" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5064433" side_tool="true" visible="true" weight="0.35207498" />
       <window_info anchor="bottom" id="Database Changes" order="11" sideWeight="0.4971061" weight="0.32720104" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.71189713" visible="true" weight="0.44940868" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.70610934" weight="0.44678056" />
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4977492" weight="0.19973719" />
-      <window_info anchor="bottom" id="Python Console" order="14" sideWeight="0.49581993" weight="0.32457292" />
+      <window_info active="true" anchor="bottom" id="Python Console" order="14" sideWeight="0.4935567" visible="true" weight="0.35207498" />
       <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49967846" weight="0.32720104" />
-      <window_info anchor="bottom" id="Database Console" order="10" sideWeight="0.48038584" weight="0.12746386" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4980289" visible="true" weight="0.17299035" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4980289" visible="true" weight="0.17783505" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
-      <window_info anchor="right" id="Database" order="3" sideWeight="0.48883048" weight="0.33890676" />
-      <window_info anchor="right" id="SciView" order="4" sideWeight="0.48357424" visible="true" weight="0.3459807" />
+      <window_info anchor="right" id="Database" order="3" sideWeight="0.48883048" weight="0.22829582" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32820907" />
+      <window_info anchor="right" id="SciView" order="4" sideWeight="0.48357424" weight="0.49003217" />
       <window_info id="Structure" order="1" sideWeight="0.50197107" side_tool="true" weight="0.18971062" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.711254" weight="0.35479632" />
+      <window_info anchor="bottom" id="Concurrent Activities Diagram" order="13" sideWeight="0.4971061" weight="0.32720104" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.70418006" weight="0.46386334" />
       <window_info id="Favorites" order="2" sideWeight="0.50097847" side_tool="true" weight="0.18713826" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -787,30 +797,30 @@
       <window_info anchor="right" x="0" y="0" width="353" height="713" id="Documentation" order="6" sideWeight="0.5111695" side_tool="true" weight="0.3363344" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32820907" />
-      <window_info anchor="bottom" id="Concurrent Activities Diagram" order="13" sideWeight="0.49758163" weight="0.32842758" />
+      <window_info anchor="bottom" id="Database Console" order="10" sideWeight="0.4733119" weight="0.28646517" />
+      <window_info anchor="right" id="Coverage" order="3" side_tool="true" />
     </layout>
     <layout-to-restore>
       <window_info anchor="bottom" id="Database Console" order="11" weight="0.32950708" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13451613" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32950708" />
-      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49870968" weight="0.32883188" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3335584" />
+      <window_info anchor="bottom" id="Python Console" order="9" weight="0.32950708" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32950708" />
       <window_info anchor="right" id="Database" order="3" visible="true" weight="0.32774192" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.32950708" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5012903" side_tool="true" weight="0.32950708" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="12" visible="true" weight="0.32987013" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49870968" weight="0.32883188" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39837947" />
-      <window_info anchor="bottom" id="Python Console" order="9" weight="0.32950708" />
+      <window_info id="Favorites" order="2" side_tool="true" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -893,7 +903,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/MarketServer.py</url>
-          <line>1155</line>
+          <line>1212</line>
           <option name="timeStamp" value="222" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -902,19 +912,9 @@
           <option name="timeStamp" value="242" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/MarketServer.py</url>
-          <line>1075</line>
-          <option name="timeStamp" value="543" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/MarketServer.py</url>
-          <line>1140</line>
-          <option name="timeStamp" value="547" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/MarketServer.py</url>
-          <line>1127</line>
-          <option name="timeStamp" value="551" />
+          <url>file://$PROJECT_DIR$/test_MarketServer.py</url>
+          <line>106</line>
+          <option name="timeStamp" value="569" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -929,65 +929,64 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="558" />
+      <option name="time" value="577" />
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
       <expression>
-        <expression-string>openOrders = numelOrderBook.loc[numelOrderBook.loc[:,'counts'] == 1,'tradeRootId']
-offsetOrders = numelOrderBook.loc[numelOrderBook.loc[:,'counts'] == 2, 'tradeRootId']
-matchedOrders = numelOrderBook.loc[numelOrderBook.loc[:,'counts'] == 3,'tradeRootId']</expression-string>
+        <expression-string>maxBid = bids.loc[(bids.loc[:,'price'] == matchTrade.loc[0,'price'])
+                                  &amp; (bids.loc[:,'tradeRootId'] == matchTrade.loc[0,'tradeRootId_bid'])]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>self.verifyMessage(signature=o.loc[:,'signature'][0],
-                               signatureMsg=o.loc[:,'signatureMsg'][0],
-                               verifyKey_hex=self.verifyKey_hex)</expression-string>
+        <expression-string>asks.loc[(asks.loc[:,'price'] == matchTrade.loc[0,'price'])
+                                  &amp; (asks.loc[:,'tradeRootId'] == matchTrade.loc[0,'tradeRootId_ask'])]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>o.loc[:,'signature'][0]</expression-string>
+        <expression-string>minAsk = asks.loc[(asks.loc[:,'price'] == matchTrade.loc[0,'price'])
+              &amp; (asks.loc[:,'tradeRootId'] == matchTrade.loc[0,'tradeRootId_ask'])]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>o.loc[0,'signature']</expression-string>
+        <expression-string>minAsk = asks.loc[(asks.loc[:,'price'] == matchTrade.loc[0,'price'])
+              &amp; (asks.loc[:,'tradeRootId'] == matchTrade.loc[:,'tradeRootId_ask'])]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>o.loc[:,'signature']</expression-string>
+        <expression-string>bids.loc[(bids.loc[:,'price'] == matchTrade.loc[0,'price'])
+                                  &amp; (bids.loc[:,'tradeRootId'] == matchTrade.loc[:,'tradeRootId_bid'])]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>self.verifyMessage(signature=o.loc[0,'signature'],
-                               signatureMsg=o.loc[0,'signatureMsg'],
-                               verifyKey_hex=self.verifyKey_hex)</expression-string>
+        <expression-string>bids.loc[(bids.loc[:,'price'] == matchTrade.loc[0,'price'])
+                                  &amp; (bids.loc['tradeRootId'] == matchTrade.loc['tradeRootId_bid'])]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>(marketBounds[['marketRootId', 'marketBranchId', 'marketMin', 'marketMax']].values == [[1, 1, 1, 1],
-                                                             [1, 2, 0.9, 0.9],
-                                                             [2,1, 0, 1]]).all()</expression-string>
+        <expression-string>minAsk = asks[(asks['price'] == matchTrade['price'])
+                                  &amp; (asks['tradeRootId'] == matchTrade['tradeRootId_ask'])]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>(marketBounds[['marketRootId', 'marketBranchId', 'marketMin', 'marketMax']].values == [[1, 1, 0, 0],
-                                                             [1, 2, 0.1, 0.1],
-                                                             [2,1, 0, 1]]).all()</expression-string>
+        <expression-string>maxBid = bids.loc[(bids['price'] == matchTrade['price'])
+                                  &amp; (bids['tradeRootId'] == matchTrade['tradeRootId_bid']),:]
+                    # Get min ask</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>(marketBounds[['marketRootId', 'marketBranchId', 'marketMin', 'marketMax']].values == [[1, 1, 0, 1],
-                                                             [1, 2, 0.1, 0.9],
-                                                             [2,1, 0, 1]]).all()</expression-string>
+        <expression-string>maxBid = bids.loc[(bids['price'] == matchTrade['price'])
+                                  &amp; (bids['tradeRootId'] == matchTrade['tradeRootId_bid'])]
+                    # Get min ask</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
@@ -1073,19 +1072,23 @@ matchedOrders = numelOrderBook.loc[numelOrderBook.loc[:,'counts'] == 3,'tradeRoo
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="das://5cc244f8-636b-42ef-b477-39e428bd82e0/schema/main/table/sample" />
-    <entry file="das://538c2182-264a-44d3-a753-de402831ecd3/schema/main/table/cachebook" />
-    <entry file="das://538c2182-264a-44d3-a753-de402831ecd3/schema/main/table/tradestate" />
-    <entry file="das://538c2182-264a-44d3-a753-de402831ecd3/schema/main/table/usertable" />
-    <entry file="das://538c2182-264a-44d3-a753-de402831ecd3/schema/main/table/marketbounds" />
-    <entry file="das://538c2182-264a-44d3-a753-de402831ecd3/schema/main/table/outcomecombinations" />
-    <entry file="das://538c2182-264a-44d3-a753-de402831ecd3/schema/main/table/orderbook" />
-    <entry file="das://538c2182-264a-44d3-a753-de402831ecd3/schema/main/table/markettable" />
-    <entry file="das://b0327238-b0ef-43a9-9eed-0eca7dfe0c8c/schema/main/table/markettable" />
-    <entry file="das://4f6d3ce6-8ab4-40d6-bd1f-9880704efa93/schema/main/table/sqlite_master" />
-    <entry file="das://4f6d3ce6-8ab4-40d6-bd1f-9880704efa93/schema/main/table/tradestate" />
-    <entry file="das://4f6d3ce6-8ab4-40d6-bd1f-9880704efa93/schema/main/table/usertable" />
-    <entry file="das://4f6d3ce6-8ab4-40d6-bd1f-9880704efa93/schema/main/table/orderbook" />
+    <entry file="file://$PROJECT_DIR$/MarketClient.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3077">
+          <caret line="186" column="54" selection-start-line="186" selection-start-column="54" selection-end-line="186" selection-end-column="54" />
+          <folding>
+            <element signature="e#1#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../myflaskproject/hello.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="50" selection-start-line="20" selection-start-column="50" selection-end-line="20" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
     <entry file="das://4f6d3ce6-8ab4-40d6-bd1f-9880704efa93/schema/main/table/markettable" />
     <entry file="das://4f6d3ce6-8ab4-40d6-bd1f-9880704efa93/schema/main/table/marketbounds" />
     <entry file="das://4f6d3ce6-8ab4-40d6-bd1f-9880704efa93/schema/main/table/outcomecombinations" />
@@ -1202,28 +1205,7 @@ matchedOrders = numelOrderBook.loc[numelOrderBook.loc[:,'counts'] == 3,'tradeRoo
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MarketClient.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="175" column="31" selection-start-line="175" selection-start-column="31" selection-end-line="175" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python35-32/Lib/unittest/case.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="599" selection-start-line="599" selection-end-line="599" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://2c4ff1e6-637c-41ba-88a1-49aca4fc9777/schema/main/table/tradestate">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://2c4ff1e6-637c-41ba-88a1-49aca4fc9777/schema/main/table/sqlite_master">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
@@ -1237,14 +1219,7 @@ matchedOrders = numelOrderBook.loc[numelOrderBook.loc[:,'counts'] == 3,'tradeRoo
         </state>
       </provider>
     </entry>
-    <entry file="das://2c4ff1e6-637c-41ba-88a1-49aca4fc9777/schema/main/table/marketbounds">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://2c4ff1e6-637c-41ba-88a1-49aca4fc9777/schema/main/table/orderbook">
+    <entry file="das://2c4ff1e6-637c-41ba-88a1-49aca4fc9777/schema/main/table/sqlite_master">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
@@ -1258,7 +1233,7 @@ matchedOrders = numelOrderBook.loc[numelOrderBook.loc[:,'counts'] == 3,'tradeRoo
         </state>
       </provider>
     </entry>
-    <entry file="das://2c4ff1e6-637c-41ba-88a1-49aca4fc9777/schema/main/table/usertable">
+    <entry file="das://2c4ff1e6-637c-41ba-88a1-49aca4fc9777/schema/main/table/marketbounds">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
@@ -1272,22 +1247,127 @@ matchedOrders = numelOrderBook.loc[numelOrderBook.loc[:,'counts'] == 3,'tradeRoo
         </state>
       </provider>
     </entry>
+    <entry file="das://5b0ddfc9-0340-4658-b49a-793914fb94a7/schema/main/table/sqlite_master">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://2c4ff1e6-637c-41ba-88a1-49aca4fc9777/schema/main/table/orderbook">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://5b0ddfc9-0340-4658-b49a-793914fb94a7/schema/main/table/cachebook">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://2c4ff1e6-637c-41ba-88a1-49aca4fc9777/schema/main/table/usertable">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python35-32/Lib/unittest/case.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="600" selection-start-line="600" selection-end-line="600" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://5b0ddfc9-0340-4658-b49a-793914fb94a7/schema/main/table/orderbook">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://5b0ddfc9-0340-4658-b49a-793914fb94a7/schema/main/table/markettable">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://5b0ddfc9-0340-4658-b49a-793914fb94a7/schema/main/table/usertable">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://5b0ddfc9-0340-4658-b49a-793914fb94a7/schema/main/table/outcomecombinations">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://5b0ddfc9-0340-4658-b49a-793914fb94a7/schema/main/table/marketbounds">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://5b0ddfc9-0340-4658-b49a-793914fb94a7/schema/main/table/tradestate">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../myflaskproject/hello.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="40" lean-forward="true" selection-start-line="20" selection-start-column="40" selection-end-line="20" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hello.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="26" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MarketServer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="26" lean-forward="true" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python/MarketObjectSQL.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-374">
+          <caret line="23" column="36" lean-forward="true" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test_MarketServer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3553">
-          <caret line="209" column="59" lean-forward="true" selection-start-line="209" selection-start-column="59" selection-end-line="209" selection-end-column="59" />
+        <state relative-caret-position="-85">
+          <caret line="13" column="31" lean-forward="true" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MarketServer.py">
+    <entry file="file://$PROJECT_DIR$/MarketClient.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3154">
-          <caret line="873" column="40" lean-forward="true" selection-start-line="873" selection-start-column="40" selection-end-line="873" selection-end-column="40" />
+        <state relative-caret-position="187">
+          <caret line="225" column="17" lean-forward="true" selection-start-line="225" selection-start-column="17" selection-end-line="225" selection-end-column="17" />
           <folding>
-            <element signature="e#26#42#0" expanded="true" />
+            <element signature="e#1#20#0" expanded="true" />
           </folding>
         </state>
       </provider>

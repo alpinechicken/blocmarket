@@ -183,4 +183,64 @@ class MarketClient(object):
 
         return marketPackage
 
+    def createUser_client(self, marketServer=None):
+        """Wrapper for createUser from marketServer"""
+        marketServer.createUser(self.verifyKey_hex)
+
+    def createTrade_client(self, tradeRow:object, marketServer=None):
+         """
+         Wrapper for createTrade from marketServer
+         :param: tradeRow: (DataFrame) trade
+         :param: marketServer: (MarketServer) market server
+
+         :return allTradeChecks: (boolean) True if all trade checks pass
+         :return colChk: (boolean) True if collateral checks pass
+
+         Example::
+         ms = MarketServer()
+         mc = MarketClient()
+         ...
+         tradeRow = pd.DataFrame({'marketRootId': [1],
+                                 'marketBranchId': [1],
+                                 'price': [[0.5, 0.4]],
+                                 'quantity': [1],
+                                 'traderId': [1]})
+         mc.createTrade_client(tradeRow=tradeRow, MarketServer = ms)
+         """
+         prevTrade = marketServer.getPreviousTrade()
+         tradePackage = self.tradeMaker(prevTrade=prevTrade,
+                                        tradeRow=tradeRow).reset_index(drop=True)
+         allTradeChks, colChk = marketServer.createTrade(tradePackage=tradePackage)
+         return allTradeChks, colChk
+
+
+    def createMarket_client(self, marketRow: object, marketServer=None):
+        """
+        Wrapper for createMarket from marketServer.
+
+        :param: marketRow: (DataFrame) market
+        :param: marketServer: (MarketServer) market server
+
+        :return: checks (bool) true if market created
+
+        Example::
+        ms = MarketServer()
+        mc = MarketClient()
+        ...
+        marketRow = pd.DataFrame({'marketRootId': [1],
+                              'marketBranchId': [1],
+                              'marketMin': [0],
+                              'marketMax': [0],
+                              'traderId': [1]})
+         mc.createMarket_client(marketRow=marketRow, MarketServer = ms)
+
+         .. note::
+        """
+
+        prevMarket = marketServer.getPreviousMarket()
+        testMarket = self.marketMaker(prevMarket, marketRow)
+        checks = marketServer.createMarket(newMarket=testMarket)
+        return checks
+
+
 

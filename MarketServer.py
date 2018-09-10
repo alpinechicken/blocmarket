@@ -1,6 +1,5 @@
-# Useful nonsense imports
+# Useful imports
 import itertools
-from datetime import date
 
 # Data imports
 import numpy as np
@@ -19,8 +18,9 @@ class MarketServer(object):
 
     Version of market object that only allows q=1 or q=-1
 
-    - Holds an order book (orderBook), user table( userTable), and list of markets (marketTable) for
-    an contract settling between some minimum and maximum.
+    - Holds an order book (orderBook), user table( userTable), and list of
+     markets (marketTable) for an contract settling between some
+     minimum and maximum.
     - Interface for adding users (createUser), markets
     (createMarket), and orders (createTrade)
     - Market object handles collateral calculations and trade matching
@@ -129,6 +129,7 @@ class MarketServer(object):
         self.marketBounds.delete().execute()
         self.tradeState.delete().execute()
         self.outcomeCombinations.delete().execute()
+        print("All tables deleted.")
 
     def purgeNonUserTables(self):
         """ Purge all tables before starting a test"""
@@ -138,28 +139,39 @@ class MarketServer(object):
         self.marketBounds.delete().execute()
         self.tradeState.delete().execute()
         self.outcomeCombinations.delete().execute()
+        print("All tables except userTable deleted.")
 
-    # Function group:
+    # Function group (API):
     # createUser
     # createMarket
     # createTrade
 
-    def createUser(self, verifyKey_hex: object):
+    def createUser(self, verifyKey_hex: str) -> object:
 
         """ Create a new user and adds to userTable.
 
         :param verifyKey_hex: (str) verify key
-        :return: self.userTable: (sql table) new row of userTable
+        :return newUsrRow: (DataFrame) new user row
+        :return self.userTable: (sql table) new row of userTable
 
         :Example:
 
         ms = MarketServer()
         ms.createUser('8d708ff647f671b29709a39c5f1529b06d6841fa268f03a834ebf6aad5e6d8e4')
 
+        :Example:
+
+        mc = MarketClient()
+        mc.generateSignatureKeys
+        ms = MarketServer()
+        ms.createUser(mc.verifyKey_hex)
+
         .. note::
         - Verify key constructed with MarketClient.generateSignaureKeys()
         - Successful call adds new column to userTable.
-        """
+
+        .. todo:: check that this is a valid key.
+]        """
 
         # Check if this key is already in userTable
         userTable = pd.read_sql_query(
@@ -173,8 +185,16 @@ class MarketServer(object):
             newUsr = dict(verifyKey = verifyKey_hex)
             # Insert to usertable (autoincrements traderId)
             self.conn.execute(self.userTable.insert(), [newUsr,])
+            # Pull back row to get traderID
+            newUsrRow = pd.read_sql_query(
+                "SELECT * FROM userTable WHERE\
+                                      verifyKey = '%s'" % (verifyKey_hex),
+                self.conn)
 
-    def createMarket(self, newMarket: object):
+        # Return new user
+        return newUsrRow.to_dict()  
+
+    def createMarket(self, newMarket: pd.DataFrame) -> bool:
         """
         Create a new row in marketTable. Update existing market
         with new bounds if market already exists.
@@ -182,9 +202,10 @@ class MarketServer(object):
         :param newMarket: (DataFrame) columns [traderId, marketMin,
         marketMax, marketRootId, marketBranchId, previousSignature,
         signatureMsg, signature]
-        :return self.marketTable - new row in market table
-        :return self.outputCombinations - updated output combinations  table
-        :return: self.marketBounds - updated market bounds
+        :return checks: (boolean) - True if checks pass
+        :return self.marketTable: - new row in market table
+        :return self.outputCombinations: - updated output combinations  table
+        :return: self.marketBounds: - updated market bounds
 
         :Example:
         ms = MarketServer()
@@ -207,6 +228,9 @@ class MarketServer(object):
              * Updates outcomeCombinations table
              * Updates marketBounds (table) with upper and lower bounds for
               all markets
+
+        .. todo:: Input check for valid key
+        .. todo:: Some kind of informative output
         """
 
         mT = pd.read_sql_table('marketTable', self.conn)
@@ -216,9 +240,11 @@ class MarketServer(object):
             # If there are no existing markets chain is ok
             chainChk = True
         else:
-            # Check that the previous sig of new market is the sig of the previous market
+            # Check that the previous sig of new market is the sig of the
+            # previous market
             prevMarket = self.getPreviousMarket()
-            chainChk =  newMarket.loc[0,'previousSig'] == prevMarket.loc[0,'signature']
+            chainChk =  newMarket.loc[0,'previousSig'] ==\
+                        prevMarket.loc[0,'signature']
 
         # Verify market signature is valid
         sigChk = self.verifyMarketSignature(newMarket)
@@ -226,7 +252,8 @@ class MarketServer(object):
         if isinstance(sigChk, bytes):
             sigChk=True
         # Check market range
-        marketRangeChk = newMarket.loc[0,'marketMin'] <= newMarket.loc[0,'marketMax']
+        marketRangeChk = newMarket.loc[0,'marketMin'] <=\
+                         newMarket.loc[0,'marketMax']
         # Checks (correct market number, signature relative to parent, range)
         checks = marketRangeChk and sigChk and chainChk
 
@@ -238,7 +265,10 @@ class MarketServer(object):
         else:
             print('Signature does not match, bad signature chain, or else marketMin > marketMax. Market not added.')
 
-    def createTrade(self, tradePackage: object):
+        # Return True if checks pass and market added
+        return checks
+
+    def createTrade(self, tradePackage: pd.DataFrame) -> bool:
         """
             Add components of a trade to tradeTable and cacheTable.
 
@@ -272,6 +302,8 @@ class MarketServer(object):
         :param tradePackage: (DataFrame) trade package with primary/offset/match
             and backup trades (from tradeMaker in MarketClient)
 
+        :return allTradeChecks: (boolean) True if all trade checks pass
+        :return colChk: (boolean) True if collateral checks pass
         :return: self.orderBook: (sql table)
         :return: self.cacheBook: (sql table)
         """
@@ -368,6 +400,7 @@ class MarketServer(object):
 
         # If all checks pass, add new trade in orderBook and post the rest to
         # cacheBook
+        colChk = False
         if allTradeChecks:
             primaryTrades = pTrades
             offsetTrade = oTrades
@@ -388,6 +421,8 @@ class MarketServer(object):
                 self.matchTrades()
             else:
                 print("Failed collateral check. Bleh.")
+
+        return colChk, allTradeChecks
 
     # Function group:
     # getPreviousTrade - previous  valid trade (for chain)
@@ -524,6 +559,7 @@ class MarketServer(object):
         rootMarkets = mT.loc[mT['marketBranchId'] == 1,:].reset_index(drop=True)
         # Construct outcome combinations in root markets
         oC= self.constructOutcomeCombinations(rootMarkets)
+        oC = oC.reset_index(drop=True)
         oC.to_sql('outcomeCombinations', self.conn, if_exists='replace')
         # Construct market bounds in all markets
         mB = self.constructMarketBounds(mT)
@@ -542,7 +578,7 @@ class MarketServer(object):
             # Get outcome for root market
             outcomeRow = oC.loc[oC['outcomeId']==iOutcome,:]
             # Add outcome to market table
-            # todo: more elegant wauy to do this
+            # todo: more elegant way to do this
             allOutcome = mT.loc[:,marketFields].append(outcomeRow[marketFields],
                                     ignore_index=True)
             # Construct new bounds given outcome
@@ -679,6 +715,7 @@ class MarketServer(object):
         """
 
         mT = pd.read_sql_table('marketTable', self.conn)
+        cB = pd.read_sql_table('cacheBook', self.conn)
         # Iterate through markets
         for iMarket in range(len(mT)):
             allMatched = False
@@ -688,24 +725,44 @@ class MarketServer(object):
                 oB = pd.read_sql_table('orderBook', self.conn)
                 tS = pd.read_sql_table('tradeState', self.conn)
                 # Only consider open trades from target market
-                oB = pd.merge(oB,
-                              marketRow.loc[:,['marketRootId', 'marketBranchId']],
+                oB = pd.merge(oB,  marketRow.loc[:,['marketRootId', 'marketBranchId']],
                               how='inner')
                 oB = pd.merge(oB, tS.loc[tS.loc[:,'isOpen'],:], how='inner')
+                # Combine with matching primary trades from cacheBook
+                combinedBook = pd.concat([oB, cB.loc[cB['tradeBranchId']==1 &
+                                           (np.in1d(cB['tradeRootId'],
+                                            oB['tradeRootId'].unique())),:]])
+
                 # Separate bids from asks
-                bids = oB.loc[oB.loc[:,'quantity']==1,:]
-                asks = oB.loc[oB.loc[:,'quantity']==-1,:]
+                bids = combinedBook.loc[combinedBook.loc[:,'quantity']==1,:]
+                asks = combinedBook.loc[combinedBook.loc[:,'quantity']==-1,:]
+                # Get matching trades
+                matchingTrades = pd.merge(bids[['tradeRootId', 'price']],
+                             asks[['tradeRootId', 'price']], how='inner',
+                             on=['price'], suffixes=('_bid', '_ask'))
 
-                maxBid = bids.loc[bids.loc[:,'price'] == bids.loc[:,'price'].max()]
-                minAsk = asks.loc[asks.loc[:,'price'] == asks.loc[:,'price'].min()]
+                if not matchingTrades.empty:
+                    # Pick first trade  for match (todo: use trade precedence and match trades down through the order book)
+                    matchTrade = matchingTrades[:1]
+                    # Get max bid
+                    maxBid = bids.loc[(bids.loc[:,'price'] == matchTrade.loc[0,'price'])
+                                  & (bids.loc[:,'tradeRootId'] == matchTrade.loc[0,'tradeRootId_bid'])]
+                    # Get min ask
+                    minAsk = asks.loc[(asks.loc[:,'price'] == matchTrade.loc[0,'price'])
+                                  & (asks.loc[:,'tradeRootId'] == matchTrade.loc[0,'tradeRootId_ask'])]
 
-                # Only take the first row
-                maxBid = maxBid[:1]
-                minAsk = minAsk[:1]
+                    # Only take the first row (if duplicates exist)
+                    maxBid = maxBid[:1]
+                    minAsk = minAsk[:1]
 
 
-                if minAsk.loc[:,'price'].values <= maxBid.loc[:,'price'].values:
                     # Write trades to orderBook
+
+                    # TODO: use cache primary orders and tradeRootId for precedence
+                    # Note: Just keeping it simple but this can ignores
+                    # precedence. At some point this can probably be
+                    # abstracted to a matching mechanism andin a separate
+                    # function.
                     self.writeMatchedTrade(maxBid)
                     self.writeMatchedTrade(minAsk)
                 else:
