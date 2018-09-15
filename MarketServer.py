@@ -192,7 +192,7 @@ class MarketServer(object):
                 self.conn)
 
         # Return new user
-        return newUsrRow.to_dict()  
+        return newUsrRow.loc[0].to_dict()
 
     def createMarket(self, newMarket: pd.DataFrame) -> bool:
         """
@@ -409,7 +409,10 @@ class MarketServer(object):
             newTrade = primaryTrades.loc[[0],:]
             # Alternative primary trades are other primary trades in the package
             altPrimaryTrades = primaryTrades.loc[1:,:]
+            # Update outcome combinaations  (needed for checkCollateral)
+            self.updateOutcomeCombinations()
             # Check collateral on first primary trade
+
             colChk, colChkAll = self.checkCollateral(newTrade)
             if colChk:
                 # Add primary trade to order book
@@ -656,6 +659,9 @@ class MarketServer(object):
         M = self.marketOutcomes # (numStates x numMarkets)
 
         # Market outcomes (numStates x numMarkets)
+        # Debug lines
+        # np.savetxt('mstar.txt', M, fmt='%1.4e')
+        # np.savetxt('m_nostar.txt', IM, fmt='%1.4e')
         Mstar = np.matmul(M,IM)
         # Quantities (numTrades x numTraders)
         Qstar = np.multiply(npm.repmat(q, numTraders, 1).transpose(), IQ)

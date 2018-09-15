@@ -20,7 +20,8 @@ class TestMarketServer(unittest.TestCase):
         cls.mc2.generateSignatureKeys()
         # Register keys with market server
         cls.ms.createUser(cls.mc1.verifyKey_hex)
-        cls.ms.createUser(cls.mc2.verifyKey_hex)
+        usr = cls.ms.createUser(cls.mc2.verifyKey_hex)
+        print(usr)
 
     def setUp(self):
         # Register verify keys

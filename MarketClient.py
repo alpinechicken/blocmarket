@@ -130,18 +130,18 @@ class MarketClient(object):
         for iPrice in range(numPrices):
             # Generate primary trade
             if isinstance(tradeRow.loc[0,'price'], list):
-                price = tradeRow.loc[0,'price'][iPrice]
+                price = float(tradeRow.loc[0,'price'][iPrice])
             else:
-                price = tradeRow.loc[0,'price']
+                price = float(tradeRow.loc[0,'price'])
 
             # Generate primary trade
-            t = pd.DataFrame({'tradeRootId': [tradeRootId],
+            t = pd.DataFrame({'tradeRootId': [float(tradeRootId)],
                               'tradeBranchId': [1],
-                              'marketRootId': [tradeRow.loc[0,'marketRootId']],
-                              'marketBranchId': [tradeRow.loc[0,'marketBranchId']],
+                              'marketRootId': [float(tradeRow.loc[0,'marketRootId'])],
+                              'marketBranchId': [float(tradeRow.loc[0,'marketBranchId'])],
                               'price': [price],
-                              'quantity': [tradeRow.loc[0,'quantity']],
-                              'traderId': [tradeRow.loc[0,'traderId']]})
+                              'quantity': [float(tradeRow.loc[0,'quantity'])],
+                              'traderId': [float(tradeRow.loc[0,'traderId'])]})
             p = self.signOrderBook(orderRow=t, previousOrderRow=prevTrade,
                                    signatureKey_hex=self.signingKey_hex)
             chk = self.verifyMessage(signature=p.loc[0,'signature'],
@@ -185,7 +185,8 @@ class MarketClient(object):
 
     def createUser_client(self, marketServer=None):
         """Wrapper for createUser from marketServer"""
-        marketServer.createUser(self.verifyKey_hex)
+        newUsr = marketServer.createUser(self.verifyKey_hex)
+        return newUsr
 
     def createTrade_client(self, tradeRow:object, marketServer=None):
          """
