@@ -51,6 +51,19 @@ class TestMarketServer(unittest.TestCase):
         mT = pd.read_sql_table('marketTable', self.ms.conn)
         assert mT.shape[0] == 3
 
+
+    def testOverwriteMarket(self):
+
+        # Try to create a market for trader2 already made by trader1
+        marketRow = pd.DataFrame({'marketRootId': [1],
+                                   'marketBranchId': [1],
+                                   'marketMin': [0],
+                                   'marketMax': [1],
+                                   'traderId': [2]})
+        self.mc2.createMarket_client(marketRow=marketRow, marketServer=self.ms)
+        mT = pd.read_sql_table('marketTable', self.ms.conn)
+        assert mT.shape[0] == 3
+
     # MarketClient tests
     # @unittest.skipIf(False)
     def test_tradeMaker(self):

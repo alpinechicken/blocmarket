@@ -246,7 +246,16 @@ class MarketServer(object):
             chainChk =  newMarket.loc[0,'previousSig'] ==\
                         prevMarket.loc[0,'signature']
 
-        # Verify market signature is valid
+        # If market exists...
+        matchCurrentMarket = pd.merge(left=mT, right=newMarket,on=['marketRootId', 'marketBranchId'])
+        ownerChk = True
+        if not matchCurrentMarket.empty:
+            # Check that trader owns it
+            ownerChk = matchCurrentMarket.loc[0, 'traderId_x'] ==\
+                       matchCurrentMarket.loc[0, 'traderId_y']
+
+
+            # Verify market signature is valid
         sigChk = self.verifyMarketSignature(newMarket)
         # Convert sigChk to logical
         if isinstance(sigChk, bytes):
@@ -255,7 +264,7 @@ class MarketServer(object):
         marketRangeChk = newMarket.loc[0,'marketMin'] <=\
                          newMarket.loc[0,'marketMax']
         # Checks (correct market number, signature relative to parent, range)
-        checks = marketRangeChk and sigChk and chainChk
+        checks = marketRangeChk and sigChk and chainChk and ownerChk
 
         #  Add market to table if checks pass
         if checks:
