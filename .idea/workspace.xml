@@ -2,10 +2,83 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f748aadd-a74f-4691-aa32-65bb3faaf10c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/MarketServer.py" beforeDir="false" afterPath="$PROJECT_DIR$/MarketServer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/manifest.in" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pmarket.egg-info/PKG-INFO" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pmarket.egg-info/SOURCES.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pmarket.egg-info/dependency_links.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pmarket.egg-info/not-zip-safe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pmarket.egg-info/requires.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pmarket.egg-info/top_level.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/schema.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.2018-01-07-200352.ipynb.sage-jupyter2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.2018-01-10-130023.ipynb.sage-jupyter2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.2018-01-21-175911.ipynb.sage-jupyter2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.2018-01-21-180229.term.sage-chat" beforeDir="false" afterPath="$PROJECT_DIR$/previousversions/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.2018-01-23-201604.ipynb.sage-jupyter2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.2018-01-23-202333.ipynb.sage-jupyter2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.Arctic.ipynb.sage-jupyter2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.MarketObject.ipynb.sage-jupyter2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.ipynb_checkpoints/MarketObject-checkpoint.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.ipynb_checkpoints/Untitled-checkpoint.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.ipynb_checkpoints/Untitled1-checkpoint.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.sql_examples.ipynb.sage-jupyter2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2018-01-27-181415.term" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2018-02-01-134834.term" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2018-03-03-170936.term" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2018-03-11-115346.term" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2018-03-24-202109.term" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2018-03-26-070905.term" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2018-04-07-160511.term" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Arctic.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Untitled.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Untitled1.ipynb" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bob.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/genome_Joe_Churchill_v5_Full_20180222182607.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/joindemo.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/m_nostar.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/matlab/DataHash.m.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/matlab/MarketClient.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/matlab/MarketObject.asv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/matlab/MarketObject.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/matlab/devnotes.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/matlab/gitcommands.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/matlab/old/DataHash.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/matlab/old/cartesian.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/matlab/old/marketData.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/matlab/old/marketMaker.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/matlab/old/matrixcollatralconditon.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/matlab/old/tradeMaker.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/matlab/testMarketObject.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/matlab/tests_tmp.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/matlab/timetmp.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mstar.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/oldpython/MarketObject.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/oldpython/MarketObjectSQL.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/oldpython/test_marketObjectSQL.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pictures/BigNotesPictures.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pictures/Picfromdraw.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pictures/WhatDoesTheFoxSay.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pictures/tmp.xlsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pmarket.db" beforeDir="false" afterPath="$PROJECT_DIR$/pmarket.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_MarketServer.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_MarketServer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pmarket3.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pynacltests.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/pynacltests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scratch.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scratch.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scratch2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sql_examples.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sqltest2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_MarketClient.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_MarketServer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thing.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tricks" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/untitled" beforeDir="false" afterPath="$PROJECT_DIR$/tests/setup.cfg" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,7 +95,7 @@
     <SUITE FILE_PATH="coverage/pmarket$Unittests_in_test_MarketClient_py.coverage" NAME="Unittests in test_MarketClient.py Coverage Results" MODIFIED="1527916815368" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pmarket$MarketObjectSQL.coverage" NAME="MarketObjectSQL Coverage Results" MODIFIED="1487486462183" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pmarket$MarketClient.coverage" NAME="MarketClient Coverage Results" MODIFIED="1527907311959" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/pmarket$Unittests_for_test_MarketServer_TestMarketServer.coverage" NAME="Unittests for test_MarketServer.TestMarketServer Coverage Results" MODIFIED="1537046994662" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pmarket$Unittests_for_test_MarketServer_TestMarketServer.coverage" NAME="Unittests for test_MarketServer.TestMarketServer Coverage Results" MODIFIED="1537584308406" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pmarket$tricks.coverage" NAME="tricks Coverage Results" MODIFIED="1481354581096" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pmarket$MarketObject.coverage" NAME="MarketObject Coverage Results" MODIFIED="1481374997762" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pmarket$Unittests_for_test_MarketServer_TestMarketServer_testMatchTrade.coverage" NAME="Unittests for test_MarketServer.TestMarketServer.testMatchTrade Coverage Results" MODIFIED="1530704993613" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -89,23 +162,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
-      <file leaf-file-name="test_MarketServer.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test_MarketServer.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="67" column="29" selection-start-line="67" selection-start-column="29" selection-end-line="67" selection-end-column="29" />
-              <folding>
-                <element signature="e#0#37#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="MarketClient.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MarketClient.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="651">
-              <caret line="243" selection-start-line="243" selection-end-line="243" />
+            <state relative-caret-position="117">
+              <caret line="202" column="12" selection-start-line="202" selection-start-column="12" selection-end-line="202" selection-end-column="12" />
               <folding>
                 <element signature="e#1#20#0" expanded="true" />
               </folding>
@@ -113,14 +174,71 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="api.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="test_MarketClient.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/test_MarketClient.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="10" column="39" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
+              <folding>
+                <element signature="e#0#37#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="setup.cfg" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/setup.cfg">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/previousversions/config.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="50" lean-forward="true" selection-start-column="50" selection-end-column="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="api.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="552">
-              <caret line="75" column="17" selection-start-line="75" selection-start-column="17" selection-end-line="75" selection-end-column="17" />
+            <state relative-caret-position="1531">
+              <caret line="95" column="41" selection-start-line="95" selection-start-column="41" selection-end-line="95" selection-end-column="41" />
               <folding>
                 <element signature="e#168#219#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="setup.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/setup.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="manifest.in" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/manifest.in">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="20" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="schema.sql" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/schema.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="45" selection-start-column="45" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -139,27 +257,6 @@
           <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
             <state>
               <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="markettable" pinned="false" current-in-tab="false">
-        <entry file="das://2c4ff1e6-637c-41ba-88a1-49aca4fc9777/schema/main/table/markettable">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MarketServer.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MarketServer.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="258" column="34" selection-start-line="258" selection-start-column="34" selection-end-line="258" selection-end-column="34" />
-              <folding>
-                <element signature="e#17#33#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -259,6 +356,11 @@
         <option value="$PROJECT_DIR$/MarketServer.py" />
         <option value="$PROJECT_DIR$/test_MarketServer.py" />
         <option value="$PROJECT_DIR$/api.py" />
+        <option value="$PROJECT_DIR$/manifest.in" />
+        <option value="$PROJECT_DIR$/schema.sql" />
+        <option value="$PROJECT_DIR$/setup.py" />
+        <option value="$PROJECT_DIR$/tests/setup.cfg" />
+        <option value="$PROJECT_DIR$/previousversions/config.py" />
       </list>
     </option>
   </component>
@@ -269,10 +371,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="3260" />
-    <option name="y" value="109" />
-    <option name="width" value="1403" />
-    <option name="height" value="1295" />
+    <option name="x" value="3196" />
+    <option name="width" value="1289" />
+    <option name="height" value="1447" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -287,6 +388,11 @@
             <path>
               <item name="pmarket" type="b2602c69:ProjectViewProjectNode" />
               <item name="pmarket" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pmarket" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pmarket" type="462c0819:PsiDirectoryNode" />
+              <item name="previousversions" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pmarket" type="b2602c69:ProjectViewProjectNode" />
@@ -767,9 +873,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_test_MarketServer_TestMarketServer - 2018.09.15 at 14h 41m 28s.xml">
-      <configuration name="Unittests for test_MarketServer.TestMarketServer" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unittests_for_test_MarketServer_TestMarketServer - 2018.09.15 at 15h 59m 54s.xml">
       <configuration name="Unittests for test_MarketServer.TestMarketServer" configurationId="tests" />
     </history-entry>
@@ -797,6 +900,9 @@
     <history-entry file="Unittests_for_test_MarketServer_TestMarketServer - 2018.09.16 at 07h 30m 52s.xml">
       <configuration name="Unittests for test_MarketServer.TestMarketServer" configurationId="tests" />
     </history-entry>
+    <history-entry file="Unittests_for_test_MarketServer_TestMarketServer - 2018.09.22 at 12h 46m 08s.xml">
+      <configuration name="Unittests for test_MarketServer.TestMarketServer" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -808,21 +914,21 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="3260" y="109" width="1403" height="1295" extended-state="0" />
+    <frame x="3196" y="0" width="1289" height="1447" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49839228" weight="0.325887" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.534624" side_tool="true" visible="true" weight="0.23508772" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.3026851" side_tool="true" weight="0.5681115" />
       <window_info anchor="bottom" id="Database Changes" order="11" sideWeight="0.4971061" weight="0.32720104" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6984363" weight="0.56842107" />
-      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4977492" weight="0.19973719" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6973149" weight="0.5681115" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49715215" weight="0.1989164" />
       <window_info anchor="bottom" id="Python Console" order="14" sideWeight="0.49225092" weight="0.20201239" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49967846" weight="0.32720104" />
-      <window_info active="true" anchor="bottom" id="Database Console" order="10" sideWeight="0.46537602" visible="true" weight="0.23508772" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4980289" visible="true" weight="0.20848846" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49928573" weight="0.32711732" />
+      <window_info anchor="bottom" id="Database Console" order="10" sideWeight="0.46571428" weight="0.2082362" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4980289" visible="true" weight="0.2278275" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
-      <window_info anchor="right" id="Database" order="3" sideWeight="0.48883048" visible="true" weight="0.23827252" />
-      <window_info anchor="right" id="SciView" order="4" sideWeight="0.48357424" weight="0.28339484" />
+      <window_info anchor="right" id="Database" order="3" sideWeight="0.48883048" weight="0.14483319" />
+      <window_info anchor="right" id="SciView" order="4" sideWeight="0.48357424" weight="0.5012205" />
       <window_info id="Structure" order="1" sideWeight="0.50197107" side_tool="true" weight="0.18971062" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.700369" weight="0.4636223" />
       <window_info id="Favorites" order="2" sideWeight="0.50097847" side_tool="true" weight="0.18713826" />
@@ -839,26 +945,32 @@
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="13" sideWeight="0.4971061" weight="0.32720104" />
     </layout>
     <layout-to-restore>
-      <window_info anchor="bottom" id="Database Console" order="11" weight="0.32950708" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13451613" />
-      <window_info id="Structure" order="1" weight="0.25" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="bottom" id="Concurrent Activities Diagram" order="13" sideWeight="0.4971061" weight="0.32720104" />
+      <window_info anchor="bottom" id="Database Console" order="10" sideWeight="0.46571428" weight="0.2082362" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4980289" visible="true" weight="0.2278275" />
+      <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49715215" weight="0.1989164" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32950708" />
-      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49870968" weight="0.32883188" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3335584" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32950708" />
-      <window_info anchor="right" id="Database" order="3" visible="true" weight="0.32774192" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32950708" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5012903" side_tool="true" weight="0.32950708" />
-      <window_info anchor="bottom" id="Concurrent Activities Diagram" order="12" visible="true" weight="0.32987013" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="5" sideWeight="0.48357424" weight="0.5012205" />
+      <window_info id="Structure" order="1" sideWeight="0.50197107" side_tool="true" weight="0.18971062" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49839228" weight="0.325887" />
+      <window_info anchor="bottom" id="Database Changes" order="11" sideWeight="0.4971061" weight="0.32720104" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6973149" visible="true" weight="0.5681115" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32820907" />
+      <window_info anchor="right" id="Data View" order="6" weight="0.32861736" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39837947" />
-      <window_info anchor="bottom" id="Python Console" order="9" weight="0.32950708" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.700369" weight="0.4636223" />
+      <window_info anchor="right" x="0" y="0" width="353" height="713" id="Documentation" order="7" sideWeight="0.5111695" side_tool="true" weight="0.3363344" />
+      <window_info anchor="right" id="Database" order="3" sideWeight="0.48883048" visible="true" weight="0.14483319" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49928573" weight="0.32711732" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.3026851" side_tool="true" visible="true" weight="0.5681115" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info id="Favorites" order="2" sideWeight="0.50097847" side_tool="true" weight="0.18713826" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Coverage" order="4" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="14" sideWeight="0.49225092" weight="0.20201239" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -911,43 +1023,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/MarketObject.py</url>
-          <line>332</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/MarketObject.py</url>
-          <line>113</line>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/test.py</url>
-          <line>35</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/sqltest2.py</url>
-          <option name="timeStamp" value="30" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/pynacltests.py</url>
-          <line>4</line>
-          <option name="timeStamp" value="128" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/pynacltests.py</url>
-          <line>23</line>
-          <option name="timeStamp" value="130" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/MarketServer.py</url>
           <line>1227</line>
           <option name="timeStamp" value="222" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/bob.py</url>
-          <line>28</line>
-          <option name="timeStamp" value="242" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -1104,21 +1182,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="das://4f6d3ce6-8ab4-40d6-bd1f-9880704efa93/schema/main/table/marketbounds" />
-    <entry file="das://4f6d3ce6-8ab4-40d6-bd1f-9880704efa93/schema/main/table/outcomecombinations" />
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python35-32/Lib/site-packages/pandas/core/generic.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="1352" selection-start-line="1352" selection-end-line="1352" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://21ddc17f-3b96-4594-b9d8-94e17a02f5c8/schema/main/table/sqlite_master" />
-    <entry file="das://21ddc17f-3b96-4594-b9d8-94e17a02f5c8/schema/main/table/tradestate" />
-    <entry file="das://21ddc17f-3b96-4594-b9d8-94e17a02f5c8/schema/main/table/usertable" />
-    <entry file="das://21ddc17f-3b96-4594-b9d8-94e17a02f5c8/schema/main/table/orderbook" />
-    <entry file="das://21ddc17f-3b96-4594-b9d8-94e17a02f5c8/schema/main/table/cachebook" />
-    <entry file="das://21ddc17f-3b96-4594-b9d8-94e17a02f5c8/schema/main/table/marketbounds" />
     <entry file="das://21ddc17f-3b96-4594-b9d8-94e17a02f5c8/schema/main/table/outcomecombinations" />
     <entry file="das://21ddc17f-3b96-4594-b9d8-94e17a02f5c8/schema/main/table/markettable" />
     <entry file="das://2c4ff1e6-637c-41ba-88a1-49aca4fc9777/schema/main/table/marketbounds.sql">
@@ -1289,13 +1352,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hello.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="26" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/python/MarketObjectSQL.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -1351,26 +1407,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_MarketServer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="67" column="29" selection-start-line="67" selection-start-column="29" selection-end-line="67" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MarketClient.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="651">
-          <caret line="243" selection-start-line="243" selection-end-line="243" />
-          <folding>
-            <element signature="e#1#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="das://2c4ff1e6-637c-41ba-88a1-49aca4fc9777/schema/main/table/marketbounds">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -1399,13 +1435,114 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/schema.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="45" selection-start-column="45" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manifest.in">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="20" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/api.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="552">
-          <caret line="75" column="17" selection-start-line="75" selection-start-column="17" selection-end-line="75" selection-end-column="17" />
+        <state relative-caret-position="1531">
+          <caret line="95" column="41" selection-start-line="95" selection-start-column="41" selection-end-line="95" selection-end-column="41" />
           <folding>
             <element signature="e#168#219#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bob.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="31" lean-forward="true" selection-start-line="12" selection-start-column="31" selection-end-line="12" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hello.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="26" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pynacltests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="44" lean-forward="true" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_MarketServer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="42" lean-forward="true" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MarketClient.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="117">
+          <caret line="202" column="12" selection-start-line="202" selection-start-column="12" selection-end-line="202" selection-end-column="12" />
+          <folding>
+            <element signature="e#1#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_MarketClient.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="39" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/previousversions/oldpython/test_marketObjectSQL.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/setup.cfg">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/previousversions/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="50" lean-forward="true" selection-start-column="50" selection-end-column="50" />
         </state>
       </provider>
     </entry>

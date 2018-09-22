@@ -1,3 +1,12 @@
+# API for bloc.
+
+# createUser()
+# createMarket(marketRootId, marketBranchId, marketMin, marketMax, traderId, signingKey_hex, verifyKey_hex)
+# createTrade(marketRootId, marketBranchId, price, quantity, traderId, signingKey_hex, verifyKey_hex)
+# viewMarketBounds()
+# viewOrderBook()
+
+
 # POST /processjson HTTP/1.1
 # Host: 127.0.0.1:5000
 # Content-Type: application/json
@@ -5,7 +14,7 @@
 # Postman-Token: 3b3394b3-9e37-39b2-d5dd-b9a70a0b7065
 #
 
-from flask import Flask, request, jsonify, Response
+from flask import Flask, request, jsonify
 from MarketServer import MarketServer
 from MarketClient import MarketClient
 import json
@@ -20,7 +29,9 @@ def createUser():
     mc = MarketClient()
     mc.generateSignatureKeys()
     newUsr = mc.createUser_client(marketServer=ms)
-    return jsonify({'traderId': str(newUsr['traderId']), 'verifyKey_hex': newUsr['verifyKey'], 'signingKey_hex': mc.signingKey_hex})
+    return jsonify({'traderId': str(newUsr['traderId']),
+                    'verifyKey_hex': newUsr['verifyKey'],
+                    'signingKey_hex': mc.signingKey_hex})
 
 
 @app.route('/createMarket', methods=['POST'])
@@ -33,8 +44,10 @@ def createMarket():
     # Retrieve keys from session and assign in client
     mc.signingKey_hex = data['signingKey_hex']
     mc.verifyKey_hex = data['verifyKey_hex']
-    marketRow = pd.DataFrame(data, index=[0])[['marketRootId','marketBranchId','marketMin','marketMax','traderId']]
-    # Call createMarket_client
+    marketRow = pd.DataFrame(data, index=[0])[['marketRootId',
+                                               'marketBranchId','marketMin',
+                                               'marketMax','traderId']]
+    # Call createMarket_clientmarketR
     checks = mc.createMarket_client(marketRow=marketRow, marketServer=ms)
     return jsonify({'checks': checks,
                     'marketRootId': data['marketRootId'],
@@ -54,7 +67,9 @@ def createTrade():
     # Retrieve keys from session and assign in client
     mc.signingKey_hex = data['signingKey_hex']
     mc.verifyKey_hex = data['verifyKey_hex']
-    tradeRow = pd.DataFrame(data, index=[0])[['marketRootId','marketBranchId','price','quantity','traderId']]
+    tradeRow = pd.DataFrame(data, index=[0])[['marketRootId',
+                                              'marketBranchId','price',
+                                              'quantity','traderId']]
     # Call createMarket_client
     checks = mc.createTrade_client(tradeRow=tradeRow, marketServer=ms)
     return jsonify({'checks': str(checks),
@@ -80,5 +95,6 @@ def viewOrderBook():
     ms = MarketServer()
     oB = pd.read_sql_table('orderBook', ms.conn)
     return jsonify(oB.loc[:,['marketRootId', 'marketBranchId',
-                             'price', 'quantity', 'tradeRootId', 'traderId']].to_json())
+                             'price', 'quantity', 'tradeRootId',
+                             'traderId']].to_json())
 

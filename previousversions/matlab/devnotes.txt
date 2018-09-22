@@ -1,0 +1,55 @@
+more access control for proposeTransaction (admin?)
+Remove trade adds an offsetting trade (with a flag if possible)
+
+Better logic for removeMarginalTrade
+
+Core functions are
+- matchTrades
+- checkCollateral
+- settleMarket
+
+
+** Check settleMarket DONE
+** Check checkCollateral DONE
+
+*** Sort out removing orphaned collateral trades (will be killed anyway if anyone tries to match them)
+*** removeTrade should sometimes create offsetting trade and match (to record cancelled trades). DONE but now use killTrade  for most things
+
+Future:
+Cross market outcomes/collateral
+
+Example 1:
+
+2 underlyings (S_1, S_2), 2 markets each (M_1, ... , M_4) 
+
+Underlying corner outcomes: [(S_1^min, S_2^min), (S_1^min, S_2^max), (S_1^max, S_2^min), (S_1^max, S_2^max)]
+
+Market corner outcomes: outcome is  (will be 16 scalar outcomes)
+- First corner outcome: O_1(S_1^min, S_2^min)), O_2(S_1^min, S_2^min), O_3(.), O_4(.)
+(e.g. If first two markets are settled on S_1 and the second 2 on S_2 then O_1 = S_1^min, O_2 = S_1^min, O_3 = S_2^min, O_4 = S_2^min)
+- Second corner outcome: O_1(S_1^min, S_2^max)), O_2(S_1^min, S_2^max), O_3(.), O_4(.)
+- Third corner outcome: O_1(S_1^max, S_2^min)), O_2(S_1^max, S_2^min), O_3(.), O_4(.)
+- Fourth corner outcome: O_1(S_1^max, S_2^max)), O_2(S_1^max, S_2^max), O_3(.), O_4(.)
+
+Construct V(O)::
+
+First corner outcome: (Sum of value functions in each market)
+V_1(O_1(S_1^min, S_2^min)) + V_2(O_2(S_1^min, S_2^min)) + V_3(O_3(S_1^min, S_2^min))) + V_4(O_4(S_1^min, S_2^min)) > collateral
+
+Second corner outcome: (Sum of value functions in each market)
+V_1(O_1(S_1^min, S_2^max)) + V_2(O_2(S_1^min, S_2^max)) + V_3(O_3(S_1^min, S_2^max))) + V_4(O_4(S_1^min, S_2^max)) > collateral
+
+Third corner outcome: (Sum of value functions in each market)
+V_1(O_1(S_1^max, S_2^min)) + V_2(O_2(S_1^max, S_2^min)) + V_3(O_3(S_1^max, S_2^min))) + V_4(O_4(S_1^max, S_2^min)) > collateral
+
+Fourth corner outcome: (Sum of value functions in each market)
+V_1(O_1(S_1^max, S_2^max)) + V_2(O_2(S_1^max, S_2^max)) + V_3(O_3(S_1^max, S_2^max))) + V_4(O_4(S_1^max, S_2^max)) > collateral
+
+To  do:
+*** Add underlying market column for markets 
+DONE (description = underlying)
+*** Construct underlying corner outcomes with cartesian product on market min/max {{[sMin1, sMax1]}, {[sMin2, sMax2]}, ... } (store in 2^numUnderlyings * numMarkets matrix/table )
+*** Construct market corner outcomes (store in 2^numUnderlying * numMarkets outcome matrix/table)
+DONE (use INST.checkCollateralCrossMarket )
+*** createUnderlying, initialize underlyingData, change proposeSettlement to work off underlying
+DONE
