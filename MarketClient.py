@@ -183,8 +183,18 @@ class MarketClient(object):
 
         return marketPackage
 
+    # Create functions for the 'client'. At present these pass in a MarketServer
+    # object but a proper version they will send to a remote server somewhere.
+    #
+    # createUser_client()
+    # createTrade_client()
+    # createMarket_client()
+
     def createUser_client(self, marketServer=None):
         """Wrapper for createUser from marketServer"""
+        # When this is split out, create user  by sending a post request to the
+        # createUser() endpoint rather than to a local version of MarketServer.
+        # (need to import requests)
         newUsr = marketServer.createUser(self.verifyKey_hex)
         return newUsr
 
@@ -213,7 +223,6 @@ class MarketClient(object):
                                         tradeRow=tradeRow).reset_index(drop=True)
          allTradeChks, colChk = marketServer.createTrade(tradePackage=tradePackage)
          return allTradeChks, colChk
-
 
     def createMarket_client(self, marketRow: object, marketServer=None):
         """
@@ -244,4 +253,9 @@ class MarketClient(object):
         return checks
 
 
+
+# - Think about splitting out mc/ms:
+# => Modify or split out MarketClient.createUser_client()/createTrade_client()/createMarket_client() so that instead of taking a
+# MarketServer object they just talk to the api endpoints for the MarketServer with json post requests.
+# =>
 

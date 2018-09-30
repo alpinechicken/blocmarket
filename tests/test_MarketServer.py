@@ -226,6 +226,18 @@ class TestMarketServer(unittest.TestCase):
                                         marketServer=self.ms)
         assert 1==1
 
+    def testsMakeManyMarkets(self):
+
+        for iMarket in [2,3,4,5]:
+            marketRow = pd.DataFrame({'marketRootId': [iMarket],
+                                          'marketBranchId': [1],
+                                          'marketMin': [0],
+                                          'marketMax': [1],
+                                          'traderId': [1]})
+            self.mc1.createMarket_client(marketRow=marketRow,
+                                             marketServer=self.ms)
+
+    assert 1==1
     # def test_marketMaker(self):
     #     pass
     #

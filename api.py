@@ -7,12 +7,36 @@
 # viewOrderBook()
 
 
+# Example POST request using Postman:
+
 # POST /processjson HTTP/1.1
 # Host: 127.0.0.1:5000
 # Content-Type: application/json
 # Cache-Control: no-cache
-# Postman-Token: 3b3394b3-9e37-39b2-d5dd-b9a70a0b7065
+# Postman-Token: 41b1439a-0f14-4e27-aadd-8962c43aca54
 #
+#
+# {
+#     "marketRootId": 1,
+#     "marketBranchId": 1,
+#     "price": 0.12345,
+#     "quantity": 1,
+#     "traderId": 1,
+#     "signingKey_hex": "2e22f9ce7c984a93a27f126a23d62fbc50a2cb5b28ea578c8a0f4e8fba8de2e9",
+#     "traderId": 4,
+#     "verifyKey_hex": "d9caa2ad98e883c283e589401c67d6c091e8970f84b18fa72c82d4b4d5d6e330"
+#
+# }
+
+# Example POST request from python using requests
+
+# content = {"signingKey_hex": "42b45efe8e50d5161ad1cfaba2e3de37387109f0f6b4451b1c94a7a4f7ae5ec8",
+#  "traderId": 4, "verifyKey_hex": "05e0ed41fdda6f705a1926a2803ac77189400f987feb5e7bb33cca38ae8be2da",
+#  "marketRootId": 5, "marketBranchId": 1, "marketMin": 1, "marketMax":1.444}
+# url = 'http://127.0.0.1:5000/createMarket'
+# headers = {'content-type': 'application/json'}
+# response = requests.post(url, data=json.dumps(content), headers=headers)
+# pd.DataFrame(response.json(), index=[0])
 
 from flask import Flask, request, jsonify
 from MarketServer import MarketServer
@@ -23,7 +47,11 @@ import pandas as pd
 app = Flask(__name__)
 
 
-@app.route('/createUser', methods=['POST'])
+@app.route('/')
+def hello_world():
+    return 'Hello wurld'
+
+@app.route('/createUser', methods=['POST', 'GET'])
 def createUser():
     ms = MarketServer()
     mc = MarketClient()
@@ -47,9 +75,14 @@ def createMarket():
     marketRow = pd.DataFrame(data, index=[0])[['marketRootId',
                                                'marketBranchId','marketMin',
                                                'marketMax','traderId']]
-    # Call createMarket_clientmarketR
-    checks = mc.createMarket_client(marketRow=marketRow, marketServer=ms)
-    return jsonify({'checks': checks,
+    # Call createMarket_client
+    try:
+        checks = mc.createMarket_client(marketRow=marketRow, marketServer=ms)
+    except:
+        checks = 'ProbablyASignatureError'
+
+
+    return jsonify({'checks': str(checks),
                     'marketRootId': data['marketRootId'],
                     'marketBranchId': data['marketBranchId'],
                     'marketMin': data['marketMin'],
@@ -71,7 +104,11 @@ def createTrade():
                                               'marketBranchId','price',
                                               'quantity','traderId']]
     # Call createMarket_client
-    checks = mc.createTrade_client(tradeRow=tradeRow, marketServer=ms)
+    try:
+        checks = mc.createTrade_client(tradeRow=tradeRow, marketServer=ms)
+    except:
+        checks = 'ProbablyASignatureError'
+
     return jsonify({'checks': str(checks),
                     'marketRootId': data['marketRootId'],
                     'marketBranchId': data['marketBranchId'],
@@ -98,3 +135,4 @@ def viewOrderBook():
                              'price', 'quantity', 'tradeRootId',
                              'traderId']].to_json())
 
+# include viewOpenTrades, viewMatchedTrades

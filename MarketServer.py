@@ -996,7 +996,7 @@ class MarketServer(object):
         numMarkets = len(marketCombinations[0])
 
         # Get unique markets
-        mT = marketTable.loc[:,['marketRootId', 'marketBranchId']].drop_duplicates()
+        mT = marketTable.loc[:,['marketRootId', 'marketBranchId']].drop_duplicates().reset_index(drop=True)
 
         marketIds = mT.loc[:,'marketRootId']
         mT.loc[:,'marketMin'] = np.nan
