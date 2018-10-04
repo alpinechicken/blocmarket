@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f748aadd-a74f-4691-aa32-65bb3faaf10c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/api.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pmarket.db" beforeDir="false" afterPath="$PROJECT_DIR$/pmarket.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/pmarket.db" beforeDir="false" afterPath="$PROJECT_DIR$/tests/pmarket.db" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -85,7 +84,7 @@
       <file leaf-file-name="MarketServer.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MarketServer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-18200">
+            <state relative-caret-position="-12995">
               <caret line="148" column="33" selection-start-line="148" selection-start-column="33" selection-end-line="148" selection-end-column="33" />
               <folding>
                 <element signature="e#17#33#0" expanded="true" />
@@ -103,7 +102,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="outcomecombinations" pinned="false" current-in-tab="false">
+      <file leaf-file-name="markettable" pinned="false" current-in-tab="false">
+        <entry file="das://2c4ff1e6-637c-41ba-88a1-49aca4fc9777/schema/main/table/markettable">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="outcomecombinations" pinned="false" current-in-tab="true">
         <entry file="das://2c4ff1e6-637c-41ba-88a1-49aca4fc9777/schema/main/table/outcomecombinations">
           <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
             <state>
@@ -112,11 +120,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="markettable" pinned="false" current-in-tab="false">
-        <entry file="das://2c4ff1e6-637c-41ba-88a1-49aca4fc9777/schema/main/table/markettable">
+      <file leaf-file-name="marketbounds" pinned="false" current-in-tab="false">
+        <entry file="das://2c4ff1e6-637c-41ba-88a1-49aca4fc9777/schema/main/table/marketbounds">
           <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
             <state>
               <filtering enabled="true" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cachebook" pinned="false" current-in-tab="false">
+        <entry file="das://2c4ff1e6-637c-41ba-88a1-49aca4fc9777/schema/main/table/cachebook">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="orderbook.sql" pinned="false" current-in-tab="false">
+        <entry file="das://2c4ff1e6-637c-41ba-88a1-49aca4fc9777/schema/main/table/orderbook.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="2" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -130,31 +156,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="usertable" pinned="false" current-in-tab="false">
-        <entry file="das://2c4ff1e6-637c-41ba-88a1-49aca4fc9777/schema/main/table/usertable">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="marketbounds" pinned="false" current-in-tab="true">
-        <entry file="das://2c4ff1e6-637c-41ba-88a1-49aca4fc9777/schema/main/table/marketbounds">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MarketClient.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MarketClient.py">
+      <file leaf-file-name="test_MarketServer.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/test_MarketServer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="358">
-              <caret line="249" selection-start-line="249" selection-end-line="249" />
+            <state relative-caret-position="299">
+              <caret line="205" column="54" selection-start-line="205" selection-start-column="54" selection-end-line="205" selection-end-column="54" />
               <folding>
-                <element signature="e#1#20#0" expanded="true" />
+                <element signature="e#0#37#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -809,7 +817,7 @@
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49839228" weight="0.325887" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.37855402" side_tool="true" weight="0.3262317" />
-      <window_info anchor="bottom" id="Database Changes" order="11" sideWeight="0.4971061" weight="0.32720104" />
+      <window_info anchor="bottom" id="Database Changes" order="11" sideWeight="0.4971061" weight="0.325887" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6973149" weight="0.56636006" />
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49715215" weight="0.1989164" />
       <window_info anchor="bottom" id="Python Console" order="14" sideWeight="0.49225092" weight="0.51379764" />
@@ -916,11 +924,6 @@
           <url>file://$USER_HOME$/AppData/Local/Programs/Python/Python35-32/src/pmarket/MarketServer.py</url>
           <line>1001</line>
           <option name="timeStamp" value="587" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/tests/test_MarketServer.py</url>
-          <line>236</line>
-          <option name="timeStamp" value="591" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/MarketServer.py</url>
@@ -1081,13 +1084,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python35-32/Lib/unittest/runner.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="182">
@@ -1312,16 +1308,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_MarketServer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="237" selection-start-line="237" selection-end-line="237" />
-          <folding>
-            <element signature="e#0#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MarketClient.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="358">
@@ -1339,16 +1325,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MarketServer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-18200">
-          <caret line="148" column="33" selection-start-line="148" selection-start-column="33" selection-end-line="148" selection-end-column="33" />
-          <folding>
-            <element signature="e#17#33#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/api.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -1356,7 +1332,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://2c4ff1e6-637c-41ba-88a1-49aca4fc9777/schema/main/table/cachebook">
+    <entry file="file://$PROJECT_DIR$/MarketServer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-12995">
+          <caret line="148" column="33" selection-start-line="148" selection-start-column="33" selection-end-line="148" selection-end-column="33" />
+          <folding>
+            <element signature="e#17#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://2c4ff1e6-637c-41ba-88a1-49aca4fc9777/schema/main/table/usertable">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_MarketServer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="205" column="54" selection-start-line="205" selection-start-column="54" selection-end-line="205" selection-end-column="54" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://2c4ff1e6-637c-41ba-88a1-49aca4fc9777/schema/main/table/orderbook">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
@@ -1370,17 +1373,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://2c4ff1e6-637c-41ba-88a1-49aca4fc9777/schema/main/table/orderbook">
+    <entry file="das://2c4ff1e6-637c-41ba-88a1-49aca4fc9777/schema/main/table/cachebook">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
         </state>
       </provider>
     </entry>
-    <entry file="das://2c4ff1e6-637c-41ba-88a1-49aca4fc9777/schema/main/table/outcomecombinations">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
+    <entry file="das://2c4ff1e6-637c-41ba-88a1-49aca4fc9777/schema/main/table/orderbook.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="2" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
         </state>
       </provider>
     </entry>
@@ -1391,14 +1394,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://2c4ff1e6-637c-41ba-88a1-49aca4fc9777/schema/main/table/usertable">
+    <entry file="das://2c4ff1e6-637c-41ba-88a1-49aca4fc9777/schema/main/table/marketbounds">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
         </state>
       </provider>
     </entry>
-    <entry file="das://2c4ff1e6-637c-41ba-88a1-49aca4fc9777/schema/main/table/marketbounds">
+    <entry file="das://2c4ff1e6-637c-41ba-88a1-49aca4fc9777/schema/main/table/outcomecombinations">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
