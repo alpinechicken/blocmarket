@@ -1,0 +1,3 @@
+[console_scripts]
+howdoi = howdoi.howdoi:command_line_runner
+

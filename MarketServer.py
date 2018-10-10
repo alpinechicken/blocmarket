@@ -509,7 +509,7 @@ class MarketServer(object):
 
     # Function group:
     # updateTradeState (update state of open/offset/matched trades)
-    # updateOutcomeCombinations
+    # updateOutcomeCombinations (update possible combinations from base markets)
 
     def updateTradeState(self):
         """Update trade state indicators (open/offset/matched).
@@ -534,14 +534,14 @@ class MarketServer(object):
         # Calculate number of of branches on trade
         numelOrderBook = oB.groupby(['traderId', 'tradeRootId', 'price']).size().reset_index(name='counts')
         # Check number of components of the trade
-        openOrders = numelOrderBook.loc[numelOrderBook.loc[:,'counts'] == 1,'tradeRootId']
-        offsetOrders = numelOrderBook.loc[numelOrderBook.loc[:,'counts'] == 2, 'tradeRootId']
-        matchedOrders = numelOrderBook.loc[numelOrderBook.loc[:,'counts'] == 3,'tradeRootId']
+        openOrders = numelOrderBook.loc[numelOrderBook.loc[:, 'counts'] == 1, 'tradeRootId']
+        offsetOrders = numelOrderBook.loc[numelOrderBook.loc[:, 'counts'] == 2,  'tradeRootId']
+        matchedOrders = numelOrderBook.loc[numelOrderBook.loc[:, 'counts'] == 3, 'tradeRootId']
 
         # Indicators for open/offset/matched
-        oB.loc[:,'isOpen'] = np.in1d(oB.loc[:,'tradeRootId'], openOrders)
-        oB.loc[:,'isOffset'] = np.in1d(oB.loc[:,'tradeRootId'], offsetOrders)
-        oB.loc[:,'isMatched'] = np.in1d(oB.loc[:,'tradeRootId'], matchedOrders)
+        oB.loc[: ,'isOpen'] = np.in1d(oB.loc[:, 'tradeRootId'], openOrders)
+        oB.loc[: ,'isOffset'] = np.in1d(oB.loc[:, 'tradeRootId'], offsetOrders)
+        oB.loc[: ,'isMatched'] = np.in1d(oB.loc[:, 'tradeRootId'], matchedOrders)
 
         # Save indicators to tradeStateTable
         tradeState = oB.loc[:, ['tradeRootId', 'tradeBranchId', 'isOpen',\
@@ -633,7 +633,7 @@ class MarketServer(object):
         if not tS.empty:
             oB = pd.merge(oB, tS)
         # Add new trade with state
-        allTrades = pd.concat([oB, newTrade], ignore_index=True)
+        allTrades = pd.concat([oB, newTrade], ignore_index=True, sort=False)
         # Force indicators to be boolean
         allTrades[['isOpen', 'isOffset', 'isMatched']] = allTrades[['isOpen', 'isOffset', 'isMatched']].astype(bool)
         # Get numbers of things
@@ -702,7 +702,7 @@ class MarketServer(object):
         # Collateral check for trader
         if not newTrade.empty:
             # Return if trader is ok cofr collateral
-            colChk = colChkAll[int(newTrade.loc[0,'traderId']-1)]
+            colChk = colChkAll[int(newTrade.loc[0, 'traderId']-1)]
         else:
             colChk = colChkAll
 
@@ -740,17 +740,17 @@ class MarketServer(object):
                 oB = pd.read_sql_table('orderBook', self.conn)
                 tS = pd.read_sql_table('tradeState', self.conn)
                 # Only consider open trades from target market
-                oB = pd.merge(oB,  marketRow.loc[:,['marketRootId', 'marketBranchId']],
+                oB = pd.merge(oB,  marketRow.loc[:, ['marketRootId', 'marketBranchId']],
                               how='inner')
-                oB = pd.merge(oB, tS.loc[tS.loc[:,'isOpen'],:], how='inner')
+                oB = pd.merge(oB, tS.loc[tS.loc[:, 'isOpen'], :], how='inner')
                 # Combine with matching primary trades from cacheBook
                 combinedBook = pd.concat([oB, cB.loc[cB['tradeBranchId']==1 &
                                            (np.in1d(cB['tradeRootId'],
-                                            oB['tradeRootId'].unique())),:]])
+                                            oB['tradeRootId'].unique())), :]], sort=False)
 
                 # Separate bids from asks
-                bids = combinedBook.loc[combinedBook.loc[:,'quantity']==1,:]
-                asks = combinedBook.loc[combinedBook.loc[:,'quantity']==-1,:]
+                bids = combinedBook.loc[combinedBook.loc[:,'quantity']==1, :]
+                asks = combinedBook.loc[combinedBook.loc[:,'quantity']==-1, :]
                 # Get matching trades
                 matchingTrades = pd.merge(bids[['tradeRootId', 'price']],
                              asks[['tradeRootId', 'price']], how='inner',
@@ -760,11 +760,11 @@ class MarketServer(object):
                     # Pick first trade  for match (todo: use trade precedence and match trades down through the order book)
                     matchTrade = matchingTrades[:1]
                     # Get max bid
-                    maxBid = bids.loc[(bids.loc[:,'price'] == matchTrade.loc[0,'price'])
-                                  & (bids.loc[:,'tradeRootId'] == matchTrade.loc[0,'tradeRootId_bid'])]
+                    maxBid = bids.loc[(bids.loc[:, 'price'] == matchTrade.loc[0, 'price'])
+                                  & (bids.loc[:, 'tradeRootId'] == matchTrade.loc[0, 'tradeRootId_bid'])]
                     # Get min ask
-                    minAsk = asks.loc[(asks.loc[:,'price'] == matchTrade.loc[0,'price'])
-                                  & (asks.loc[:,'tradeRootId'] == matchTrade.loc[0,'tradeRootId_ask'])]
+                    minAsk = asks.loc[(asks.loc[:, 'price'] == matchTrade.loc[0, 'price'])
+                                  & (asks.loc[:, 'tradeRootId'] == matchTrade.loc[0, 'tradeRootId_ask'])]
 
                     # Only take the first row (if duplicates exist)
                     maxBid = maxBid[:1]
@@ -961,7 +961,7 @@ class MarketServer(object):
         oB = pd.read_sql_table('orderBook', self.conn)
         oB = oB.loc[oB.traderId == traderId,: ]
         numelOrderBook = oB.groupby(['traderId', 'tradeRootId', 'price'])['quantity'].size().reset_index()
-        oB = pd.merge(oB, numelOrderBook.loc[numelOrderBook.loc[:,0]== 1])
+        oB = pd.merge(oB, numelOrderBook[numelOrderBook.loc[:,'quantity']== 1])
 
         removeTrade = oB.loc[[0],:]
 

@@ -1,0 +1,4 @@
+pyquery
+pygments
+requests
+requests-cache

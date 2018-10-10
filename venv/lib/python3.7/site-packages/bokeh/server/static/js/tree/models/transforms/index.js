@@ -1,0 +1,11 @@
+"use strict";
+var transform_1 = require("./transform");
+exports.Transform = transform_1.Transform;
+var jitter_1 = require("./jitter");
+exports.Jitter = jitter_1.Jitter;
+var interpolator_1 = require("./interpolator");
+exports.Interpolator = interpolator_1.Interpolator;
+var linear_interpolator_1 = require("./linear_interpolator");
+exports.LinearInterpolator = linear_interpolator_1.LinearInterpolator;
+var step_interpolator_1 = require("./step_interpolator");
+exports.StepInterpolator = step_interpolator_1.StepInterpolator;
