@@ -135,13 +135,13 @@ class MarketClient(object):
                 price = float(tradeRow.loc[0,'price'])
 
             # Generate primary trade
-            t = pd.DataFrame({'tradeRootId': [float(tradeRootId)],
-                              'tradeBranchId': [1],
-                              'marketRootId': [float(tradeRow.loc[0,'marketRootId'])],
-                              'marketBranchId': [float(tradeRow.loc[0,'marketBranchId'])],
+            t = pd.DataFrame({'tradeRootId': [int(tradeRootId)],
+                              'tradeBranchId': [int(1)],
+                              'marketRootId': [int(tradeRow.loc[0,'marketRootId'])],
+                              'marketBranchId': [int(tradeRow.loc[0,'marketBranchId'])],
                               'price': [price],
                               'quantity': [float(tradeRow.loc[0,'quantity'])],
-                              'traderId': [float(tradeRow.loc[0,'traderId'])]})
+                              'traderId': [int(tradeRow.loc[0,'traderId'])]})
             p = self.signOrderBook(orderRow=t, previousOrderRow=prevTrade,
                                    signatureKey_hex=self.signingKey_hex)
             chk = self.verifyMessage(signature=p.loc[0,'signature'],
@@ -149,9 +149,10 @@ class MarketClient(object):
                                verifyKey_hex=self.verifyKey_hex)
             pT = pd.concat([pT, p])
             #  Generate offset trade
-            o = t.loc[:,['tradeRootId', 'marketRootId', 'marketBranchId', 'price', 'traderId']]
+            o = t
+            o = o.loc[:,['tradeRootId', 'tradeBranchId', 'marketRootId', 'marketBranchId', 'price', 'traderId']]
             o.loc[0,'quantity'] = t.loc[0,'quantity'] * -1
-            o.loc[0,'tradeBranchId'] = 2
+            o.loc[0,'tradeBranchId'] = int(2)
             o = self.signOrderBook(orderRow=o, previousOrderRow=p,
                                    signatureKey_hex=self.signingKey_hex)
             chk = self.verifyMessage(signature=o.loc[0,'signature'],
@@ -159,9 +160,10 @@ class MarketClient(object):
                                verifyKey_hex=self.verifyKey_hex)
             oT = pd.concat([oT, o])
             # Generate match trade
-            m = o.loc[:,['tradeRootId', 'marketRootId', 'marketBranchId', 'price', 'traderId']]
+            m = o;
+            m = m.loc[:,['tradeRootId', 'tradeBranchId', 'marketRootId', 'marketBranchId', 'price', 'traderId']]
             m.loc[0,'quantity'] = o.loc[0,'quantity'] * -1
-            m.loc[0,'tradeBranchId'] = 3
+            m.loc[0,'tradeBranchId'] = int(3)
             m = self.signOrderBook(orderRow=m, previousOrderRow=o,
                                    signatureKey_hex=self.signingKey_hex)
             chk = self.verifyMessage(signature=m.loc[0,'signature'],

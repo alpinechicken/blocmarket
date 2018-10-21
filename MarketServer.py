@@ -41,11 +41,12 @@ class MarketServer(object):
 
     def __init__(self):
         # self.engine = create_engine('sqlite:///:memory:', echo=True)
-        self.engine = create_engine('sqlite:///pmarket.db')
+        self.engine = create_engine("postgresql://alpine:3141592@localhost/blocparty")
+        # self.engine = create_engine('sqlite:///pmarket.db')
         self.engine.echo = False
         self.metadata = MetaData(self.engine)
         self.userTable = Table('userTable', self.metadata,
-                      Column('traderId', Integer, primary_key=True, autoincrement=True),
+                      Column('traderId', Integer),
                       Column('verifyKey', String),
                       )
         # Order book for all trades, including including order book,
@@ -83,9 +84,9 @@ class MarketServer(object):
                       Column('marketMin', Float),
                       Column('marketMax', Float),
                       Column('traderId', Integer),
-                      Column('previousSig', BLOB),
-                      Column('signatureMsg', BLOB),
-                      Column('signature', BLOB),
+                      Column('previousSig', LargeBinary),
+                      Column('signatureMsg', LargeBinary),
+                      Column('signature', LargeBinary),
                         )
         # Market state (possible combinationss)
         self.outcomeCombinations = Table('outcomeCombinations', self.metadata,
@@ -174,22 +175,17 @@ class MarketServer(object):
 ]        """
 
         # Check if this key is already in userTable
-        userTable = pd.read_sql_query(
-            "SELECT * FROM userTable WHERE\
-                                  verifyKey = '%s'" %(verifyKey_hex) ,
-            self.conn)
+        userTable = pd.read_sql_query('SELECT * FROM "userTable" WHERE "verifyKey" = \'%s\'' % (verifyKey_hex), self.conn)
         if not userTable.empty:
             print('Username already exists, sorry buddy.')
         else:
+            traderId = len(pd.read_sql_table("userTable", self.conn))+1
             # Create the new user
-            newUsr = dict(verifyKey = verifyKey_hex)
+            newUsr = dict(verifyKey=verifyKey_hex, traderId=int(traderId))
             # Insert to usertable (autoincrements traderId)
             self.conn.execute(self.userTable.insert(), [newUsr,])
             # Pull back row to get traderID
-            newUsrRow = pd.read_sql_query(
-                "SELECT * FROM userTable WHERE\
-                                      verifyKey = '%s'" % (verifyKey_hex),
-                self.conn)
+            newUsrRow = pd.read_sql_query('SELECT * FROM "userTable" WHERE "verifyKey" = \'%s\'' % (verifyKey_hex), self.conn)
 
         # Return new user
         return newUsrRow.loc[0].to_dict()
@@ -1129,9 +1125,7 @@ class MarketServer(object):
 
         """
 
-        verifyKey =  pd.read_sql('SELECT verifyKey FROM userTable WHERE'
-                                 ' traderId = "%s"' %(traderId), self.conn
-                                 ).verifyKey[0]
+        verifyKey = pd.read_sql('SELECT "verifyKey" FROM "userTable" WHERE "traderId" = \'%s\'' %(traderId), self.conn).verifyKey[0]
         return verifyKey
 
     def signMessage(self, msg: object, signingKey_hex: object) -> object:

@@ -21,17 +21,23 @@ class TestMarketServer(unittest.TestCase):
         # Register keys with market server
         cls.ms.createUser(cls.mc1.verifyKey_hex)
         usr = cls.ms.createUser(cls.mc2.verifyKey_hex)
+
+        tmp  = pd.read_sql_query('SELECT DISTINCT "traderId" from "userTable"', cls.ms.conn)
+        cls.trader0 = tmp.traderId[0]
+        cls.trader1 = tmp.traderId[1]
         print(usr)
 
     def setUp(self):
         # Register verify keys
         self.ms.purgeNonUserTables()
 
+
+
         marketRow = pd.DataFrame({'marketRootId': [1],
                                    'marketBranchId': [1],
                                    'marketMin': [0],
                                    'marketMax': [1],
-                                   'traderId': [1]})
+                                   'traderId': [int(self.trader0)]})
         self.mc1.createMarket_client(marketRow=marketRow, marketServer=self.ms)
 
 
@@ -39,14 +45,14 @@ class TestMarketServer(unittest.TestCase):
                                    'marketBranchId': [2],
                                    'marketMin': [0.1],
                                    'marketMax': [0.9],
-                                   'traderId': [1]})
+                                   'traderId': [int(self.trader0)]})
         self.mc1.createMarket_client(marketRow=marketRow, marketServer=self.ms)
 
         marketRow = pd.DataFrame({'marketRootId': [2],
                                    'marketBranchId': [1],
                                    'marketMin': [0],
                                    'marketMax': [1],
-                                   'traderId': [1]})
+                                   'traderId': [int(self.trader0)]})
         self.mc1.createMarket_client(marketRow=marketRow, marketServer=self.ms)
         mT = pd.read_sql_table('marketTable', self.ms.conn)
         assert mT.shape[0] == 3
@@ -59,7 +65,7 @@ class TestMarketServer(unittest.TestCase):
                                    'marketBranchId': [1],
                                    'marketMin': [0],
                                    'marketMax': [1],
-                                   'traderId': [2]})
+                                   'traderId': [int(self.trader1)]})
         self.mc2.createMarket_client(marketRow=marketRow, marketServer=self.ms)
         mT = pd.read_sql_table('marketTable', self.ms.conn)
         assert mT.shape[0] == 3
@@ -73,7 +79,7 @@ class TestMarketServer(unittest.TestCase):
                               'marketBranchId': [1],
                               'price': [0.5],
                               'quantity': [1],
-                              'traderId': [1]})
+                              'traderId': [int(self.trader0)]})
         a = self.mc1.tradeMaker(prevTrade=prevTrade,tradeRow=tradeRow).reset_index(drop=True)
         # Check trade signatures
         assert self.mc1.verifyMessage(a['signature'][0], a['signatureMsg'][0], self.mc1.verifyKey_hex)
@@ -86,7 +92,7 @@ class TestMarketServer(unittest.TestCase):
                                    'marketBranchId': [1],
                                    'marketMin': [1],
                                    'marketMax': [1],
-                                   'traderId': [1]})
+                                   'traderId': [int(self.trader0)]})
         self.mc1.createMarket_client(marketRow=marketRow, marketServer=self.ms)
         marketBounds = pd.read_sql_table('marketBounds', self.ms.conn)
         assert (marketBounds[['marketRootId', 'marketBranchId', 'marketMin', 'marketMax']].values == [[1, 1, 1, 1],
@@ -98,7 +104,7 @@ class TestMarketServer(unittest.TestCase):
                                    'marketBranchId': [1],
                                    'marketMin': [0],
                                    'marketMax': [0],
-                                   'traderId': [1]})
+                                   'traderId': [int(self.trader0)]})
         self.mc1.createMarket_client(marketRow=marketRow, marketServer=self.ms)
         marketBounds = pd.read_sql_table('marketBounds', self.ms.conn)
         assert (marketBounds[['marketRootId', 'marketBranchId', 'marketMin', 'marketMax']].values == [[1, 1, 0, 0],
@@ -110,21 +116,21 @@ class TestMarketServer(unittest.TestCase):
                                  'marketBranchId': [1],
                                  'price': [[0.5, 0.4]],
                                  'quantity': [1],
-                                 'traderId': [1]})
+                                 'traderId': [int(self.trader0)]})
         self.mc1.createTrade_client(tradeRow=tradeRow, marketServer=self.ms)
 
         tradeRow = pd.DataFrame({'marketRootId': [1],
                                  'marketBranchId': [1],
                                  'price': [[0.5, 0.6]],
                                  'quantity': [-1],
-                                 'traderId': [2]})
+                                 'traderId': [int(self.trader1)]})
         self.mc2.createTrade_client(tradeRow=tradeRow, marketServer=self.ms)
 
         tradeRow = pd.DataFrame({'marketRootId': [1],
                                  'marketBranchId': [1],
                                  'price': [[0.8, 0.9]],
                                  'quantity': [-1],
-                                 'traderId': [2]})
+                                 'traderId': [int(self.trader1)]})
 
         self.mc2.createTrade_client(tradeRow=tradeRow, marketServer=self.ms)
         oB = pd.read_sql_table('orderBook', self.ms.conn)
@@ -135,7 +141,7 @@ class TestMarketServer(unittest.TestCase):
                                  'marketBranchId': [1],
                                  'price': [0.9],
                                  'quantity': [-1],
-                                 'traderId': [2]})
+                                 'traderId': [int(self.trader1)]})
         tradePackage = self.mc2.tradeMaker(prevTrade=prevTrade,
                                 tradeRow=tradeRow).reset_index(drop=True)
 
@@ -156,7 +162,7 @@ class TestMarketServer(unittest.TestCase):
                                      'marketBranchId': [1],
                                      'price': [0.4],
                                       'quantity': [1],
-                                     'traderId': [1]})
+                                     'traderId': [int(self.trader0)]})
             self.mc1.createTrade_client(tradeRow=tradeRow, marketServer=self.ms)
 
         # Five matched orders in market 2
@@ -166,14 +172,14 @@ class TestMarketServer(unittest.TestCase):
                                      'marketBranchId': [1],
                                      'price': [0.5],
                                      'quantity': [1],
-                                     'traderId': [1]})
+                                     'traderId': [int(self.trader0)]})
             self.mc1.createTrade_client(tradeRow=tradeRow, marketServer=self.ms)
             # Trader 2 offer at 0.5
             tradeRow = pd.DataFrame({'marketRootId': [2],
                                      'marketBranchId': [1],
                                      'price': [0.5],
                                      'quantity': [-1],
-                                     'traderId': [2]})
+                                     'traderId': [int(self.trader1)]})
             self.mc2.createTrade_client(tradeRow=tradeRow, marketServer=self.ms)
 
         colChk, colChkAll = self.ms.checkCollateral()
@@ -196,7 +202,7 @@ class TestMarketServer(unittest.TestCase):
                                      'marketBranchId': [1],
                                      'price': [0.5],
                                      'quantity': [1],
-                                     'traderId': [1]})
+                                     'traderId': [int(self.trader0)]})
             self.mc1.createTrade_client(tradeRow=tradeRow,
                                         marketServer=self.ms)
             # Trader 2 offer at 0.5
@@ -204,7 +210,7 @@ class TestMarketServer(unittest.TestCase):
                                      'marketBranchId': [1],
                                      'price': [0.5],
                                      'quantity': [-1],
-                                     'traderId': [2]})
+                                     'traderId': [int(self.trader1)]})
             self.mc2.createTrade_client(tradeRow=tradeRow,
                                         marketServer=self.ms)
             # Trader 2 bid at 0.5
@@ -212,7 +218,7 @@ class TestMarketServer(unittest.TestCase):
                                      'marketBranchId': [1],
                                      'price': [0.5],
                                      'quantity': [1],
-                                     'traderId': [2]})
+                                     'traderId': [int(self.trader1)]})
 
             self.mc2.createTrade_client(tradeRow=tradeRow,
                                         marketServer=self.ms)
@@ -221,7 +227,7 @@ class TestMarketServer(unittest.TestCase):
                                      'marketBranchId': [1],
                                      'price': [0.5],
                                      'quantity': [-1],
-                                     'traderId': [1]})
+                                     'traderId': [int(self.trader0)]})
             self.mc1.createTrade_client(tradeRow=tradeRow,
                                         marketServer=self.ms)
         assert 1==1
@@ -233,7 +239,7 @@ class TestMarketServer(unittest.TestCase):
                                           'marketBranchId': [1],
                                           'marketMin': [0],
                                           'marketMax': [1],
-                                          'traderId': [1]})
+                                          'traderId': [int(self.trader0)]})
             self.mc1.createMarket_client(marketRow=marketRow,
                                              marketServer=self.ms)
 
