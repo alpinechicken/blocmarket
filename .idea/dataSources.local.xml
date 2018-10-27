@@ -10,7 +10,7 @@
       <user-name>alpine</user-name>
       <introspection-schemas>blocparty:*</introspection-schemas>
     </data-source>
-    <data-source name="pmarket" uuid="f2e95971-5699-4e16-a5e8-f067a525f843">
+    <data-source name="pmarket" uuid="8b77fc70-4409-48e0-8936-18fbc3f35953">
       <database-info product="SQLite" version="3.20.1" jdbc-version="2.1" driver-name="SQLite JDBC" driver-version="3.20.1.1" family="SQLITE" exact-version="3.20.1" />
       <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
       <auth-required>false</auth-required>

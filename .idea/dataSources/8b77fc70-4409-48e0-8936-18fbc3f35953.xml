@@ -245,15 +245,10 @@
     <column id="70" parent="13" name="traderId">
       <Position>1</Position>
       <DataType>INTEGER|0s</DataType>
-      <NotNull>1</NotNull>
     </column>
     <column id="71" parent="13" name="verifyKey">
       <Position>2</Position>
       <DataType>VARCHAR|0s</DataType>
     </column>
-    <key id="72" parent="13">
-      <ColNames>traderId</ColNames>
-      <Primary>1</Primary>
-    </key>
   </database-model>
 </dataSource>
