@@ -1,8 +1,0 @@
-MANIFEST.in
-setup.py
-pmarket.egg-info/PKG-INFO
-pmarket.egg-info/SOURCES.txt
-pmarket.egg-info/dependency_links.txt
-pmarket.egg-info/not-zip-safe
-pmarket.egg-info/requires.txt
-pmarket.egg-info/top_level.txt

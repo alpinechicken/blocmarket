@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="postgres@localhost" uuid="0081da3a-247b-48bb-8254-694dee847ca4">
+    <data-source source="LOCAL" name="blocparty@localhost" uuid="40749f87-b5cc-44ab-91e5-7d9f7ca94b16">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/postgres</jdbc-url>
+      <jdbc-url>jdbc:postgresql://localhost:5432/blocparty</jdbc-url>
     </data-source>
-    <data-source source="LOCAL" name="pmarket" uuid="8b77fc70-4409-48e0-8936-18fbc3f35953">
+    <data-source source="LOCAL" name="pmarket" uuid="40d88e03-d2aa-41cb-acb9-dad48c0038c2">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/tests/pmarket.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/pmarket.db</jdbc-url>
       <driver-properties>
         <property name="enable_load_extension" value="true" />
       </driver-properties>

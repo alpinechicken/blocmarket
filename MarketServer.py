@@ -13,6 +13,7 @@ import nacl.signing
 import itertools
 
 
+
 class MarketServer(object):
     """
 
@@ -41,7 +42,9 @@ class MarketServer(object):
 
     def __init__(self):
         # self.engine = create_engine('sqlite:///:memory:', echo=True)
-        self.engine = create_engine("postgresql://alpine:3141592@localhost/blocparty")
+        self.engine = create_engine("postgresql://alpine:3141592@localhost/blocparty",
+                                    isolation_level="AUTOCOMMIT")
+        # Note postgress needs AUTOCOMMIT or else postgress hangs when it gets to a matching trade
         # self.engine = create_engine('sqlite:///pmarket.db')
         self.engine.echo = False
         self.metadata = MetaData(self.engine)

@@ -131,8 +131,44 @@ def viewOrderBook():
     # Return order book
     ms = MarketServer()
     oB = pd.read_sql_table('orderBook', ms.conn)
-    return jsonify(oB.loc[:,['marketRootId', 'marketBranchId',
-                             'price', 'quantity', 'tradeRootId',
-                             'traderId']].to_json())
 
-# include viewOpenTrades, viewMatchedTrades
+    return jsonify(oB.loc[:,['marketRootId', 'marketBranchId',
+                             'price', 'quantity', 'traderId']].to_json())
+
+
+# View order book
+@app.route('/viewOpenTrades', methods=['POST'])
+def viewOpenTrades():
+    # Return order book
+    ms = MarketServer()
+    tS = pd.read_sql_table('tradeState', ms.conn)
+    oB = pd.read_sql_table('orderBook', ms.conn)
+
+    # Open trades
+    openTrades = pd.merge(tS.loc[tS.isOpen,:], oB, how='inner')
+
+    # Sum orders s
+    openTrades_sum = openTrades.groupby(['marketRootId', 'marketBranchId', 'price', 'traderId'],
+                        as_index=False).agg({"quantity": "sum"})
+
+    return jsonify(openTrades_sum.loc[:,['marketRootId', 'marketBranchId',
+                             'price', 'quantity', 'traderId']].to_json())
+
+# View order book
+@app.route('/viewMatchedTrades', methods=['POST'])
+def viewMatchedTrades():
+    # Return order book
+    ms = MarketServer()
+    tS = pd.read_sql_table('tradeState', ms.conn)
+    oB = pd.read_sql_table('orderBook', ms.conn)
+
+    # Open trades
+    openTrades = pd.merge(tS.loc[tS.isMatched, :], oB, how='inner')
+    # Sum orders s
+    openTrades_sum = openTrades.groupby(['marketRootId', 'marketBranchId', 'price', 'traderId'],
+                        as_index=False).agg({"quantity": "sum"})
+
+    return jsonify(openTrades_sum.loc[:, ['marketRootId', 'marketBranchId',
+                                  'price', 'quantity', 'traderId']].to_json())
+
+
