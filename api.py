@@ -163,12 +163,12 @@ def viewMatchedTrades():
     oB = pd.read_sql_table('orderBook', ms.conn)
 
     # Open trades
-    openTrades = pd.merge(tS.loc[tS.isMatched, :], oB, how='inner')
+    matchedTrades = oB.loc[oB['tradeBranchId'] == 3, :]
     # Sum orders s
-    openTrades_sum = openTrades.groupby(['marketRootId', 'marketBranchId', 'price', 'traderId'],
+    matchedTrades_sum = matchedTrades.groupby(['marketRootId', 'marketBranchId', 'price', 'traderId'],
                         as_index=False).agg({"quantity": "sum"})
 
-    return jsonify(openTrades_sum.loc[:, ['marketRootId', 'marketBranchId',
+    return jsonify(matchedTrades_sum.loc[:, ['marketRootId', 'marketBranchId',
                                   'price', 'quantity', 'traderId']].to_json())
 
 
