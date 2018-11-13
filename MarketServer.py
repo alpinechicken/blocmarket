@@ -17,9 +17,9 @@ import itertools
 class MarketServer(object):
     """
 
-    Version of market object that only allows q=1 or q=-1
+    Market object that only allows q=1 or q=-1
 
-    - Holds an order book (orderBook), user table( userTable), and list of
+    - Holds an order book (orderBook), user table (userTable), and list of
      markets (marketTable) for an contract settling between some
      minimum and maximum.
     - Interface for adding users (createUser), markets
@@ -42,10 +42,10 @@ class MarketServer(object):
 
     def __init__(self):
         # self.engine = create_engine('sqlite:///:memory:', echo=True)
-        self.engine = create_engine("postgresql://alpine:3141592@localhost/blocparty",
-                                    isolation_level="AUTOCOMMIT")
+        # self.engine = create_engine("postgresql://alpine:3141592@localhost/blocparty",
+        #                             isolation_level="AUTOCOMMIT")
         # Note postgress needs AUTOCOMMIT or else postgress hangs when it gets to a matching trade
-        # self.engine = create_engine('sqlite:///pmarket.db')
+        self.engine = create_engine('sqlite:///pmarket.db')
         self.engine.echo = False
         self.metadata = MetaData(self.engine)
         self.userTable = Table('userTable', self.metadata,

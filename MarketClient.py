@@ -107,7 +107,7 @@ class MarketClient(object):
                                    'previousSig': previousOrderRow['signature'],
                                    'signatureMsg': sig.message,
                                    'signature': sig.signature})
-        # # Debugging check that orderRow has correct sig
+        # # Debugging check that orderRow has correct signature
         chk = newOrderRow['signature'] == bytes(sig.signature)
         signedOrderBook = newOrderRow
         return signedOrderBook
@@ -258,6 +258,6 @@ class MarketClient(object):
 
 # - Think about splitting out mc/ms:
 # => Modify or split out MarketClient.createUser_client()/createTrade_client()/createMarket_client() so that instead of taking a
-# MarketServer object they just talk to the api endpoints for the MarketServer with json post requests.
+# MarketServer object they just talk to the api endpoints for MarketServer.
 # =>
 
