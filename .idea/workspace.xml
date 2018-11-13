@@ -2,24 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f748aadd-a74f-4691-aa32-65bb3faaf10c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MarketClient.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MarketServer.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Procfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Untitled.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloc.egg-info/PKG-INFO" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloc.egg-info/SOURCES.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloc.egg-info/dependency_links.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloc.egg-info/not-zip-safe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloc.egg-info/requires.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloc.egg-info/top_level.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/bloc-0.0.1-py3-none-any.whl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloc/MANIFEST.in" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloc/Procfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloc/api.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloc/pmarket.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloc/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloc/runtime.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloc/setup.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/api.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pmarket.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/runtime.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_MarketClient.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_MarketClient.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_MarketServer.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_MarketServer.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -185,19 +175,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bloc/api.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="367">
-              <caret line="43" column="11" lean-forward="true" selection-start-line="43" selection-start-column="11" selection-end-line="43" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/test_MarketClient.py">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="42" lean-forward="true" selection-start-column="42" selection-end-column="42" />
+              <caret column="42" selection-start-column="42" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -206,7 +187,7 @@
         <entry file="file://$PROJECT_DIR$/tests/test_MarketServer.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="45">
-              <caret line="3" column="19" lean-forward="true" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="19" />
+              <caret line="3" column="19" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="19" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
               </folding>
@@ -218,7 +199,7 @@
         <entry file="file://$PROJECT_DIR$/bloc/MarketClient.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="82">
-              <caret line="6" column="19" lean-forward="true" selection-start-line="5" selection-start-column="20" selection-end-line="6" selection-end-column="19" />
+              <caret line="6" column="19" selection-start-line="5" selection-start-column="20" selection-end-line="6" selection-end-column="19" />
               <folding>
                 <element signature="e#1#20#0" expanded="true" />
               </folding>
@@ -229,8 +210,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bloc/MarketServer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+            <state relative-caret-position="390">
+              <caret line="26" column="70" selection-start-line="26" selection-start-column="70" selection-end-line="26" selection-end-column="70" />
+              <folding>
+                <element signature="e#15#33#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -774,9 +758,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_test_MarketServer_TestMarketServer - 2018.10.28 at 22h 30m 09s.xml">
-      <configuration name="Unittests for test_MarketServer.TestMarketServer" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unittests_for_test_MarketServer_TestMarketServer - 2018.10.28 at 22h 30m 54s.xml">
       <configuration name="Unittests for test_MarketServer.TestMarketServer" configurationId="tests" />
     </history-entry>
@@ -804,6 +785,9 @@
     <history-entry file="Unittests_for_test_MarketServer_TestMarketServer - 2018.11.13 at 13h 40m 29s.xml">
       <configuration name="Unittests for test_MarketServer.TestMarketServer" configurationId="tests" />
     </history-entry>
+    <history-entry file="Unittests_for_test_MarketServer_TestMarketServer - 2018.11.13 at 16h 03m 49s.xml">
+      <configuration name="Unittests for test_MarketServer.TestMarketServer" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -816,13 +800,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.47853735" visible="true" weight="0.21459228" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.47853735" visible="true" weight="0.21459228" />
       <window_info id="Structure" order="1" sideWeight="0.5214626" side_tool="true" visible="true" weight="0.21459228" />
       <window_info id="Favorites" order="2" sideWeight="0.50385606" side_tool="true" weight="0.19170243" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49713877" weight="0.32686982" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5493562" visible="true" weight="0.24216868" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.5493562" visible="true" weight="0.24216868" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.67167383" weight="0.46024096" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -1309,41 +1294,44 @@
     <entry file="file://$PROJECT_DIR$/bloc/api.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="367">
-          <caret line="43" column="11" lean-forward="true" selection-start-line="43" selection-start-column="11" selection-end-line="43" selection-end-column="11" />
+          <caret line="43" column="11" selection-start-line="43" selection-start-column="11" selection-end-line="43" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/test_MarketClient.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="42" lean-forward="true" selection-start-column="42" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_MarketServer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="19" lean-forward="true" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#37#0" expanded="true" />
-          </folding>
+          <caret column="42" selection-start-column="42" selection-end-column="42" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bloc/MarketClient.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="82">
-          <caret line="6" column="19" lean-forward="true" selection-start-line="5" selection-start-column="20" selection-end-line="6" selection-end-column="19" />
+          <caret line="6" column="19" selection-start-line="5" selection-start-column="20" selection-end-line="6" selection-end-column="19" />
           <folding>
             <element signature="e#1#20#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_MarketServer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="19" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/bloc/MarketServer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+        <state relative-caret-position="390">
+          <caret line="26" column="70" selection-start-line="26" selection-start-column="70" selection-end-line="26" selection-end-column="70" />
+          <folding>
+            <element signature="e#15#33#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
