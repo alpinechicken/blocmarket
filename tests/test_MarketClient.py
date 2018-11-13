@@ -1,4 +1,4 @@
-from MarketClient import MarketClient
+from bloc.MarketClient import MarketClient
 import unittest
 import pandas as pd
 

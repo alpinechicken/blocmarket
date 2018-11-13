@@ -1,5 +1,5 @@
-from MarketServer import MarketServer
-from MarketClient import MarketClient
+from bloc.MarketServer import MarketServer
+from bloc.MarketClient import MarketClient
 import unittest
 import pandas as pd
 
