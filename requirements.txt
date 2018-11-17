@@ -2,3 +2,7 @@ django
 gunicorn
 django-heroku
 flask
+numpy
+pandas
+sqlalchemy
+pynacl
