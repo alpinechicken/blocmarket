@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f748aadd-a74f-4691-aa32-65bb3faaf10c" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/bloc/MarketServer.py" beforeDir="false" afterPath="$PROJECT_DIR$/bloc/MarketServer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/pmarket.db" beforeDir="false" afterPath="$PROJECT_DIR$/tests/pmarket.db" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,7 +19,7 @@
     <SUITE FILE_PATH="coverage/pmarket$MarketClient.coverage" NAME="MarketClient Coverage Results" MODIFIED="1527907311959" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pmarket$scratch2.coverage" NAME="scratch2 Coverage Results" MODIFIED="1484467853736" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pmarket$scratch.coverage" NAME="scratch Coverage Results" MODIFIED="1481360955794" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/pmarket$Unittests_for_test_MarketServer_TestMarketServer.coverage" NAME="Unittests for test_MarketServer.TestMarketServer Coverage Results" MODIFIED="1542441343333" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/" />
+    <SUITE FILE_PATH="coverage/pmarket$Unittests_for_test_MarketServer_TestMarketServer.coverage" NAME="Unittests for test_MarketServer.TestMarketServer Coverage Results" MODIFIED="1542442294219" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/" />
     <SUITE FILE_PATH="coverage/pmarket$Unittests_for_test_MarketServer_TestMarketServer_testMatchTrade.coverage" NAME="Unittests for test_MarketServer.TestMarketServer.testMatchTrade Coverage Results" MODIFIED="1530704993613" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pmarket$untitled.coverage" NAME="untitled Coverage Results" MODIFIED="1539865728573" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/pmarket$MarketServer.coverage" NAME="MarketServer Coverage Results" MODIFIED="1526762668991" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -121,7 +120,7 @@
           <entry key="api" value="11" />
           <entry key="env" value="15" />
           <entry key="in" value="7" />
-          <entry key="py" value="3198" />
+          <entry key="py" value="3217" />
           <entry key="sql" value="62" />
           <entry key="txt" value="26" />
         </counts>
@@ -130,7 +129,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="51" />
-          <entry key="Python" value="3689" />
+          <entry key="Python" value="3708" />
           <entry key="SQL" value="1" />
           <entry key="Scratch" value="62" />
         </counts>
@@ -201,8 +200,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bloc/MarketServer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="245">
-              <caret line="48" column="8" selection-start-line="48" selection-start-column="8" selection-end-line="48" selection-end-column="8" />
+            <state relative-caret-position="765">
+              <caret line="51" column="49" lean-forward="true" selection-start-line="51" selection-start-column="49" selection-end-line="51" selection-end-column="49" />
               <folding>
                 <element signature="e#15#33#0" expanded="true" />
                 <element signature="e#22141#23736#0" />
@@ -1337,8 +1336,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bloc/MarketServer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="48" column="8" selection-start-line="48" selection-start-column="8" selection-end-line="48" selection-end-column="8" />
+        <state relative-caret-position="765">
+          <caret line="51" column="49" lean-forward="true" selection-start-line="51" selection-start-column="49" selection-end-line="51" selection-end-column="49" />
           <folding>
             <element signature="e#15#33#0" expanded="true" />
             <element signature="e#22141#23736#0" />
