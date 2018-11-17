@@ -50,7 +50,7 @@ class MarketServer(object):
         DATABASE_URL = os.environ['DATABASE_URL']
         self.engine = create_engine(DATABASE_URL)
         self.engine.echo = False
-        self.metadata = MetaData(self.engisne)
+        self.metadata = MetaData(self.engine)
         self.userTable = Table('userTable', self.metadata,
                                Column('traderId', Integer),
                                Column('verifyKey', String),
