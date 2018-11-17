@@ -120,7 +120,7 @@
           <entry key="api" value="11" />
           <entry key="env" value="15" />
           <entry key="in" value="7" />
-          <entry key="py" value="3163" />
+          <entry key="py" value="3198" />
           <entry key="sql" value="62" />
           <entry key="txt" value="26" />
         </counts>
@@ -129,7 +129,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="51" />
-          <entry key="Python" value="3654" />
+          <entry key="Python" value="3689" />
           <entry key="SQL" value="1" />
           <entry key="Scratch" value="62" />
         </counts>
@@ -200,8 +200,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bloc/MarketServer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="49" column="32" lean-forward="true" selection-start-line="49" selection-start-column="32" selection-end-line="49" selection-end-column="32" />
+            <state relative-caret-position="305">
+              <caret line="52" column="43" selection-start-line="52" selection-start-column="43" selection-end-line="52" selection-end-column="43" />
               <folding>
                 <element signature="e#15#33#0" expanded="true" />
                 <element signature="e#22141#23736#0" />
@@ -1336,8 +1336,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bloc/MarketServer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="49" column="32" lean-forward="true" selection-start-line="49" selection-start-column="32" selection-end-line="49" selection-end-column="32" />
+        <state relative-caret-position="305">
+          <caret line="52" column="43" selection-start-line="52" selection-start-column="43" selection-end-line="52" selection-end-column="43" />
           <folding>
             <element signature="e#15#33#0" expanded="true" />
             <element signature="e#22141#23736#0" />
