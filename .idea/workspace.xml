@@ -2,24 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f748aadd-a74f-4691-aa32-65bb3faaf10c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/testfile.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wsgi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/.ipynb_checkpoints/api-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/doc/.ipynb_checkpoints/api-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/MarketObject.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/doc/MarketObject.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/api.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/img/.ipynb_checkpoints/BasicSignature1-checkpoint.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/img/.ipynb_checkpoints/BetterPriceMatch-checkpoint.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/img/.ipynb_checkpoints/BetterPriceMatchChained-checkpoint.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/img/.ipynb_checkpoints/OrderGeometry1-checkpoint.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/img/BasicSignature1.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/img/BetterPriceMatch.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/img/BetterPriceMatchChained.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/img/OrderGeometry1.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/img/PerfectMatch.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pmarket.db" beforeDir="false" afterPath="$PROJECT_DIR$/pmarket.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/pmarket.db" beforeDir="false" afterPath="$PROJECT_DIR$/tests/pmarket.db" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -225,12 +209,12 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="mock:///Users/admin/Library/Caches/PyCharm2018.2/snapshots/pmarket2.pstat">
           <provider selected="true" editor-type-id="profiler-session-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/api.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2027">
@@ -1265,23 +1249,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wsgi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="21" lean-forward="true" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2027">
-          <caret line="137" lean-forward="true" selection-start-line="137" selection-end-line="137" />
-          <folding>
-            <element signature="e#1367#1408#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -1344,6 +1311,23 @@
           <folding>
             <element signature="e#15#33#0" expanded="true" />
             <element signature="e#22141#23736#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wsgi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="21" lean-forward="true" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2027">
+          <caret line="137" lean-forward="true" selection-start-line="137" selection-end-line="137" />
+          <folding>
+            <element signature="e#1367#1408#0" expanded="true" />
           </folding>
         </state>
       </provider>
