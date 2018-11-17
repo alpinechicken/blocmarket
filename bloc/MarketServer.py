@@ -46,9 +46,9 @@ class MarketServer(object):
         # self.engine = create_engine("postgresql://alpine:3141592@localhost/blocparty",
         #                              isolation_level="AUTOCOMMIT")
         # Note postgress needs AUTOCOMMIT or else postgress hangs when it gets to a matching trade
-        DATABASE_URL = 'sqlite:///pmarket.db'
+        # DATABASE_URL = 'sqlite:///pmarket.db'
         # DATABASE_URL = 'postgresql://vzpupvzqyhznrh:14eeeb882d30a816ad01f3fe64610f3a9e465d2158821cf003b08f1169f3a786@ec2-54-83-8-246.compute-1.amazonaws.com:5432/dbee8j5ki95jfn'
-        # DATABASE_URL = os.environ['DATABASE_URL']
+        DATABASE_URL = os.environ['DATABASE_URL']
         self.engine = create_engine(DATABASE_URL)
         self.engine.echo = False
         self.metadata = MetaData(self.engine)
