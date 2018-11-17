@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f748aadd-a74f-4691-aa32-65bb3faaf10c" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/bloc/MarketServer.py" beforeDir="false" afterPath="$PROJECT_DIR$/bloc/MarketServer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/api.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api.ipynb" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -120,7 +121,7 @@
           <entry key="api" value="11" />
           <entry key="env" value="15" />
           <entry key="in" value="7" />
-          <entry key="py" value="3219" />
+          <entry key="py" value="3234" />
           <entry key="sql" value="62" />
           <entry key="txt" value="26" />
         </counts>
@@ -129,7 +130,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="51" />
-          <entry key="Python" value="3710" />
+          <entry key="Python" value="3725" />
           <entry key="SQL" value="1" />
           <entry key="Scratch" value="62" />
         </counts>
@@ -200,8 +201,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bloc/MarketServer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="337">
-              <caret line="50" column="49" lean-forward="true" selection-start-line="50" selection-start-column="49" selection-end-line="50" selection-end-column="49" />
+            <state relative-caret-position="369">
+              <caret line="51" column="78" selection-start-line="51" selection-start-column="78" selection-end-line="51" selection-end-column="78" />
               <folding>
                 <element signature="e#15#33#0" expanded="true" />
                 <element signature="e#22141#23736#0" />
@@ -819,6 +820,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.47853735" visible="true" weight="0.21459228" />
       <window_info id="Structure" order="1" sideWeight="0.5214626" side_tool="true" visible="true" weight="0.21459228" />
@@ -1340,8 +1342,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bloc/MarketServer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="337">
-          <caret line="50" column="49" lean-forward="true" selection-start-line="50" selection-start-column="49" selection-end-line="50" selection-end-column="49" />
+        <state relative-caret-position="369">
+          <caret line="51" column="78" selection-start-line="51" selection-start-column="78" selection-end-line="51" selection-end-column="78" />
           <folding>
             <element signature="e#15#33#0" expanded="true" />
             <element signature="e#22141#23736#0" />

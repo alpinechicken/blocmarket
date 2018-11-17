@@ -49,7 +49,7 @@ class MarketServer(object):
         # DATABASE_URL = 'sqlite:///pmarket.db'
         # DATABASE_URL = 'postgresql://vzpupvzqyhznrh:14eeeb882d30a816ad01f3fe64610f3a9e465d2158821cf003b08f1169f3a786@ec2-54-83-8-246.compute-1.amazonaws.com:5432/dbee8j5ki95jfn'
         DATABASE_URL = os.environ['DATABASE_URL']
-        self.engine = create_engine(DATABASE_URL)
+        self.engine = create_engine(DATABASE_URL, isolation_level="AUTOCOMMIT")
         self.engine.echo = False
         self.metadata = MetaData(self.engine)
         self.userTable = Table('userTable', self.metadata,
