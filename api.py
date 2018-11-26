@@ -44,14 +44,17 @@ from bloc.MarketClient import MarketClient
 import json
 import pandas as pd
 
-app = Flask(__name__)
+application = Flask(__name__)
+
+if __name__ == "__main__":
+    application.run()
 
 
-@app.route('/')
+@application.route('/')
 def hello_world():
     return 'Hello wurld'
 
-@app.route('/createUser', methods=['POST', 'GET'])
+@application.route('/createUser', methods=['POST', 'GET'])
 def createUser():
     ms = MarketServer()
     mc = MarketClient()
@@ -62,7 +65,7 @@ def createUser():
                     'signingKey_hex': mc.signingKey_hex})
 
 
-@app.route('/createMarket', methods=['POST'])
+@application.route('/createMarket', methods=['POST'])
 def createMarket():
     #  Get request data
     data = request.get_json()
@@ -90,7 +93,7 @@ def createMarket():
                     'traderId': data['traderId']})
 
 
-@app.route('/createTrade', methods=['POST'])
+@application.route('/createTrade', methods=['POST'])
 def createTrade():
     #  Get request data
     data = request.get_json()
@@ -117,7 +120,7 @@ def createTrade():
                     'traderId': data['traderId']})
 
 # View market bounds
-@app.route('/viewMarketBounds', methods=['POST'])
+@application.route('/viewMarketBounds', methods=['POST'])
 def viewMarkets():
     # Return market bounds
     ms = MarketServer()
@@ -126,7 +129,7 @@ def viewMarkets():
                              'marketMin', 'marketMax']].to_json())
 
 # View order book
-@app.route('/viewOrderBook', methods=['POST'])
+@application.route('/viewOrderBook', methods=['POST'])
 def viewOrderBook():
     # Return order book
     ms = MarketServer()
@@ -137,7 +140,7 @@ def viewOrderBook():
 
 
 # View order book
-@app.route('/viewOpenTrades', methods=['POST'])
+@application.route('/viewOpenTrades', methods=['POST'])
 def viewOpenTrades():
     # Return order book
     ms = MarketServer()
@@ -155,7 +158,7 @@ def viewOpenTrades():
                              'price', 'quantity', 'traderId']].to_json())
 
 # View order book
-@app.route('/viewMatchedTrades', methods=['POST'])
+@application.route('/viewMatchedTrades', methods=['POST'])
 def viewMatchedTrades():
     # Return order book
     ms = MarketServer()

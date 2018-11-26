@@ -39,19 +39,22 @@
 # pd.DataFrame(response.json(), index=[0])
 
 from flask import Flask, request, jsonify
-from MarketServer import MarketServer
-from MarketClient import MarketClient
+from bloc.MarketServer import MarketServer
+from bloc.MarketClient import MarketClient
 import json
 import pandas as pd
 
-app = Flask(__name__)
+application = Flask(__name__)
+
+if __name__ == "__main__":
+    application.run()
 
 
-@app.route('/')
+@application.route('/')
 def hello_world():
     return 'Hello wurld'
 
-@app.route('/createUser', methods=['POST', 'GET'])
+@application.route('/createUser', methods=['POST', 'GET'])
 def createUser():
     ms = MarketServer()
     mc = MarketClient()
@@ -62,7 +65,7 @@ def createUser():
                     'signingKey_hex': mc.signingKey_hex})
 
 
-@app.route('/createMarket', methods=['POST'])
+@application.route('/createMarket', methods=['POST'])
 def createMarket():
     #  Get request data
     data = request.get_json()
@@ -90,7 +93,7 @@ def createMarket():
                     'traderId': data['traderId']})
 
 
-@app.route('/createTrade', methods=['POST'])
+@application.route('/createTrade', methods=['POST'])
 def createTrade():
     #  Get request data
     data = request.get_json()
@@ -117,7 +120,7 @@ def createTrade():
                     'traderId': data['traderId']})
 
 # View market bounds
-@app.route('/viewMarketBounds', methods=['POST'])
+@application.route('/viewMarketBounds', methods=['POST'])
 def viewMarkets():
     # Return market bounds
     ms = MarketServer()
@@ -126,13 +129,49 @@ def viewMarkets():
                              'marketMin', 'marketMax']].to_json())
 
 # View order book
-@app.route('/viewOrderBook', methods=['POST'])
+@application.route('/viewOrderBook', methods=['POST'])
 def viewOrderBook():
     # Return order book
     ms = MarketServer()
     oB = pd.read_sql_table('orderBook', ms.conn)
-    return jsonify(oB.loc[:,['marketRootId', 'marketBranchId',
-                             'price', 'quantity', 'tradeRootId',
-                             'traderId']].to_json())
 
-# include viewOpenTrades, viewMatchedTrades
+    return jsonify(oB.loc[:,['marketRootId', 'marketBranchId',
+                             'price', 'quantity', 'traderId']].to_json())
+
+
+# View order book
+@application.route('/viewOpenTrades', methods=['POST'])
+def viewOpenTrades():
+    # Return order book
+    ms = MarketServer()
+    tS = pd.read_sql_table('tradeState', ms.conn)
+    oB = pd.read_sql_table('orderBook', ms.conn)
+
+    # Open trades
+    openTrades = pd.merge(tS.loc[tS.isOpen,:], oB, how='inner')
+
+    # Sum orders s
+    openTrades_sum = openTrades.groupby(['marketRootId', 'marketBranchId', 'price', 'traderId'],
+                        as_index=False).agg({"quantity": "sum"})
+
+    return jsonify(openTrades_sum.loc[:,['marketRootId', 'marketBranchId',
+                             'price', 'quantity', 'traderId']].to_json())
+
+# View order book
+@application.route('/viewMatchedTrades', methods=['POST'])
+def viewMatchedTrades():
+    # Return order book
+    ms = MarketServer()
+    tS = pd.read_sql_table('tradeState', ms.conn)
+    oB = pd.read_sql_table('orderBook', ms.conn)
+
+    # Open trades
+    matchedTrades = oB.loc[oB['tradeBranchId'] == 3, :]
+    # Sum orders s
+    matchedTrades_sum = matchedTrades.groupby(['marketRootId', 'marketBranchId', 'price', 'traderId'],
+                        as_index=False).agg({"quantity": "sum"})
+
+    return jsonify(matchedTrades_sum.loc[:, ['marketRootId', 'marketBranchId',
+                                  'price', 'quantity', 'traderId']].to_json())
+
+
