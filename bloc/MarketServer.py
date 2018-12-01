@@ -691,7 +691,7 @@ class MarketServer(object):
                 # Mimiumum payoff for open trade
                 NC_open[:, iTrader] = np.min(np.multiply(Mstar_ - Pstar_, npm.repmat(Qstar_, numStates, 1)), axis=1)
 
-        # Collateral available under all worst outcomess
+        # Collateral available under all worst outcomes
         netCollateral = NC_matched + NC_open
         # Indicator for which traders fail collateral check
         colChkAll = (netCollateral >= self.COLLATERAL_LIMIT).all(axis=0)
