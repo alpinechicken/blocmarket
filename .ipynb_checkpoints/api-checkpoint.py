@@ -60,6 +60,7 @@ def createUser():
     mc = MarketClient()
     mc.generateSignatureKeys()
     newUsr = mc.createUser_client(marketServer=ms)
+    ms.conn.close()
     return jsonify({'traderId': str(newUsr['traderId']),
                     'verifyKey_hex': newUsr['verifyKey'],
                     'signingKey_hex': mc.signingKey_hex})
@@ -84,7 +85,7 @@ def createMarket():
     except:
         checks = 'ProbablyASignatureError'
 
-
+    ms.conn.close()
     return jsonify({'checks': str(checks),
                     'marketRootId': data['marketRootId'],
                     'marketBranchId': data['marketBranchId'],
@@ -111,7 +112,8 @@ def createTrade():
         checks = mc.createTrade_client(tradeRow=tradeRow, marketServer=ms)
     except:
         checks = 'ProbablyASignatureError'
-
+        
+    ms.conn.close()
     return jsonify({'checks': str(checks),
                     'marketRootId': data['marketRootId'],
                     'marketBranchId': data['marketBranchId'],
@@ -125,6 +127,7 @@ def viewMarkets():
     # Return market bounds
     ms = MarketServer()
     mB = pd.read_sql_table('marketBounds', ms.conn)
+    ms.conn.close()
     return jsonify(mB.loc[:,['marketRootId', 'marketBranchId',
                              'marketMin', 'marketMax']].to_json())
 
@@ -134,7 +137,7 @@ def viewOrderBook():
     # Return order book
     ms = MarketServer()
     oB = pd.read_sql_table('orderBook', ms.conn)
-
+    ms.conn.close()
     return jsonify(oB.loc[:,['marketRootId', 'marketBranchId',
                              'price', 'quantity', 'traderId']].to_json())
 
@@ -153,7 +156,7 @@ def viewOpenTrades():
     # Sum orders s
     openTrades_sum = openTrades.groupby(['marketRootId', 'marketBranchId', 'price', 'traderId'],
                         as_index=False).agg({"quantity": "sum"})
-
+    ms.conn.close()
     return jsonify(openTrades_sum.loc[:,['marketRootId', 'marketBranchId',
                              'price', 'quantity', 'traderId']].to_json())
 
@@ -170,7 +173,7 @@ def viewMatchedTrades():
     # Sum orders s
     matchedTrades_sum = matchedTrades.groupby(['marketRootId', 'marketBranchId', 'price', 'traderId'],
                         as_index=False).agg({"quantity": "sum"})
-
+    ms.conn.close()
     return jsonify(matchedTrades_sum.loc[:, ['marketRootId', 'marketBranchId',
                                   'price', 'quantity', 'traderId']].to_json())
 

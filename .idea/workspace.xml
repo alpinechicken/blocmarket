@@ -2,7 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f748aadd-a74f-4691-aa32-65bb3faaf10c" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/40749f87-b5cc-44ab-91e5-7d9f7ca94b16.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/40749f87-b5cc-44ab-91e5-7d9f7ca94b16.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/40749f87-b5cc-44ab-91e5-7d9f7ca94b16/storage_v2/_src_/database/blocparty.CP5MNA/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/40749f87-b5cc-44ab-91e5-7d9f7ca94b16/storage_v2/_src_/database/blocparty.CP5MNA/schema/public.abK9xQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/40749f87-b5cc-44ab-91e5-7d9f7ca94b16/storage_v2/_src_/database/postgres.edMnLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/40749f87-b5cc-44ab-91e5-7d9f7ca94b16/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/untitled.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/untitled.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/.ipynb_checkpoints/api-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/doc/.ipynb_checkpoints/api-checkpoint.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/api.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api.ipynb" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -13,22 +20,22 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/pmarket$MarketObject.coverage" NAME="MarketObject Coverage Results" MODIFIED="1481374997762" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/pmarket$Unittests_in_test_MarketClient_py.coverage" NAME="Unittests in test_MarketClient.py Coverage Results" MODIFIED="1527916815368" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/pmarket$test.coverage" NAME="test Coverage Results" MODIFIED="1481378461844" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/pmarket$bob.coverage" NAME="bob Coverage Results" MODIFIED="1528008925763" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/pmarket$tricks.coverage" NAME="tricks Coverage Results" MODIFIED="1481354581096" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/pmarket$MarketClient.coverage" NAME="MarketClient Coverage Results" MODIFIED="1527907311959" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pmarket$Unittests_for_test_MarketServer_TestMarketServer.coverage" NAME="Unittests for test_MarketServer.TestMarketServer Coverage Results" MODIFIED="1543834853619" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/" />
     <SUITE FILE_PATH="coverage/pmarket$scratch2.coverage" NAME="scratch2 Coverage Results" MODIFIED="1484467853736" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/pmarket$scratch.coverage" NAME="scratch Coverage Results" MODIFIED="1481360955794" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/pmarket$Unittests_for_test_MarketServer_TestMarketServer.coverage" NAME="Unittests for test_MarketServer.TestMarketServer Coverage Results" MODIFIED="1543648376256" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/" />
-    <SUITE FILE_PATH="coverage/pmarket$Unittests_for_test_MarketServer_TestMarketServer_testMatchTrade.coverage" NAME="Unittests for test_MarketServer.TestMarketServer.testMatchTrade Coverage Results" MODIFIED="1530704993613" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/pmarket$untitled.coverage" NAME="untitled Coverage Results" MODIFIED="1539865728573" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/pmarket$MarketServer.coverage" NAME="MarketServer Coverage Results" MODIFIED="1526762668991" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pmarket$MarketClient.coverage" NAME="MarketClient Coverage Results" MODIFIED="1527907311959" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pmarket$bob.coverage" NAME="bob Coverage Results" MODIFIED="1528008925763" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pmarket$test.coverage" NAME="test Coverage Results" MODIFIED="1481378461844" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pmarket$Unittests_in_test_MarketClient_py.coverage" NAME="Unittests in test_MarketClient.py Coverage Results" MODIFIED="1527916815368" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pmarket$tricks.coverage" NAME="tricks Coverage Results" MODIFIED="1481354581096" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pmarket$sqltest2.coverage" NAME="sqltest2 Coverage Results" MODIFIED="1482555234549" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pmarket$MarketServer.coverage" NAME="MarketServer Coverage Results" MODIFIED="1526762668991" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pmarket$Unittests_for_test_MarketServer_TestMarketServer_testRemoveTrade.coverage" NAME="Unittests for test_MarketServer.TestMarketServer.testRemoveTrade Coverage Results" MODIFIED="1538289456892" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pmarket$untitled.coverage" NAME="untitled Coverage Results" MODIFIED="1539865728573" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/pmarket$pynacltests.coverage" NAME="pynacltests Coverage Results" MODIFIED="1507970611880" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pmarket$Unittests_for_test_MarketServer_TestMarketServer_testMatchTrade.coverage" NAME="Unittests for test_MarketServer.TestMarketServer.testMatchTrade Coverage Results" MODIFIED="1530704993613" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pmarket$scratch.coverage" NAME="scratch Coverage Results" MODIFIED="1481360955794" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pmarket$Unittests_in_test_marketObjectSQL.coverage" NAME="Unittests in test_marketObjectSQL Coverage Results" MODIFIED="1509918137100" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pmarket$Unittests_for_test_MarketServer_TestMarketServer_test_tradeMaker.coverage" NAME="Unittests for test_MarketServer.TestMarketServer.test_tradeMaker Coverage Results" MODIFIED="1530704793624" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/pmarket$pynacltests.coverage" NAME="pynacltests Coverage Results" MODIFIED="1507970611880" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/pmarket$Unittests_for_test_MarketServer_TestMarketServer_testRemoveTrade.coverage" NAME="Unittests for test_MarketServer.TestMarketServer.testRemoveTrade Coverage Results" MODIFIED="1538289456892" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pmarket$MarketObjectSQL.coverage" NAME="MarketObjectSQL Coverage Results" MODIFIED="1487486462183" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="CreatePatchCommitExecutor">
@@ -178,6 +185,43 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="-155986568">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.6" value="1" />
+          <entry key="project.open.time.7" value="1" />
+          <entry key="project.opened" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="cacheBook" value="1" />
+          <entry key="marketTable" value="1" />
+          <entry key="orderBook" value="1" />
+          <entry key="py" value="2" />
+          <entry key="sql" value="1" />
+          <entry key="userTable" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="Database Element" value="4" />
+          <entry key="Python" value="2" />
+          <entry key="Scratch" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="Python Console" value="191" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="Python" value="191" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FavoritesManager">
     <favorites_list name="pmarket" />
@@ -190,8 +234,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bloc/MarketServer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="169">
-              <caret line="330" selection-start-line="330" selection-end-line="330" />
+            <state relative-caret-position="53">
+              <caret line="41" column="7" selection-start-line="41" selection-start-column="7" selection-end-line="41" selection-end-column="7" />
               <folding>
                 <element signature="e#15#33#0" expanded="true" />
               </folding>
@@ -199,23 +243,83 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/tests/test_MarketServer.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="445">
-              <caret line="70" column="30" lean-forward="true" selection-start-line="70" selection-start-column="30" selection-end-line="70" selection-end-column="30" />
+            <state relative-caret-position="180">
+              <caret line="44" column="19" selection-start-line="44" selection-start-column="19" selection-end-line="44" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/bloc/MarketClient.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-902">
+              <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+              <folding>
+                <element signature="e#1#20#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/marketBounds">
+        <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/userTable">
           <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
             <state>
               <filtering enabled="true" />
               <column-attributes>
                 <column name="ctid" enabled="false" />
               </column-attributes>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/orderBook">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
+              <column-attributes>
+                <column name="ctid" enabled="false" />
+              </column-attributes>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/marketTable">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
+              <column-attributes>
+                <column name="ctid" enabled="false" />
+              </column-attributes>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/cacheBook">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
+              <column-attributes>
+                <column name="ctid" enabled="false" />
+              </column-attributes>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/test_MarketServer.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
+              <folding>
+                <element signature="e#0#42#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -346,8 +450,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="width" value="1440" />
-    <option name="height" value="900" />
+    <option name="width" value="1680" />
+    <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -383,7 +487,7 @@
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$2/SQL Dialects" value="SQLite" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="js.eslint.eslintPackage" value="" />
-    <property name="last_opened_file_path" value="$USER_HOME$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="settings.editor.splitter.proportion" value="0.2375852" />
   </component>
@@ -757,12 +861,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_test_MarketServer_TestMarketServer - 2018.12.01 at 14h 24m 50s.xml">
-      <configuration name="Unittests for test_MarketServer.TestMarketServer" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_test_MarketServer_TestMarketServer - 2018.12.01 at 14h 25m 50s.xml">
-      <configuration name="Unittests for test_MarketServer.TestMarketServer" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unittests_for_test_MarketServer_TestMarketServer - 2018.12.01 at 14h 26m 29s.xml">
       <configuration name="Unittests for test_MarketServer.TestMarketServer" configurationId="tests" />
     </history-entry>
@@ -787,6 +885,12 @@
     <history-entry file="Unittests_for_test_MarketServer_TestMarketServer - 2018.12.01 at 17h 13m 35s.xml">
       <configuration name="Unittests for test_MarketServer.TestMarketServer" configurationId="tests" />
     </history-entry>
+    <history-entry file="Unittests_for_test_MarketServer_TestMarketServer - 2018.12.03 at 20h 42m 40s.xml">
+      <configuration name="Unittests for test_MarketServer.TestMarketServer" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_MarketServer_TestMarketServer - 2018.12.03 at 21h 01m 27s.xml">
+      <configuration name="Unittests for test_MarketServer.TestMarketServer" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -798,35 +902,37 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4753577" visible="true" weight="0.22031474" />
-      <window_info id="Structure" order="1" sideWeight="0.5246423" side_tool="true" visible="true" weight="0.22031474" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4711934" visible="true" weight="0.22527473" />
+      <window_info id="Structure" order="1" sideWeight="0.52880657" side_tool="true" visible="true" weight="0.22527473" />
       <window_info id="Favorites" order="2" sideWeight="0.50385606" side_tool="true" weight="0.19170243" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49713877" weight="0.32686982" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.54363376" visible="true" weight="0.24216868" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.54273504" weight="0.24183674" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.66809726" weight="0.46024096" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49499285" weight="0.32409972" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.45636624" side_tool="true" visible="true" weight="0.24216868" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.503663" side_tool="true" visible="true" weight="0.5040816" />
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49642345" weight="0.19806094" />
       <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.61731046" weight="0.32409972" />
       <window_info anchor="bottom" id="Database Console" order="10" sideWeight="0.4620887" weight="0.20498616" />
       <window_info anchor="bottom" id="Database Changes" order="11" sideWeight="0.49213162" weight="0.32409638" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="13" sideWeight="0.4971061" weight="0.32720104" />
-      <window_info anchor="bottom" id="Python Console" order="14" sideWeight="0.49713877" weight="0.5048193" />
+      <window_info anchor="bottom" id="Python Console" order="14" sideWeight="0.496337" visible="true" weight="0.5040816" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Database" order="3" sideWeight="0.48883048" visible="true" weight="0.20386267" />
+      <window_info anchor="right" id="Database" order="3" sideWeight="0.48883048" visible="true" weight="0.2032967" />
       <window_info anchor="right" id="Coverage" order="4" side_tool="true" />
       <window_info anchor="right" id="SciView" order="5" sideWeight="0.48357424" weight="0.23819743" />
       <window_info anchor="right" id="Data View" order="6" weight="0.32861736" />
       <window_info anchor="right" x="0" y="0" width="353" height="713" id="Documentation" order="7" sideWeight="0.5111695" side_tool="true" weight="0.3363344" />
+      <window_info anchor="right" id="R Graphics" order="8" />
+      <window_info anchor="right" id="R Packages" order="9" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1047,7 +1153,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="das://0081da3a-247b-48bb-8254-694dee847ca4/database/blocparty/schema/public/table/cacheBook" />
     <entry file="das://0081da3a-247b-48bb-8254-694dee847ca4/database/blocparty/schema/public/table/marketBounds" />
     <entry file="das://0081da3a-247b-48bb-8254-694dee847ca4/database/blocparty/schema/public/table/tradeState" />
     <entry file="das://0081da3a-247b-48bb-8254-694dee847ca4/database/blocparty/schema/public/table/userTable" />
@@ -1059,9 +1164,7 @@
     <entry file="das://77c479ec-f70b-4b60-8170-41eaf858608e/schema/main/table/cachebook" />
     <entry file="das://77c479ec-f70b-4b60-8170-41eaf858608e/schema/main/table/usertable" />
     <entry file="das://77c479ec-f70b-4b60-8170-41eaf858608e/schema/main/table/marketbounds" />
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/40749f87-b5cc-44ab-91e5-7d9f7ca94b16/console.sql">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/40749f87-b5cc-44ab-91e5-7d9f7ca94b16/console.sql" />
     <entry file="das://40d88e03-d2aa-41cb-acb9-dad48c0038c2/schema/main/table/sqlite_master">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -1109,24 +1212,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/__init__.py" />
     <entry file="file://$PROJECT_DIR$/MarketClient.py" />
-    <entry file="file://$PROJECT_DIR$/../python-getting-started/gettingstarted/wsgi.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../python-getting-started/manage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../python-getting-started/gettingstarted/wsgi.py" />
+    <entry file="file://$PROJECT_DIR$/../python-getting-started/manage.py" />
     <entry file="file://$PROJECT_DIR$/MarketServer.py" />
-    <entry file="file://$PROJECT_DIR$/../python-getting-started/hello/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="40" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../python-getting-started/hello/views.py" />
     <entry file="file://$PROJECT_DIR$/setup.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -1135,19 +1224,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bloc/api.py" />
-    <entry file="file://$PROJECT_DIR$/bloc/MarketClient.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
-          <caret line="6" column="19" selection-start-line="5" selection-start-column="20" selection-end-line="6" selection-end-column="19" />
-          <folding>
-            <element signature="e#1#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testfile.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/testfile.txt" />
     <entry file="file://$PROJECT_DIR$/tests/test_MarketClient.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -1183,13 +1260,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wsgi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/wsgi.py" />
     <entry file="file:///Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/platform.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
@@ -1211,40 +1282,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="44" column="19" selection-start-line="44" selection-start-column="19" selection-end-line="44" selection-end-column="19" />
-          <folding>
-            <element signature="e#1367#1408#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/pandas/io/sql.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="141">
           <caret line="231" selection-start-line="231" selection-end-line="231" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bloc/MarketServer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="330" selection-start-line="330" selection-end-line="330" />
-          <folding>
-            <element signature="e#15#33#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/orderBook">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-          <column-attributes>
-            <column name="ctid" enabled="false" />
-          </column-attributes>
         </state>
       </provider>
     </entry>
@@ -1268,15 +1309,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/marketTable">
+    <entry file="das://40d88e03-d2aa-41cb-acb9-dad48c0038c2/schema/main/table/orderbook">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
-          <column-attributes>
-            <column name="ctid" enabled="false" />
-          </column-attributes>
         </state>
       </provider>
+    </entry>
+    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/marketBounds">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_MarketServer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/437ce884-981b-4f8b-a6fa-f3974513a7dc/console.sql">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/cacheBook">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
@@ -1288,10 +1346,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://40d88e03-d2aa-41cb-acb9-dad48c0038c2/schema/main/table/orderbook">
+    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/orderBook">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
+          <column-attributes>
+            <column name="ctid" enabled="false" />
+          </column-attributes>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/marketTable">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+          <column-attributes>
+            <column name="ctid" enabled="false" />
+          </column-attributes>
         </state>
       </provider>
     </entry>
@@ -1305,20 +1376,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/marketBounds">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-          <column-attributes>
-            <column name="ctid" enabled="false" />
-          </column-attributes>
+    <entry file="file://$PROJECT_DIR$/bloc/MarketServer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="53">
+          <caret line="41" column="7" selection-start-line="41" selection-start-column="7" selection-end-line="41" selection-end-column="7" />
+          <folding>
+            <element signature="e#15#33#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_MarketServer.py">
+    <entry file="file://$PROJECT_DIR$/api.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="445">
-          <caret line="70" column="30" lean-forward="true" selection-start-line="70" selection-start-column="30" selection-end-line="70" selection-end-column="30" />
+        <state relative-caret-position="180">
+          <caret line="44" column="19" selection-start-line="44" selection-start-column="19" selection-end-line="44" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bloc/MarketClient.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-902">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+          <folding>
+            <element signature="e#1#20#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
