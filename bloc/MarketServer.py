@@ -3,7 +3,7 @@ import numpy as np
 import numpy.matlib as npm
 import pandas as pd
 from sqlalchemy import create_engine, Table, Column, Integer, String, Float, \
-    LargeBinary, BLOB, MetaData, update
+    LargeBinary, BLOB, MetaData, update, ForeignKey
 import os, platform
 
 # Crypto imports
@@ -52,39 +52,40 @@ class MarketServer(object):
             # Use local postgres if on mac
             DATABASE_URL = "postgresql://alpine:3141592@localhost/blocparty"
         else:
-            # Use DATABASE_URL from env
+            # Use DATABASE_URL from env otherwise
             DATABASE_URL = os.environ['DATABASE_URL']
 
         self.engine = create_engine(DATABASE_URL, isolation_level="AUTOCOMMIT")
         self.engine.echo = False
         self.metadata = MetaData(self.engine)
         self.userTable = Table('userTable', self.metadata,
-                               Column('traderId', Integer),
+                               Column('traderId', Integer, primary_key=True),
                                Column('verifyKey', String),
                                )
         # Order book for all trades, including including order book,
         # matched, and linked trades (offsets, partials, etc)
         self.orderBook = Table('orderBook', self.metadata,
-                               Column('tradeRootId', Integer),
-                               Column('tradeBranchId', Integer),
+                               Column('tradeRootId', Integer, primary_key=True),
+                               Column('tradeBranchId', Integer, primary_key=True),
                                Column('price', Float),
                                Column('quantity', Float),
-                               Column('marketRootId', Integer),
-                               Column('marketBranchId', Integer),
-                               Column('traderId', Integer),
+                               Column('marketRootId', Integer, ForeignKey("marketTable.marketRootId")),
+                               Column('marketBranchId', Integer, ForeignKey("marketTable.marketBranchId")),
+                               Column('traderId', Integer, ForeignKey("userTable.traderId")),
                                Column('previousSig', LargeBinary),
                                Column('signatureMsg', LargeBinary),
                                Column('signature', LargeBinary),
                                )
+
         # Cache order book (trades can be promoted to the order book)
         self.cacheBook = Table('cacheBook', self.metadata,
-                               Column('tradeRootId', Integer),
-                               Column('tradeBranchId', Integer),
+                               Column('tradeRootId', Integer, ForeignKey("orderBook.tradeRootId")),
+                               Column('tradeBranchId', Integer, ForeignKey("orderBook.tradeBranchId")),
                                Column('price', Float),
                                Column('quantity', Float),
-                               Column('marketRootId', Integer),
-                               Column('marketBranchId', Integer),
-                               Column('traderId', Integer),
+                               Column('marketRootId', Integer, ForeignKey("marketTable.marketRootId")),
+                               Column('marketBranchId', Integer, ForeignKey("marketTable.marketBranchId")),
+                               Column('traderId', Integer, ForeignKey("userTable.traderId")),
                                Column('previousSig', LargeBinary),
                                Column('signatureMsg', LargeBinary),
                                Column('signature', LargeBinary),
@@ -92,41 +93,44 @@ class MarketServer(object):
 
         # Market table with minimum and maximum of each market.
         self.marketTable = Table('marketTable', self.metadata,
-                                 Column('marketRootId', Integer),
-                                 Column('marketBranchId', Integer),
+                                 Column('marketRootId', Integer, primary_key=True),
+                                 Column('marketBranchId', Integer, primary_key=True),
                                  Column('marketMin', Float),
                                  Column('marketMax', Float),
-                                 Column('traderId', Integer),
+                                 Column('traderId', Integer, ForeignKey("userTable.traderId")),
                                  Column('previousSig', LargeBinary),
                                  Column('signatureMsg', LargeBinary),
                                  Column('signature', LargeBinary),
                                  )
+
         # Market state (possible combinationss)
         self.outcomeCombinations = Table('outcomeCombinations', self.metadata,
-                                         Column('outcomeId', Integer),
-                                         Column('marketRootId', Integer),
-                                         Column('marketBranchId', Integer),
+                                         Column('outcomeId', Integer, primary_key=True),
+                                         Column('marketRootId', Integer, ForeignKey("marketTable.marketRootId")),
+                                         Column('marketBranchId', Integer, ForeignKey("marketTable.marketBranchId")),
                                          Column('marketMin', Float),
                                          Column('marketMax', Float),
                                          )
+
         # Possible combinations of root market outcomes
         self.marketBounds = Table('marketBounds', self.metadata,
-                                  Column('marketRootId', Integer),
-                                  Column('marketBranchId', Integer),
+                                  Column('marketRootId', Integer, ForeignKey("marketTable.marketRootId")),
+                                  Column('marketBranchId', Integer, ForeignKey("marketTable.marketBranchId")),
                                   Column('marketMin', Float),
                                   Column('marketMax', Float),
                                   )
-        # Numpy array with market outcomes in each state (used for collateral calculations)
-        self.marketOutcomes = np.array
+
         # Trade state
         self.tradeState = Table('tradeState', self.metadata,
-                                Column('tradeRootId', Integer),
-                                Column('tradeBranchId', Integer),
+                                Column('tradeRootId', Integer, ForeignKey("orderBook.tradeRootId")),
+                                Column('tradeBranchId', Integer, ForeignKey("orderBook.tradeBranchId")),
                                 Column('isOpen', Integer),
                                 Column('isOffset', Integer),
                                 Column('isMatched', Integer)
                                 )
 
+        # Numpy array with market outcomes in each state (used for collateral calculations)
+        self.marketOutcomes = np.array
         # Collateral limit for each trader
         self.COLLATERAL_LIMIT = -2
 
@@ -263,7 +267,7 @@ class MarketServer(object):
             # Check that trader owns it
             ownerChk = matchCurrentMarket.loc[0, 'traderId_x'] == matchCurrentMarket.loc[0, 'traderId_y']
 
-            # Verify market signature is valid
+        # Verify market signature is valid
         sigChk = self.verifyMarketSignature(newMarket)
         # Convert sigChk to logical
         if isinstance(sigChk, bytes):
@@ -364,7 +368,7 @@ class MarketServer(object):
         #  Check quantity is -1 or 1
         validTradeQuantityChk = all(np.in1d(pTrades.loc[0, 'quantity'], [-1, 1]))
 
-        # Check that market exists in marketTable
+        # Check that market root/branch combination exists in marketTable
         if ((pTrades.loc[0, 'marketRootId'] == mT['marketRootId']) & \
             (pTrades.loc[0, 'marketBranchId'] == mT['marketBranchId'])).any():
             validMarketChk = True
@@ -466,7 +470,7 @@ class MarketServer(object):
         :return: previousTrade: (DataFrame) row of previous valid trade
 
         """
-        oB = pd.read_sql_table('orderBook', self.conn)
+        oB = pd.read_sql_table("orderBook", self.conn)
 
         if not oB.empty:
             maxTrade = oB[oB['tradeRootId'] == np.max(oB['tradeRootId'])]
@@ -502,8 +506,10 @@ class MarketServer(object):
             # Dummy market if marketTable is empty
             previousMarket = pd.DataFrame({'marketRootId': [0], 'signature': ['s'.encode('utf-8')]})
         else:
-            # previousMarket
-            previousMarket = mT.iloc[-1].to_frame().transpose()
+            # previousMarket is max branch on max root
+            maxMarketRoot = mT.loc[mT.marketRootId == np.max(mT.marketRootId)]
+            maxMarketBranch = maxMarketRoot.loc[maxMarketRoot.marketBranchId == np.max(maxMarketRoot.marketBranchId)]
+            previousMarket = maxMarketBranch.iloc[0].to_frame().transpose()
             #     todo: more elegant way to get the last market
 
         return previousMarket.reset_index(drop=True)
@@ -547,7 +553,7 @@ class MarketServer(object):
         # Save indicators to tradeStateTable
         tradeState = oB.loc[:, ['tradeRootId', 'tradeBranchId', 'isOpen', 'isOffset', 'isMatched']]
         # Keep track of trade state in sql table
-        tradeState.to_sql('tradeState', self.conn, if_exists='replace')
+        tradeState.to_sql('tradeState', self.conn, if_exists='replace', index=False)
 
     def updateOutcomeCombinations(self):
         """Update outcome combinations taking into account mins/maxes on
@@ -571,14 +577,13 @@ class MarketServer(object):
         # Construct outcome combinations in root markets
         oC = self.constructOutcomeCombinations(rootMarkets)
         oC = oC.reset_index(drop=True)
-        oC.to_sql('outcomeCombinations', self.conn, if_exists='replace')
+        oC.to_sql('outcomeCombinations', self.conn, if_exists='replace', index=False)
         # Construct market bounds in all markets
         mB = self.constructMarketBounds(mT)
-        marketFields = ['marketRootId', 'marketBranchId', 'marketMin',
-                        'marketMax']
+        marketFields = ['marketRootId', 'marketBranchId', 'marketMin', 'marketMax']
         mB = mB.loc[:, marketFields].reset_index(drop=True)
         # Full replace of market bounds
-        mB.to_sql('marketBounds', self.conn, if_exists='replace')
+        mB.to_sql('marketBounds', self.conn, if_exists='replace', index=False)
 
         numMarkets = len(mB)
         numStates = oC.loc[:, 'outcomeId'].max() + 1

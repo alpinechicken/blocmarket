@@ -191,7 +191,7 @@ class TestMarketServer(unittest.TestCase):
         #   offset ALL trades in market one to free up collateral.
 
         # Five matched orders in market 2
-        for iTrade in range(5):
+        for iTrade in range(50):
             # Trader 1 bid at 0.5
             tradeRow = pd.DataFrame({'marketRootId': [2],
                                      'marketBranchId': [1],

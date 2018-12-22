@@ -84,8 +84,8 @@
       <ObjectId>2200</ObjectId>
       <Comment>standard public schema</Comment>
       <Owner>postgres</Owner>
-      <IntrospectionTimestamp>2018-12-03.21:03:19.867</IntrospectionTimestamp>
-      <IntrospectionStateNumber>3878</IntrospectionStateNumber>
+      <IntrospectionTimestamp>2018-12-09.15:23:04.922</IntrospectionTimestamp>
+      <IntrospectionStateNumber>85901</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -136,196 +136,325 @@
       <Owner>alpine</Owner>
       <StateNumber>560</StateNumber>
     </table>
-    <table id="24" parent="16" name="marketTable">
+    <table id="24" parent="16" name="marketBounds">
+      <ObjectId>25738</ObjectId>
+      <Owner>alpine</Owner>
+      <StateNumber>85900</StateNumber>
+    </table>
+    <table id="25" parent="16" name="marketTable">
       <ObjectId>16404</ObjectId>
       <Owner>alpine</Owner>
       <StateNumber>561</StateNumber>
     </table>
-    <table id="25" parent="16" name="orderBook">
+    <table id="26" parent="16" name="orderBook">
       <ObjectId>16392</ObjectId>
       <Owner>alpine</Owner>
       <StateNumber>559</StateNumber>
     </table>
-    <table id="26" parent="16" name="userTable">
+    <table id="27" parent="16" name="outcomeCombinations">
+      <ObjectId>25734</ObjectId>
+      <Owner>alpine</Owner>
+      <StateNumber>85737</StateNumber>
+    </table>
+    <table id="28" parent="16" name="tradeState">
+      <ObjectId>25578</ObjectId>
+      <Owner>alpine</Owner>
+      <StateNumber>85331</StateNumber>
+    </table>
+    <table id="29" parent="16" name="userTable">
       <ObjectId>16386</ObjectId>
       <Owner>alpine</Owner>
       <StateNumber>558</StateNumber>
     </table>
-    <column id="27" parent="23" name="tradeRootId">
+    <column id="30" parent="23" name="tradeRootId">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>560</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="28" parent="23" name="tradeBranchId">
+    <column id="31" parent="23" name="tradeBranchId">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>560</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="29" parent="23" name="price">
+    <column id="32" parent="23" name="price">
       <Position>3</Position>
       <DataType>double precision|0s</DataType>
       <StateNumber>560</StateNumber>
       <TypeId>701</TypeId>
     </column>
-    <column id="30" parent="23" name="quantity">
+    <column id="33" parent="23" name="quantity">
       <Position>4</Position>
       <DataType>double precision|0s</DataType>
       <StateNumber>560</StateNumber>
       <TypeId>701</TypeId>
     </column>
-    <column id="31" parent="23" name="marketRootId">
+    <column id="34" parent="23" name="marketRootId">
       <Position>5</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>560</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="32" parent="23" name="marketBranchId">
+    <column id="35" parent="23" name="marketBranchId">
       <Position>6</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>560</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="33" parent="23" name="traderId">
+    <column id="36" parent="23" name="traderId">
       <Position>7</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>560</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="34" parent="23" name="previousSig">
+    <column id="37" parent="23" name="previousSig">
       <Position>8</Position>
       <DataType>bytea|0s</DataType>
       <StateNumber>560</StateNumber>
       <TypeId>17</TypeId>
     </column>
-    <column id="35" parent="23" name="signatureMsg">
+    <column id="38" parent="23" name="signatureMsg">
       <Position>9</Position>
       <DataType>bytea|0s</DataType>
       <StateNumber>560</StateNumber>
       <TypeId>17</TypeId>
     </column>
-    <column id="36" parent="23" name="signature">
+    <column id="39" parent="23" name="signature">
       <Position>10</Position>
       <DataType>bytea|0s</DataType>
       <StateNumber>560</StateNumber>
       <TypeId>17</TypeId>
     </column>
-    <column id="37" parent="24" name="marketRootId">
+    <column id="40" parent="24" name="index">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <StateNumber>85900</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="41" parent="24" name="marketRootId">
+      <Position>2</Position>
+      <DataType>bigint|0s</DataType>
+      <StateNumber>85900</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="42" parent="24" name="marketBranchId">
+      <Position>3</Position>
+      <DataType>bigint|0s</DataType>
+      <StateNumber>85900</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="43" parent="24" name="marketMin">
+      <Position>4</Position>
+      <DataType>double precision|0s</DataType>
+      <StateNumber>85900</StateNumber>
+      <TypeId>701</TypeId>
+    </column>
+    <column id="44" parent="24" name="marketMax">
+      <Position>5</Position>
+      <DataType>double precision|0s</DataType>
+      <StateNumber>85900</StateNumber>
+      <TypeId>701</TypeId>
+    </column>
+    <index id="45" parent="24" name="ix_marketBounds_index">
+      <ObjectId>25741</ObjectId>
+      <ColNames>index</ColNames>
+    </index>
+    <column id="46" parent="25" name="marketRootId">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>561</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="38" parent="24" name="marketBranchId">
+    <column id="47" parent="25" name="marketBranchId">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>561</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="39" parent="24" name="marketMin">
+    <column id="48" parent="25" name="marketMin">
       <Position>3</Position>
       <DataType>double precision|0s</DataType>
       <StateNumber>561</StateNumber>
       <TypeId>701</TypeId>
     </column>
-    <column id="40" parent="24" name="marketMax">
+    <column id="49" parent="25" name="marketMax">
       <Position>4</Position>
       <DataType>double precision|0s</DataType>
       <StateNumber>561</StateNumber>
       <TypeId>701</TypeId>
     </column>
-    <column id="41" parent="24" name="traderId">
+    <column id="50" parent="25" name="traderId">
       <Position>5</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>561</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="42" parent="24" name="previousSig">
+    <column id="51" parent="25" name="previousSig">
       <Position>6</Position>
       <DataType>bytea|0s</DataType>
       <StateNumber>561</StateNumber>
       <TypeId>17</TypeId>
     </column>
-    <column id="43" parent="24" name="signatureMsg">
+    <column id="52" parent="25" name="signatureMsg">
       <Position>7</Position>
       <DataType>bytea|0s</DataType>
       <StateNumber>561</StateNumber>
       <TypeId>17</TypeId>
     </column>
-    <column id="44" parent="24" name="signature">
+    <column id="53" parent="25" name="signature">
       <Position>8</Position>
       <DataType>bytea|0s</DataType>
       <StateNumber>561</StateNumber>
       <TypeId>17</TypeId>
     </column>
-    <column id="45" parent="25" name="tradeRootId">
+    <column id="54" parent="26" name="tradeRootId">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>559</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="46" parent="25" name="tradeBranchId">
+    <column id="55" parent="26" name="tradeBranchId">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>559</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="47" parent="25" name="price">
+    <column id="56" parent="26" name="price">
       <Position>3</Position>
       <DataType>double precision|0s</DataType>
       <StateNumber>559</StateNumber>
       <TypeId>701</TypeId>
     </column>
-    <column id="48" parent="25" name="quantity">
+    <column id="57" parent="26" name="quantity">
       <Position>4</Position>
       <DataType>double precision|0s</DataType>
       <StateNumber>559</StateNumber>
       <TypeId>701</TypeId>
     </column>
-    <column id="49" parent="25" name="marketRootId">
+    <column id="58" parent="26" name="marketRootId">
       <Position>5</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>559</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="50" parent="25" name="marketBranchId">
+    <column id="59" parent="26" name="marketBranchId">
       <Position>6</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>559</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="51" parent="25" name="traderId">
+    <column id="60" parent="26" name="traderId">
       <Position>7</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>559</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="52" parent="25" name="previousSig">
+    <column id="61" parent="26" name="previousSig">
       <Position>8</Position>
       <DataType>bytea|0s</DataType>
       <StateNumber>559</StateNumber>
       <TypeId>17</TypeId>
     </column>
-    <column id="53" parent="25" name="signatureMsg">
+    <column id="62" parent="26" name="signatureMsg">
       <Position>9</Position>
       <DataType>bytea|0s</DataType>
       <StateNumber>559</StateNumber>
       <TypeId>17</TypeId>
     </column>
-    <column id="54" parent="25" name="signature">
+    <column id="63" parent="26" name="signature">
       <Position>10</Position>
       <DataType>bytea|0s</DataType>
       <StateNumber>559</StateNumber>
       <TypeId>17</TypeId>
     </column>
-    <column id="55" parent="26" name="traderId">
+    <column id="64" parent="27" name="index">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <StateNumber>85737</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="65" parent="27" name="marketRootId">
+      <Position>2</Position>
+      <DataType>bigint|0s</DataType>
+      <StateNumber>85737</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="66" parent="27" name="marketBranchId">
+      <Position>3</Position>
+      <DataType>bigint|0s</DataType>
+      <StateNumber>85737</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="67" parent="27" name="marketMin">
+      <Position>4</Position>
+      <DataType>double precision|0s</DataType>
+      <StateNumber>85737</StateNumber>
+      <TypeId>701</TypeId>
+    </column>
+    <column id="68" parent="27" name="marketMax">
+      <Position>5</Position>
+      <DataType>double precision|0s</DataType>
+      <StateNumber>85737</StateNumber>
+      <TypeId>701</TypeId>
+    </column>
+    <column id="69" parent="27" name="outcomeId">
+      <Position>6</Position>
+      <DataType>bigint|0s</DataType>
+      <StateNumber>85737</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <index id="70" parent="27" name="ix_outcomeCombinations_index">
+      <ObjectId>25737</ObjectId>
+      <ColNames>index</ColNames>
+    </index>
+    <column id="71" parent="28" name="index">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <StateNumber>85331</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="72" parent="28" name="tradeRootId">
+      <Position>2</Position>
+      <DataType>bigint|0s</DataType>
+      <StateNumber>85331</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="73" parent="28" name="tradeBranchId">
+      <Position>3</Position>
+      <DataType>bigint|0s</DataType>
+      <StateNumber>85331</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="74" parent="28" name="isOpen">
+      <Position>4</Position>
+      <DataType>boolean|0s</DataType>
+      <StateNumber>85331</StateNumber>
+      <TypeId>16</TypeId>
+    </column>
+    <column id="75" parent="28" name="isOffset">
+      <Position>5</Position>
+      <DataType>boolean|0s</DataType>
+      <StateNumber>85331</StateNumber>
+      <TypeId>16</TypeId>
+    </column>
+    <column id="76" parent="28" name="isMatched">
+      <Position>6</Position>
+      <DataType>boolean|0s</DataType>
+      <StateNumber>85331</StateNumber>
+      <TypeId>16</TypeId>
+    </column>
+    <index id="77" parent="28" name="ix_tradeState_index">
+      <ObjectId>25581</ObjectId>
+      <ColNames>index</ColNames>
+    </index>
+    <column id="78" parent="29" name="traderId">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>558</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="56" parent="26" name="verifyKey">
+    <column id="79" parent="29" name="verifyKey">
       <Position>2</Position>
       <DataType>varchar|0s</DataType>
       <StateNumber>558</StateNumber>
