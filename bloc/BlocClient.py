@@ -238,4 +238,6 @@ tradeRow = pd.DataFrame({'marketId': [1],
                          'price': [0.5],
                          'quantity': [1],
                          'traderId': [1]})
-bc.createTrade_client(tradeRow=tradeRow, blocServer=bs)
+res = bc.createTrade_client(tradeRow=tradeRow, blocServer=bs)
+
+1

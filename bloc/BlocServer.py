@@ -283,6 +283,8 @@ class BlocServer(object):
 
         .. todo: Example
         """
+        # This creates the self.marketOutcomes array
+        self.updateOutcomeCombinations()
 
         # Check signature is right
         previousSigChk = previousSig == bytes(self.getPreviousOrder()['signature'][0])
