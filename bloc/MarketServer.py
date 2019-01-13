@@ -65,13 +65,13 @@ class MarketServer(object):
         # Order book for all trades, including including order book,
         # matched, and linked trades (offsets, partials, etc)
         self.orderBook = Table('orderBook', self.metadata,
-                               Column('tradeRootId', Integer, primary_key=True),
-                               Column('tradeBranchId', Integer, primary_key=True),
+                               Column('tradeRootId', Integer),
+                               Column('tradeBranchId', Integer),
                                Column('price', Float),
                                Column('quantity', Float),
-                               Column('marketRootId', Integer, ForeignKey("marketTable.marketRootId")),
-                               Column('marketBranchId', Integer, ForeignKey("marketTable.marketBranchId")),
-                               Column('traderId', Integer, ForeignKey("userTable.traderId")),
+                               Column('marketRootId', Integer),
+                               Column('marketBranchId', Integer),
+                               Column('traderId', Integer),
                                Column('previousSig', LargeBinary),
                                Column('signatureMsg', LargeBinary),
                                Column('signature', LargeBinary),
@@ -79,13 +79,13 @@ class MarketServer(object):
 
         # Cache order book (trades can be promoted to the order book)
         self.cacheBook = Table('cacheBook', self.metadata,
-                               Column('tradeRootId', Integer, ForeignKey("orderBook.tradeRootId")),
-                               Column('tradeBranchId', Integer, ForeignKey("orderBook.tradeBranchId")),
+                               Column('tradeRootId', Integer),
+                               Column('tradeBranchId', Integer),
                                Column('price', Float),
                                Column('quantity', Float),
-                               Column('marketRootId', Integer, ForeignKey("marketTable.marketRootId")),
-                               Column('marketBranchId', Integer, ForeignKey("marketTable.marketBranchId")),
-                               Column('traderId', Integer, ForeignKey("userTable.traderId")),
+                               Column('marketRootId', Integer),
+                               Column('marketBranchId', Integer),
+                               Column('traderId', Integer),
                                Column('previousSig', LargeBinary),
                                Column('signatureMsg', LargeBinary),
                                Column('signature', LargeBinary),
@@ -93,11 +93,11 @@ class MarketServer(object):
 
         # Market table with minimum and maximum of each market.
         self.marketTable = Table('marketTable', self.metadata,
-                                 Column('marketRootId', Integer, primary_key=True),
-                                 Column('marketBranchId', Integer, primary_key=True),
+                                 Column('marketRootId', Integer),
+                                 Column('marketBranchId', Integer),
                                  Column('marketMin', Float),
                                  Column('marketMax', Float),
-                                 Column('traderId', Integer, ForeignKey("userTable.traderId")),
+                                 Column('traderId', Integer),
                                  Column('previousSig', LargeBinary),
                                  Column('signatureMsg', LargeBinary),
                                  Column('signature', LargeBinary),
@@ -106,24 +106,24 @@ class MarketServer(object):
         # Market state (possible combinationss)
         self.outcomeCombinations = Table('outcomeCombinations', self.metadata,
                                          Column('outcomeId', Integer, primary_key=True),
-                                         Column('marketRootId', Integer, ForeignKey("marketTable.marketRootId")),
-                                         Column('marketBranchId', Integer, ForeignKey("marketTable.marketBranchId")),
+                                         Column('marketRootId', Integer),
+                                         Column('marketBranchId', Integer),
                                          Column('marketMin', Float),
                                          Column('marketMax', Float),
                                          )
 
         # Possible combinations of root market outcomes
         self.marketBounds = Table('marketBounds', self.metadata,
-                                  Column('marketRootId', Integer, ForeignKey("marketTable.marketRootId")),
-                                  Column('marketBranchId', Integer, ForeignKey("marketTable.marketBranchId")),
+                                  Column('marketRootId', Integer),
+                                  Column('marketBranchId', Integer),
                                   Column('marketMin', Float),
                                   Column('marketMax', Float),
                                   )
 
         # Trade state
         self.tradeState = Table('tradeState', self.metadata,
-                                Column('tradeRootId', Integer, ForeignKey("orderBook.tradeRootId")),
-                                Column('tradeBranchId', Integer, ForeignKey("orderBook.tradeBranchId")),
+                                Column('tradeRootId', Integer),
+                                Column('tradeBranchId', Integer),
                                 Column('isOpen', Integer),
                                 Column('isOffset', Integer),
                                 Column('isMatched', Integer)

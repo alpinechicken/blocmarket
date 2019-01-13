@@ -7,11 +7,11 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/blocparty</jdbc-url>
     </data-source>
-    <data-source source="LOCAL" name="pmarket" uuid="40d88e03-d2aa-41cb-acb9-dad48c0038c2">
+    <data-source source="LOCAL" name="pmarket [2]" uuid="df1003dd-be15-4f8e-8000-774a3b7d481a">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/pmarket.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/tests/pmarket.db</jdbc-url>
       <driver-properties>
         <property name="enable_load_extension" value="true" />
       </driver-properties>

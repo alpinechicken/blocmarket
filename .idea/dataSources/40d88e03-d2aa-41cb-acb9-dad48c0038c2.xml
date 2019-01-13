@@ -83,7 +83,6 @@
     </column>
     <index id="29" parent="7" name="ix_marketBounds_index">
       <ColNames>index</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <column id="30" parent="8" name="marketRootId">
       <Position>1</Position>
@@ -183,7 +182,6 @@
     </column>
     <index id="54" parent="10" name="ix_outcomeCombinations_index">
       <ColNames>index</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <column id="55" parent="11" name="type">
       <Position>1</Position>
@@ -231,7 +229,6 @@
     </column>
     <index id="66" parent="12" name="ix_tradeState_index">
       <ColNames>index</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <check id="67" parent="12">
       <Predicate>&quot;isMatched&quot; IN (0, 1)</Predicate>

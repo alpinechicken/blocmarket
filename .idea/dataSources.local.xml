@@ -10,11 +10,9 @@
       <user-name>alpine</user-name>
       <introspection-schemas>@:@</introspection-schemas>
     </data-source>
-    <data-source name="pmarket" uuid="40d88e03-d2aa-41cb-acb9-dad48c0038c2">
-      <database-info product="SQLite" version="3.20.1" jdbc-version="2.1" driver-name="SQLite JDBC" driver-version="3.20.1.1" family="SQLITE" exact-version="3.20.1" />
-      <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
+    <data-source name="pmarket [2]" uuid="df1003dd-be15-4f8e-8000-774a3b7d481a">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" family="SQLITE" exact-version="0.0" />
       <auth-required>false</auth-required>
-      <introspection-schemas>*:@</introspection-schemas>
     </data-source>
   </component>
 </project>
