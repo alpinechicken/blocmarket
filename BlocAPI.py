@@ -63,6 +63,7 @@ def createUser():
     bc.generateSignatureKeys()
     newUsr = bc.createUser_client(blocServer=bs)
     bs.conn.close()
+    bs.engine.dispose()
     return jsonify({'traderId': str(newUsr['traderId']),
                     'verifyKey_hex': newUsr['verifyKey'],
                     'signingKey_hex': bc.signingKey_hex})
@@ -86,6 +87,7 @@ def createMarket():
         checks = 'ProbablyASignatureError'
 
     bs.conn.close()
+    bs.engine.dispose()
     return jsonify({'checks': str(checks),
                     'marketRootId': data['marketRootId'],
                     'marketBranchId': data['marketBranchId'],
@@ -114,6 +116,7 @@ def createTrade():
 
         
     bs.conn.close()
+    bs.engine.dispose()
     return jsonify({'checks': str(checks),
                     'marketId': data['marketId'],
                     'price': data['price'],
@@ -127,6 +130,7 @@ def viewMarkets():
     bs = BlocServer()
     mB = pd.read_sql_table('marketBounds', bs.conn)
     bs.conn.close()
+    bs.engine.dispose()
     return jsonify(mB.loc[:,['marketId', 'marketRootId', 'marketBranchId', 'marketMin', 'marketMax']].to_json())
 
 # View order book
@@ -137,6 +141,7 @@ def viewOrderBook():
     oB = pd.read_sql_table('orderBook', bs.conn)
     oB = oB[np.logical_not( oB['iRemoved'])]
     bs.conn.close()
+    bs.engine.dispose()
     return jsonify(oB.loc[:,['marketId', 'price', 'quantity', 'traderId', 'iMatched']].to_json())
 
 
@@ -153,6 +158,7 @@ def viewOpenTrades():
     # Sum orders s
     openTrades_sum = openTrades.groupby(['marketId', 'price', 'traderId'], as_index=False).agg({"quantity": "sum"})
     bs.conn.close()
+    bs.engine.dispose()
     return jsonify(openTrades_sum.loc[:,['marketId', 'price', 'quantity', 'traderId']].to_json())
 
 # View order book
@@ -167,6 +173,7 @@ def viewMatchedTrades():
     # Sum orders s
     matchedTrades_sum = matchedTrades.groupby(['marketId', 'price', 'traderId'], as_index=False).agg({"quantity": "sum"})
     bs.conn.close()
+    bs.engine.dispose()
     return jsonify(matchedTrades_sum.loc[:, ['marketId', 'price', 'quantity', 'traderId']].to_json())
 
 
