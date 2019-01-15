@@ -127,7 +127,7 @@ def viewMarkets():
     bs = BlocServer()
     mB = pd.read_sql_table('marketBounds', bs.conn)
     bs.conn.close()
-    return jsonify(mB.loc[:,['marketRootId', 'marketBranchId', 'marketMin', 'marketMax']].to_json())
+    return jsonify(mB.loc[:,['marketId', 'marketRootId', 'marketBranchId', 'marketMin', 'marketMax']].to_json())
 
 # View order book
 @application.route('/viewOrderBook', methods=['POST'])
@@ -135,8 +135,9 @@ def viewOrderBook():
     # Return order book
     bs = BlocServer()
     oB = pd.read_sql_table('orderBook', bs.conn)
+    oB = oB[np.logical_not( oB['iRemoved'])]
     bs.conn.close()
-    return jsonify(oB.loc[:,['marketRootId', 'marketBranchId', 'price', 'quantity', 'traderId']].to_json())
+    return jsonify(oB.loc[:,['marketId', 'price', 'quantity', 'traderId', 'iMatched']].to_json())
 
 
 # View order book
@@ -147,7 +148,7 @@ def viewOpenTrades():
     oB = pd.read_sql_table('orderBook', bs.conn)
 
     # Open trades
-    openTrades = oB[np.logical_not(oB['iMatched'])]
+    openTrades = oB[np.logical_not(oB['iMatched'] & np.logical_not(oB['iRemoved']))]
 
     # Sum orders s
     openTrades_sum = openTrades.groupby(['marketId', 'price', 'traderId'], as_index=False).agg({"quantity": "sum"})
@@ -162,10 +163,10 @@ def viewMatchedTrades():
     oB = pd.read_sql_table('orderBook', bs.conn)
 
     # Open trades
-    openTrades = oB[np.logical_not(oB['iMatched'])]
+    matchedTrades = oB[oB['iMatched']]
     # Sum orders s
-    openTrades_sum = openTrades.groupby(['marketId', 'price', 'traderId'], as_index=False).agg({"quantity": "sum"})
+    matchedTrades_sum = matchedTrades.groupby(['marketId', 'price', 'traderId'], as_index=False).agg({"quantity": "sum"})
     bs.conn.close()
-    return jsonify(openTrades_sum.loc[:, ['marketRootId', 'marketBranchId', 'price', 'quantity', 'traderId']].to_json())
+    return jsonify(matchedTrades_sum.loc[:, ['marketId', 'price', 'quantity', 'traderId']].to_json())
 
 

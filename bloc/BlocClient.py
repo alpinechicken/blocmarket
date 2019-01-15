@@ -216,7 +216,7 @@ class BlocClient(object):
                                 verifyKey=self.verifyKey_hex)
         return checks
 
-
+"""
 from bloc.BlocServer import BlocServer
 from bloc.BlocClient import BlocClient
 
@@ -240,4 +240,4 @@ tradeRow = pd.DataFrame({'marketId': [1],
                          'traderId': [1]})
 res = bc.createTrade_client(tradeRow=tradeRow, blocServer=bs)
 
-1
+"""

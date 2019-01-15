@@ -47,8 +47,8 @@ class BlocServer(object):
                                Column('tradeId', Integer, primary_key=True, autoincrement=True),
                                Column('price', Float),
                                Column('quantity', Float),
-                               Column('marketRootId', Integer),
-                               Column('marketBranchId', Integer),
+                               #Column('marketRootId', Integer),
+                               #Column('marketBranchId', Integer),
                                Column('marketId', Integer),
                                Column('traderId', Integer,),
                                Column('signature', LargeBinary),
@@ -69,6 +69,7 @@ class BlocServer(object):
 
         # Possible combinations of root market outcomes
         self.marketBounds = Table('marketBounds', self.metadata,
+                                  Column('marketBounds', Integer),
                                   Column('marketRootId', Integer),
                                   Column('marketBranchId', Integer),
                                   Column('marketMin', Float),
@@ -286,6 +287,10 @@ class BlocServer(object):
         # This creates the self.marketOutcomes array
         self.updateOutcomeCombinations()
 
+        # Check if market exists
+        marketIds = pd.read_sql('select distinct "marketId" from "marketBounds"', self.conn)["marketId"]
+        marketChk = np.any(mInd_ == marketIds)
+
         # Check signature is right
         previousSigChk = previousSig == bytes(self.getPreviousOrder()['signature'][0])
         # Check signature for trade (Created in client)
@@ -302,13 +307,11 @@ class BlocServer(object):
             sigChk = True
 
         colChk = False
-        if sigChk & previousSigChk:
+        if marketChk & sigChk & previousSigChk:
             colChk = self.checkCollateral(p_, q_, mInd_, tInd_)
             if colChk:
                 newTrade = pd.DataFrame({ 'price': [p_],
                                           'quantity': [q_],
-                                          'marketRootId': [mInd_],
-                                          'marketBranchId': [mInd_],
                                           'marketId': [mInd_],
                                           'traderId': [tInd_],
                                           'signature': signature,
@@ -445,7 +448,7 @@ class BlocServer(object):
         oC.to_sql('outcomeCombinations', self.conn, if_exists='replace', index=False)
         # Construct market bounds in all markets
         mB = self.constructMarketBounds(mT)
-        marketFields = ['marketRootId', 'marketBranchId', 'marketMin', 'marketMax']
+        marketFields = ['marketId','marketRootId', 'marketBranchId', 'marketMin', 'marketMax']
         mB = mB.loc[:, marketFields].reset_index(drop=True)
         # Full replace of market bounds
         mB.to_sql('marketBounds', self.conn, if_exists='replace', index=False)
@@ -522,7 +525,7 @@ class BlocServer(object):
         numMarkets = len(marketCombinations[0])
 
         # Get unique markets
-        mT = marketTable.loc[:, ['marketRootId', 'marketBranchId']].drop_duplicates().reset_index(drop=True)
+        mT = marketTable.loc[:, ['marketId','marketRootId', 'marketBranchId']].drop_duplicates().reset_index(drop=True)
 
         marketIds = mT.loc[:, 'marketRootId']
         mT.loc[:, 'marketMin'] = np.nan
@@ -554,7 +557,7 @@ class BlocServer(object):
         # Pull market table
         mT = pd.read_sql_table('marketTable', self.conn)
 
-        mT = mT.loc[:, ['marketRootId', 'marketBranchId']].drop_duplicates().reset_index(drop=True)
+        mT = mT.loc[:, ['marketId','marketRootId', 'marketBranchId']].drop_duplicates().reset_index(drop=True)
         mT['marketMin'] = np.nan
         mT['marketMax'] = np.nan
 
@@ -584,7 +587,7 @@ class BlocServer(object):
             mT.loc[iMarket, 'marketMax'] = U_[-1][0]
 
         # Take what we need back
-        marketBounds = mT.loc[:, ['marketRootId', 'marketBranchId',
+        marketBounds = mT.loc[:, ['marketId', 'marketRootId', 'marketBranchId',
                                   'marketMin', 'marketMax']]
 
         return marketBounds.reset_index(drop=True)
