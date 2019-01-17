@@ -4,6 +4,7 @@ import numpy.matlib as npm
 import pandas as pd
 from sqlalchemy import create_engine, Table, Column, Integer, Boolean, String, Float, \
     LargeBinary, BLOB, MetaData, update, ForeignKey
+from sqlalchemy.pool import NullPool
 import os, platform
 
 # Crypto imports
@@ -34,7 +35,7 @@ class BlocServer(object):
             # Use DATABASE_URL from env otherwise
             DATABASE_URL = os.environ['DATABASE_URL']
 
-        self.engine = create_engine(DATABASE_URL, isolation_level="AUTOCOMMIT")
+        self.engine = create_engine(DATABASE_URL, isolation_level="AUTOCOMMIT", poolclass=NullPool)
         self.engine.echo = False
         self.metadata = MetaData(self.engine)
         self.userTable = Table('userTable', self.metadata,
