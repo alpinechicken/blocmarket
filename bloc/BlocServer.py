@@ -3,9 +3,10 @@ import numpy as np
 import numpy.matlib as npm
 import pandas as pd
 from sqlalchemy import create_engine, Table, Column, Integer, Boolean, String, Float, \
-    LargeBinary, BLOB, MetaData, update, ForeignKey
+    LargeBinary, BLOB, TIMESTAMP, MetaData, update, ForeignKey
 from sqlalchemy.pool import NullPool
 import os, platform
+import datetime
 
 # Crypto imports
 import nacl.encoding
@@ -55,6 +56,7 @@ class BlocServer(object):
                                Column('signature', LargeBinary),
                                Column('iMatched', Boolean),
                                Column('iRemoved', Boolean),
+                               Column('timeStampUTC', TIMESTAMP),
                                )
 
         # Market table with minimum and maximum of each market.
@@ -66,6 +68,7 @@ class BlocServer(object):
                                  Column('marketMax', Float),
                                  Column('traderId', Integer),
                                  Column('signature', LargeBinary),
+                                 Column('timeStampUTC', TIMESTAMP),
                                  )
 
         # Possible combinations of root market outcomes
@@ -85,6 +88,7 @@ class BlocServer(object):
                                          Column('marketMin', Float),
                                          Column('marketMax', Float),
                                          )
+
 
         # Create all tables
         self.metadata.create_all(self.engine)
@@ -258,6 +262,7 @@ class BlocServer(object):
 
             #  Add market to table if checks pass
             if checks:
+                newMarket['timeStampUTC'] = datetime.datetime.utcnow()
                 newMarket.to_sql(name='marketTable', con=self.conn, if_exists='append', index=False)
                 # Update all possible combinations of root markets
                 self.updateOutcomeCombinations()
@@ -319,6 +324,7 @@ class BlocServer(object):
                                           'iMatched': [False],
                                           'iRemoved': [False]})
                 # Append new trade
+                newTrade['timeStampUTC'] = datetime.datetime.utcnow()
                 newTrade.to_sql(name='orderBook', con=self.conn, if_exists='append', index=False)
                 # Check for matches
                 data = pd.read_sql_query(
@@ -747,28 +753,6 @@ class BlocServer(object):
 
 
 """
-b = BlocServer()
-
-b.createUser('vk1')
-b.createUser('vk2')
-
-b.createMarket(marketRootId=1, marketBranchId=1, marketMin=0, marketMax= 1, traderId=1, previousSig=b'sig', signature=b'sig', verifyKey='vk1' )
-b.createMarket(2, 1, 0.0, 1, 2, b'sig',b'sig', 'vk2' )
-
-
-
-b.createTrade(p_=0.5, q_=1, mInd_=1, tInd_=1, previousSig=b'sig', signature=b'sig', verifyKey='vk1')
-b.createTrade(0.4, 2, 2, 1,b'sig', b'sig', 'vk1')
-b.createTrade(0.9,-1, 1, 2,b'sig', b'sig', 'vk2')
-
-
-# createMarket(self, marketRootId, marketBranchId, marketMin, marketMax, traderId, signature, verifyKey)
-
-for i in range(5):
-    b.createTrade(0.5, 1, 1, 2, b'sig', b'sig', 'vk2')
-    b.createTrade(0.5, 1, 1, 1, b'sig',b'sig', 'vk1')
-    b.createTrade(0.5, -1, 1, 2,b'sig', b'sig', 'vk2')
-
 
 a=1
 # TODO

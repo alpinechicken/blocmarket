@@ -142,7 +142,7 @@ def viewOrderBook():
     oB = oB[np.logical_not( oB['iRemoved'])]
     bs.conn.close()
      
-    return jsonify(oB.loc[:,['marketId', 'price', 'quantity', 'traderId', 'iMatched']].to_json())
+    return jsonify(oB.loc[:,['marketId', 'price', 'quantity', 'traderId', 'iMatched', 'timeStampUTC']].to_json())
 
 
 # View order book
@@ -155,11 +155,9 @@ def viewOpenTrades():
     # Open trades
     openTrades = oB[np.logical_not(oB['iMatched'] & np.logical_not(oB['iRemoved']))]
 
-    # Sum orders s
-    openTrades_sum = openTrades.groupby(['marketId', 'price', 'traderId'], as_index=False).agg({"quantity": "sum"})
     bs.conn.close()
      
-    return jsonify(openTrades_sum.loc[:,['marketId', 'price', 'quantity', 'traderId']].to_json())
+    return jsonify(openTrades.loc[:,['marketId', 'price', 'quantity', 'traderId', 'timeStampUTC']].to_json())
 
 # View order book
 @application.route('/viewMatchedTrades', methods=['POST'])
@@ -170,10 +168,10 @@ def viewMatchedTrades():
 
     # Open trades
     matchedTrades = oB[oB['iMatched']]
-    # Sum orders s
+    # Sum orders with same price by quantity
     matchedTrades_sum = matchedTrades.groupby(['marketId', 'price', 'traderId'], as_index=False).agg({"quantity": "sum"})
     bs.conn.close()
      
-    return jsonify(matchedTrades_sum.loc[:, ['marketId', 'price', 'quantity', 'traderId']].to_json())
+    return jsonify(matchedTrades_sum.loc[:, ['marketId', 'price', 'quantity', 'traderId', 'timeStampUTC']].to_json())
 
 

@@ -51,8 +51,7 @@ class TestBlocServer(unittest.TestCase):
                                   'marketMax': [1],
                                   'traderId': [int(self.trader0)]})
         self.bc1.createMarket_client(marketRow=marketRow, blocServer=self.bs)
-        mT = pd.read_sql_table('marketTable', self.bs.conn)
-        assert mT.shape[0] == 3
+        assert len(pd.read_sql_table('marketTable', self.bs.conn))==3
 
     def testOverwriteMarket(self):
 
@@ -63,8 +62,7 @@ class TestBlocServer(unittest.TestCase):
                                   'marketMax': [1],
                                   'traderId': [int(self.trader1)]})
         self.bc2.createMarket_client(marketRow=marketRow, blocServer=self.bs)
-        mT = pd.read_sql_table('marketTable', self.bs.conn)
-        assert mT.shape[0] == 3
+        assert len(pd.read_sql_table('marketTable', self.bs.conn)) == 3
 
     # BlocClient tests
     # @unittest.skipIf(False)
@@ -75,7 +73,7 @@ class TestBlocServer(unittest.TestCase):
                                  'price': [0.5],
                                  'quantity': [1],
                                  'traderId': [int(self.trader0)]})
-        a = self.bc1.tradeMaker(prevTrade=prevTrade, tradeRow=tradeRow).reset_index(drop=True)
+        a = self.bc1.tradeMaker(prevTrade=prevTrade, tradeRow=tradeRow)
         # Check trade signatures
         assert self.bc1.verifyMessage(a['signature'][0], a['signatureMsg'][0], self.bc1.verifyKey_hex)
         # Will error if verfication fails
@@ -134,7 +132,7 @@ class TestBlocServer(unittest.TestCase):
                                  'quantity': [-1],
                                  'traderId': [int(self.trader1)]})
         tradePackage = self.bc2.tradeMaker(prevTrade=prevTrade,
-                                           tradeRow=tradeRow).reset_index(drop=True)
+                                           tradeRow=tradeRow)
 
         colChk = self.bs.checkCollateral(tradePackage['price'][0], tradePackage['quantity'][0], tradePackage['marketId'][0], tradePackage['traderId'][0])
         assert colChk == True
@@ -170,17 +168,15 @@ class TestBlocServer(unittest.TestCase):
             self.bc2.createTrade_client(tradeRow=tradeRow, blocServer=self.bs)
 
         colChk = self.bs.checkCollateral(tInd_=1)
+        oB = pd.read_sql_table("orderBook", self.bs.conn)
+        assert len(oB) == 12
+        assert len(oB.loc[oB['iRemoved'],:])==4
+        assert len(oB.loc[oB['iMatched'], :]) == 8
         assert colChk == True
 
     def testManyTrades(self):
-        # Test trade removal:
-        # - Load up a bunch of open orders in market 1
-        # - Load up matched orders in market 2
-        # = Eventually the collateral limit is hit the market should try to
-        #   offset ALL trades in market one to free up collateral.
-
-        # Five matched orders in market 2
-        for iTrade in range(10):
+        # Add bunch of matched trades in market 2
+        for iTrade in range(3):
             # Trader 1 bid at 0.5
             tradeRow = pd.DataFrame({'marketId': [3],
                                      'price': [0.5],
@@ -211,6 +207,7 @@ class TestBlocServer(unittest.TestCase):
             self.bc1.createTrade_client(tradeRow=tradeRow,
                                         blocServer=self.bs)
         colChk =self.bs.checkCollateral(tInd_=1)
+        assert len(pd.read_sql_table("orderBook", self.bs.conn))==12
         assert colChk
 
     def testsMakeManyMarkets(self):

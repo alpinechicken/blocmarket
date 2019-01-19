@@ -84,7 +84,8 @@
       <ObjectId>2200</ObjectId>
       <Comment>standard public schema</Comment>
       <Owner>postgres</Owner>
-      <IntrospectionTimestamp>2019-01-14.21:06:19.673</IntrospectionTimestamp>
+      <IntrospectionTimestamp>2019-01-19.17:40:19.429</IntrospectionTimestamp>
+      <IntrospectionStateNumber>822499</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -130,5 +131,256 @@
       <HandlerId>335</HandlerId>
       <Type>index</Type>
     </access-method>
+    <sequence id="23" parent="16" name="orderBook_tradeId_seq">
+      <ObjectId>62842</ObjectId>
+      <Owner>alpine</Owner>
+      <StateNumber>821409</StateNumber>
+      <SequenceIdentity>1..2147483647</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+      <DataType>integer</DataType>
+    </sequence>
+    <sequence id="24" parent="16" name="userTable_traderId_seq">
+      <ObjectId>62831</ObjectId>
+      <Owner>alpine</Owner>
+      <StateNumber>821408</StateNumber>
+      <SequenceIdentity>1..2147483647</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+      <DataType>integer</DataType>
+    </sequence>
+    <table id="25" parent="16" name="marketBounds">
+      <ObjectId>63221</ObjectId>
+      <Owner>alpine</Owner>
+      <StateNumber>822499</StateNumber>
+    </table>
+    <table id="26" parent="16" name="marketTable">
+      <ObjectId>62853</ObjectId>
+      <Owner>alpine</Owner>
+      <StateNumber>821410</StateNumber>
+    </table>
+    <table id="27" parent="16" name="orderBook">
+      <ObjectId>62844</ObjectId>
+      <Owner>alpine</Owner>
+      <StateNumber>821409</StateNumber>
+    </table>
+    <table id="28" parent="16" name="outcomeCombinations">
+      <ObjectId>63218</ObjectId>
+      <Owner>alpine</Owner>
+      <StateNumber>822337</StateNumber>
+    </table>
+    <table id="29" parent="16" name="userTable">
+      <ObjectId>62833</ObjectId>
+      <Owner>alpine</Owner>
+      <StateNumber>821408</StateNumber>
+    </table>
+    <column id="30" parent="25" name="marketId">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <StateNumber>822499</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="31" parent="25" name="marketRootId">
+      <Position>2</Position>
+      <DataType>bigint|0s</DataType>
+      <StateNumber>822499</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="32" parent="25" name="marketBranchId">
+      <Position>3</Position>
+      <DataType>bigint|0s</DataType>
+      <StateNumber>822499</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="33" parent="25" name="marketMin">
+      <Position>4</Position>
+      <DataType>double precision|0s</DataType>
+      <StateNumber>822499</StateNumber>
+      <TypeId>701</TypeId>
+    </column>
+    <column id="34" parent="25" name="marketMax">
+      <Position>5</Position>
+      <DataType>double precision|0s</DataType>
+      <StateNumber>822499</StateNumber>
+      <TypeId>701</TypeId>
+    </column>
+    <column id="35" parent="26" name="marketRootId">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>821410</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="36" parent="26" name="marketBranchId">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>821410</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="37" parent="26" name="marketId">
+      <Position>3</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>821410</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="38" parent="26" name="marketMin">
+      <Position>4</Position>
+      <DataType>double precision|0s</DataType>
+      <StateNumber>821410</StateNumber>
+      <TypeId>701</TypeId>
+    </column>
+    <column id="39" parent="26" name="marketMax">
+      <Position>5</Position>
+      <DataType>double precision|0s</DataType>
+      <StateNumber>821410</StateNumber>
+      <TypeId>701</TypeId>
+    </column>
+    <column id="40" parent="26" name="traderId">
+      <Position>6</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>821410</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="41" parent="26" name="signature">
+      <Position>7</Position>
+      <DataType>bytea|0s</DataType>
+      <StateNumber>821410</StateNumber>
+      <TypeId>17</TypeId>
+    </column>
+    <column id="42" parent="26" name="timeStampUTC">
+      <Position>8</Position>
+      <DataType>timestamp|0s</DataType>
+      <StateNumber>821410</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="43" parent="27" name="tradeId">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>821409</StateNumber>
+      <DefaultExpression>nextval(&apos;&quot;orderBook_tradeId_seq&quot;&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+      <SequenceName>orderBook_tradeId_seq</SequenceName>
+    </column>
+    <column id="44" parent="27" name="price">
+      <Position>2</Position>
+      <DataType>double precision|0s</DataType>
+      <StateNumber>821409</StateNumber>
+      <TypeId>701</TypeId>
+    </column>
+    <column id="45" parent="27" name="quantity">
+      <Position>3</Position>
+      <DataType>double precision|0s</DataType>
+      <StateNumber>821409</StateNumber>
+      <TypeId>701</TypeId>
+    </column>
+    <column id="46" parent="27" name="marketId">
+      <Position>4</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>821409</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="47" parent="27" name="traderId">
+      <Position>5</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>821409</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="48" parent="27" name="signature">
+      <Position>6</Position>
+      <DataType>bytea|0s</DataType>
+      <StateNumber>821409</StateNumber>
+      <TypeId>17</TypeId>
+    </column>
+    <column id="49" parent="27" name="iMatched">
+      <Position>7</Position>
+      <DataType>boolean|0s</DataType>
+      <StateNumber>821409</StateNumber>
+      <TypeId>16</TypeId>
+    </column>
+    <column id="50" parent="27" name="iRemoved">
+      <Position>8</Position>
+      <DataType>boolean|0s</DataType>
+      <StateNumber>821409</StateNumber>
+      <TypeId>16</TypeId>
+    </column>
+    <column id="51" parent="27" name="timeStampUTC">
+      <Position>9</Position>
+      <DataType>timestamp|0s</DataType>
+      <StateNumber>821409</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <index id="52" parent="27" name="orderBook_pkey">
+      <ObjectId>62851</ObjectId>
+      <ColNames>tradeId</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="53" parent="27" name="orderBook_pkey">
+      <ObjectId>62852</ObjectId>
+      <ColNames>tradeId</ColNames>
+      <UnderlyingIndexName>orderBook_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="54" parent="28" name="marketId">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <StateNumber>822337</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="55" parent="28" name="marketRootId">
+      <Position>2</Position>
+      <DataType>bigint|0s</DataType>
+      <StateNumber>822337</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="56" parent="28" name="marketBranchId">
+      <Position>3</Position>
+      <DataType>bigint|0s</DataType>
+      <StateNumber>822337</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="57" parent="28" name="marketMin">
+      <Position>4</Position>
+      <DataType>double precision|0s</DataType>
+      <StateNumber>822337</StateNumber>
+      <TypeId>701</TypeId>
+    </column>
+    <column id="58" parent="28" name="marketMax">
+      <Position>5</Position>
+      <DataType>double precision|0s</DataType>
+      <StateNumber>822337</StateNumber>
+      <TypeId>701</TypeId>
+    </column>
+    <column id="59" parent="28" name="outcomeId">
+      <Position>6</Position>
+      <DataType>bigint|0s</DataType>
+      <StateNumber>822337</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="60" parent="29" name="traderId">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>821408</StateNumber>
+      <DefaultExpression>nextval(&apos;&quot;userTable_traderId_seq&quot;&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+      <SequenceName>userTable_traderId_seq</SequenceName>
+    </column>
+    <column id="61" parent="29" name="verifyKey">
+      <Position>2</Position>
+      <DataType>varchar|0s</DataType>
+      <StateNumber>821408</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="62" parent="29" name="userTable_pkey">
+      <ObjectId>62840</ObjectId>
+      <ColNames>traderId</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="63" parent="29" name="userTable_pkey">
+      <ObjectId>62841</ObjectId>
+      <ColNames>traderId</ColNames>
+      <UnderlyingIndexName>userTable_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
   </database-model>
 </dataSource>
