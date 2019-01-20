@@ -340,7 +340,7 @@ class BlocServer(object):
 
         colChk = False
         if marketChk & sigChk & previousSigChk:
-            colChk = self.checkCollateral(p_, q_, mInd_, tInd_)
+            colChk, deets = self.checkCollateral(p_, q_, mInd_, tInd_)
             if colChk:
                 # Append new trade
                 ts = self.TimeServer.signedUTCNow()
@@ -367,7 +367,7 @@ class BlocServer(object):
             # Clean up trades causing collateral to fail
             allClear = False
             while not allClear:
-                colChk = self.checkCollateral(tInd_ = tInd_)
+                colChk, deets = self.checkCollateral(tInd_ = tInd_)
                 if colChk:
                     allClear = True
                 else:
@@ -378,6 +378,25 @@ class BlocServer(object):
     # Collateral check
 
     def checkCollateral(self, p_=[], q_=[], mInd_ = [], tInd_=None):
+        """Check collateral for new trade.
+
+        :param p_: price
+        :param q_: quantity
+        :param mInd_: market index
+        :param tInd_: trader index
+
+
+        :Example:
+
+
+               Example::
+               ms = MarketServer()
+               ... set up trade users/markets
+               ms = ms.updateOutcomeCombinations
+
+               """
+
+
         # Check collateral for new trade.
         #
         # p_, q_, mInd_, tInd_ - New trade
@@ -444,20 +463,23 @@ class BlocServer(object):
             TC = np.sum(NCstar_matched, axis=1) + np.min(NCstar_unmatched, axis=1)
 
 
-        colChk = np.all(TC + self.COLLATERAL_LIMIT >= 0)
+        worstCollateral =  TC + self.COLLATERAL_LIMIT
 
+        colChk = np.all(worstCollateral>= 0)
+
+        collateralDetails = dict(price = self.p, quantity = self.q, traderId = self.tInd, marketId = self.mInd, iMatched = self.iMatched, outcomes=NCstar, worstCollateral = worstCollateral)
         '''
         The collateral condition can be calculated simultaneously across all traders in one step by
         taking each column D columns of the second term as the minimum unmatched collateral for all 
         trades for each trader. 
         '''
 
-        return colChk
+        return colChk, collateralDetails
 
 
     # Function group:
     # updateOutcomeCombinations
-    # updateBoudns
+    # updateBounds
 
     def updateOutcomeCombinations(self):
         """Update outcome combinations taking into account mins/maxes on

@@ -13,6 +13,7 @@ class TestBlocServer(unittest.TestCase):
         cls.bc2 = BlocClient()
         cls.bs = BlocServer()
         cls.bs.purgeTables()
+        cls.bs.COLLATERAL_LIMIT = 2
         # Pull user table to ensure is empty
         tmpUserTable = pd.read_sql_table('userTable', cls.bs.conn)
         # Generate signature keys for two traders
@@ -134,7 +135,8 @@ class TestBlocServer(unittest.TestCase):
         tradePackage = self.bc2.tradeMaker(prevTrade=prevTrade,
                                            tradeRow=tradeRow)
 
-        colChk = self.bs.checkCollateral(tradePackage['price'][0], tradePackage['quantity'][0], tradePackage['marketId'][0], tradePackage['traderId'][0])
+
+        colChk, details = self.bs.checkCollateral(tradePackage['price'][0], tradePackage['quantity'][0], tradePackage['marketId'][0], tradePackage['traderId'][0])
         assert colChk == True
 
     def testRemoveTrade(self):
@@ -167,7 +169,7 @@ class TestBlocServer(unittest.TestCase):
                                      'traderId': [int(self.trader1)]})
             self.bc2.createTrade_client(tradeRow=tradeRow, blocServer=self.bs)
 
-        colChk = self.bs.checkCollateral(tInd_=1)
+        colChk, details = self.bs.checkCollateral(tInd_=1)
         oB = pd.read_sql_table("orderBook", self.bs.conn)
         assert len(oB) == 12
         assert len(oB.loc[oB['iRemoved'],:])==4

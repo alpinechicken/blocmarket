@@ -153,7 +153,7 @@ def viewOpenTrades():
     oB = pd.read_sql_table('orderBook', bs.conn)
 
     # Open trades
-    openTrades = oB[np.logical_not(oB['iMatched'] & np.logical_not(oB['iRemoved']))]
+    openTrades = oB[np.logical_not(oB['iMatched']) & np.logical_not(oB['iRemoved'])]
 
     bs.conn.close()
      
@@ -175,3 +175,23 @@ def viewMatchedTrades():
     return jsonify(matchedTrades_sum.loc[:, ['marketId', 'price', 'quantity', 'traderId']].to_json())
 
 
+# Trade summary
+
+@application.route('/viewTradeSummary', methods=['POST'])
+def viewTradeSummary():
+
+    data = request.get_json()
+    traderId = data['traderId']
+    bs = BlocServer()
+    #ps = pd.read_sql_query('SELECT "price", "quantity", "traderId", "isMatched", "timeStampUTC", "marketId", "marketRootId", "marketBranchId", "marketMin", "marketMax" FROM "orderBook" INNER JOIN "marketTable" ON "orderBook.marketId" WHERE "traderId" = %s' % (str(traderId)), bs.conn)
+    oB = pd.read_sql_table('orderBook', bs.conn)
+    mT = pd.read_sql_table('marketBounds', bs.conn)
+
+    tradeSummary = oB[np.logical_and(np.logical_not(oB['iRemoved']),oB['traderId'] == traderId)]
+
+    posSummary = pd.merge(tradeSummary.loc[:,['marketId', 'price', 'quantity', 'traderId', 'iMatched', 'timeStampUTC']], mT.loc[:, ['marketId', 'marketMin', 'marketMax']], on='marketId', how='left')
+
+    posSummary['marketMinOutcome'] = (posSummary['marketMin'] - posSummary['price'])*posSummary['quantity']
+    posSummary['marketMaxOutcome'] = (posSummary['marketMax'] - posSummary['price'])*posSummary['quantity']
+
+    return jsonify(posSummary.to_json())
