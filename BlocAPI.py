@@ -172,6 +172,6 @@ def viewMatchedTrades():
     matchedTrades_sum = matchedTrades.groupby(['marketId', 'price', 'traderId'], as_index=False).agg({"quantity": "sum"})
     bs.conn.close()
      
-    return jsonify(matchedTrades_sum.loc[:, ['marketId', 'price', 'quantity', 'traderId', 'timeStampUTC']].to_json())
+    return jsonify(matchedTrades_sum.loc[:, ['marketId', 'price', 'quantity', 'traderId']].to_json())
 
 

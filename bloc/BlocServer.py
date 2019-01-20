@@ -8,13 +8,15 @@ from sqlalchemy.pool import NullPool
 import os, platform
 import datetime
 
+# Time server
+from bloc.BlocTime import BlocTime
+
 # Crypto imports
 import nacl.encoding
 import nacl.signing
 
 # Other imports
 import itertools
-
 
 
 
@@ -39,8 +41,14 @@ class BlocServer(object):
         self.engine = create_engine(DATABASE_URL, isolation_level="AUTOCOMMIT", poolclass=NullPool)
         self.engine.echo = False
         self.metadata = MetaData(self.engine)
+        # Users
         self.userTable = Table('userTable', self.metadata,
                                Column('traderId', Integer, primary_key=True),
+                               Column('verifyKey', String),
+                               )
+        # Timestamp servers for signing UTC timestamps
+        self.timeStampServerTable = Table('timeStampServerTable', self.metadata,
+                               Column('tssId', Integer, primary_key=True, autoincrement=True),
                                Column('verifyKey', String),
                                )
         # Order book for all trades, including including order book,
@@ -49,14 +57,14 @@ class BlocServer(object):
                                Column('tradeId', Integer, primary_key=True, autoincrement=True),
                                Column('price', Float),
                                Column('quantity', Float),
-                               #Column('marketRootId', Integer),
-                               #Column('marketBranchId', Integer),
                                Column('marketId', Integer),
                                Column('traderId', Integer,),
+                               Column('previousSig', LargeBinary),
                                Column('signature', LargeBinary),
                                Column('iMatched', Boolean),
                                Column('iRemoved', Boolean),
                                Column('timeStampUTC', TIMESTAMP),
+                               Column('timeStampUTCSignature', LargeBinary),
                                )
 
         # Market table with minimum and maximum of each market.
@@ -67,8 +75,10 @@ class BlocServer(object):
                                  Column('marketMin', Float),
                                  Column('marketMax', Float),
                                  Column('traderId', Integer),
+                                 Column('previousSig', LargeBinary),
                                  Column('signature', LargeBinary),
                                  Column('timeStampUTC', TIMESTAMP),
+                                 Column('timeStampUTCSignature', LargeBinary),
                                  )
 
         # Possible combinations of root market outcomes
@@ -105,6 +115,17 @@ class BlocServer(object):
         self.tInd = np.array([0])
         self.iMatched = np.array([False])
         self.sig = np.array([0])
+
+        # Time server
+        self.TimeServer = BlocTime()
+        # Register time series server
+        ts = self.TimeServer.signedUTCNow()
+        tssTable = pd.read_sql_query('SELECT * FROM "timeStampServerTable" WHERE "verifyKey" = \'%s\'' % (ts['verifyKey']), self.conn)
+        if tssTable.empty:
+            newTSS = dict(verifyKey=ts['verifyKey'])
+            # Insert to timeStampServerTable (autoincrements tssID)
+            self.conn.execute(self.timeStampServerTable.insert(), [newTSS, ])
+
 
     def purgeTables(self):
         """ Purge all tables before starting a test. """
@@ -214,6 +235,8 @@ class BlocServer(object):
             else:
                 marketId = marketId[0]
 
+            # Sign current UTC timestamp
+            ts = self.TimeServer.signedUTCNow()
 
             newMarket = pd.DataFrame({'marketId': [marketId],
                                        'marketRootId': [marketRootId],
@@ -221,7 +244,10 @@ class BlocServer(object):
                                        'marketMin': [marketMin],
                                        'marketMax': [marketMax],
                                        'traderId': [traderId],
-                                       'signature': signature})
+                                       'previousSig': previousSig,
+                                       'signature': signature,
+                                       'timeStampUTC': ts['timeStampUTC'],
+                                       'timeStampUTCSignature': ts['timeStampUTCSignature']})
 
             # Check signature chain for market
             chainChk = False
@@ -262,7 +288,7 @@ class BlocServer(object):
 
             #  Add market to table if checks pass
             if checks:
-                newMarket['timeStampUTC'] = datetime.datetime.utcnow()
+                # Append new market
                 newMarket.to_sql(name='marketTable', con=self.conn, if_exists='append', index=False)
                 # Update all possible combinations of root markets
                 self.updateOutcomeCombinations()
@@ -316,15 +342,18 @@ class BlocServer(object):
         if marketChk & sigChk & previousSigChk:
             colChk = self.checkCollateral(p_, q_, mInd_, tInd_)
             if colChk:
+                # Append new trade
+                ts = self.TimeServer.signedUTCNow()
                 newTrade = pd.DataFrame({ 'price': [p_],
                                           'quantity': [q_],
                                           'marketId': [mInd_],
                                           'traderId': [tInd_],
+                                          'previousSig': previousSig,
                                           'signature': signature,
                                           'iMatched': [False],
-                                          'iRemoved': [False]})
-                # Append new trade
-                newTrade['timeStampUTC'] = datetime.datetime.utcnow()
+                                          'iRemoved': [False],
+                                          'timeStampUTC': ts['timeStampUTC'],
+                                          'timeStampUTCSignature': ts['timeStampUTCSignature']})
                 newTrade.to_sql(name='orderBook', con=self.conn, if_exists='append', index=False)
                 # Check for matches
                 data = pd.read_sql_query(
