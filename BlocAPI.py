@@ -41,6 +41,7 @@
 from flask import Flask, request, jsonify
 from bloc.BlocServer import BlocServer
 from bloc.BlocClient import BlocClient
+from bloc.BlocTime import BlocTime
 import json
 import numpy as np
 import pandas as pd
@@ -195,3 +196,17 @@ def viewTradeSummary():
     posSummary['marketMaxOutcome'] = (posSummary['marketMax'] - posSummary['price'])*posSummary['quantity']
 
     return jsonify(posSummary.to_json())
+
+
+# Local time server
+@application.route('/getSignedUTCTimestamp')
+def getSignedUTCTimestamp():
+    # Get a signed timestamp
+    bt = BlocTime()
+    signedUTCNow = bt.signedUTCNow()
+
+    tsOutput = {'timeStampUTC': str(signedUTCNow['timeStampUTC']),
+                             'timeStampUTCSignature': str(signedUTCNow['timeStampUTCSignature']),
+                             'verifyKey': signedUTCNow['verifyKey']}
+    return json.dumps(tsOutput)
+

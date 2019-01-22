@@ -31,6 +31,13 @@ class BlocTime(object):
         signed = signingKey.sign(msg)
         return signed
 
+    def verifyMessage(self, signature: bytes,
+                      signatureMsg: bytes,
+                      verifyKey_hex: str) -> object:
+        # Verify message
+        verifyKey = nacl.signing.VerifyKey(verifyKey_hex, encoder=nacl.encoding.HexEncoder)
+        verified = verifyKey.verify(signatureMsg, signature=signature)
+        return verified
 '''
 bt = BlocTime()
 z =bt.signedUTCNow()
