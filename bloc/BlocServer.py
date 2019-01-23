@@ -126,6 +126,9 @@ class BlocServer(object):
             # Insert to timeStampServerTable (autoincrements tssID)
             self.conn.execute(self.timeStampServerTable.insert(), [newTSS, ])
 
+        self.tssTable = pd.read_sql_query('SELECT * FROM "timeStampServerTable" WHERE "verifyKey" = \'%s\'' % (ts['verifyKey']), self.conn)
+
+
 
     def purgeTables(self):
         """ Purge all tables before starting a test. """
@@ -237,7 +240,14 @@ class BlocServer(object):
 
             # Sign current UTC timestamp
             ts = self.TimeServer.signedUTCNow()
-
+            maxTS = pd.read_sql_query('select max("timeStampUTC") from "marketTable"', self.conn)['max'][0]
+            if maxTS is None:
+                maxTS = datetime.datetime.strptime(ts['timeStampUTC'], '%Y-%m-%d %H:%M:%S.%f')
+            # Check time signature is valid and time server public key is registered and signature is newer than the recent maximum
+            timeChk = self.verifyMessage(signatureMsg=bytes(ts['timeStampUTC'], 'utf-8'),
+                                         signature=ts['timeStampUTCSignature'], verifyKey_hex=ts['verifyKey']) and\
+                                         np.any(ts['verifyKey']==self.tssTable['verifyKey']) and\
+                                         datetime.datetime.strptime(ts['timeStampUTC'], '%Y-%m-%d %H:%M:%S.%f')>= maxTS
             newMarket = pd.DataFrame({'marketId': [marketId],
                                        'marketRootId': [marketRootId],
                                        'marketBranchId': [marketBranchId],
@@ -281,10 +291,13 @@ class BlocServer(object):
             # Convert sigChk to logical
             if isinstance(sigChk, bytes):
                 sigChk = True
+            # Convert time signature check to logical
+            if isinstance(timeChk, bytes):
+                timeChk = True
             # Check market range
             marketRangeChk = newMarket.loc[0, 'marketMin'] <= newMarket.loc[0, 'marketMax']
             # Checks (correct market number, signature relative to parent, range)
-            checks = marketRangeChk and sigChk and chainChk and ownerChk
+            checks = marketRangeChk and sigChk and chainChk and ownerChk and timeChk
 
             #  Add market to table if checks pass
             if checks:
@@ -338,12 +351,29 @@ class BlocServer(object):
         if isinstance(sigChk, bytes):
             sigChk = True
 
+        # Sign current UTC timestamp
+        ts = self.TimeServer.signedUTCNow()
+        maxTS = pd.read_sql_query('select max("timeStampUTC") from "orderBook"', self.conn)['max'][0]
+        if maxTS is None:
+            maxTS = datetime.datetime.strptime(ts['timeStampUTC'], '%Y-%m-%d %H:%M:%S.%f')
+        # Check time signature is valid and time server public key is registered and signature is newer than the recent maximum
+        timeChk = self.verifyMessage(signatureMsg=bytes(ts['timeStampUTC'], 'utf-8'),
+                                     signature=ts['timeStampUTCSignature'], verifyKey_hex=ts['verifyKey']) and \
+                  np.any(ts['verifyKey'] == self.tssTable['verifyKey']) and \
+                  datetime.datetime.strptime(ts['timeStampUTC'], '%Y-%m-%d %H:%M:%S.%f') >= \
+                  maxTS
+
+        # Convert time signature check to logical
+        if isinstance(timeChk, bytes):
+            timeChk=True
+
         colChk = False
-        if marketChk & sigChk & previousSigChk:
+        if marketChk & sigChk & previousSigChk and timeChk:
             colChk, deets = self.checkCollateral(p_, q_, mInd_, tInd_)
             if colChk:
                 # Append new trade
-                ts = self.TimeServer.signedUTCNow()
+
+
                 newTrade = pd.DataFrame({ 'price': [p_],
                                           'quantity': [q_],
                                           'marketId': [mInd_],

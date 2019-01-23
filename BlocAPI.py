@@ -206,7 +206,7 @@ def getSignedUTCTimestamp():
     signedUTCNow = bt.signedUTCNow()
 
     tsOutput = {'timeStampUTC': str(signedUTCNow['timeStampUTC']),
-                             'timeStampUTCSignature': str(signedUTCNow['timeStampUTCSignature']),
+                             'timeStampUTCSignature': signedUTCNow['timeStampUTCSignature'],
                              'verifyKey': signedUTCNow['verifyKey']}
     return json.dumps(tsOutput)
 
