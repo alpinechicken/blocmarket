@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f748aadd-a74f-4691-aa32-65bb3faaf10c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/BlocAPI.py" beforeDir="false" afterPath="$PROJECT_DIR$/BlocAPI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloc/BlocServer.py" beforeDir="false" afterPath="$PROJECT_DIR$/bloc/BlocServer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/BlocAPI.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/doc/BlocAPI.ipynb" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -31,7 +31,7 @@
     <SUITE FILE_PATH="coverage/pmarket$BlocMarket.coverage" NAME="BlocMarket Coverage Results" MODIFIED="1547289022191" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bloc" />
     <SUITE FILE_PATH="coverage/pmarket$MarketClient.coverage" NAME="MarketClient Coverage Results" MODIFIED="1527907311959" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pmarket$bob.coverage" NAME="bob Coverage Results" MODIFIED="1528008925763" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/pmarket$Unittests_in_test_BlocServer_py.coverage" NAME="Unittests in test_BlocServer.py Coverage Results" MODIFIED="1548240134712" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/pmarket$Unittests_in_test_BlocServer_py.coverage" NAME="Unittests in test_BlocServer.py Coverage Results" MODIFIED="1548324586183" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/pmarket$sqltest2.coverage" NAME="sqltest2 Coverage Results" MODIFIED="1482555234549" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pmarket$BlocTime.coverage" NAME="BlocTime Coverage Results" MODIFIED="1548236041091" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bloc" />
     <SUITE FILE_PATH="coverage/pmarket$untitled.coverage" NAME="untitled Coverage Results" MODIFIED="1539865728573" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
@@ -227,7 +227,7 @@
           <entry key="BlocMarket" value="76" />
           <entry key="Procfile" value="8" />
           <entry key="Python Console" value="2789" />
-          <entry key="py" value="20493" />
+          <entry key="py" value="20578" />
           <entry key="sql" value="47" />
           <entry key="tmp" value="140" />
         </counts>
@@ -235,7 +235,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="8" />
-          <entry key="Python" value="23900" />
+          <entry key="Python" value="23985" />
           <entry key="SQL" value="47" />
         </counts>
       </usages-collector>
@@ -261,10 +261,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BlocAPI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="491">
+            <state relative-caret-position="1368">
               <caret line="212" lean-forward="true" selection-start-line="212" selection-end-line="212" />
               <folding>
                 <element signature="e#1367#1408#0" expanded="true" />
@@ -277,8 +277,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bloc/BlocClient.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="43" selection-start-line="43" selection-end-line="49" selection-end-column="23" />
+            <state relative-caret-position="615">
+              <caret line="41" column="21" lean-forward="true" selection-start-line="41" selection-start-column="21" selection-end-line="41" selection-end-column="21" />
               <folding>
                 <element signature="e#1#20#0" expanded="true" />
               </folding>
@@ -298,13 +298,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bloc/BlocServer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3735">
-              <caret line="249" column="113" selection-start-line="249" selection-start-column="113" selection-end-line="249" selection-end-column="113" />
+            <state relative-caret-position="338">
+              <caret line="511" lean-forward="true" selection-start-line="511" selection-end-line="511" />
               <folding>
                 <element signature="e#15#33#0" expanded="true" />
+                <marker date="1548324691552" expanded="true" signature="22166:22198" ph="..." />
               </folding>
             </state>
           </provider>
@@ -449,8 +450,8 @@
         <option value="$PROJECT_DIR$/Procfile" />
         <option value="$PROJECT_DIR$/tests/test_BlocServer.py" />
         <option value="$PROJECT_DIR$/bloc/BlocTime.py" />
-        <option value="$PROJECT_DIR$/bloc/BlocServer.py" />
         <option value="$PROJECT_DIR$/BlocAPI.py" />
+        <option value="$PROJECT_DIR$/bloc/BlocServer.py" />
       </list>
     </option>
   </component>
@@ -939,9 +940,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_in_test_BlocServer_py - 2019.01.23 at 20h 08m 12s.xml">
-      <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unittests_in_test_BlocServer_py - 2019.01.23 at 20h 09m 13s.xml">
       <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
     </history-entry>
@@ -969,6 +967,9 @@
     <history-entry file="Unittests_in_test_BlocServer_py - 2019.01.23 at 20h 42m 28s.xml">
       <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
     </history-entry>
+    <history-entry file="Unittests_in_test_BlocServer_py - 2019.01.24 at 20h 09m 46s.xml">
+      <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -988,7 +989,7 @@
       <window_info id="Favorites" order="2" sideWeight="0.50385606" side_tool="true" weight="0.19170243" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49713877" weight="0.32686982" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.53968257" weight="0.2597254" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.53968257" visible="true" weight="0.2597254" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.5910758" weight="0.49885583" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -1000,7 +1001,7 @@
       <window_info anchor="bottom" id="Database Changes" order="11" sideWeight="0.49213162" weight="0.322807" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="13" sideWeight="0.4971061" weight="0.32608697" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="14" sideWeight="0.4945055" visible="true" weight="0.2631579" />
+      <window_info anchor="bottom" id="Python Console" order="14" sideWeight="0.4945055" weight="0.2631579" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -1425,16 +1426,6 @@ maxTS</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_BlocServer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="127" selection-start-line="127" selection-end-line="127" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/timeStampServerTable">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -1452,16 +1443,6 @@ maxTS</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bloc/BlocServer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3735">
-          <caret line="249" column="113" selection-start-line="249" selection-start-column="113" selection-end-line="249" selection-end-column="113" />
-          <folding>
-            <element signature="e#15#33#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/bloc/BlocTime.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -1472,23 +1453,44 @@ maxTS</expression-string>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/BlocAPI.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1368">
+          <caret line="212" lean-forward="true" selection-start-line="212" selection-end-line="212" />
+          <folding>
+            <element signature="e#1367#1408#0" expanded="true" />
+            <marker date="1548241517323" expanded="true" signature="6199:6599" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/bloc/BlocClient.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="43" selection-start-line="43" selection-end-line="49" selection-end-column="23" />
+        <state relative-caret-position="615">
+          <caret line="41" column="21" lean-forward="true" selection-start-line="41" selection-start-column="21" selection-end-line="41" selection-end-column="21" />
           <folding>
             <element signature="e#1#20#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BlocAPI.py">
+    <entry file="file://$PROJECT_DIR$/tests/test_BlocServer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="491">
-          <caret line="212" lean-forward="true" selection-start-line="212" selection-end-line="212" />
+        <state relative-caret-position="283">
+          <caret line="127" selection-start-line="127" selection-end-line="127" />
           <folding>
-            <element signature="e#1367#1408#0" expanded="true" />
-            <marker date="1548241517323" expanded="true" signature="6199:6599" ph="..." />
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bloc/BlocServer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="511" lean-forward="true" selection-start-line="511" selection-end-line="511" />
+          <folding>
+            <element signature="e#15#33#0" expanded="true" />
+            <marker date="1548324691552" expanded="true" signature="22166:22198" ph="..." />
           </folding>
         </state>
       </provider>

@@ -407,7 +407,8 @@ class BlocServer(object):
 
     # Collateral check
 
-    def checkCollateral(self, p_=[], q_=[], mInd_ = [], tInd_=None):
+
+    def checkCollateral2(self, p_=[], q_=[], mInd_ = [], tInd_=None):
         """Check collateral for new trade.
 
         :param p_: price
@@ -506,6 +507,8 @@ class BlocServer(object):
 
         return colChk, collateralDetails
 
+    def checkCollateral(self, p_=[], q_=[], mInd_ = [], tInd_=None):
+        return True, True
 
     # Function group:
     # updateOutcomeCombinations
