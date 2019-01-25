@@ -171,14 +171,14 @@ class BlocClient(object):
          prevTrade = blocServer.getPreviousOrder()
          tradePackage = self.tradeMaker(prevTrade=prevTrade, tradeRow=tradeRow).reset_index(drop=True)
 
-         colChk = blocServer.createTrade(p_=tradePackage['price'][0],
+         colChk, allChecks = blocServer.createTrade(p_=tradePackage['price'][0],
                                          q_=tradePackage['quantity'][0],
                                          mInd_= tradePackage['marketId'][0],
                                          tInd_= tradePackage['traderId'][0],
                                          previousSig=tradePackage['previousSig'][0],
                                          signature=tradePackage['signature'][0],
                                          verifyKey=self.verifyKey_hex)
-         return colChk
+         return colChk, allChecks
 
     def createMarket_client(self, marketRow: object, blocServer=None):
         """
@@ -206,7 +206,7 @@ class BlocClient(object):
         prevMarket = blocServer.getPreviousMarket()
         testMarket = self.marketMaker(prevMarket, marketRow)
 
-        checks = blocServer.createMarket(marketRootId=testMarket['marketRootId'][0],
+        checks, allChecks = blocServer.createMarket(marketRootId=testMarket['marketRootId'][0],
                                 marketBranchId=testMarket['marketBranchId'][0],
                                 marketMin=testMarket['marketMin'][0],
                                 marketMax=testMarket['marketMax'][0],
@@ -214,7 +214,7 @@ class BlocClient(object):
                                 previousSig=testMarket['previousSig'][0],
                                 signature=testMarket['signature'][0],
                                 verifyKey=self.verifyKey_hex)
-        return checks
+        return checks, allChecks
 
 """
 from bloc.BlocServer import BlocServer

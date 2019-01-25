@@ -83,13 +83,13 @@ def createMarket():
     marketRow = pd.DataFrame(data, index=[0])[['marketRootId', 'marketBranchId','marketMin', 'marketMax','traderId']]
     # Call createMarket_client
     try:
-        checks = bc.createMarket_client(marketRow=marketRow, blocServer=bs)
+        checks, allChecks = bc.createMarket_client(marketRow=marketRow, blocServer=bs)
     except:
         checks = 'ProbablyASignatureError'
 
     bs.conn.close()
      
-    return jsonify({'checks': str(checks),
+    return jsonify({'checks': allChecks,
                     'marketRootId': data['marketRootId'],
                     'marketBranchId': data['marketBranchId'],
                     'marketMin': data['marketMin'],
@@ -110,7 +110,7 @@ def createTrade():
     tradeRow = pd.DataFrame(data, index=[0])[['marketId', 'price', 'quantity', 'traderId']]
     # Call createMarket_client
     try:
-        checks = bc.createTrade_client(tradeRow=tradeRow, blocServer=bs)
+        checks, allChecks = bc.createTrade_client(tradeRow=tradeRow, blocServer=bs)
     except Exception as err:
         checks = traceback.format_exc()
 

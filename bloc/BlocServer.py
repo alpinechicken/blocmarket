@@ -309,7 +309,9 @@ class BlocServer(object):
                 print('Signature does not match, bad signature chain, or else marketMin > marketMax. Market not added.')
 
             # Return True if checks pass and market added
-            return checks
+            return checks, {'marketRangeChk':marketRangeChk, 'sigChk': sigChk, 'chainChk':chainChk,\
+                            'ownerChk':ownerChk,  'timeChk': timeChk}
+
 
     def createTrade(self, p_, q_, mInd_, tInd_, previousSig, signature, verifyKey)->bool:
 
@@ -403,7 +405,8 @@ class BlocServer(object):
                 else:
                     self.killMarginalOpenTrade(tInd_)
 
-            return colChk
+            return colChk, {'marketChk':marketChk, 'sigChk': sigChk, 'previousSigChk':previousSigChk,
+                            'timeChk': timeChk, 'colChk':colChk}
 
     # Collateral check
 
