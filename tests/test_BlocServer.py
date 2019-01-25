@@ -98,7 +98,7 @@ class TestBlocServer(unittest.TestCase):
                                   'marketMin': [0],
                                   'marketMax': [0],
                                   'traderId': [int(self.trader0)]})
-        self.bc1.createMarket_client(marketRow=marketRow, blocServer=self.bs)
+        check, allChecks = self.bc1.createMarket_client(marketRow=marketRow, blocServer=self.bs)
         marketBounds = pd.read_sql_table('marketBounds', self.bs.conn)
         assert (marketBounds[['marketRootId', 'marketBranchId', 'marketMin', 'marketMax']].values == [[1, 1, 0, 0],
                                                                                                       [1, 2, 0.1, 0.1],
@@ -123,7 +123,7 @@ class TestBlocServer(unittest.TestCase):
                                  'quantity': [-1],
                                  'traderId': [int(self.trader1)]})
 
-        self.bc2.createTrade_client(tradeRow=tradeRow, blocServer=self.bs)
+        check, allChecks  =self.bc2.createTrade_client(tradeRow=tradeRow, blocServer=self.bs)
         oB = pd.read_sql_table('orderBook', self.bs.conn)
         assert oB.shape[0] == 3
 

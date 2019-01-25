@@ -232,12 +232,12 @@ marketRow = pd.DataFrame({'marketRootId': [1],
                               'marketMin': [0],
                               'marketMax': [0],
                               'traderId': [1]})
-bc.createMarket_client(marketRow=marketRow, blocServer = bs)
+check, allChecks = bc.createMarket_client(marketRow=marketRow, blocServer = bs)
 
 tradeRow = pd.DataFrame({'marketId': [1],
                          'price': [0.5],
                          'quantity': [1],
                          'traderId': [1]})
-res = bc.createTrade_client(tradeRow=tradeRow, blocServer=bs)
-
+check, allChecks = bc.createTrade_client(tradeRow=tradeRow, blocServer=bs)
+a=1
 """
