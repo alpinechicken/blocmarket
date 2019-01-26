@@ -332,7 +332,7 @@ class BlocServer(object):
         .. todo: Example
         """
         # This creates the self.marketOutcomes array
-        self.updateOutcomeCombinations()
+        self.updateOutcomeCombinations(fromTrade=True)
 
         # Check if market exists
         marketIds = pd.read_sql('select distinct "marketId" from "marketBounds"', self.conn)["marketId"]
@@ -515,7 +515,7 @@ class BlocServer(object):
     # updateOutcomeCombinations
     # updateBounds
 
-    def updateOutcomeCombinations(self):
+    def updateOutcomeCombinations(self, fromTrade=False):
         """Update outcome combinations taking into account mins/maxes on
         branches.
 
@@ -530,36 +530,42 @@ class BlocServer(object):
         ms = ms.updateOutcomeCombinations
 
         """
+        if not fromTrade:
+            mT = pd.read_sql_table('marketTable', self.conn)
+            # Root markets have marketBranchId ==1
+            rootMarkets = mT.loc[mT['marketBranchId'] == 1, :].reset_index(drop=True)
+            # Construct outcome combinations in root markets
+            oC = self.constructOutcomeCombinations(rootMarkets)
+            oC = oC.reset_index(drop=True)
+            oC.to_sql('outcomeCombinations', self.conn, if_exists='replace', index=False)
+            # Construct market bounds in all markets
+            mB = self.constructMarketBounds(mT)
+            marketFields = ['marketId','marketRootId', 'marketBranchId', 'marketMin', 'marketMax']
+            mB = mB.loc[:, marketFields].reset_index(drop=True)
+            # Full replace of market bounds
+            mB.to_sql('marketBounds', self.conn, if_exists='replace', index=False)
+        else:
+            mB = pd.read_sql_table('marketBounds', self.conn)
+            oC = pd.read_sql_table('outcomeCombinations', self.conn)
 
-        mT = pd.read_sql_table('marketTable', self.conn)
-        # Root markets have marketBranchId ==1
-        rootMarkets = mT.loc[mT['marketBranchId'] == 1, :].reset_index(drop=True)
-        # Construct outcome combinations in root markets
-        oC = self.constructOutcomeCombinations(rootMarkets)
-        oC = oC.reset_index(drop=True)
-        oC.to_sql('outcomeCombinations', self.conn, if_exists='replace', index=False)
-        # Construct market bounds in all markets
-        mB = self.constructMarketBounds(mT)
-        marketFields = ['marketId','marketRootId', 'marketBranchId', 'marketMin', 'marketMax']
-        mB = mB.loc[:, marketFields].reset_index(drop=True)
-        # Full replace of market bounds
-        mB.to_sql('marketBounds', self.conn, if_exists='replace', index=False)
 
         numMarkets = len(mB)
         numStates = oC.loc[:, 'outcomeId'].max() + 1
+
         # Preallocate market outcomes
         M = np.zeros((numStates, numMarkets))
-
-        for iOutcome in range(numStates):
-            # Get outcome for root market
-            outcomeRow = oC.loc[oC['outcomeId'] == iOutcome, :]
-            # Add outcome to market table
-            # todo: more elegant way to do this
-            allOutcome = mT.loc[:, marketFields].append(outcomeRow[marketFields], ignore_index=True)
-            # Construct new bounds given outcome
-            settleOutcome = self.constructMarketBounds(allOutcome)
-            # Markets settle at marketMin=marketMax so choose either
-            M[iOutcome,] = settleOutcome.loc[:, 'marketMin'].values
+        if not fromTrade:
+            for iOutcome in range(numStates):
+                # Get outcome for root market
+                outcomeRow = oC.loc[oC['outcomeId'] == iOutcome, :]
+                # Add outcome to market table
+                # todo: more elegant way to do this
+                allOutcome = mT.loc[:, marketFields].append(outcomeRow[marketFields], ignore_index=True)
+                # Construct new bounds given outcome
+                settleOutcome = self.constructMarketBounds(allOutcome)
+                # Markets settle at marketMin=marketMax so choose either
+                M[iOutcome,] = settleOutcome.loc[:, 'marketMin'].values
+                mTable = pd.DataFrame()
         # marketOutcomes is a (numStates * numMarkets) matrix of extreme market
         # states.
         self.marketOutcomes = M

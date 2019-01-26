@@ -2,32 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f748aadd-a74f-4691-aa32-65bb3faaf10c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/40749f87-b5cc-44ab-91e5-7d9f7ca94b16.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/40749f87-b5cc-44ab-91e5-7d9f7ca94b16.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/40749f87-b5cc-44ab-91e5-7d9f7ca94b16/storage_v2/_src_/database/blocparty.CP5MNA/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/40749f87-b5cc-44ab-91e5-7d9f7ca94b16/storage_v2/_src_/database/blocparty.CP5MNA/schema/public.abK9xQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Untitled.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Untitled1.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Untitled2.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Untitled3.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Untitled4.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloc/MarketClient.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloc/MarketServer.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crl.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloc/BlocServer.py" beforeDir="false" afterPath="$PROJECT_DIR$/bloc/BlocServer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/BlocAPI.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/doc/BlocAPI.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/MarketObject-Copy1.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/MarketObject.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/Untitled.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/Untitled1.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/Untitled2.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/article.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/collateralExample.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/newarticle.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pmarket.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/pmarket.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/pynacltests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_MarketClient.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_MarketServer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/regtest.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_BlocServer.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_BlocServer.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -55,7 +33,7 @@
     <SUITE FILE_PATH="coverage/pmarket$BlocMarket.coverage" NAME="BlocMarket Coverage Results" MODIFIED="1547289022191" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bloc" />
     <SUITE FILE_PATH="coverage/pmarket$MarketClient.coverage" NAME="MarketClient Coverage Results" MODIFIED="1527907311959" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pmarket$bob.coverage" NAME="bob Coverage Results" MODIFIED="1528008925763" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/pmarket$Unittests_in_test_BlocServer_py.coverage" NAME="Unittests in test_BlocServer.py Coverage Results" MODIFIED="1548475839609" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/pmarket$Unittests_in_test_BlocServer_py.coverage" NAME="Unittests in test_BlocServer.py Coverage Results" MODIFIED="1548539682979" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/pmarket$sqltest2.coverage" NAME="sqltest2 Coverage Results" MODIFIED="1482555234549" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pmarket$BlocTime.coverage" NAME="BlocTime Coverage Results" MODIFIED="1548236041091" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bloc" />
     <SUITE FILE_PATH="coverage/pmarket$untitled.coverage" NAME="untitled Coverage Results" MODIFIED="1539865728573" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
@@ -217,17 +195,17 @@
           <entry key="cacheBook" value="6" />
           <entry key="env" value="1" />
           <entry key="ipynb" value="4" />
-          <entry key="marketBounds" value="30" />
-          <entry key="marketTable" value="65" />
+          <entry key="marketBounds" value="32" />
+          <entry key="marketTable" value="66" />
           <entry key="markettable" value="4" />
           <entry key="orderBook" value="112" />
           <entry key="orderBook1" value="1" />
           <entry key="orderBook3" value="1" />
           <entry key="orderbook" value="4" />
-          <entry key="outcomeCombinations" value="27" />
+          <entry key="outcomeCombinations" value="30" />
           <entry key="outcomecombinations" value="1" />
           <entry key="pstat" value="6" />
-          <entry key="py" value="58" />
+          <entry key="py" value="60" />
           <entry key="sql" value="1" />
           <entry key="timeStampServerTable" value="9" />
           <entry key="timesStampServerTable" value="2" />
@@ -237,11 +215,11 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Database Element" value="296" />
+          <entry key="Database Element" value="302" />
           <entry key="IPNB" value="4" />
           <entry key="PLAIN_TEXT" value="2" />
           <entry key="Profiler Session" value="6" />
-          <entry key="Python" value="58" />
+          <entry key="Python" value="60" />
           <entry key="Scratch" value="1" />
         </counts>
       </usages-collector>
@@ -251,7 +229,7 @@
           <entry key="BlocMarket" value="76" />
           <entry key="Procfile" value="8" />
           <entry key="Python Console" value="3065" />
-          <entry key="py" value="21250" />
+          <entry key="py" value="21494" />
           <entry key="sql" value="47" />
           <entry key="tmp" value="140" />
         </counts>
@@ -259,7 +237,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="8" />
-          <entry key="Python" value="24933" />
+          <entry key="Python" value="25177" />
           <entry key="SQL" value="47" />
         </counts>
       </usages-collector>
@@ -276,8 +254,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/test_BlocServer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="139">
-              <caret line="101" selection-start-line="101" selection-end-line="101" />
+            <state relative-caret-position="607">
+              <caret line="173" column="9" selection-start-line="173" selection-start-column="9" selection-end-line="173" selection-end-column="9" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -325,33 +303,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bloc/BlocServer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1192">
-              <caret line="314" selection-start-line="314" selection-end-line="314" />
+            <state relative-caret-position="95">
+              <caret line="566" column="9" lean-forward="true" selection-start-line="566" selection-start-column="9" selection-end-line="566" selection-end-column="9" />
               <folding>
                 <element signature="e#15#33#0" expanded="true" />
-                <marker date="1548476348396" expanded="true" signature="22361:22367" ph="..." />
+                <marker date="1548539549743" expanded="true" signature="22375:22381" ph="..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/orderBook">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/marketTable">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-              <column-attributes>
-                <column name="ctid" enabled="false" />
-              </column-attributes>
             </state>
           </provider>
         </entry>
@@ -369,9 +326,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>self.market</find>
-      <find>previousS</find>
-      <find>ind2</find>
       <find>getPre</find>
       <find>getPrev</find>
       <find>['signature'][0]</find>
@@ -399,6 +353,9 @@
       <find>createTra</find>
       <find>createMarket</find>
       <find>checkC</find>
+      <find>updateOut</find>
+      <find>upda</find>
+      <find>updateou</find>
     </findStrings>
     <replaceStrings>
       <replace>value</replace>
@@ -481,10 +438,10 @@
         <option value="$PROJECT_DIR$/bloc/BlocMarket.py" />
         <option value="$PROJECT_DIR$/Procfile" />
         <option value="$PROJECT_DIR$/bloc/BlocTime.py" />
-        <option value="$PROJECT_DIR$/tests/test_BlocServer.py" />
         <option value="$PROJECT_DIR$/bloc/BlocClient.py" />
-        <option value="$PROJECT_DIR$/bloc/BlocServer.py" />
         <option value="$PROJECT_DIR$/BlocAPI.py" />
+        <option value="$PROJECT_DIR$/bloc/BlocServer.py" />
+        <option value="$PROJECT_DIR$/tests/test_BlocServer.py" />
       </list>
     </option>
   </component>
@@ -973,27 +930,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_in_test_BlocServer_py - 2019.01.25 at 21h 43m 41s.xml">
-      <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_test_BlocServer_py - 2019.01.25 at 21h 53m 50s.xml">
-      <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_test_BlocServer_py - 2019.01.25 at 21h 54m 21s.xml">
-      <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_test_BlocServer_py - 2019.01.25 at 22h 03m 16s.xml">
-      <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_test_BlocServer_py - 2019.01.25 at 22h 03m 53s.xml">
-      <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_test_BlocServer_py - 2019.01.25 at 22h 21m 59s.xml">
-      <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_test_BlocServer_py - 2019.01.25 at 22h 24m 09s.xml">
-      <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unittests_in_test_BlocServer_py - 2019.01.26 at 13h 39m 23s.xml">
       <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
     </history-entry>
@@ -1001,6 +937,27 @@
       <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
     </history-entry>
     <history-entry file="Unittests_in_test_BlocServer_py - 2019.01.26 at 14h 09m 57s.xml">
+      <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_BlocServer_py - 2019.01.27 at 07h 26m 06s.xml">
+      <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_BlocServer_py - 2019.01.27 at 07h 34m 56s.xml">
+      <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_BlocServer_py - 2019.01.27 at 07h 35m 46s.xml">
+      <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_BlocServer_py - 2019.01.27 at 07h 51m 11s.xml">
+      <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_BlocServer_py - 2019.01.27 at 07h 52m 40s.xml">
+      <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_BlocServer_py - 2019.01.27 at 07h 54m 42s.xml">
+      <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_BlocServer_py - 2019.01.27 at 07h 54m 53s.xml">
       <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
     </history-entry>
   </component>
@@ -1022,8 +979,8 @@
       <window_info id="Favorites" order="2" sideWeight="0.50385606" side_tool="true" weight="0.19170243" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49713877" weight="0.32686982" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.53968257" weight="0.2597254" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.5910758" visible="true" weight="0.49885583" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.53968257" visible="true" weight="0.2597254" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.5910758" weight="0.30778033" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49499285" weight="0.322807" />
@@ -1038,9 +995,9 @@
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info active="true" anchor="right" id="Database" order="3" sideWeight="0.48883048" visible="true" weight="0.32967034" />
+      <window_info anchor="right" id="Database" order="3" sideWeight="0.48883048" weight="0.32967034" />
       <window_info anchor="right" id="Coverage" order="4" side_tool="true" />
-      <window_info anchor="right" id="SciView" order="5" sideWeight="0.48357424" weight="0.25030527" />
+      <window_info active="true" anchor="right" id="SciView" order="5" sideWeight="0.48357424" visible="true" weight="0.25030527" />
       <window_info anchor="right" id="Data View" order="6" weight="0.32861736" />
       <window_info anchor="right" x="0" y="0" width="353" height="713" id="Documentation" order="7" sideWeight="0.5111695" side_tool="true" weight="0.3363344" />
       <window_info anchor="right" id="R Graphics" order="8" weight="0.32905984" />
@@ -1161,6 +1118,11 @@
           <line>90</line>
           <option name="timeStamp" value="837" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/tests/test_BlocServer.py</url>
+          <line>173</line>
+          <option name="timeStamp" value="840" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
@@ -1178,6 +1140,16 @@
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
+      <expression>
+        <expression-string>len(oB.loc[oB['iMatched'], :]) == 8</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>len(oB.loc[oB['iRemoved'],:])==4</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>datetime.datetime.strptime(ts['timeStampUTC'], '%Y-%m-%d %H:%M:%S.%f') &lt;= maxTS</expression-string>
         <language-id>Python</language-id>
@@ -1210,17 +1182,6 @@
       </expression>
       <expression>
         <expression-string>datetime.datetime.strptime(ts['timeStampUTC'], '%Y-%m-%d %H:%M:%S.%f')</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>maxTS</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>datetime.datetime.strptime(ts['timeStampUTC'], '%Y-%m-%d %H:%M:%S.%f') 
-maxTS</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
@@ -1411,30 +1372,10 @@ maxTS</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/marketBounds">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-          <column-attributes>
-            <column name="ctid" enabled="false" />
-          </column-attributes>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/doc/BlocAPI.ipynb">
       <provider selected="true" editor-type-id="ipnb-editor">
         <state>
           <selected id="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/outcomeCombinations">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-          <column-attributes>
-            <column name="ctid" enabled="false" />
-          </column-attributes>
         </state>
       </provider>
     </entry>
@@ -1465,16 +1406,6 @@ maxTS</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_BlocServer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="101" selection-start-line="101" selection-end-line="101" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BlocAPI.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="268">
@@ -1483,6 +1414,19 @@ maxTS</expression-string>
             <element signature="e#1367#1408#0" expanded="true" />
             <marker date="1548476481850" expanded="true" signature="6446:6846" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/regtest.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/orderBook">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
@@ -1496,20 +1440,43 @@ maxTS</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/orderBook">
+    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/outcomeCombinations">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
+          <column-attributes>
+            <column name="ctid" enabled="false" />
+          </column-attributes>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/marketBounds">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+          <column-attributes>
+            <column name="ctid" enabled="false" />
+          </column-attributes>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_BlocServer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="607">
+          <caret line="173" column="9" selection-start-line="173" selection-start-column="9" selection-end-line="173" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bloc/BlocServer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1192">
-          <caret line="314" selection-start-line="314" selection-end-line="314" />
+        <state relative-caret-position="95">
+          <caret line="566" column="9" lean-forward="true" selection-start-line="566" selection-start-column="9" selection-end-line="566" selection-end-column="9" />
           <folding>
             <element signature="e#15#33#0" expanded="true" />
-            <marker date="1548476348396" expanded="true" signature="22361:22367" ph="..." />
+            <marker date="1548539549743" expanded="true" signature="22375:22381" ph="..." />
           </folding>
         </state>
       </provider>
