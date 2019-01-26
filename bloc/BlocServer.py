@@ -339,7 +339,7 @@ class BlocServer(object):
         marketChk = np.any(mInd_ == marketIds)
 
         # Check signature is right
-        previousSigChk = previousSig == bytes(self.getPreviousOrder()['signature'][0])
+        chainChk = previousSig == bytes(self.getPreviousOrder()['signature'][0])
         # Check signature for trade (Created in client)
         sigMsg =\
             str(p_).encode("utf-8")+\
@@ -370,7 +370,7 @@ class BlocServer(object):
             timeChk=True
 
         colChk = False
-        if marketChk & sigChk & previousSigChk and timeChk:
+        if marketChk & sigChk & chainChk and timeChk:
             colChk, deets = self.checkCollateral(p_, q_, mInd_, tInd_)
             if colChk:
                 # Append new trade
@@ -405,7 +405,7 @@ class BlocServer(object):
                 else:
                     self.killMarginalOpenTrade(tInd_)
 
-            return colChk, {'marketChk':marketChk, 'sigChk': sigChk, 'previousSigChk':previousSigChk,
+            return colChk, {'marketChk':marketChk, 'sigChk': sigChk, 'chainChk':chainChk,
                             'timeChk': timeChk, 'colChk':colChk}
 
     # Collateral check

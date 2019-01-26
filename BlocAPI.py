@@ -86,11 +86,11 @@ def createMarket():
         checks, allChecks = bc.createMarket_client(marketRow=marketRow, blocServer=bs)
     except:
         checks = traceback.format_exc()
-        allChecks = {'Boned.'}
+        allChecks = {'Boned':True}
 
     bs.conn.close()
      
-    return jsonify({'checks': checks,
+    return jsonify({'checks': str(allChecks),
                     'marketRootId': data['marketRootId'],
                     'marketBranchId': data['marketBranchId'],
                     'marketMin': data['marketMin'],
@@ -114,17 +114,17 @@ def createTrade():
         checks, allChecks = bc.createTrade_client(tradeRow=tradeRow, blocServer=bs)
     except Exception as err:
         checks = traceback.format_exc()
-        allChecks = 'So boned.'
+        allChecks = {'Boned':True}
 
 
         
     bs.conn.close()
      
-    return jsonify({'checks': str(checks),
+    return jsonify({'checks': str(allChecks),
                     'marketId': data['marketId'],
                     'price': data['price'],
                     'quantity': data['quantity'],
-                    'traderId': data['traderId']}.update(allChecks))
+                    'traderId': data['traderId']})
 
 # View market bounds
 @application.route('/viewMarketBounds', methods=['POST'])
