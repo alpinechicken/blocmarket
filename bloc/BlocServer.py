@@ -52,7 +52,7 @@ class BlocServer(object):
                                Column('verifyKey', String),
                                )
         # Order book for all trades, including including order book,
-        # matched, and linked trades (offsets, partials, etc)
+        # matched, and linked trades
         self.orderBook = Table('orderBook', self.metadata,
                                Column('tradeId', Integer, primary_key=True, autoincrement=True),
                                Column('price', Float),
@@ -309,7 +309,7 @@ class BlocServer(object):
                 print('Signature does not match, bad signature chain, or else marketMin > marketMax. Market not added.')
 
             # Return True if checks pass and market added
-            return checks, {'marketRangeChk':marketRangeChk, 'sigChk': sigChk, 'chainChk':chainChk,\
+            return checks, {'marketId': str(marketId), 'marketRangeChk':marketRangeChk, 'sigChk': sigChk, 'chainChk':chainChk,\
                             'ownerChk':ownerChk,  'timeChk': timeChk}
 
 

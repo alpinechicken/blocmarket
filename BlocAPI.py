@@ -90,12 +90,14 @@ def createMarket():
 
     bs.conn.close()
      
-    return jsonify({'checks': str(allChecks),
+    return jsonify({'checks': str(checks),
+                    'marketId': int(allChecks['marketId']),
                     'marketRootId': data['marketRootId'],
                     'marketBranchId': data['marketBranchId'],
                     'marketMin': data['marketMin'],
                     'marketMax': data['marketMax'],
-                    'traderId': data['traderId']})
+                    'traderId': data['traderId'],
+                    'allChecks': str(allChecks)})
 
 
 @application.route('/createTrade', methods=['POST'])
@@ -120,11 +122,12 @@ def createTrade():
         
     bs.conn.close()
      
-    return jsonify({'checks': str(allChecks),
+    return jsonify({'checks': str(checks),
                     'marketId': data['marketId'],
                     'price': data['price'],
                     'quantity': data['quantity'],
-                    'traderId': data['traderId']})
+                    'traderId': data['traderId'],
+                    'allChecks': str(allChecks)})
 
 # View market bounds
 @application.route('/viewMarketBounds', methods=['POST'])
