@@ -36,7 +36,7 @@ If anything breaks or behaves unusually, please leave an issue.
 
 The documentation is mainly in ipython notebooks in /doc.
 
-The three main classes are BlocServer, BlocClient, and BlocTime are in /bloc
+The three main classes are BlocServer, BlocClient, and BlocTime in /bloc
 
 bloc stands for '(b)loc is a (l)imit (o)rder (c)hain'.
 
