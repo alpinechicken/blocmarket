@@ -17,13 +17,19 @@ Data is maintained in six tables with postgress, though it will run with sqlite 
 
 
 https://blocmarket.herokuapp.com/createUser
+
 https://blocmarket.herokuapp.com/createMarket
+
 https://blocmarket.herokuapp.com/createUser
 
 https://blocmarket.herokuapp.com/viewMarketBounds
+
 https://blocmarket.herokuapp.com/viewOrderBook
+
 https://blocmarket.herokuapp.com/viewOpenTrades
+
 https://blocmarket.herokuapp.com/viewMatchedTrades
+
 https://blocmarket.herokuapp.com/viewTradeSummary
 
 If anything breaks or behaves unusually, please leave an issue.
@@ -32,5 +38,5 @@ The documentation is mainly in ipython notebooks in /doc.
 
 The three main classes are BlocServer, BlocClient, and BlocTime are in /bloc
 
-BLOC stands for 'Bloc is a Limit Order Chain'.
+bloc stands for '(b)loc is a (l)imit (o)rder (c)hain'.
 
