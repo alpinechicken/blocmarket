@@ -55,7 +55,7 @@ if __name__ == "__main__":
 
 @application.route('/')
 def hello_world():
-    return 'Hello wurld'
+    return 'Hello wurld..'
 
 @application.route('/createUser', methods=['POST', 'GET'])
 def createUser():
