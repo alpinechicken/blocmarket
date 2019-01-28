@@ -153,11 +153,11 @@ class BlocServer(object):
     # createMarket
     # createTrade
 
-    def createUser(self, verifyKey_hex: str) -> object:
+    def createUser(self, verifyKey: str) -> object:
 
             """ Create a new user and adds to userTable.
 
-            :param verifyKey_hex: (str) verify key
+            :param verifyKey: (str) verify key
             :return newUsrRow: (DataFrame) new user row
             :return self.userTable: (sql table) new row of userTable
 
@@ -171,7 +171,7 @@ class BlocServer(object):
             bc = BlocClient()
             bc.generateSignatureKeys
             bs = BlocServer()
-            bs.createUser(bc.verifyKey_hex)
+            bs.createUser(bc.verifyKey)
 
             .. note::
             - Verify key constructed with BlocClient.generateSignatureKeys()
@@ -181,18 +181,18 @@ class BlocServer(object):
             """
 
             # Check if this key is already in userTable
-            userTable = pd.read_sql_query('SELECT * FROM "userTable" WHERE "verifyKey" = \'%s\'' % (verifyKey_hex), self.conn)
+            userTable = pd.read_sql_query('SELECT * FROM "userTable" WHERE "verifyKey" = \'%s\'' % (verifyKey), self.conn)
             if not userTable.empty:
                 print('Username already exists, sorry buddy.')
                 return False
             else:
                 traderId = len(pd.read_sql_table("userTable", self.conn)) + 1
                 # Create the new user
-                newUsr = dict(verifyKey=verifyKey_hex, traderId=int(traderId))
+                newUsr = dict(verifyKey=verifyKey, traderId=int(traderId))
                 # Insert to usertable (autoincrements traderId)
                 self.conn.execute(self.userTable.insert(), [newUsr, ])
                 # Pull back row to get traderID
-                newUsrRow = pd.read_sql_query('SELECT * FROM "userTable" WHERE "verifyKey" = \'%s\'' % (verifyKey_hex),
+                newUsrRow = pd.read_sql_query('SELECT * FROM "userTable" WHERE "verifyKey" = \'%s\'' % (verifyKey),
                                               self.conn)
 
             # Return new user
@@ -245,7 +245,7 @@ class BlocServer(object):
                 maxTS = datetime.datetime.strptime(ts['timeStampUTC'], '%Y-%m-%d %H:%M:%S.%f')
             # Check time signature is valid and time server public key is registered and signature is newer than the recent maximum
             timeChk = self.verifyMessage(signatureMsg=bytes(ts['timeStampUTC'], 'utf-8'),
-                                         signature=ts['timeStampUTCSignature'], verifyKey_hex=ts['verifyKey']) and\
+                                         signature=ts['timeStampUTCSignature'], verifyKey=ts['verifyKey']) and\
                                          np.any(ts['verifyKey']==self.tssTable['verifyKey']) and\
                                          datetime.datetime.strptime(ts['timeStampUTC'], '%Y-%m-%d %H:%M:%S.%f')>= maxTS
             newMarket = pd.DataFrame({'marketId': [marketId],
@@ -360,7 +360,7 @@ class BlocServer(object):
             maxTS = datetime.datetime.strptime(ts['timeStampUTC'], '%Y-%m-%d %H:%M:%S.%f')
         # Check time signature is valid and time server public key is registered and signature is newer than the recent maximum
         timeChk = self.verifyMessage(signatureMsg=bytes(ts['timeStampUTC'], 'utf-8'),
-                                     signature=ts['timeStampUTCSignature'], verifyKey_hex=ts['verifyKey']) and \
+                                     signature=ts['timeStampUTCSignature'], verifyKey=ts['verifyKey']) and \
                   np.any(ts['verifyKey'] == self.tssTable['verifyKey']) and \
                   datetime.datetime.strptime(ts['timeStampUTC'], '%Y-%m-%d %H:%M:%S.%f') >= \
                   maxTS
@@ -718,7 +718,7 @@ class BlocServer(object):
 
     def checkSignature(self, signature,sigMsg, verifyKey):
         # Check signature message
-        return  self.verifyMessage(signature=signature, signatureMsg=sigMsg, verifyKey_hex= verifyKey)
+        return  self.verifyMessage(signature=signature, signatureMsg=sigMsg, verifyKey= verifyKey)
 
 
     def getPreviousOrder(self):
@@ -785,18 +785,18 @@ class BlocServer(object):
         verifyKey = pd.read_sql(queryStr, self.conn).verifyKey[0]
         return verifyKey
 
-    def signMessage(self, msg: object, signingKey_hex: object) -> object:
+    def signMessage(self, msg: object, signingKey: object) -> object:
         """Sign a message
 
         :param: msg: message to sign
-        :param: signingKey_hex: signing key as hex
+        :param: signingKey: signing key as hex
 
         :return: signed: signed message
 
         """
 
         # Convert hex key to bytes
-        signingKey_bytes = b'%s' % str.encode(signingKey_hex)
+        signingKey_bytes = b'%s' % str.encode(signingKey)
         # Generate signing key
         signingKey = nacl.signing.SigningKey(signingKey_bytes,
                                              encoder=nacl.encoding.HexEncoder)
@@ -804,18 +804,18 @@ class BlocServer(object):
         signed = signingKey.sign(msg)
         return signed
 
-    def verifyMessage(self, signature: bytes, signatureMsg: bytes, verifyKey_hex: str) -> object:
+    def verifyMessage(self, signature: bytes, signatureMsg: bytes, verifyKey: str) -> object:
         """Verify a signature
 
         :param: signature: (bytes) signature to check
         :param: signatureMsg: (bytes) message that signature is from
-        :param: verifyKey_hex: (str) verification key as string
+        :param: verifyKey: (str) verification key as string
 
         :return: verified: (bytes) returns signatureMsg if verified
 
         """
 
-        verifyKey = nacl.signing.VerifyKey(verifyKey_hex, encoder=nacl.encoding.HexEncoder)
+        verifyKey = nacl.signing.VerifyKey(verifyKey, encoder=nacl.encoding.HexEncoder)
         verified = verifyKey.verify(signatureMsg, signature=signature)
         return verified
 
@@ -831,9 +831,9 @@ class BlocServer(object):
 
         """
 
-        verifyKey_hex = self.getVerifyKey(traderId=traderId)
+        verifyKey = self.getVerifyKey(traderId=traderId)
         # Verify the message against the signature and verify key
-        sigChk = self.verifyMessage(signature=signature, signatureMsg=signatureMsg, verifyKey_hex=verifyKey_hex)
+        sigChk = self.verifyMessage(signature=signature, signatureMsg=signatureMsg, verifyKey=verifyKey)
         return sigChk
 
     def ind2vec(self, ind, N=None):

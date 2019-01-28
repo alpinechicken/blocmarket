@@ -11,8 +11,8 @@ class BlocClient(object):
     # 'Market client class'
 
     def __init__(self):
-        self.signingKey_hex = []
-        self.verifyKey_hex = []
+        self.signingKey = []
+        self.verifyKey = []
 
     def generateSignatureKeys(self):
         #  Generate signature key pairs.
@@ -23,18 +23,18 @@ class BlocClient(object):
         verifyKey = signingKey.verify_key
 
         # Serialize the verify key to send it to a third party
-        signingKey_hex = signingKey.encode(encoder=nacl.encoding.HexEncoder)
-        verifyKey_hex = verifyKey.encode(encoder=nacl.encoding.HexEncoder)
+        signingKey = signingKey.encode(encoder=nacl.encoding.HexEncoder)
+        verifyKey = verifyKey.encode(encoder=nacl.encoding.HexEncoder)
 
         # Set as properties
-        self.signingKey_hex = signingKey_hex.decode('UTF-8')
-        self.verifyKey_hex = verifyKey_hex.decode('UTF-8')
+        self.signingKey = signingKey.decode('UTF-8')
+        self.verifyKey = verifyKey.decode('UTF-8')
 
-        return signingKey_hex, verifyKey_hex
+        return signingKey, verifyKey
 
-    def signMessage(self, msg: object, signingKey_hex: str) -> object:
+    def signMessage(self, msg: object, signingKey: str) -> object:
         # Sign a message
-        signingKey_bytes = b'%s' % str.encode(signingKey_hex, 'utf-8')
+        signingKey_bytes = b'%s' % str.encode(signingKey, 'utf-8')
         # Generate signing key
         signingKey = nacl.signing.SigningKey(signingKey_bytes, encoder=nacl.encoding.HexEncoder)
         # Sign message
@@ -43,9 +43,9 @@ class BlocClient(object):
 
     def verifyMessage(self, signature: bytes,
                       signatureMsg: bytes,
-                      verifyKey_hex: str) -> object:
+                      verifyKey: str) -> object:
         # Verify message
-        verifyKey = nacl.signing.VerifyKey(verifyKey_hex, encoder=nacl.encoding.HexEncoder)
+        verifyKey = nacl.signing.VerifyKey(verifyKey, encoder=nacl.encoding.HexEncoder)
         verified = verifyKey.verify(signatureMsg, signature=signature)
         return verified
 
@@ -61,7 +61,7 @@ class BlocClient(object):
             str(marketRow.loc[0, 'traderId']).encode("utf-8") + \
             previousMarketRow.loc[0, 'signature'] + b'end'
 
-        sig = self.signMessage(msg=msg, signingKey_hex=signatureKey_hex)
+        sig = self.signMessage(msg=msg, signingKey=signatureKey_hex)
         newMarketRow = pd.DataFrame({'marketRootId': marketRow['marketRootId'],
                                      'marketBranchId': marketRow['marketBranchId'],
                                      'marketMin': marketRow['marketMin'],
@@ -86,10 +86,10 @@ class BlocClient(object):
             str(orderRow.loc[0,'traderId']).encode("utf-8")+\
             previousOrderRow.loc[0,'signature'] + b'end'
         # Sign message
-        sig = self.signMessage(msg=msg, signingKey_hex=signatureKey_hex)
+        sig = self.signMessage(msg=msg, signingKey=signatureKey_hex)
         # Debugging chk that signature is correct
         chk = self.verifyMessage(signature=sig.signature, signatureMsg=msg,
-                           verifyKey_hex=self.verifyKey_hex)
+                           verifyKey=self.verifyKey)
         newOrderRow = pd.DataFrame({
                                    'price': orderRow['price'],
                                    'quantity': orderRow['quantity'],
@@ -115,10 +115,10 @@ class BlocClient(object):
                           'quantity': [float(tradeRow.loc[0, 'quantity'])],
                           'traderId': [int(tradeRow.loc[0, 'traderId'])]})
         p = self.signOrderBook(orderRow=t, previousOrderRow=prevTrade,
-                               signatureKey_hex=self.signingKey_hex)
+                               signatureKey_hex=self.signingKey)
         chk = self.verifyMessage(signature=p.loc[0, 'signature'],
                                  signatureMsg=p.loc[0, 'signatureMsg'],
-                                 verifyKey_hex=self.verifyKey_hex)
+                                 verifyKey=self.verifyKey)
         tradePackage = p
 
         return tradePackage
@@ -129,7 +129,7 @@ class BlocClient(object):
 
         marketPackage = self.signMarketTable(marketRow=marketRow,
                                          previousMarketRow=previousMarketRow,
-                                         signatureKey_hex=self.signingKey_hex)
+                                         signatureKey_hex=self.signingKey)
 
         return marketPackage
 
@@ -145,7 +145,7 @@ class BlocClient(object):
         # When this is split out, create user  by sending a post request to the
         # createUser() endpoint rather than to a local version of BlocServer.
         # (need to import requests)
-        newUsr = blocServer.createUser(self.verifyKey_hex)
+        newUsr = blocServer.createUser(self.verifyKey)
         return newUsr
 
     def createTrade_client(self, tradeRow:object, blocServer=None):
@@ -177,7 +177,7 @@ class BlocClient(object):
                                          tInd_= tradePackage['traderId'][0],
                                          previousSig=tradePackage['previousSig'][0],
                                          signature=tradePackage['signature'][0],
-                                         verifyKey=self.verifyKey_hex)
+                                         verifyKey=self.verifyKey)
          return colChk, allChecks
 
     def createMarket_client(self, marketRow: object, blocServer=None):
@@ -213,7 +213,7 @@ class BlocClient(object):
                                 traderId=testMarket['traderId'][0],
                                 previousSig=testMarket['previousSig'][0],
                                 signature=testMarket['signature'][0],
-                                verifyKey=self.verifyKey_hex)
+                                verifyKey=self.verifyKey)
         return checks, allChecks
 
 """

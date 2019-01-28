@@ -20,8 +20,8 @@ class TestBlocServer(unittest.TestCase):
         cls.bc1.generateSignatureKeys()
         cls.bc2.generateSignatureKeys()
         # Register keys with market server
-        cls.bs.createUser(cls.bc1.verifyKey_hex)
-        usr = cls.bs.createUser(cls.bc2.verifyKey_hex)
+        cls.bs.createUser(cls.bc1.verifyKey)
+        usr = cls.bs.createUser(cls.bc2.verifyKey)
 
         tmp = pd.read_sql_query('SELECT DISTINCT "traderId" from "userTable" ORDER BY "traderId"', cls.bs.conn)
         cls.trader0 = tmp.traderId[0]
@@ -76,7 +76,7 @@ class TestBlocServer(unittest.TestCase):
                                  'traderId': [int(self.trader0)]})
         a = self.bc1.tradeMaker(prevTrade=prevTrade, tradeRow=tradeRow)
         # Check trade signatures
-        assert self.bc1.verifyMessage(a['signature'][0], a['signatureMsg'][0], self.bc1.verifyKey_hex)
+        assert self.bc1.verifyMessage(a['signature'][0], a['signatureMsg'][0], self.bc1.verifyKey)
         # Will error if verfication fails
 
     def testSettleMarketUp(self):

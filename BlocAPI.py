@@ -1,8 +1,8 @@
 # API for bloc.
 
 # createUser()
-# createMarket(marketRootId, marketBranchId, marketMin, marketMax, traderId, signingKey_hex, verifyKey_hex)
-# createTrade(marketRootId, marketBranchId, price, quantity, traderId, signingKey_hex, verifyKey_hex)
+# createMarket(marketRootId, marketBranchId, marketMin, marketMax, traderId, signingKey, verifyKey)
+# createTrade(marketRootId, marketBranchId, price, quantity, traderId, signingKey, verifyKey)
 # viewMarketBounds()
 # viewOrderBook()
 
@@ -22,16 +22,16 @@
 #     "price": 0.12345,
 #     "quantity": 1,
 #     "traderId": 1,
-#     "signingKey_hex": "2e22f9ce7c984a93a27f126a23d62fbc50a2cb5b28ea578c8a0f4e8fba8de2e9",
+#     "signingKey": "2e22f9ce7c984a93a27f126a23d62fbc50a2cb5b28ea578c8a0f4e8fba8de2e9",
 #     "traderId": 4,
-#     "verifyKey_hex": "d9caa2ad98e883c283e589401c67d6c091e8970f84b18fa72c82d4b4d5d6e330"
+#     "verifyKey": "d9caa2ad98e883c283e589401c67d6c091e8970f84b18fa72c82d4b4d5d6e330"
 #
 # }
 
 # Example POST request from python using requests
 
-# content = {"signingKey_hex": "42b45efe8e50d5161ad1cfaba2e3de37387109f0f6b4451b1c94a7a4f7ae5ec8",
-#  "traderId": 4, "verifyKey_hex": "05e0ed41fdda6f705a1926a2803ac77189400f987feb5e7bb33cca38ae8be2da",
+# content = {"signingKey": "42b45efe8e50d5161ad1cfaba2e3de37387109f0f6b4451b1c94a7a4f7ae5ec8",
+#  "traderId": 4, "verifyKey": "05e0ed41fdda6f705a1926a2803ac77189400f987feb5e7bb33cca38ae8be2da",
 #  "marketRootId": 5, "marketBranchId": 1, "marketMin": 1, "marketMax":1.444}
 # url = 'http://127.0.0.1:5000/createMarket'
 # headers = {'content-type': 'application/json'}
@@ -66,8 +66,8 @@ def createUser():
     bs.conn.close()
      
     return jsonify({'traderId': str(newUsr['traderId']),
-                    'verifyKey_hex': newUsr['verifyKey'],
-                    'signingKey_hex': bc.signingKey_hex})
+                    'verifyKey': newUsr['verifyKey'],
+                    'signingKey': bc.signingKey})
 
 
 @application.route('/createMarket', methods=['POST'])
@@ -78,8 +78,8 @@ def createMarket():
     bs = BlocServer()
     bc = BlocClient()
     # Retrieve keys from session and assign in client
-    bc.signingKey_hex = data['signingKey_hex']
-    bc.verifyKey_hex = data['verifyKey_hex']
+    bc.signingKey = data['signingKey']
+    bc.verifyKey = data['verifyKey']
     marketRow = pd.DataFrame(data, index=[0])[['marketRootId', 'marketBranchId','marketMin', 'marketMax','traderId']]
     # Call createMarket_client
     try:
@@ -108,8 +108,8 @@ def createTrade():
     bs = BlocServer()
     bc = BlocClient()
     # Retrieve keys from session and assign in client
-    bc.signingKey_hex = data['signingKey_hex']
-    bc.verifyKey_hex = data['verifyKey_hex']
+    bc.signingKey = data['signingKey']
+    bc.verifyKey = data['verifyKey']
     tradeRow = pd.DataFrame(data, index=[0])[['marketId', 'price', 'quantity', 'traderId']]
     # Call createMarket_client
     try:
