@@ -845,13 +845,8 @@ class BlocServer(object):
 
 """
 
-a=1
-# TODO
-# add signatures for trades
-# add mechanism to add markets DONE
-# new database table orderBook DONE
-# web api
-# tests
-
+TODO:
+more tests
+replace checkCollateral with query
 
 """
