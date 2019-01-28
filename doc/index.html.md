@@ -107,9 +107,9 @@ tId = 2\
 \
 url = 'https://blocmarket.herokuapp.com/createMarket'\
 headers = \{'content-type': 'application/json'\}\
-content_makemarket = \{"signingKey_hex": sk,\
+content_makemarket = \{"signingKey": sk,\
                     "traderId": tId, \
-                    "verifyKey_hex": vk,\
+                    "verifyKey": vk,\
                     "marketRootId": 1, \
                     "marketBranchId": 1, \
                     "marketMin": 0,\
@@ -119,9 +119,9 @@ response = requests.post(url, data=json.dumps(content), headers=headers)\
 ```\
 \
 ```shell\
-curl --data '\{"signingKey_hex": "ece2efc138c8298d43caba1315ceda614e20644c74d46fed37871c47ea19afdf",\
+curl --data '\{"signingKey": "ece2efc138c8298d43caba1315ceda614e20644c74d46fed37871c47ea19afdf",\
 "traderId": 1, \
-"verifyKey_hex": "9690a2e12971ae452d68bf3d08405090d45791533cf80740fd186aea4b6773fc",\
+"verifyKey": "9690a2e12971ae452d68bf3d08405090d45791533cf80740fd186aea4b6773fc",\
 "marketRootId": 1, \
 "marketBranchId": 5, \
 "marketMin": 0, \
@@ -161,8 +161,8 @@ If the market exists, this will update the maximum/minimum within the bounds of 
 \
 Parameter | Default | Description\
 --------- | ------- | -----------\
-`signingKey_hex` | none | Private signature key\
-`verifyKey_hex` | none | Pubic signature key\
+`signingKey` | none | Private signature key\
+`verifyKey` | none | Pubic signature key\
 `traderId` | none | Trader Id\
 `marketRootId` | none | Market root Id\
 `marketBranchId` | none | Market branch Id\
@@ -181,9 +181,9 @@ tId = 2\
 \
 url = 'https://blocmarket.herokuapp.com/createTrade'\
 headers = \{'content-type': 'application/json'\}\
-content_maketrade = \{"signingKey_hex": sk,\
+content_maketrade = \{"signingKey": sk,\
                      "traderId": int(tId),\
-                     "verifyKey_hex": vk,\
+                     "verifyKey": vk,\
                      "marketId": mkId,\
                      "price": 0.55,\
                      "quantity":1\}\
@@ -191,9 +191,9 @@ response = requests.post(url, data=json.dumps(content_maketrade), headers=header
 ```\
 \
 ```shell\
-curl --data '\{"signingKey_hex": "ece2efc138c8298d43caba1315ceda614e20644c74d46fed37871c47ea19afdf",\
+curl --data '\{"signingKey": "ece2efc138c8298d43caba1315ceda614e20644c74d46fed37871c47ea19afdf",\
 "traderId": 1, \
-"verifyKey_hex": "9690a2e12971ae452d68bf3d08405090d45791533cf80740fd186aea4b6773fc",\
+"verifyKey": "9690a2e12971ae452d68bf3d08405090d45791533cf80740fd186aea4b6773fc",\
 "marketRootId": 1, \
 "marketBranchId": 5, \
 "marketMin": 0, \
