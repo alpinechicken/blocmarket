@@ -32,9 +32,9 @@ https://blocmarket.herokuapp.com/viewMatchedTrades
 
 https://blocmarket.herokuapp.com/viewTradeSummary
 
-If anything breaks or behaves unusually, please leave an issue.
+If anything breaks or behaves unexpectedly, please leave an issue.
 
-The documentation is mainly in ipython notebooks in /doc.
+The documentation is mainly in ipython notebooks in /doc. A full walkthrough of the API is /doc/BlocAPI.ipynb
 
 The three main classes are BlocServer, BlocClient, and BlocTime in /bloc
 
