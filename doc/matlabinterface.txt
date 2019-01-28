@@ -1,0 +1,55 @@
+
+%% createUser
+resp = webread('http://blocmarket.herokuapp.com/createUser')
+
+signingKey = resp.signingKey;
+verifyKey = resp.verifyKey;
+tId = str2num(resp.traderId);
+
+%Returns something like
+%     signingKey: '57f611e7cb7c5d4123be69663ccd06442c64db1a4f1161399dbb1b9bb6cc0e06'
+%           traderId: '2'
+%      verifyKey: 'ddaa5b0119a4ccfeffa36be0e6aac3682f798d021d5ded1d90512f2226e727b5'
+%% createMarket
+data = struct('signingKey', signingKey,...
+'traderId', tId, ...
+'verifyKey', verifyKey ,...
+'marketRootId', 2, ...
+'marketBranchId', 1, ...
+'marketMin', 0.01, ...
+'marketMax', 1)
+resp = webwrite('http://blocmarket.herokuapp.com/createMarket', data, weboptions('RequestMethod', 'post','MediaType', 'application/json'))
+
+% Returns something like
+%             checks: 'True'
+%     marketBranchId: 1
+%          marketMax: 1
+%          marketMin: 0.0100
+%       marketRootId: 2
+%           traderId: 1
+
+%% createTrade
+data = struct('signingKey', signingKey,...
+'traderId', tId,...
+'verifyKey', verifyKey ,...
+'marketId', 1,...
+'price', 0.51,...
+'quantity', 1)
+resp = webwrite('http://blocmarket.herokuapp.com/createTrade', data, weboptions('MediaType', 'application/json'))
+
+% Returns something like
+%       checks: 'True'
+%     marketId: 1
+%        price: 0.5100
+%     quantity: 1
+%     traderId: 1
+
+%% viewMarketBounds
+resp = webwrite('http://blocmarket.herokuapp.com/viewMarketBounds', weboptions('RequestMethod', 'post','contentType', 'json', 'Timeout', 10))
+
+%% viewOrderBook
+resp = webwrite('http://blocmarket.herokuapp.com/viewOrderBook', weboptions('RequestMethod', 'post','contentType', 'json'), 'Timeout', 10)
+
+%% viewTradeSummary
+data = struct('traderId',1);
+resp = webwrite('http://blocmarket.herokuapp.com/viewTradeSummary', data, weboptions('RequestMethod', 'post','MediaType', 'application/json'))
