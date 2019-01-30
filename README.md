@@ -11,9 +11,9 @@ The interface has three main components:
 Orders and markets are can be created and signed by any user and accompanied by a signed timestamp. Collateral is calculated simulataneously across all markets. 
 A market can have any number of branches which all settle within the bounds of previous markets on the branch.
 
-The two main applicaitons are for event prediction markets (minimum = 0, maximum = 1), and for bounded futures contracts. 
+The two main applications are event prediction markets (minimum = 0, maximum = 1), and bounded futures contracts (futures contracts with a minimum and maximum payoff). 
 
-Data is maintained in six tables with postgress, though it will run with sqlite and othere. The API uses flask and is generally running on Heroku with these endpoints:
+Data is maintained in six tables with postgress, though it will run with sqlite and others. The API uses flask and is generally running on Heroku with these endpoints:
 
 
 https://blocmarket.herokuapp.com/createUser
