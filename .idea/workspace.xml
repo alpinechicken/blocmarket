@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f748aadd-a74f-4691-aa32-65bb3faaf10c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/40749f87-b5cc-44ab-91e5-7d9f7ca94b16.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/40749f87-b5cc-44ab-91e5-7d9f7ca94b16.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/40749f87-b5cc-44ab-91e5-7d9f7ca94b16/storage_v2/_src_/database/blocparty.CP5MNA/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/40749f87-b5cc-44ab-91e5-7d9f7ca94b16/storage_v2/_src_/database/blocparty.CP5MNA/schema/public.abK9xQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BlocAPI.py" beforeDir="false" afterPath="$PROJECT_DIR$/BlocAPI.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloc/BlocClient.py" beforeDir="false" afterPath="$PROJECT_DIR$/bloc/BlocClient.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloc/BlocServer.py" beforeDir="false" afterPath="$PROJECT_DIR$/bloc/BlocServer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/BlocAPI.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/doc/BlocAPI.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_BlocServer.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_BlocServer.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -297,13 +291,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="Python Console" value="79" />
-          <entry key="py" value="810" />
+          <entry key="py" value="815" />
           <entry key="sql" value="45" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="889" />
+          <entry key="Python" value="894" />
           <entry key="SQL" value="45" />
         </counts>
       </usages-collector>
@@ -339,11 +333,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BlocAPI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="61" column="21" lean-forward="true" selection-start-line="61" selection-start-column="21" selection-end-line="61" selection-end-column="21" />
+            <state relative-caret-position="103">
+              <caret line="57" column="130" lean-forward="true" selection-start-line="57" selection-start-column="130" selection-end-line="57" selection-end-column="130" />
               <folding>
                 <element signature="e#1335#1376#0" expanded="true" />
-                <marker date="1548842374074" expanded="true" signature="6607:7007" ph="..." />
+                <marker date="1548849576097" expanded="true" signature="6668:7068" ph="..." />
               </folding>
             </state>
           </provider>
@@ -1517,11 +1511,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BlocAPI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="61" column="21" lean-forward="true" selection-start-line="61" selection-start-column="21" selection-end-line="61" selection-end-column="21" />
+        <state relative-caret-position="103">
+          <caret line="57" column="130" lean-forward="true" selection-start-line="57" selection-start-column="130" selection-end-line="57" selection-end-column="130" />
           <folding>
             <element signature="e#1335#1376#0" expanded="true" />
-            <marker date="1548842374074" expanded="true" signature="6607:7007" ph="..." />
+            <marker date="1548849576097" expanded="true" signature="6668:7068" ph="..." />
           </folding>
         </state>
       </provider>
