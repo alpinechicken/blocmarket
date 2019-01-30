@@ -34,7 +34,7 @@ https://blocmarket.herokuapp.com/viewTradeSummary
 
 If anything breaks or behaves unexpectedly, please leave an issue.
 
-The documentation is mainly in ipython notebooks in /doc. A full walkthrough of the API is /doc/BlocAPI.ipynb. A Slate server has the same information with pretty colours.
+The documentation is mainly in ipython notebooks in /doc. A full walkthrough of the API is /doc/BlocAPI.ipynb. A Slate server https://alpinechicken.github.io/slate has the same information with pretty colours.
 
 The three main classes are BlocServer, BlocClient, and BlocTime in /bloc
 
