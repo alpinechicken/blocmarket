@@ -55,7 +55,7 @@ if __name__ == "__main__":
 
 @application.route('/')
 def hello_world():
-    return 'Hello wurld..'
+    return 'This is an exchange API. Documentation and examples <a href="https://github.com/alpinechicken/blocmarket">here</a> <br><br> If anything breaks, or if you need to talk, leave an <a href="https://github.com/alpinechicken/blocmarket/issues">issue</a>.'
 
 @application.route('/createUser', methods=['POST', 'GET'])
 def createUser():

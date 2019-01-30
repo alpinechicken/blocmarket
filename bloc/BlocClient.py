@@ -203,6 +203,11 @@ class BlocClient(object):
          .. note::
         """
 
+        if not 'marketDesc' in marketRow:
+            marketRow['marketDesc'] = 'Market root : ' + str(marketRow['marketRootId'][0]) \
+                                           + ', branch: ' + str(marketRow['marketBranchId'][0])
+
+
         prevMarket = blocServer.getPreviousMarket()
         testMarket = self.marketMaker(prevMarket, marketRow)
 
@@ -213,7 +218,8 @@ class BlocClient(object):
                                 traderId=testMarket['traderId'][0],
                                 previousSig=testMarket['previousSig'][0],
                                 signature=testMarket['signature'][0],
-                                verifyKey=self.verifyKey)
+                                verifyKey=self.verifyKey,
+                                marketDesc = marketRow['marketDesc'][0])
         return checks, allChecks
 
 """

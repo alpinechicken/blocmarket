@@ -36,7 +36,8 @@ class TestBlocServer(unittest.TestCase):
                                   'marketBranchId': [1],
                                   'marketMin': [0],
                                   'marketMax': [1],
-                                  'traderId': [int(self.trader0)]})
+                                  'traderId': [int(self.trader0)],
+                                  'marketDesc': 'This is a market with a name.'})
         self.bc1.createMarket_client(marketRow=marketRow, blocServer=self.bs)
 
         marketRow = pd.DataFrame({'marketRootId': [1],

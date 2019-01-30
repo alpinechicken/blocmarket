@@ -1,6 +1,5 @@
 # Data imports
 import numpy as np
-import numpy.matlib as npm
 import pandas as pd
 from sqlalchemy import create_engine, Table, Column, Integer, Boolean, String, Float, \
     LargeBinary, BLOB, TIMESTAMP, MetaData, update, ForeignKey
@@ -79,6 +78,7 @@ class BlocServer(object):
                                  Column('signature', LargeBinary),
                                  Column('timeStampUTC', TIMESTAMP),
                                  Column('timeStampUTCSignature', LargeBinary),
+                                 Column('marketDesc', String)
                                  )
 
         # Possible combinations of root market outcomes
@@ -198,7 +198,7 @@ class BlocServer(object):
             # Return new user
             return newUsrRow.loc[0].to_dict()
 
-    def createMarket(self, marketRootId, marketBranchId, marketMin, marketMax, traderId, previousSig, signature, verifyKey) -> bool:
+    def createMarket(self, marketRootId, marketBranchId, marketMin, marketMax, traderId, previousSig, signature, verifyKey, marketDesc) -> bool:
             """
             Create a new row in marketTable. Update existing market
             with new bounds if market already exists.
@@ -257,7 +257,8 @@ class BlocServer(object):
                                        'previousSig': previousSig,
                                        'signature': signature,
                                        'timeStampUTC': ts['timeStampUTC'],
-                                       'timeStampUTCSignature': ts['timeStampUTCSignature']})
+                                       'timeStampUTCSignature': ts['timeStampUTCSignature'],
+                                       'marketDesc': marketDesc})
 
             # Check signature chain for market
             chainChk = False
@@ -841,6 +842,9 @@ class BlocServer(object):
         if N is None:
             N = ind.max() + 1
         return (np.arange(N) == ind[:, None]).astype(int)
+
+    def __repr__(self):
+        return 'I am a bloc. What are you?'
 
 
 """

@@ -13,6 +13,19 @@
     <data-source name="pmarket [2]" uuid="df1003dd-be15-4f8e-8000-774a3b7d481a">
       <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" family="SQLITE" exact-version="0.0" />
       <auth-required>false</auth-required>
+      <introspection-schemas>*:</introspection-schemas>
+    </data-source>
+    <data-source name="dfi33hnqjs2hjj@ec2-54-225-227-125.compute-1.amazonaws.com" uuid="44b3f4d7-b859-43f8-977b-3a83e5a88e6d">
+      <database-info product="PostgreSQL" version="10.6 (Ubuntu 10.6-1.pgdg16.04+1)" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.2.2" family="POSTGRES" exact-version="10.6">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>kedsxcnzezfikq</user-name>
+      <introspection-schemas>@:@</introspection-schemas>
+      <ssl-config>
+        <enabled>true</enabled>
+      </ssl-config>
     </data-source>
   </component>
 </project>
