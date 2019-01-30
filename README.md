@@ -20,7 +20,7 @@ https://blocmarket.herokuapp.com/createUser
 
 https://blocmarket.herokuapp.com/createMarket
 
-https://blocmarket.herokuapp.com/createUser
+https://blocmarket.herokuapp.com/createTrade
 
 https://blocmarket.herokuapp.com/viewMarketBounds
 
