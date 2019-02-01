@@ -40,3 +40,6 @@ The three main classes are BlocServer, BlocClient, and BlocTime in /bloc
 
 bloc stands for '(b)loc is a (l)imit (o)rder (c)hain'.
 
+## License
+
+bloc is licensed under the GNU LGPL v2.1.  A copy of which is included in [LICENSE](LICENSE)
