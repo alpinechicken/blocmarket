@@ -107,7 +107,7 @@ class BlocServer(object):
         # Collateral limit
         self.COLLATERAL_LIMIT = 2
         # Number of markets limit (too many will make too many outcome combinations)
-        self.MARKET_LIMIT = 8
+        self.MARKET_LIMIT = 5
 
         # Temporary local variables
         self.marketOutcomes = np.array([])  # Market corners
