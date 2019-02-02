@@ -106,6 +106,8 @@ class BlocServer(object):
 
         # Collateral limit
         self.COLLATERAL_LIMIT = 2
+        # Number of markets limit (too many will make too many outcome combinations)
+        self.MARKET_LIMIT = 8
 
         # Temporary local variables
         self.marketOutcomes = np.array([])  # Market corners
@@ -225,6 +227,9 @@ class BlocServer(object):
             .. todo:: Some kind of informative output
             """
 
+            # Check if trader has correct verify key
+            traderIdChk = self.getVerifyKey(traderId) == verifyKey
+
             mT = pd.read_sql_table('marketTable', self.conn)
 
             # If the market exists, use previous Id
@@ -237,6 +242,9 @@ class BlocServer(object):
                 marketId = mT['marketId'].max()+1
             else:
                 marketId = marketId[0]
+
+            # Limit number of markets
+            marketLimitChk = marketId <= self.MARKET_LIMIT
 
             # Sign current UTC timestamp
             ts = self.TimeServer.signedUTCNow()
@@ -298,7 +306,7 @@ class BlocServer(object):
             # Check market range
             marketRangeChk = newMarket.loc[0, 'marketMin'] <= newMarket.loc[0, 'marketMax']
             # Checks (correct market number, signature relative to parent, range)
-            checks = marketRangeChk and sigChk and chainChk and ownerChk and timeChk
+            checks = marketLimitChk and traderIdChk and marketRangeChk and sigChk and chainChk and ownerChk and timeChk
 
             #  Add market to table if checks pass
             if checks:
@@ -310,7 +318,7 @@ class BlocServer(object):
                 print('Signature does not match, bad signature chain, or else marketMin > marketMax. Market not added.')
 
             # Return True if checks pass and market added
-            return checks, {'marketId': str(marketId), 'marketRangeChk':marketRangeChk, 'sigChk': sigChk, 'chainChk':chainChk,\
+            return checks, {'marketLimitChk': marketLimitChk, 'traderIdChk': traderIdChk, 'marketId': str(marketId), 'marketRangeChk':marketRangeChk, 'sigChk': sigChk, 'chainChk':chainChk,\
                             'ownerChk':ownerChk,  'timeChk': timeChk}
 
 
@@ -334,6 +342,9 @@ class BlocServer(object):
         """
         # This creates the self.marketOutcomes array
         self.updateOutcomeCombinations(fromTrade=True)
+
+        # Check if trader has correct verify key
+        traderIdChk = self.getVerifyKey(tInd_) == verifyKey
 
         # Check if market exists
         marketIds = pd.read_sql('select distinct "marketId" from "marketBounds"', self.conn)["marketId"]
@@ -371,7 +382,7 @@ class BlocServer(object):
             timeChk=True
 
         colChk = False
-        if marketChk & sigChk & chainChk and timeChk:
+        if traderIdChk and marketChk and sigChk and chainChk and timeChk:
             colChk, deets = self.checkCollateral(p_, q_, mInd_, tInd_)
             if colChk:
                 # Append new trade
@@ -406,7 +417,7 @@ class BlocServer(object):
                 else:
                     self.killMarginalOpenTrade(tInd_)
 
-            return colChk, {'marketChk':marketChk, 'sigChk': sigChk, 'chainChk':chainChk,
+            return colChk, {'traderIdChk': traderIdChk, 'marketChk':marketChk, 'sigChk': sigChk, 'chainChk':chainChk,
                             'timeChk': timeChk, 'colChk':colChk}
 
     # Collateral check

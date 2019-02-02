@@ -222,7 +222,7 @@ class BlocClient(object):
                                 marketDesc = marketRow['marketDesc'][0])
         return checks, allChecks
 
-"""
+'''
 from bloc.BlocServer import BlocServer
 from bloc.BlocClient import BlocClient
 
@@ -246,4 +246,5 @@ tradeRow = pd.DataFrame({'marketId': [1],
                          'traderId': [1]})
 check, allChecks = bc.createTrade_client(tradeRow=tradeRow, blocServer=bs)
 a=1
-"""
+'''
+
