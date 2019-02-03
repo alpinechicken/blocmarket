@@ -107,7 +107,8 @@ class BlocServer(object):
         # Collateral limit
         self.COLLATERAL_LIMIT = 2
         # Number of markets limit (too many will make too many outcome combinations)
-        self.MARKET_LIMIT = 5
+        self.ROOT_MARKET_LIMIT = 5
+        self.BRANCH_MARKET_LIMIT = 10
 
         # Temporary local variables
         self.marketOutcomes = np.array([])  # Market corners
@@ -200,7 +201,9 @@ class BlocServer(object):
             # Return new user
             return newUsrRow.loc[0].to_dict()
 
-    def createMarket(self, marketRootId, marketBranchId, marketMin, marketMax, traderId, previousSig, signature, verifyKey, marketDesc) -> bool:
+    def createMarket(self, marketRootId: int, marketBranchId: int, marketMin: float,\
+                     marketMax: float, traderId: int, previousSig: bytes,\
+                     signature: bytes, verifyKey: str, marketDesc: str) -> bool:
             """
             Create a new row in marketTable. Update existing market
             with new bounds if market already exists.
@@ -223,14 +226,13 @@ class BlocServer(object):
             :Example:
 
             .. todo:: Example
-            .. todo:: Input check for valid key
-            .. todo:: Some kind of informative output
             """
 
             # Check if trader has correct verify key
             traderIdChk = self.getVerifyKey(traderId) == verifyKey
 
             mT = pd.read_sql_table('marketTable', self.conn)
+            numRootMarkets = len(set(mT['marketRootId']))
 
             # If the market exists, use previous Id
             marketId = (mT[(mT['marketRootId'] == marketRootId) & (mT['marketBranchId'] == marketBranchId)]['marketId']).unique()
@@ -239,12 +241,17 @@ class BlocServer(object):
             if mT.empty:
                 marketId = 1
             elif marketId.size ==0:
+                # Market doesn't exist
                 marketId = mT['marketId'].max()+1
             else:
+                # Market does exist
                 marketId = marketId[0]
 
-            # Limit number of markets
-            marketLimitChk = marketId <= self.MARKET_LIMIT
+            # Limit number of root markets
+            if marketBranchId >1:
+                marketLimitChk = marketBranchId <= self.BRANCH_MARKET_LIMIT
+            else:
+                marketLimitChk = numRootMarkets <= self.ROOT_MARKET_LIMIT
 
             # Sign current UTC timestamp
             ts = self.TimeServer.signedUTCNow()
@@ -305,8 +312,9 @@ class BlocServer(object):
                 timeChk = True
             # Check market range
             marketRangeChk = newMarket.loc[0, 'marketMin'] <= newMarket.loc[0, 'marketMax']
+            marketIndChk =  newMarket.loc[0, 'marketBranchId'] > 0 and newMarket.loc[0, 'marketRootId'] > 0
             # Checks (correct market number, signature relative to parent, range)
-            checks = marketLimitChk and traderIdChk and marketRangeChk and sigChk and chainChk and ownerChk and timeChk
+            checks = marketLimitChk and marketIndChk and traderIdChk and marketRangeChk and sigChk and chainChk and ownerChk and timeChk
 
             #  Add market to table if checks pass
             if checks:
@@ -318,11 +326,11 @@ class BlocServer(object):
                 print('Signature does not match, bad signature chain, or else marketMin > marketMax. Market not added.')
 
             # Return True if checks pass and market added
-            return checks, {'marketLimitChk': marketLimitChk, 'traderIdChk': traderIdChk, 'marketId': str(marketId), 'marketRangeChk':marketRangeChk, 'sigChk': sigChk, 'chainChk':chainChk,\
+            return checks, {'marketLimitChk': marketLimitChk, 'traderIdChk': traderIdChk, 'marketId': str(marketId), 'marketRangeChk':marketRangeChk, 'marketIndChk': marketIndChk, 'sigChk': sigChk, 'chainChk':chainChk,\
                             'ownerChk':ownerChk,  'timeChk': timeChk}
 
 
-    def createTrade(self, p_, q_, mInd_, tInd_, previousSig, signature, verifyKey)->bool:
+    def createTrade(self, p_: float, q_: float, mInd_: int, tInd_: int, previousSig: bytes, signature: bytes, verifyKey: str)->bool:
 
         """
         Create a new row in marketTable. Update existing market with new bounds if market already exists.
@@ -423,7 +431,7 @@ class BlocServer(object):
     # Collateral check
 
 
-    def checkCollateral(self, p_=[], q_=[], mInd_ = [], tInd_=None):
+    def checkCollateral(self, p_=[], q_=[], mInd_ = [], tInd_=None) -> object:
         """Check collateral for new trade.
 
         :param p_: price
@@ -527,7 +535,7 @@ class BlocServer(object):
     # updateOutcomeCombinations
     # updateBounds
 
-    def updateOutcomeCombinations(self, fromTrade=False):
+    def updateOutcomeCombinations(self, fromTrade: bool = False) -> None:
         """Update outcome combinations taking into account mins/maxes on
         branches.
 
@@ -609,7 +617,7 @@ class BlocServer(object):
     # constructCartesianProduct
     # constructUnitVector
 
-    def constructOutcomeCombinations(self, marketTable: object) -> object:
+    def constructOutcomeCombinations(self, marketTable: object) -> pd.DataFrame:
         """Construct all possible outcome combinations for some table of markets.
 
         :param: marketTable: (DataFrame) marketTable with same columns as the SQL table
@@ -652,7 +660,7 @@ class BlocServer(object):
 
         return marketOutcomes.reset_index(drop=True).drop_duplicates()
 
-    def constructMarketBounds(self, marketTable):
+    def constructMarketBounds(self, marketTable: pd.DataFrame) -> pd.DataFrame:
         """Construct upper and lower bounds for all markets, taking into
         account the bounds of lower branchess.
 
@@ -702,7 +710,7 @@ class BlocServer(object):
 
         return marketBounds.reset_index(drop=True)
 
-    def constructCartesianProduct(self, input):
+    def constructCartesianProduct(self, input: np.ndarray) -> list:
         """Construct all possible combinations of a set
 
         :param: input: (ndarray) input set
@@ -712,7 +720,7 @@ class BlocServer(object):
         cp = list(itertools.product(*input))
         return cp
 
-    def constructUnitVector(self, L, x):
+    def constructUnitVector(self, L: int, x: int):
         """Make a vector of length L with a one in the x'th position
 
         :param: L: (int64) Length of unit vector
@@ -728,7 +736,7 @@ class BlocServer(object):
     # getPreviousOrder
 
 
-    def checkSignature(self, signature,sigMsg, verifyKey):
+    def checkSignature(self, signature: bytes, sigMsg: bytes, verifyKey: str):
         # Check signature message
         return  self.verifyMessage(signature=signature, signatureMsg=sigMsg, verifyKey= verifyKey)
 
@@ -743,14 +751,14 @@ class BlocServer(object):
             return pd.DataFrame({'tradeId': [0], 'signature': ['sig'.encode('utf-8')]})
 
 
-    def killMarginalOpenTrade(self, tInd_):
+    def killMarginalOpenTrade(self, tInd_: int) -> None:
         # Find earliest unmatched trade
         data = pd.read_sql_query(
             'SELECT min("tradeId") FROM "orderBook" WHERE "traderId" = %s and "iMatched" = FALSE AND "iRemoved" = FALSE' % (tInd_), self.conn)  # Find a match
         # Kill earliest unmatched trade
         self.conn.execute('UPDATE "orderBook" SET "iRemoved"= TRUE where "tradeId" = %s' % (data['min'][0]))
 
-    def getPreviousMarket(self):
+    def getPreviousMarket(self) -> pd.DataFrame:
         """Get most recent market signature.
 
         Example::
@@ -784,7 +792,7 @@ class BlocServer(object):
     # verifyMarketSignature
     # verifySignature
 
-    def getVerifyKey(self, traderId):
+    def getVerifyKey(self, traderId: int) -> str:
 
         """Get verify key for trader
 
@@ -794,7 +802,11 @@ class BlocServer(object):
 
         """
         queryStr = 'SELECT "verifyKey" FROM "userTable" WHERE "traderId" = \'%s\'' % (traderId)
-        verifyKey = pd.read_sql(queryStr, self.conn).verifyKey[0]
+        res = pd.read_sql(queryStr, self.conn)
+        if not res.empty:
+            verifyKey = res.verifyKey[0]
+        else:
+            verifyKey = 'null'
         return verifyKey
 
     def signMessage(self, msg: object, signingKey: object) -> object:
@@ -832,7 +844,7 @@ class BlocServer(object):
         return verified
 
 
-    def verifySignature(self, traderId, signature, signatureMsg):
+    def verifySignature(self, traderId: int, signature: bytes, signatureMsg: bytes):
         """Vefify a signature message by looking up the verify key and checking
 
         :param: traderId: (int64) trader id
@@ -855,7 +867,7 @@ class BlocServer(object):
         return (np.arange(N) == ind[:, None]).astype(int)
 
     def __repr__(self):
-        return 'I am a bloc. What are you?'
+        return 'bloc is a limit order chain'
 
 
 """
