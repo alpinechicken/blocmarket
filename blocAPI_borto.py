@@ -38,7 +38,9 @@
 # response = requests.post(url, data=json.dumps(content), headers=headers)
 # pd.DataFrame(response.json(), index=[0])
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response, stream_with_context
+import requests
+
 from bloc.BlocServer import BlocServer
 from bloc.BlocClient import BlocClient
 from bloc.BlocTime import BlocTime
@@ -57,6 +59,7 @@ if __name__ == "__main__":
 def hello_world():
     return 'This is an exchange API. Documentation and examples <a href="https://github.com/alpinechicken/blocmarket">here</a> and <a href="https://alpinechicken.github.io/slate">here</a> <br><br> If anything breaks, or if you need to talk, leave an <a href="https://github.com/alpinechicken/blocmarket/issues">issue</a>.'
 
+
 @application.route('/createUser', methods=['POST', 'GET'])
 def createUser():
     bs = BlocServer()
@@ -64,7 +67,7 @@ def createUser():
     bc.generateSignatureKeys()
     newUsr = bc.createUser_client(blocServer=bs)
     bs.conn.close()
-     
+
     return jsonify({'traderId': str(newUsr['traderId']),
                     'verifyKey': newUsr['verifyKey'],
                     'signingKey': bc.signingKey})
@@ -80,16 +83,16 @@ def createMarket():
     # Retrieve keys from session and assign in client
     bc.signingKey = data['signingKey']
     bc.verifyKey = data['verifyKey']
-    marketRow = pd.DataFrame(data, index=[0])[['marketRootId', 'marketBranchId','marketMin', 'marketMax','traderId']]
+    marketRow = pd.DataFrame(data, index=[0])[['marketRootId', 'marketBranchId', 'marketMin', 'marketMax', 'traderId']]
     # Call createMarket_client
     try:
         checks, allChecks = bc.createMarket_client(marketRow=marketRow, blocServer=bs)
     except:
         checks = traceback.format_exc()
-        allChecks = {'Boned':True, 'marketId':0}
+        allChecks = {'Boned': True, 'marketId': 0}
 
     bs.conn.close()
-     
+
     return jsonify({'checks': str(checks),
                     'marketId': int(allChecks['marketId']),
                     'marketRootId': data['marketRootId'],
@@ -116,12 +119,10 @@ def createTrade():
         checks, allChecks = bc.createTrade_client(tradeRow=tradeRow, blocServer=bs)
     except Exception as err:
         checks = traceback.format_exc()
-        allChecks = {'Boned':True}
+        allChecks = {'Boned': True}
 
-
-        
     bs.conn.close()
-     
+
     return jsonify({'checks': str(checks),
                     'marketId': data['marketId'],
                     'price': data['price'],
@@ -129,84 +130,81 @@ def createTrade():
                     'traderId': data['traderId'],
                     'allChecks': str(allChecks)})
 
+
 # View market bounds
 @application.route('/viewMarketBounds', methods=['POST'])
 def viewMarkets():
-    # Return market boundsß
+    # Return market bounds
     bs = BlocServer()
     mB = pd.read_sql_table('marketBounds', bs.conn)
     bs.conn.close()
-     
-    return jsonify(mB.loc[:,['marketId', 'marketRootId', 'marketBranchId', 'marketMin', 'marketMax']].to_json())
+
+    return jsonify(mB.loc[:, ['marketId', 'marketRootId', 'marketBranchId', 'marketMin', 'marketMax']].to_json())
+
 
 # View order book
 @application.route('/viewOrderBook', methods=['POST'])
 def viewOrderBook():
-    #  Get request data
-    data = request.get_json()
-    marketId = data['marketId']
+    marketRootId = 1
+    marketBranchId = 1
+    try:
+        # Return order book
+        bs = BlocServer()
+        oB = pd.read_sql_query(
+            'select * from "orderBook" ob left outer join "marketBounds" mb on mb."marketId" = ob."marketId" where mb."marketRootId" = %s and mb."marketBranchId" = %s and ob."iRemoved" = FALSE' % (
+            marketRootId, marketBranchId), bs.conn)
+        bs.conn.close()
+        return jsonify(oB.to_json())
+    except Exception as err:
+        return (traceback.format_exc())
+
+
+# View order book ('/post/<int:post_id>')
+@application.route('/viewOpenTrades/<marketRootId>/<marketBranchId>', methods=['POST'])
+def viewOpenTrades(marketRootId, marketBranchId):
     # Return order book
     bs = BlocServer()
-    oB = pd.read_sql_table('orderBook', bs.conn)
-    oB = oB[np.logical_not( oB['iRemoved']) & (oB['marketId']==marketId)]
+    oB = pd.read_sql_query(
+        'select * from "orderBook" ob left outer join "marketBounds" mb on mb."marketId" = ob."marketId" where mb."marketRootId" = %s and mb."marketBranchId" = %s and ob."iRemoved" = FALSE and "iMatched"=FALSE' % (
+        marketRootId, marketBranchId), bs.conn)
+
     bs.conn.close()
-     
-    return jsonify(oB.loc[:,['marketId', 'price', 'quantity', 'traderId', 'iMatched', 'timeStampUTC']].to_json())
+
+    return jsonify(oB.loc[:, ['marketId', 'marketRootId', 'marketBranchId', 'price', 'quantity', 'traderId',
+                              'timeStampUTC']].to_json())
 
 
 # View order book
-@application.route('/viewOpenTrades', methods=['POST'])
-def viewOpenTrades():
-    #  Get request data
-    data = request.get_json()
-    marketId = data['marketId']
+@application.route('/viewMatchedTrades/<marketRootId>/<marketBranchId>', methods=['POST'])
+def viewMatchedTrades(marketRootId, marketBranchId):
     # Return order book
     bs = BlocServer()
-    oB = pd.read_sql_table('orderBook', bs.conn)
+    oB = pd.read_sql_query(
+        'select * from "orderBook" ob left outer join "marketBounds" mb on mb."marketId" = ob."marketId" where mb."marketRootId" = %s and mb."marketBranchId" = %s and ob."iRemoved" = FALSE and "iMatched"= TRUE' % (
+        marketRootId, marketBranchId), bs.conn)
 
-    # Open trades
-    openTrades = oB[np.logical_not(oB['iMatched']) & np.logical_not(oB['iRemoved']) & (oB['marketId']==marketId)]
-
-    bs.conn.close()
-     
-    return jsonify(openTrades.loc[:,['marketId', 'price', 'quantity', 'traderId', 'timeStampUTC']].to_json())
-
-# View order book
-@application.route('/viewMatchedTrades', methods=['POST'])
-def viewMatchedTrades():
-    #  Get request data
-    data = request.get_json()
-    marketId = data['marketId']
-    # Return order book
-    bs = BlocServer()
-    oB = pd.read_sql_table('orderBook', bs.conn)
-
-    # Open trades
-    matchedTrades = oB[oB['iMatched'] & oB['marketId']==marketId]
     # Sum orders with same price by quantity
-    matchedTrades_sum = matchedTrades.groupby(['marketId', 'price', 'traderId'], as_index=False).agg({"quantity": "sum"})
+    matchedTrades_sum = oB.groupby(['marketId', 'price', 'traderId'], as_index=False).agg({"quantity": "sum"})
     bs.conn.close()
-     
-    return jsonify(matchedTrades_sum.loc[:, ['marketId', 'price', 'quantity', 'traderId']].to_json())
+
+    return jsonify(matchedTrades_sum.loc[:,
+                   ['marketId', 'marketRootId', 'marketBranchId', 'price', 'quantity', 'traderId']].to_json())
 
 
 # Trade summary
+
 @application.route('/viewTradeSummary', methods=['POST'])
 def viewTradeSummary():
-
     data = request.get_json()
     traderId = data['traderId']
     bs = BlocServer()
-    #ps = pd.read_sql_query('SELECT "price", "quantity", "traderId", "isMatched", "timeStampUTC", "marketId", "marketRootId", "marketBranchId", "marketMin", "marketMax" FROM "orderBook" INNER JOIN "marketTable" ON "orderBook.marketId" WHERE "traderId" = %s' % (str(traderId)), bs.conn)
-    oB = pd.read_sql_table('orderBook', bs.conn)
-    mT = pd.read_sql_table('marketBounds', bs.conn)
+    # ps = pd.read_sql_query('SELECT "price", "quantity", "traderId", "isMatched", "timeStampUTC", "marketId", "marketRootId", "marketBranchId", "marketMin", "marketMax" FROM "orderBook" INNER JOIN "marketTable" ON "orderBook.marketId" WHERE "traderId" = %s' % (str(traderId)), bs.conn)
+    posSummary = pd.read_sql_query(
+        'select * from "orderBook" ob left outer join "marketBounds" mb on mb."marketId" = ob."marketId" where ob."iRemoved" = FALSE and ob."traderId"= %s' % (
+            traderId), bs.conn)
 
-    tradeSummary = oB[np.logical_and(np.logical_not(oB['iRemoved']),oB['traderId'] == traderId)]
-
-    posSummary = pd.merge(tradeSummary.loc[:,['marketId', 'price', 'quantity', 'traderId', 'iMatched', 'timeStampUTC']], mT.loc[:, ['marketId', 'marketRootId', 'marketBranchId', 'marketMin', 'marketMax']], on='marketId', how='left')
-
-    posSummary['marketMinOutcome'] = (posSummary['marketMin'] - posSummary['price'])*posSummary['quantity']
-    posSummary['marketMaxOutcome'] = (posSummary['marketMax'] - posSummary['price'])*posSummary['quantity']
+    posSummary['marketMinOutcome'] = (posSummary['marketMin'] - posSummary['price']) * posSummary['quantity']
+    posSummary['marketMaxOutcome'] = (posSummary['marketMax'] - posSummary['price']) * posSummary['quantity']
 
     return jsonify(posSummary.to_json())
 
@@ -219,7 +217,7 @@ def getSignedUTCTimestamp():
     signedUTCNow = bt.signedUTCNow()
 
     tsOutput = {'timeStampUTC': str(signedUTCNow['timeStampUTC']),
-                             'timeStampUTCSignature': str(signedUTCNow['timeStampUTCSignature']),
-                             'verifyKey': signedUTCNow['verifyKey']}
+                'timeStampUTCSignature': str(signedUTCNow['timeStampUTCSignature']),
+                'verifyKey': signedUTCNow['verifyKey']}
     return json.dumps(tsOutput)
 

@@ -17,6 +17,7 @@ import nacl.signing
 # Other imports
 import itertools
 
+import typing
 
 
 class BlocServer(object):
@@ -109,6 +110,7 @@ class BlocServer(object):
         # Number of markets limit (too many will make too many outcome combinations)
         self.ROOT_MARKET_LIMIT = 5
         self.BRANCH_MARKET_LIMIT = 10
+        self.DECIMAL_LIMIT = 2
 
         # Temporary local variables
         self.marketOutcomes = np.array([])  # Market corners
@@ -227,6 +229,23 @@ class BlocServer(object):
 
             .. todo:: Example
             """
+            # Force/check inputs
+
+            try:
+                marketRootId = np.int64(marketRootId)
+                marketBranchId = np.int64(marketBranchId)
+                marketMin = float(marketMin)
+                marketMax = float(marketMax)
+                traderId = np.int64(traderId)
+                assert isinstance(marketRootId, np.int64) and marketRootId>0
+                assert isinstance(marketBranchId, np.int64) and marketBranchId >0
+                assert isinstance(marketMin, float)
+                assert isinstance(marketMax, float)
+                assert isinstance(traderId, np.int64) and traderId >0
+                inputChk = True
+            except:
+                inputChk = False
+
 
             # Check if trader has correct verify key
             traderIdChk = self.getVerifyKey(traderId) == verifyKey
@@ -249,7 +268,7 @@ class BlocServer(object):
 
             # Limit number of root markets
             if marketBranchId >1:
-                marketLimitChk = marketBranchId <= self.BRANCH_MARKET_LIMIT
+                marketLimitChk = (marketBranchId <= self.BRANCH_MARKET_LIMIT) and np.any(mT['marketRootId']==marketRootId)
             else:
                 marketLimitChk = numRootMarkets <= self.ROOT_MARKET_LIMIT
 
@@ -314,7 +333,7 @@ class BlocServer(object):
             marketRangeChk = newMarket.loc[0, 'marketMin'] <= newMarket.loc[0, 'marketMax']
             marketIndChk =  newMarket.loc[0, 'marketBranchId'] > 0 and newMarket.loc[0, 'marketRootId'] > 0
             # Checks (correct market number, signature relative to parent, range)
-            checks = marketLimitChk and marketIndChk and traderIdChk and marketRangeChk and sigChk and chainChk and ownerChk and timeChk
+            checks = inputChk and marketLimitChk and marketIndChk and traderIdChk and marketRangeChk and sigChk and chainChk and ownerChk and timeChk
 
             #  Add market to table if checks pass
             if checks:
@@ -326,7 +345,7 @@ class BlocServer(object):
                 print('Signature does not match, bad signature chain, or else marketMin > marketMax. Market not added.')
 
             # Return True if checks pass and market added
-            return checks, {'marketLimitChk': marketLimitChk, 'traderIdChk': traderIdChk, 'marketId': str(marketId), 'marketRangeChk':marketRangeChk, 'marketIndChk': marketIndChk, 'sigChk': sigChk, 'chainChk':chainChk,\
+            return checks, {'inputChk': inputChk,'marketLimitChk': marketLimitChk, 'traderIdChk': traderIdChk, 'marketId': str(marketId), 'marketRangeChk':marketRangeChk, 'marketIndChk': marketIndChk, 'sigChk': sigChk, 'chainChk':chainChk,\
                             'ownerChk':ownerChk,  'timeChk': timeChk}
 
 
@@ -348,6 +367,21 @@ class BlocServer(object):
 
         .. todo: Example
         """
+        # Force/check inputs
+
+        try:
+            p_ = round(float(p_), self.DECIMAL_LIMIT)
+            q_ = round(float(q_), self.DECIMAL_LIMIT)
+            mInd_ = np.int64(mInd_)
+            tInd = np.int64(tInd_)
+            assert isinstance(p_, float)
+            assert isinstance(q_, float)
+            assert isinstance(mInd_, np.int64) and mInd_ > 0
+            assert isinstance(tInd, np.int64) and mInd_ > 0
+            inputChk = True
+        except:
+            inputChk = False
+
         # This creates the self.marketOutcomes array
         self.updateOutcomeCombinations(fromTrade=True)
 
@@ -390,7 +424,7 @@ class BlocServer(object):
             timeChk=True
 
         colChk = False
-        if traderIdChk and marketChk and sigChk and chainChk and timeChk:
+        if inputChk and traderIdChk and marketChk and sigChk and chainChk and timeChk:
             colChk, deets = self.checkCollateral(p_, q_, mInd_, tInd_)
             if colChk:
                 # Append new trade
@@ -425,7 +459,7 @@ class BlocServer(object):
                 else:
                     self.killMarginalOpenTrade(tInd_)
 
-            return colChk, {'traderIdChk': traderIdChk, 'marketChk':marketChk, 'sigChk': sigChk, 'chainChk':chainChk,
+            return colChk, {'inputChk': inputChk, 'traderIdChk': traderIdChk, 'marketChk':marketChk, 'sigChk': sigChk, 'chainChk':chainChk,
                             'timeChk': timeChk, 'colChk':colChk}
 
     # Collateral check

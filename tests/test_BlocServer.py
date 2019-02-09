@@ -108,13 +108,13 @@ class TestBlocServer(unittest.TestCase):
 
     def testMatchTrade(self):
         tradeRow = pd.DataFrame({'marketId': [1],
-                                 'price': [0.5],
+                                 'price': [0.515],
                                  'quantity': [1],
                                  'traderId': [int(self.trader0)]})
         self.bc1.createTrade_client(tradeRow=tradeRow, blocServer=self.bs)
 
         tradeRow = pd.DataFrame({'marketId': [1],
-                                 'price': [0.5],
+                                 'price': [0.515],
                                  'quantity': [-1],
                                  'traderId': [int(self.trader1)]})
         self.bc2.createTrade_client(tradeRow=tradeRow, blocServer=self.bs)

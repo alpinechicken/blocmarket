@@ -1,5 +1,6 @@
 
 import pandas as pd
+import numpy as np
 
 
 # Crypto imports
@@ -13,6 +14,7 @@ class BlocClient(object):
     def __init__(self):
         self.signingKey = []
         self.verifyKey = []
+        self.DECIMAL_LIMIT = 2
 
     def generateSignatureKeys(self):
         #  Generate signature key pairs.
@@ -167,7 +169,14 @@ class BlocClient(object):
                                  'quantity': [1],
                                  'traderId': [1]})
          mc.createTrade_client(tradeRow=tradeRow, BlocServer = bs)
+
+
+
          """
+         tradeRow['price'] = round(float(tradeRow['price']),self.DECIMAL_LIMIT)
+         tradeRow['quantity'] = round(float(tradeRow['quantity']), self.DECIMAL_LIMIT)
+         tradeRow['marketId'] = np.int64(tradeRow['marketId'])
+         tradeRow['traderId'] = np.int64(tradeRow['traderId'])
          prevTrade = blocServer.getPreviousOrder()
          tradePackage = self.tradeMaker(prevTrade=prevTrade, tradeRow=tradeRow).reset_index(drop=True)
 
@@ -203,6 +212,13 @@ class BlocClient(object):
          .. note::
         """
 
+        marketRow['marketRootId'] = np.int64(marketRow['marketRootId'])
+        marketRow['marketBranchId'] = np.int64(marketRow['marketBranchId'])
+        marketRow['marketMin'] = float(marketRow['marketMin'])
+        marketRow['marketMax'] = float(marketRow['marketMax'] )
+        marketRow['traderId'] = np.int64(marketRow['traderId'] )
+
+
         if not 'marketDesc' in marketRow:
             marketRow['marketDesc'] = 'Market root : ' + str(marketRow['marketRootId'][0]) \
                                            + ', branch: ' + str(marketRow['marketBranchId'][0])
@@ -233,11 +249,11 @@ bc.generateSignatureKeys()
 
 bc.createUser_client(bs)
 
-marketRow = pd.DataFrame({'marketRootId': [1],
-                          'marketBranchId': [99],
+marketRow = pd.DataFrame({'marketRootId': [9],
+                          'marketBranchId': [2],
                               'marketMin': [0],
                               'marketMax': [0],
-                              'traderId': [3]})
+                              'traderId': [9]})
 check, allChecks = bc.createMarket_client(marketRow=marketRow, blocServer = bs)
 
 # Note that the traderId must match the keys on bc

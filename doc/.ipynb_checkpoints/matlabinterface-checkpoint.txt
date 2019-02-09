@@ -48,8 +48,7 @@ resp = webwrite('http://blocmarket.herokuapp.com/createTrade', data, weboptions(
 resp = webwrite('http://blocmarket.herokuapp.com/viewMarketBounds', weboptions('RequestMethod', 'post','contentType', 'json', 'Timeout', 10))
 
 %% viewOrderBook
-data = struct('marketId',1);
-resp = webwrite('http://blocmarket.herokuapp.com/viewOrderBook', data, weboptions('RequestMethod', 'post','contentType', 'json'), 'Timeout', 10)
+resp = webwrite('http://blocmarket.herokuapp.com/viewOrderBook', weboptions('RequestMethod', 'post','contentType', 'json'), 'Timeout', 10)
 
 %% viewTradeSummary
 data = struct('traderId',1);
