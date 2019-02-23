@@ -13,6 +13,7 @@ class TestBlocServer(unittest.TestCase):
         cls.bc2 = BlocClient()
         cls.bs = BlocServer()
         cls.bs.purgeTables()
+        # Ovewrite with collateral = 2
         cls.bs.COLLATERAL_LIMIT = 2
         # Pull user table to ensure is empty
         tmpUserTable = pd.read_sql_table('userTable', cls.bs.conn)
@@ -91,7 +92,7 @@ class TestBlocServer(unittest.TestCase):
         assert (marketBounds[['marketRootId', 'marketBranchId', 'marketMin', 'marketMax']].values == [[1, 1, 1, 1],
                                                                                                       [1, 2, 0.9, 0.9],
                                                                                                       [2, 1, 0,
-                                                                                                       1]]).all()
+                                                                                                       1]] ).all()
 
     def testSettleMarketDown(self):
         marketRow = pd.DataFrame({'marketRootId': [1],

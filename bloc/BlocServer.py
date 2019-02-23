@@ -106,7 +106,7 @@ class BlocServer(object):
         self.conn = self.engine.connect()
 
         # Collateral limit
-        self.COLLATERAL_LIMIT = 2
+        self.COLLATERAL_LIMIT = 1e6
         # Number of markets limit (too many will make too many outcome combinations)
         self.ROOT_MARKET_LIMIT = 5
         self.BRANCH_MARKET_LIMIT = 10
@@ -459,7 +459,7 @@ class BlocServer(object):
                 else:
                     self.killMarginalOpenTrade(tInd_)
 
-            return colChk, {'inputChk': inputChk, 'traderIdChk': traderIdChk, 'marketChk':marketChk, 'sigChk': sigChk, 'chainChk':chainChk,
+        return colChk, {'inputChk': inputChk, 'traderIdChk': traderIdChk, 'marketChk':marketChk, 'sigChk': sigChk, 'chainChk':chainChk,
                             'timeChk': timeChk, 'colChk':colChk}
 
     # Collateral check
@@ -560,6 +560,8 @@ class BlocServer(object):
         The collateral condition can be calculated simultaneously across all traders in one step by
         taking each column D columns of the second term as the minimum unmatched collateral for all 
         trades for each trader. 
+        
+        TODO: Do this as a table operation.
         '''
 
         return colChk, collateralDetails

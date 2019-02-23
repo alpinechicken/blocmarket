@@ -80,7 +80,12 @@ def createMarket():
     # Retrieve keys from session and assign in client
     bc.signingKey = data['signingKey']
     bc.verifyKey = data['verifyKey']
-    marketRow = pd.DataFrame(data, index=[0])[['marketRootId', 'marketBranchId','marketMin', 'marketMax','traderId']]
+
+    if 'marketDesc' in data:
+        marketRow = pd.DataFrame(data, index=[0])[['marketRootId', 'marketBranchId','marketMin', 'marketMax','traderId', 'marketDesc']]
+    else:
+        marketRow = pd.DataFrame(data, index=[0])[['marketRootId', 'marketBranchId','marketMin', 'marketMax','traderId']]
+
     # Call createMarket_client
     try:
         checks, allChecks = bc.createMarket_client(marketRow=marketRow, blocServer=bs)
@@ -132,12 +137,19 @@ def createTrade():
 # View market bounds
 @application.route('/viewMarketBounds', methods=['POST'])
 def viewMarkets():
-    # Return market boundsß
+    # Return market bounds
     bs = BlocServer()
     mB = pd.read_sql_table('marketBounds', bs.conn)
+    mT = pd.read_sql_table('marketTable', bs.conn)
+
+    # Add original market descriptions
+    minTimeInd  = mT.groupby('marketId').agg({'timeStampUTC': 'idxmin'})['timeStampUTC']
+    originalMarketDescriptions = mT.loc[minTimeInd, ['marketId', 'marketDesc']]
+    mB = mB.merge(originalMarketDescriptions, on='marketId',how='left')
+
     bs.conn.close()
      
-    return jsonify(mB.loc[:,['marketId', 'marketRootId', 'marketBranchId', 'marketMin', 'marketMax']].to_json())
+    return jsonify(mB.loc[:,['marketId', 'marketRootId', 'marketBranchId', 'marketMin', 'marketMax', 'marketDesc']].to_json())
 
 # View order book
 @application.route('/viewOrderBook', methods=['POST'])

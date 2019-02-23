@@ -257,8 +257,8 @@ marketRow = pd.DataFrame({'marketRootId': [9],
 check, allChecks = bc.createMarket_client(marketRow=marketRow, blocServer = bs)
 
 # Note that the traderId must match the keys on bc
-tradeRow = pd.DataFrame({'marketId': [6],
-                         'price': [0.5],
+tradeRow = pd.DataFrame({'marketId': [1],
+                         'price': [3625.7],
                          'quantity': [1],
                          'traderId': [1]})
 check, allChecks = bc.createTrade_client(tradeRow=tradeRow, blocServer=bs)
@@ -272,18 +272,18 @@ from bloc.BlocClient import BlocClient
 bs = BlocServer()
 bc = BlocClient()
 
-bc.signingKey = '55417f9a34956c35556a5c6bc0629110b083c9f00f8025213804cbf8dc994032'
-bc.verifyKey = '64644dbcfaf9eb52f2ef7d2abbcf42c10e4dafe7f091e47b8ae114b732185f5a'
+bc.signingKey = '5af7a61c0e5e7548c1af7fcb5f764c4b88fe4a3f535fbcf05846592b7a30ebd3'
+bc.verifyKey = 'bf1b8a9b8123caf9d08bc377b291fd5a2ff9aae2495c8f0c57bdd66353ec04da'
 
 bc.createUser_client(bs)
 
 
 
-marketRow = pd.DataFrame({'marketRootId': [1],
-                          'marketBranchId': [99],
-                              'marketMin': [0],
-                              'marketMax': [0],
-                              'traderId': [1]})
-check, allChecks = bc.createMarket_client(marketRow=marketRow, blocServer = bs)
-'''
+tradeRow = pd.DataFrame({'marketId': [7],
+                         'price': [3625.7],
+                         'quantity': [1],
+                         'traderId': [7]})
+check, allChecks = bc.createTrade_client(tradeRow=tradeRow, blocServer = bs)
 
+
+'''
