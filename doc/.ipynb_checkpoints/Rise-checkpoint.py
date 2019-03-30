@@ -45,7 +45,7 @@ data['botseed'] = []
 data['botseed'].append(bot1)
 data['botseed'].append(bot2)
 
-with open('blocbotspawn.txt','w') as f:
+with open('botdefs.txt','w') as f:
     json.dump(data, f)
 
 '''
@@ -60,7 +60,7 @@ def rise(botdef):
     bot.streamQuote()
     
 # Call 
-with open('bots/blocbotspawn.txt') as jf:
+with open('bots/botdefs.txt') as jf:
     data = json.load(jf)
     for bot in data['botseed']:
         threading.Thread(target=rise, args=(bot,)).start()

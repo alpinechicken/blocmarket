@@ -1,15 +1,14 @@
 import requests
 import json
-import numpy as np
-import pandas as pd
 import time
 import datetime
 import pytz
 import pandas as pd
+import logging
 
 class BlocBot(object):
     
-    # Price making bot using external source
+    # Basic price making bot using external quote source
     
     def __init__(self):
         # Price making parameters
@@ -19,63 +18,14 @@ class BlocBot(object):
         self.verifyKey = []
         self.signingKey = []    
         self.traderId = []
-        # Bloc market info
-        self.marketRootId = []
-        self.marketBranchId = []
+        # Target market
         self.marketId = []
-        self.marketMin = 2500
-        self.marketMax = 4500
-        self.marketDesc = 'BTC'       
         # Bloc setup
         self.blocurl = 'http://127.0.0.1:7000/'
         self.blocheaders = {'content-type': 'application/json'}
         # Source setup
         self.quoteSource = 'alphavantage'
-    
-    # Setup functions:
-    # setupUser - make a bloc user
-    # setupMarket - make a bloc market
-        
-    def setupUser(self):
-        # Create a new bloc user 
-        url = self.blocurl +'createUser'
-        headers = self.blocheaders
-        content = {}
-        response = requests.post(url, data=json.dumps(content), headers=headers)
-        self.signingKey = response.json()['signingKey']
-        self.verifyKey = response.json()['verifyKey']
-        self.traderId = int(response.json()['traderId'])
-        return response
-    
-    def setupMarket(self):
-        # Set up a bloc market
-        
-        # Find next spare market
-        url = self.blocurl+'viewMarketBounds'
-        content = {}
-        response = requests.post(url, data=json.dumps(content), headers=self.blocheaders)
-        mBounds = pd.read_json(response.json())
-        self.marketRootId = max(mBounds['marketRootId']) + 1
-        self.marketBranchId = 1
-        
-        # Create/update market
-        url = self.blocurl + 'createMarket'
-        content_makemarket = {"signingKey": self.signingKey,
-                        "traderId": self.traderId, 
-                        "verifyKey": self.verifyKey,
-                        "marketRootId": self.marketRootId, 
-                        "marketBranchId": self.marketBranchId, 
-                        "marketMin": self.marketMin,
-                        "marketMax": self.marketMax,
-                        "marketDesc": self.marketDesc}
-        
-        # Post market
-        response = requests.post(url, data=json.dumps(content_makemarket), headers=self.blocheaders)
-        # Get marketId from response
-        self.marketId = response.json()['marketId']
-        return response
-        
-                
+
     def getQuote(self):
         # Get quote from source 
         # In:
@@ -99,6 +49,8 @@ class BlocBot(object):
     
     def postQuote(self, p, q):
         # Create a trade
+        # In: postQuote(0.43, -4)
+        # Out: <Standard response from createTrade()>
         tradeurl = self.blocurl+'createTrade'
 
         content_maketrade = {"signingKey": self.signingKey,
@@ -111,6 +63,8 @@ class BlocBot(object):
         return response.json()
     
     def getTradeSummary(self):
+        # In: postQuote(0.43, -4)
+        # Out: <Standard response from viewTradeSummary()>
         # Get trade summary from bloc market
         url = self.blocurl+'viewTradeSummary'
         content = {"traderId": self.traderId}
@@ -119,18 +73,21 @@ class BlocBot(object):
         
     def streamQuote(self):
         # Stream a quote bid/ask from source
-        
+        logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO, filename='botlog.log')
+        logging.info('[Bot starting quote stream]: ' + json.dumps(vars(self)))
         qt = self.getQuote()
         prevQuote = qt['Trade']
         stillQuoting = True
         while stillQuoting:
+            # Get a quote
             try:
                 qt = self.getQuote()
-            except:
-                #logging
-                pass
-                    
-            quotePrice = qt['Trade']
+                quotePrice = qt['Trade']
+                logging.info('[Quote]: ' + str(quotePrice))
+            except Exception as e:
+                logging.error('Exception trying getQuote()', exc_info=True)
+
+            # Update market if quote has changed
             if prevQuote == quotePrice:
                 time.sleep(self.updateFrequencySeconds)
             else:          
@@ -143,27 +100,31 @@ class BlocBot(object):
                 bidTdId = cbid['tradeId']
                 askTdId = cask['tradeId']
                 time.sleep(self.updateFrequencySeconds)
-                
+
                 ts = pd.read_json(self.getTradeSummary())
                 
-                # Remove bids if not already matched
+                # Remove bids and asks if not already matched
                 if bidTdId not in ts[ts['iMatched']]:
                     self.postQuote(bidPrice, -1)
-                
+                    logging.info('[Bid]: ' + str(bidPrice))
                 if askTdId not in ts[ts['iMatched']]:
                     self.postQuote(askPrice, 1)
+                    logging.info('[Ask]: ' + str(askPrice))
                 
                 # Check if trades still being accepted 
                 if (cbid['checks'] == 'False') or (cask['checks'] == 'False'):
                     stillQuoting = False
                 else:
                     prevQuote = quotePrice
-                    print('Within cells interlinked: ' + str(quotePrice))
-                    
-                
+                    msg= '[Within cells interlinked]: ' + str(quotePrice)
+                    print(msg)
+
+        # Return output if quote fails
         if not stillQuoting:
-            print('You\'re pretty far off baseline: ' +  rask['allChecks'])
-            return True
+            logging.info('[Bot stopping quote stream]: ' + ', Bot def:' + json.dumps(vars(self)))
+            logging.info('[You\'re pretty far off baseline]: Bid checks:' + cbid['allChecks'] +
+                         ',  Ask checks: ' +  cask['allChecks'] )
+            return cask['allChecks']
                 
 
                 

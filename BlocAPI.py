@@ -126,8 +126,11 @@ def createTrade():
 
         
     bs.conn.close()
+    if np.isnan(allChecks['tradeId']):
+        allChecks['tradeId'] = 0
      
     return jsonify({'checks': str(checks),
+                    'tradeId': int(allChecks['tradeId']),
                     'marketId': data['marketId'],
                     'price': data['price'],
                     'quantity': data['quantity'],
@@ -181,7 +184,7 @@ def viewOpenTrades():
 
     bs.conn.close()
      
-    return jsonify(openTrades.loc[:,['marketId', 'price', 'quantity', 'traderId', 'timeStampUTC']].to_json())
+    return jsonify(openTrades.loc[:,['tradeId','marketId', 'price', 'quantity', 'traderId', 'timeStampUTC']].to_json())
 
 # View order book
 @application.route('/viewMatchedTrades', methods=['POST'])
@@ -215,7 +218,7 @@ def viewTradeSummary():
 
     tradeSummary = oB[np.logical_and(np.logical_not(oB['iRemoved']),oB['traderId'] == traderId)]
 
-    posSummary = pd.merge(tradeSummary.loc[:,['marketId', 'price', 'quantity', 'traderId', 'iMatched', 'timeStampUTC']], mT.loc[:, ['marketId', 'marketRootId', 'marketBranchId', 'marketMin', 'marketMax']], on='marketId', how='left')
+    posSummary = pd.merge(tradeSummary.loc[:,['tradeId','marketId', 'price', 'quantity', 'traderId', 'iMatched', 'timeStampUTC']], mT.loc[:, ['marketId', 'marketRootId', 'marketBranchId', 'marketMin', 'marketMax']], on='marketId', how='left')
 
     posSummary['marketMinOutcome'] = (posSummary['marketMin'] - posSummary['price'])*posSummary['quantity']
     posSummary['marketMaxOutcome'] = (posSummary['marketMax'] - posSummary['price'])*posSummary['quantity']

@@ -1,0 +1,101 @@
+2019-03-30 17:47:29,118 - [Bot starting quote stream: {"spread": 0.05, "updateFrequencySeconds": 360, "verifyKey": "1461611936a3e9255f82faf2c51127f689ad598c6ff468079044585ffbf6a09c", "signingKey": "b82beba336c2e498560f9a1794f0f600149334e6722f488ffe7414e006a88345", "traderId": 3, "marketId": 1, "blocurl": "http://127.0.0.1:7000/", "blocheaders": {"content-type": "application/json"}, "quoteSource": "alphavantage"}
+2019-03-30 17:47:31,637 - Exception trying getQuote()
+Traceback (most recent call last):
+  File "/Users/josephclark/src/blocmarket/doc/bots/BlocBot.py", line 82, in streamQuote
+    logging.info('[Quote]:' + json.dumps(vars(qt)))
+TypeError: vars() argument must have __dict__ attribute
+2019-03-30 17:53:33,114 - Exception trying getQuote()
+Traceback (most recent call last):
+  File "/Users/josephclark/src/blocmarket/doc/bots/BlocBot.py", line 82, in streamQuote
+    logging.info('[Quote]:' + json.dumps(vars(qt)))
+TypeError: vars() argument must have __dict__ attribute
+2019-03-30 17:59:33,629 - Within cells interlinked: 4108.72: traderId3: marketId1
+2019-03-30 17:59:35,090 - Exception trying getQuote()
+Traceback (most recent call last):
+  File "/Users/josephclark/src/blocmarket/doc/bots/BlocBot.py", line 82, in streamQuote
+    logging.info('[Quote]:' + json.dumps(vars(qt)))
+TypeError: vars() argument must have __dict__ attribute
+2019-03-30 18:05:35,591 - Within cells interlinked: 4108.96: traderId3: marketId1
+2019-03-30 18:05:37,214 - Exception trying getQuote()
+Traceback (most recent call last):
+  File "/Users/josephclark/src/blocmarket/doc/bots/BlocBot.py", line 82, in streamQuote
+    try:
+TypeError: vars() argument must have __dict__ attribute
+2019-03-30 18:11:37,705 - Within cells interlinked: 4103.64: traderId3: marketId1
+2019-03-30 18:11:38,916 - Exception trying getQuote()
+Traceback (most recent call last):
+  File "/Users/josephclark/src/blocmarket/doc/bots/BlocBot.py", line 82, in streamQuote
+    try:
+TypeError: vars() argument must have __dict__ attribute
+2019-03-30 18:17:39,410 - Within cells interlinked: 4103.33: traderId3: marketId1
+2019-03-30 18:17:40,711 - Exception trying getQuote()
+Traceback (most recent call last):
+  File "/Users/josephclark/src/blocmarket/doc/bots/BlocBot.py", line 82, in streamQuote
+    try:
+TypeError: vars() argument must have __dict__ attribute
+2019-03-30 18:23:41,201 - Within cells interlinked: 4100.17: traderId3: marketId1
+2019-03-30 18:23:42,490 - Exception trying getQuote()
+Traceback (most recent call last):
+  File "/Users/josephclark/src/blocmarket/doc/bots/BlocBot.py", line 82, in streamQuote
+    try:
+TypeError: vars() argument must have __dict__ attribute
+2019-03-30 18:29:42,971 - Within cells interlinked: 4101.91: traderId3: marketId1
+2019-03-30 18:29:44,234 - Exception trying getQuote()
+Traceback (most recent call last):
+  File "/Users/josephclark/src/blocmarket/doc/bots/BlocBot.py", line 82, in streamQuote
+    try:
+TypeError: vars() argument must have __dict__ attribute
+2019-03-30 18:35:44,714 - Within cells interlinked: 4097.32: traderId3: marketId1
+2019-03-30 18:35:46,039 - Exception trying getQuote()
+Traceback (most recent call last):
+  File "/Users/josephclark/src/blocmarket/doc/bots/BlocBot.py", line 82, in streamQuote
+    try:
+TypeError: vars() argument must have __dict__ attribute
+2019-03-30 18:41:46,519 - Within cells interlinked: 4096.44: traderId3: marketId1
+2019-03-30 18:41:47,706 - Exception trying getQuote()
+Traceback (most recent call last):
+  File "/Users/josephclark/src/blocmarket/doc/bots/BlocBot.py", line 82, in streamQuote
+    try:
+TypeError: vars() argument must have __dict__ attribute
+2019-03-30 18:47:48,200 - Within cells interlinked: 4099.17: traderId3: marketId1
+2019-03-30 18:47:49,447 - Exception trying getQuote()
+Traceback (most recent call last):
+  File "/Users/josephclark/src/blocmarket/doc/bots/BlocBot.py", line 82, in streamQuote
+    try:
+TypeError: vars() argument must have __dict__ attribute
+2019-03-30 18:53:49,940 - Within cells interlinked: 4099.6: traderId3: marketId1
+2019-03-30 18:53:51,174 - Exception trying getQuote()
+Traceback (most recent call last):
+  File "/Users/josephclark/src/blocmarket/doc/bots/BlocBot.py", line 82, in streamQuote
+    try:
+TypeError: vars() argument must have __dict__ attribute
+2019-03-30 18:59:51,667 - Within cells interlinked: 4099.7: traderId3: marketId1
+2019-03-30 18:59:52,984 - Exception trying getQuote()
+Traceback (most recent call last):
+  File "/Users/josephclark/src/blocmarket/doc/bots/BlocBot.py", line 82, in streamQuote
+    try:
+TypeError: vars() argument must have __dict__ attribute
+2019-03-30 19:05:53,470 - Within cells interlinked: 4100.27: traderId3: marketId1
+2019-03-30 19:05:55,026 - Exception trying getQuote()
+Traceback (most recent call last):
+  File "/Users/josephclark/src/blocmarket/doc/bots/BlocBot.py", line 82, in streamQuote
+    try:
+TypeError: vars() argument must have __dict__ attribute
+2019-03-30 19:11:55,523 - Within cells interlinked: 4095.88: traderId3: marketId1
+2019-03-30 19:11:56,912 - Exception trying getQuote()
+Traceback (most recent call last):
+  File "/Users/josephclark/src/blocmarket/doc/bots/BlocBot.py", line 82, in streamQuote
+    try:
+TypeError: vars() argument must have __dict__ attribute
+2019-03-30 19:17:57,391 - Within cells interlinked: 4100.55: traderId3: marketId1
+2019-03-30 19:17:58,703 - Exception trying getQuote()
+Traceback (most recent call last):
+  File "/Users/josephclark/src/blocmarket/doc/bots/BlocBot.py", line 82, in streamQuote
+    try:
+TypeError: vars() argument must have __dict__ attribute
+2019-03-30 19:23:59,180 - Within cells interlinked: 4101.09: traderId3: marketId1
+2019-03-30 19:24:00,467 - Exception trying getQuote()
+Traceback (most recent call last):
+  File "/Users/josephclark/src/blocmarket/doc/bots/BlocBot.py", line 82, in streamQuote
+    try:
+TypeError: vars() argument must have __dict__ attribute

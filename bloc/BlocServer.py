@@ -423,6 +423,7 @@ class BlocServer(object):
         if isinstance(timeChk, bytes):
             timeChk=True
 
+        newTradeId = np.nan
         colChk = False
         if inputChk and traderIdChk and marketChk and sigChk and chainChk and timeChk:
             colChk, deets = self.checkCollateral(p_, q_, mInd_, tInd_)
@@ -441,14 +442,23 @@ class BlocServer(object):
                                           'timeStampUTC': ts['timeStampUTC'],
                                           'timeStampUTCSignature': ts['timeStampUTCSignature']})
                 newTrade.to_sql(name='orderBook', con=self.conn, if_exists='append', index=False)
+
+                # Check newTrade is there and get its id.
+                # TODO: match signature directly in query if possible
+                checkTrade = pd.read_sql_query('SELECT "tradeId", "signature" FROM "orderBook" WHERE "tradeId" = (SELECT max("tradeId") from "orderBook")', self.conn)
+                if bytes(checkTrade.loc[0, 'signature']) == signature:
+                    newTradeId = checkTrade.loc[0, 'tradeId']
+                else:
+                    newTradeId = np.nan
+
                 # Check for matches
-                data = pd.read_sql_query(
+                matchTrade = pd.read_sql_query(
                     'SELECT "tradeId" FROM "orderBook" WHERE "price" = %s AND "quantity" = %s AND "iMatched" = FALSE AND "iRemoved" = FALSE' % (p_, -q_), self.conn)               # Find a match
                 # Update
-                if not data.empty:
+                if not matchTrade.empty:
                     # Update iMatched for matching trades
                     self.conn.execute(
-                        'UPDATE "orderBook" SET "iMatched"= TRUE where "tradeId" IN (%s, (SELECT MAX("tradeId") FROM "orderBook"))' % (data['tradeId'][0]))
+                        'UPDATE "orderBook" SET "iMatched"= TRUE where "tradeId" IN (%s, (SELECT MAX("tradeId") FROM "orderBook"))' % (matchTrade['tradeId'][0]))
 
             # Clean up trades causing collateral to fail
             allClear = False
@@ -459,7 +469,7 @@ class BlocServer(object):
                 else:
                     self.killMarginalOpenTrade(tInd_)
 
-        return colChk, {'inputChk': inputChk, 'traderIdChk': traderIdChk, 'marketChk':marketChk, 'sigChk': sigChk, 'chainChk':chainChk,
+        return colChk, {'tradeId': newTradeId ,'inputChk': inputChk, 'traderIdChk': traderIdChk, 'marketChk':marketChk, 'sigChk': sigChk, 'chainChk':chainChk,
                             'timeChk': timeChk, 'colChk':colChk}
 
     # Collateral check
