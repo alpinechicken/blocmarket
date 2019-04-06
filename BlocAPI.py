@@ -166,7 +166,7 @@ def viewOrderBook():
     oB = oB[np.logical_not( oB['iRemoved']) & (oB['marketId']==marketId)]
     bs.conn.close()
      
-    return jsonify(oB.loc[:,['marketId', 'price', 'quantity', 'traderId', 'iMatched', 'timeStampUTC']].to_json())
+    return jsonify(oB.loc[:,['tradeId','marketId', 'price', 'quantity', 'traderId', 'iMatched', 'timeStampUTC']].to_json())
 
 
 # View order book
@@ -224,6 +224,64 @@ def viewTradeSummary():
     posSummary['marketMaxOutcome'] = (posSummary['marketMax'] - posSummary['price'])*posSummary['quantity']
 
     return jsonify(posSummary.to_json())
+
+@application.route('/viewTickHistory', methods=['POST'])
+def viewTickHistory():
+    #  Processed tick data with self
+    data = request.get_json()
+    marketId = data['marketId']
+    # Return order book
+    bs = BlocServer()
+    oB = pd.read_sql_table('orderBook', bs.conn)
+    # Sort by timeStampId
+    oB = oB.sort_values(by=['timeStampUTC'], ascending=True)
+    # numpy this or it's super slow
+    p = oB['price'].values
+    q = oB['quantity'].values
+    tradeId = oB['tradeId'].values
+    traderId = oB['traderId'].values
+    iMatched = oB['iMatched'].values
+    ts = oB['timeStampUTC'].values
+    xTradeId = tradeId*np.nan
+    ownCross = tradeId*False
+    ownTrade = tradeId*False
+
+    for iRow in range(len(p)):
+        if iMatched[iRow]:
+            # Find matching trade
+            mask = (p == p[iRow]) & (q == -1*q[iRow]) & (ts > ts[iRow])
+            if mask.any():
+                # Get first crossing trade and check if own trad
+                xTdId = tradeId[mask][0]
+                iOwnTrade = traderId[iRow] == traderId[mask][0]
+                # Record info
+                xTradeId[iRow] = xTdId
+                xTradeId[mask] = tradeId[iRow]
+                ownCross[mask] = iOwnTrade
+                ownTrade[mask] = iOwnTrade
+                ownTrade[iRow] = iOwnTrade
+
+    oB['xTradeId'] = xTradeId
+    oB['ownCross'] = ownCross
+    oB['ownTrade'] = ownTrade
+
+    # History of bids and asks excluding own crosses
+    bids = oB.loc[~oB['ownCross'] & (oB['quantity'] > 0), :].sort_values(by='price', ascending=False)
+    asks = oB.loc[~oB['ownCross'] & (oB['quantity'] < 0), :].sort_values(by='price', ascending=False)
+    trades = oB.loc[~oB['ownTrade'] & oB['iMatched'], :].sort_values(by='price', ascending=False)
+
+    bids['tickType'] = 'BID'
+    asks['tickType'] = 'ASK'
+    trades['tickType'] = 'TRADE'
+
+    tickHistory = pd.concat([bids, asks, trades])
+    tickHistory.reset_index(inplace=True)
+
+    bs.conn.close()
+
+    #return jsonify(tickHistory.loc[:,['tradeId','marketId', 'price', 'quantity', 'traderId', 'timeStampUTC', 'tickType']].to_json())
+    return jsonify(tickHistory[['tickType','tradeId', 'xTradeId' ,'marketId', 'price', 'quantity', 'traderId', 'iMatched', 'timeStampUTC']].to_json())
+
 
 
 # Local time server
