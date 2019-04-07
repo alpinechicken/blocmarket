@@ -3,8 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="f748aadd-a74f-4691-aa32-65bb3faaf10c" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/BlocAPI.py" beforeDir="false" afterPath="$PROJECT_DIR$/BlocAPI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Untitled2.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Untitled2.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/bots/BlocBot.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/doc/bots/BlocBot.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/bots/scratch/.ipynb_checkpoints/FXQuoteBot-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/doc/bots/scratch/.ipynb_checkpoints/FXQuoteBot-checkpoint.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/bots/scratch/FXQuoteBot.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/doc/bots/scratch/FXQuoteBot.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/slate" beforeDir="false" afterPath="$PROJECT_DIR$/slate" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/slate/source/index.html.md" beforeDir="false" afterPath="$PROJECT_DIR$/slate/source/index.html.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -302,8 +305,8 @@
           <entry key="Python Console" value="325" />
           <entry key="cell" value="35" />
           <entry key="html" value="147" />
-          <entry key="md" value="1179" />
-          <entry key="py" value="9685" />
+          <entry key="md" value="1248" />
+          <entry key="py" value="10110" />
           <entry key="sql" value="241" />
           <entry key="tmp" value="277" />
           <entry key="txt" value="1" />
@@ -314,9 +317,9 @@
           <entry key="HTML" value="147" />
           <entry key="JSON" value="22" />
           <entry key="JavaScript" value="1" />
-          <entry key="Markdown" value="1156" />
+          <entry key="Markdown" value="1223" />
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="11010" />
+          <entry key="Python" value="11437" />
           <entry key="SQL" value="241" />
           <entry key="Scratch" value="35" />
         </counts>
@@ -361,11 +364,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BlocAPI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="446">
-              <caret line="262" lean-forward="true" selection-start-line="262" selection-end-line="262" />
+            <state relative-caret-position="258">
+              <caret line="237" column="16" selection-start-line="237" selection-start-column="16" selection-end-line="237" selection-end-column="49" />
               <folding>
                 <element signature="e#1335#1376#0" expanded="true" />
               </folding>
@@ -373,12 +376,12 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/slate/source/index.html.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="3129">
-                <caret line="560" lean-forward="true" selection-start-line="560" selection-end-line="560" />
+              <first_editor relative-caret-position="292">
+                <caret line="496" column="115" selection-start-line="496" selection-start-column="115" selection-end-line="496" selection-end-column="115" />
               </first_editor>
               <second_editor />
             </state>
@@ -543,7 +546,7 @@
   </component>
   <component name="Git.Settings">
     <option name="UPDATE_TYPE" value="MERGE" />
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/slate" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="testbranch" />
@@ -602,8 +605,8 @@
         <option value="$PROJECT_DIR$/doc/BlocAPI.ipynb" />
         <option value="$PROJECT_DIR$/doc/bots/BlocBot.py" />
         <option value="$PROJECT_DIR$/bloc/BlocServer.py" />
-        <option value="$PROJECT_DIR$/BlocAPI.py" />
         <option value="$PROJECT_DIR$/slate/source/index.html.md" />
+        <option value="$PROJECT_DIR$/BlocAPI.py" />
       </list>
     </option>
   </component>
@@ -1248,7 +1251,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/BlocAPI.py</url>
-          <line>92</line>
+          <line>93</line>
           <option name="timeStamp" value="837" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1719,23 +1722,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BlocAPI.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="446">
-          <caret line="262" lean-forward="true" selection-start-line="262" selection-end-line="262" />
-          <folding>
-            <element signature="e#1335#1376#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/slate/source/index.html.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="3129">
-            <caret line="560" lean-forward="true" selection-start-line="560" selection-end-line="560" />
+          <first_editor relative-caret-position="292">
+            <caret line="496" column="115" selection-start-line="496" selection-start-column="115" selection-end-line="496" selection-end-column="115" />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BlocAPI.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="237" column="16" selection-start-line="237" selection-start-column="16" selection-end-line="237" selection-end-column="49" />
+          <folding>
+            <element signature="e#1335#1376#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -46,6 +46,7 @@ import json
 import numpy as np
 import pandas as pd
 import traceback
+from datetime import datetime
 
 application = Flask(__name__)
 
@@ -230,9 +231,16 @@ def viewTickHistory():
     #  Processed tick data with self
     data = request.get_json()
     marketId = data['marketId']
+    # Start and end time expected as unix timestamps in UTC
+    startTime = data['startTime']
+    endTime = data['endTime']
+    # Convert dates to datetime
+    startTime = datetime.fromtimestamp(startTime)
+    endTime = datetime.fromtimestamp(endTime)
     # Return order book
     bs = BlocServer()
     oB = pd.read_sql_table('orderBook', bs.conn)
+    oB = oB.loc[(oB['marketId']==marketId) & (oB['timeStampUTC'] > startTime) & (oB['timeStampUTC']< endTime)]
     # Sort by timeStampId
     oB = oB.sort_values(by=['timeStampUTC'], ascending=True)
     # numpy this or it's super slow
@@ -279,7 +287,6 @@ def viewTickHistory():
 
     bs.conn.close()
 
-    #return jsonify(tickHistory.loc[:,['tradeId','marketId', 'price', 'quantity', 'traderId', 'timeStampUTC', 'tickType']].to_json())
     return jsonify(tickHistory[['tickType','tradeId', 'xTradeId' ,'marketId', 'price', 'quantity', 'traderId', 'iMatched', 'timeStampUTC']].to_json())
 
 
