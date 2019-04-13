@@ -234,9 +234,9 @@ def viewTickHistory():
     # Start and end time expected as unix timestamps in UTC
     startTime = data['startTime']
     endTime = data['endTime']
-    # Convert dates to datetime
-    startTime = datetime.fromtimestamp(startTime)
-    endTime = datetime.fromtimestamp(endTime)
+    # Convert dates to datetime (Use UTC stamp * 1000 format so it's consistent with what comes back from datetimes)
+    startTime = datetime.fromtimestamp(startTime/1000)
+    endTime = datetime.fromtimestamp(endTime/1000)
     # Return order book
     bs = BlocServer()
     oB = pd.read_sql_table('orderBook', bs.conn)
