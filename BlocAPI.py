@@ -289,7 +289,31 @@ def viewTickHistory():
 
     return jsonify(tickHistory[['tickType','tradeId', 'xTradeId' ,'marketId', 'price', 'quantity', 'traderId', 'iMatched', 'timeStampUTC']].to_json())
 
+@application.route('/checkCollateral', methods=['POST'])
+def checkCollateral():
+    # Will work with or without price/quantity/market
+    data = request.get_json()
+    traderId = data['traderId']
+    if 'price' in data:
+        price = data['price']
+        quantity = data['quantity']
+        marketId = data['marketId']
+    else:
+        price = []
+        quantity = []
+        marketId = []
 
+    bs = BlocServer()
+    bs.updateOutcomeCombinations()
+    colChk, collateralDetails = bs.checkCollateral(p_=price, q_=quantity, mInd_=marketId, tInd_= traderId )
+
+
+    return jsonify({'colChk': str(colChk),
+                    'traderId': traderId,
+                    'price': price,
+                    'quantity': quantity,
+                    'marketId': marketId,
+                    'allChecks': str(collateralDetails)})
 
 # Local time server
 @application.route('/getSignedUTCTimestamp')
