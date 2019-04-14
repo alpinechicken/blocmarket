@@ -313,7 +313,8 @@ def checkCollateral():
                     'price': price,
                     'quantity': quantity,
                     'marketId': marketId,
-                    'allChecks': str(collateralDetails)})
+                    'outcomes': str(collateralDetails['outcomes']),
+                    'worstCollateral': str(collateralDetails['worstCollateral'])})
 
 # Local time server
 @application.route('/getSignedUTCTimestamp')
