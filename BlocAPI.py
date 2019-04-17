@@ -314,7 +314,7 @@ def checkCollateral():
                     'quantity': quantity,
                     'marketId': marketId,
                     'outcomes': str(collateralDetails['outcomes']),
-                    'worstCollateral': str(collateralDetails['worstCollateral'])})
+                    'worstCollateral': np.min(collateralDetails['worstCollateral'])})
 
 # Local time server
 @application.route('/getSignedUTCTimestamp')

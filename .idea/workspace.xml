@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f748aadd-a74f-4691-aa32-65bb3faaf10c" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/BlocAPI.py" beforeDir="false" afterPath="$PROJECT_DIR$/BlocAPI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/BlocAPI.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/doc/BlocAPI.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/slate" beforeDir="false" afterPath="$PROJECT_DIR$/slate" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/slate/source/index.html.md" beforeDir="false" afterPath="$PROJECT_DIR$/slate/source/index.html.md" afterDir="false" />
     </list>
@@ -303,7 +304,7 @@
           <entry key="cell" value="35" />
           <entry key="html" value="147" />
           <entry key="md" value="1248" />
-          <entry key="py" value="10936" />
+          <entry key="py" value="10950" />
           <entry key="sql" value="337" />
           <entry key="tmp" value="277" />
           <entry key="txt" value="1" />
@@ -316,7 +317,7 @@
           <entry key="JavaScript" value="1" />
           <entry key="Markdown" value="1223" />
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="12622" />
+          <entry key="Python" value="12636" />
           <entry key="SQL" value="337" />
           <entry key="Scratch" value="35" />
         </counts>
@@ -365,11 +366,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BlocAPI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="316" column="82" lean-forward="true" selection-start-line="316" selection-start-column="82" selection-end-line="316" selection-end-column="82" />
+            <state relative-caret-position="255">
+              <caret line="315" column="66" selection-start-line="315" selection-start-column="66" selection-end-line="315" selection-end-column="66" />
               <folding>
                 <element signature="e#1335#1376#0" expanded="true" />
-                <marker date="1555211771760" expanded="true" signature="11126:11913" ph="..." />
+                <marker date="1555501203922" expanded="true" signature="11126:11916" ph="..." />
               </folding>
             </state>
           </provider>
@@ -1691,11 +1692,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BlocAPI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="316" column="82" lean-forward="true" selection-start-line="316" selection-start-column="82" selection-end-line="316" selection-end-column="82" />
+        <state relative-caret-position="255">
+          <caret line="315" column="66" selection-start-line="315" selection-start-column="66" selection-end-line="315" selection-end-column="66" />
           <folding>
             <element signature="e#1335#1376#0" expanded="true" />
-            <marker date="1555211771760" expanded="true" signature="11126:11913" ph="..." />
+            <marker date="1555501203922" expanded="true" signature="11126:11916" ph="..." />
           </folding>
         </state>
       </provider>
