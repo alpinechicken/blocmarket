@@ -259,7 +259,7 @@ def viewTickHistory():
             # Find matching trade
             mask = (p == p[iRow]) & (q == -1*q[iRow]) & (ts > ts[iRow])
             if mask.any():
-                # Get first crossing trade and check if own trad
+                # Get first crossing trade and check if own trade
                 xTdId = tradeId[mask][0]
                 iOwnTrade = traderId[iRow] == traderId[mask][0]
                 # Record info
@@ -282,7 +282,7 @@ def viewTickHistory():
     asks['tickType'] = 'ASK'
     trades['tickType'] = 'TRADE'
 
-    tickHistory = pd.concat([bids, asks, trades])
+    tickHistory = pd.concat([bids, asks, trades]).sort_values(by='timeStampUTC')
     tickHistory.reset_index(inplace=True)
 
     bs.conn.close()

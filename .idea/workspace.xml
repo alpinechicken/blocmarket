@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f748aadd-a74f-4691-aa32-65bb3faaf10c" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/44b3f4d7-b859-43f8-977b-3a83e5a88e6d.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/44b3f4d7-b859-43f8-977b-3a83e5a88e6d.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/44b3f4d7-b859-43f8-977b-3a83e5a88e6d/storage_v2/_src_/database/dfi33hnqjs2hjj.A2pisg/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/44b3f4d7-b859-43f8-977b-3a83e5a88e6d/storage_v2/_src_/database/dfi33hnqjs2hjj.A2pisg/schema/public.abK9xQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BlocAPI.py" beforeDir="false" afterPath="$PROJECT_DIR$/BlocAPI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/.ipynb_checkpoints/BlocAPI-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/doc/.ipynb_checkpoints/BlocAPI-checkpoint.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/BlocAPI.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/doc/BlocAPI.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/bots/BlocBot.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/doc/bots/BlocBot.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/slate" beforeDir="false" afterPath="$PROJECT_DIR$/slate" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/slate/source/index.html.md" beforeDir="false" afterPath="$PROJECT_DIR$/slate/source/index.html.md" afterDir="false" />
     </list>
@@ -43,7 +48,7 @@
     <SUITE FILE_PATH="coverage/pmarket$untitled.coverage" NAME="untitled Coverage Results" MODIFIED="1539865728573" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/pmarket$Unittests_for_test_MarketServer_TestMarketServer_testMatchTrade.coverage" NAME="Unittests for test_MarketServer.TestMarketServer.testMatchTrade Coverage Results" MODIFIED="1530704993613" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/blocmarket$tmp__1_.coverage" NAME="tmp (1) Coverage Results" MODIFIED="1553319582919" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/doc/bots" />
-    <SUITE FILE_PATH="coverage/blocmarket$Unittests_in_test_BlocServer_py.coverage" NAME="Unittests in test_BlocServer.py Coverage Results" MODIFIED="1553320018387" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/blocmarket$Unittests_in_test_BlocServer_py.coverage" NAME="Unittests in test_BlocServer.py Coverage Results" MODIFIED="1555805878004" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/pmarket$Unittests_for_test_MarketServer_TestMarketServer_test_tradeMaker.coverage" NAME="Unittests for test_MarketServer.TestMarketServer.test_tradeMaker Coverage Results" MODIFIED="1530704793624" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pmarket$MarketObjectSQL.coverage" NAME="MarketObjectSQL Coverage Results" MODIFIED="1487486462183" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
@@ -115,30 +120,6 @@
         <item name="dfi33hnqjs2hjj@ec2-54-225-227-125.compute-1.amazonaws.com" type="feb32156:DbDataSourceImpl" />
         <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="dfi33hnqjs2hjj: database" type="6d9b600a:PostgresImplModel$Database" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="dfi33hnqjs2hjj@ec2-54-225-227-125.compute-1.amazonaws.com" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="dfi33hnqjs2hjj: database" type="6d9b600a:PostgresImplModel$Database" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="dfi33hnqjs2hjj@ec2-54-225-227-125.compute-1.amazonaws.com" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="dfi33hnqjs2hjj: database" type="6d9b600a:PostgresImplModel$Database" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="public: schema" type="a16502c0:PostgresImplModel$Schema" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="dfi33hnqjs2hjj@ec2-54-225-227-125.compute-1.amazonaws.com" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="dfi33hnqjs2hjj: database" type="6d9b600a:PostgresImplModel$Database" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="public: schema" type="a16502c0:PostgresImplModel$Schema" />
-        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
       </path>
     </expand>
     <select />
@@ -300,11 +281,11 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="BlocClient" value="723" />
-          <entry key="Python Console" value="684" />
+          <entry key="Python Console" value="1053" />
           <entry key="cell" value="35" />
           <entry key="html" value="147" />
           <entry key="md" value="1248" />
-          <entry key="py" value="10950" />
+          <entry key="py" value="11206" />
           <entry key="sql" value="337" />
           <entry key="tmp" value="277" />
           <entry key="txt" value="1" />
@@ -317,7 +298,7 @@
           <entry key="JavaScript" value="1" />
           <entry key="Markdown" value="1223" />
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="12636" />
+          <entry key="Python" value="13261" />
           <entry key="SQL" value="337" />
           <entry key="Scratch" value="35" />
         </counts>
@@ -325,31 +306,31 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="html" value="1" />
-          <entry key="ipynb" value="4" />
+          <entry key="ipynb" value="6" />
           <entry key="log" value="5" />
-          <entry key="marketBounds" value="33" />
+          <entry key="marketBounds" value="34" />
           <entry key="marketTable" value="50" />
           <entry key="md" value="6" />
-          <entry key="orderBook" value="31" />
+          <entry key="orderBook" value="32" />
           <entry key="outcomeCombinations" value="25" />
-          <entry key="py" value="24" />
+          <entry key="py" value="27" />
           <entry key="sh" value="1" />
           <entry key="sql" value="1" />
           <entry key="timeStampServerTable" value="6" />
-          <entry key="txt" value="12" />
-          <entry key="userTable" value="36" />
+          <entry key="txt" value="13" />
+          <entry key="userTable" value="37" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Bash" value="1" />
-          <entry key="Database Element" value="181" />
+          <entry key="Database Element" value="184" />
           <entry key="HTML" value="1" />
-          <entry key="IPNB" value="4" />
+          <entry key="IPNB" value="6" />
           <entry key="Log" value="1" />
           <entry key="Markdown" value="6" />
-          <entry key="PLAIN_TEXT" value="16" />
-          <entry key="Python" value="24" />
+          <entry key="PLAIN_TEXT" value="17" />
+          <entry key="Python" value="27" />
           <entry key="Scratch" value="1" />
         </counts>
       </usages-collector>
@@ -366,11 +347,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BlocAPI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="315" column="66" selection-start-line="315" selection-start-column="66" selection-end-line="315" selection-end-column="66" />
+            <state relative-caret-position="-3319">
+              <caret line="71" selection-start-line="71" selection-end-line="71" />
               <folding>
                 <element signature="e#1335#1376#0" expanded="true" />
-                <marker date="1555501203922" expanded="true" signature="11126:11916" ph="..." />
+                <marker date="1555732958201" expanded="true" signature="11158:11948" ph="..." />
               </folding>
             </state>
           </provider>
@@ -379,8 +360,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/doc/bots/BlocBot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="775">
-              <caret line="128" selection-start-line="128" selection-end-line="128" />
+            <state relative-caret-position="134">
+              <caret line="51" column="33" lean-forward="true" selection-start-line="51" selection-start-column="33" selection-end-line="51" selection-end-column="33" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
                 <marker date="1553942251540" expanded="true" signature="126:198" ph="..." />
@@ -392,8 +373,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bloc/BlocServer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-856">
-              <caret line="497" column="41" lean-forward="true" selection-start-line="497" selection-start-column="41" selection-end-line="497" selection-end-column="41" />
+            <state relative-caret-position="232">
+              <caret line="20" selection-start-line="20" selection-end-line="20" />
               <folding>
                 <element signature="e#15#33#0" expanded="true" />
               </folding>
@@ -402,10 +383,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/test_BlocServer.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-49">
+              <caret line="44" column="56" selection-start-line="44" selection-start-column="56" selection-end-line="44" selection-end-column="56" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/doc/bots/Rise.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="712">
-              <caret line="58" column="12" selection-start-line="58" selection-start-column="12" selection-end-line="58" selection-end-column="78" />
+            <state relative-caret-position="525">
+              <caret line="35" column="28" selection-start-line="35" selection-start-column="28" selection-end-line="35" selection-end-column="28" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -414,32 +404,24 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/orderBook">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true">
-                <filter text="price = 4062.99" />
-              </filtering>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/doc/BlocMarket.ipynb">
-          <provider selected="true" editor-type-id="ipnb-editor">
-            <state>
-              <selected id="0" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bloc/BlocClient.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="554">
-              <caret line="139" column="5" selection-start-line="139" selection-start-column="5" selection-end-line="139" selection-end-column="5" />
+            <state relative-caret-position="15">
+              <caret line="115" column="41" selection-start-line="115" selection-start-column="36" selection-end-line="115" selection-end-column="41" />
               <folding>
                 <element signature="e#1#20#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bloc/BlocTime.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="18" column="22" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
+              <folding>
+                <element signature="e#2#17#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -459,7 +441,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>createTrad</find>
       <find>newTrad</find>
       <find>insert</find>
       <find>timesS</find>
@@ -489,6 +470,7 @@
       <find>err</find>
       <find>checkColl</find>
       <find>updateOut</find>
+      <find>DEC</find>
     </findStrings>
     <replaceStrings>
       <replace>value</replace>
@@ -565,7 +547,6 @@
         <option value="$PROJECT_DIR$/blocAPI_borto.py" />
         <option value="$PROJECT_DIR$/tests/test_BlocServer.py" />
         <option value="$PROJECT_DIR$/bloc/tmp.py" />
-        <option value="$PROJECT_DIR$/bloc/BlocClient.py" />
         <option value="$PROJECT_DIR$/forms/createMarket.html" />
         <option value="$PROJECT_DIR$/doc/Rise.py" />
         <option value="$PROJECT_DIR$/doc/bots/tmp.py" />
@@ -575,8 +556,9 @@
         <option value="$PROJECT_DIR$/doc/BlocAPI.ipynb" />
         <option value="$PROJECT_DIR$/doc/bots/BlocBot.py" />
         <option value="$PROJECT_DIR$/slate/source/index.html.md" />
-        <option value="$PROJECT_DIR$/bloc/BlocServer.py" />
         <option value="$PROJECT_DIR$/BlocAPI.py" />
+        <option value="$PROJECT_DIR$/bloc/BlocClient.py" />
+        <option value="$PROJECT_DIR$/bloc/BlocServer.py" />
       </list>
     </option>
   </component>
@@ -614,6 +596,12 @@
               <item name="blocmarket" type="b2602c69:ProjectViewProjectNode" />
               <item name="blocmarket" type="462c0819:PsiDirectoryNode" />
               <item name="doc" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="blocmarket" type="b2602c69:ProjectViewProjectNode" />
+              <item name="blocmarket" type="462c0819:PsiDirectoryNode" />
+              <item name="doc" type="462c0819:PsiDirectoryNode" />
+              <item name="bots" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -664,7 +652,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Rise">
+  <component name="RunManager" selected="Python tests.Unittests in test_BlocServer.py">
     <configuration default="true" type="tests" factoryName="Attests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -773,9 +761,6 @@
       <module name="untitled" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/doc/bots" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -956,8 +941,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Rise" />
         <item itemvalue="Python tests.Unittests in test_BlocServer.py" />
+        <item itemvalue="Python.Rise" />
         <item itemvalue="Python.tmp (1)" />
         <item itemvalue="Python tests.Unittests for test_BlocServer.TestBlocServer.testSettleMarketUp" />
         <item itemvalue="Python.BlocClient" />
@@ -1070,9 +1055,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_in_test_BlocServer_py - 2019.03.17 at 08h 47m 23s.xml">
-      <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unittests_in_test_BlocServer_py - 2019.03.17 at 08h 55m 03s.xml">
       <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
     </history-entry>
@@ -1100,6 +1082,9 @@
     <history-entry file="Unittests_in_test_BlocServer_py - 2019.03.23 at 15h 47m 09s.xml">
       <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
     </history-entry>
+    <history-entry file="Unittests_in_test_BlocServer_py - 2019.04.21 at 10h 18m 07s.xml">
+      <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1114,12 +1099,12 @@
     <frame x="113" y="23" width="1567" height="947" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4686825" visible="true" weight="0.21114755" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4686825" visible="true" weight="0.21114755" />
       <window_info id="Structure" order="1" sideWeight="0.5313175" side_tool="true" weight="0.32030585" />
       <window_info id="Favorites" order="2" sideWeight="0.50385606" side_tool="true" weight="0.19170243" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49713877" weight="0.32664093" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.53907204" weight="0.17451738" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.53907204" visible="true" weight="0.174269" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.56105006" weight="0.3065442" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -1131,14 +1116,14 @@
       <window_info anchor="bottom" id="Database Changes" order="11" sideWeight="0.49213162" weight="0.32265446" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="13" sideWeight="0.4971061" weight="0.32608697" />
-      <window_info anchor="bottom" id="Python Console" order="14" sideWeight="0.4945055" visible="true" weight="0.25847954" />
+      <window_info anchor="bottom" id="Python Console" order="14" sideWeight="0.4945055" weight="0.25847954" />
       <window_info anchor="bottom" id="Inspection Results" order="15" weight="0.33333334" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Database" order="3" sideWeight="0.48883048" visible="true" weight="0.18819672" />
+      <window_info active="true" anchor="right" id="Database" order="3" sideWeight="0.48883048" visible="true" weight="0.18819672" />
       <window_info anchor="right" id="Coverage" order="4" side_tool="true" />
-      <window_info anchor="right" id="SciView" order="5" sideWeight="0.48357424" weight="0.25030527" />
+      <window_info anchor="right" id="SciView" order="5" sideWeight="0.48357424" weight="0.24983607" />
       <window_info anchor="right" id="Data View" order="6" weight="0.32861736" />
       <window_info anchor="right" x="0" y="0" width="353" height="713" id="Documentation" order="7" sideWeight="0.5111695" side_tool="true" weight="0.3363344" />
       <window_info anchor="right" id="R Graphics" order="8" weight="0.32905984" />
@@ -1208,11 +1193,6 @@
           <url>file://$USER_HOME$/AppData/Local/Programs/Python/Python35-32/src/pmarket/MarketServer.py</url>
           <line>1001</line>
           <option name="timeStamp" value="587" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/BlocAPI.py</url>
-          <line>93</line>
-          <option name="timeStamp" value="837" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/tests/test_BlocServer.py</url>
@@ -1383,7 +1363,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/tests/test_MarketClient.py" />
     <entry file="file://$PROJECT_DIR$/bloc/BlocMarket.py" />
     <entry file="file://$PROJECT_DIR$/tests/test_MarketServer.py" />
     <entry file="file://$PROJECT_DIR$/venv/lib/python3.7/site-packages/pandas/core/generic.py">
@@ -1415,16 +1394,6 @@
     <entry file="file://$PROJECT_DIR$/regtest.py" />
     <entry file="file://$PROJECT_DIR$/setup.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bloc/BlocTime.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="38" column="56" selection-start-line="38" selection-start-column="56" selection-end-line="38" selection-end-column="56" />
-          <folding>
-            <element signature="e#2#17#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/44b3f4d7-b859-43f8-977b-3a83e5a88e6d/console.sql">
       <provider selected="true" editor-type-id="text-editor" />
@@ -1459,23 +1428,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/forms/createMarket.html" />
-    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/dfi33hnqjs2hjj/schema/public/table/userTable">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/dfi33hnqjs2hjj/schema/public/table/marketBounds">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-          <column-attributes>
-            <column name="ctid" enabled="false" />
-          </column-attributes>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/slate/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -1498,13 +1450,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="975">
           <caret line="65" column="37" lean-forward="true" selection-start-line="65" selection-start-column="37" selection-end-line="65" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_BlocServer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1395">
-          <caret line="93" column="53" selection-start-line="93" selection-start-column="53" selection-end-line="93" selection-end-column="53" />
         </state>
       </provider>
     </entry>
@@ -1569,39 +1514,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/doc/BlocMarket.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/doc/BlocAPI.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/botlog.log">
       <provider selected="true" editor-type-id="LogFileEditorProvider" />
-    </entry>
-    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/dfi33hnqjs2hjj/schema/public/table/orderBook">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" text="price =0.1">
-            <filter text="price =0.1" />
-            <filter text="price =0.44" />
-            <filter text="&quot;tradeId&quot;=21832" />
-            <filter text="&quot;tradeId&quot;=21831" />
-            <filter text="&quot;tradeId&quot;=21829" />
-            <filter text="&quot;price&quot;= 0.23" />
-            <filter text="&quot;tradeId&quot;= 21825" />
-            <filter text="&quot;tradeId&quot; = (select max(&quot;tradeId&quot;) from &quot;orderBook&quot;)" />
-            <filter text="&quot;iMatched&quot;= FALSE" />
-          </filtering>
-        </state>
-      </provider>
     </entry>
     <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/dfi33hnqjs2hjj/schema/public/table/marketTable">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
@@ -1610,27 +1524,6 @@
           <column-attributes>
             <column name="ctid" enabled="false" />
           </column-attributes>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/doc/bots/Rise.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="712">
-          <caret line="58" column="12" selection-start-line="58" selection-start-column="12" selection-end-line="58" selection-end-column="78" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/doc/bots/BlocBot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="775">
-          <caret line="128" selection-start-line="128" selection-end-line="128" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-            <marker date="1553942251540" expanded="true" signature="126:198" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1661,6 +1554,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/dfi33hnqjs2hjj/schema/public/table/marketBounds">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+          <column-attributes>
+            <column name="ctid" enabled="false" />
+          </column-attributes>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/dfi33hnqjs2hjj/schema/public/table/userTable">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/dfi33hnqjs2hjj/schema/public/table/orderBook">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" text="&quot;">
+            <filter text="price =0.1" />
+            <filter text="price =0.44" />
+            <filter text="&quot;tradeId&quot;=21832" />
+            <filter text="&quot;tradeId&quot;=21831" />
+            <filter text="&quot;tradeId&quot;=21829" />
+            <filter text="&quot;price&quot;= 0.23" />
+            <filter text="&quot;tradeId&quot;= 21825" />
+            <filter text="&quot;tradeId&quot; = (select max(&quot;tradeId&quot;) from &quot;orderBook&quot;)" />
+            <filter text="&quot;iMatched&quot;= FALSE" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
     <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/orderBook">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -1670,10 +1597,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/doc/BlocMarket.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bloc/BlocTime.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="22" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
+          <folding>
+            <element signature="e#2#17#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/bots/Rise.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="35" column="28" selection-start-line="35" selection-start-column="28" selection-end-line="35" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/bloc/BlocClient.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="554">
-          <caret line="139" column="5" selection-start-line="139" selection-start-column="5" selection-end-line="139" selection-end-column="5" />
+        <state relative-caret-position="15">
+          <caret line="115" column="41" selection-start-line="115" selection-start-column="36" selection-end-line="115" selection-end-column="41" />
           <folding>
             <element signature="e#1#20#0" expanded="true" />
           </folding>
@@ -1682,21 +1636,49 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bloc/BlocServer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-856">
-          <caret line="497" column="41" lean-forward="true" selection-start-line="497" selection-start-column="41" selection-end-line="497" selection-end-column="41" />
+        <state relative-caret-position="232">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
           <folding>
             <element signature="e#15#33#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/doc/BlocAPI.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_BlocServer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-49">
+          <caret line="44" column="56" selection-start-line="44" selection-start-column="56" selection-end-line="44" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/matlabinterface.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/bots/BlocBot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="51" column="33" lean-forward="true" selection-start-line="51" selection-start-column="33" selection-end-line="51" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+            <marker date="1553942251540" expanded="true" signature="126:198" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/BlocAPI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="315" column="66" selection-start-line="315" selection-start-column="66" selection-end-line="315" selection-end-column="66" />
+        <state relative-caret-position="-3319">
+          <caret line="71" selection-start-line="71" selection-end-line="71" />
           <folding>
             <element signature="e#1335#1376#0" expanded="true" />
-            <marker date="1555501203922" expanded="true" signature="11126:11916" ph="..." />
+            <marker date="1555732958201" expanded="true" signature="11158:11948" ph="..." />
           </folding>
         </state>
       </provider>
