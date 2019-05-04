@@ -55,8 +55,8 @@ class BlocServer(object):
         # matched, and linked trades
         self.orderBook = Table('orderBook', self.metadata,
                                Column('tradeId', Integer, primary_key=True, autoincrement=True),
-                               Column('price', Float),
-                               Column('quantity', Float),
+                               Column('price', Integer),
+                               Column('quantity', Integer),
                                Column('marketId', Integer),
                                Column('traderId', Integer,),
                                Column('previousSig', LargeBinary),
@@ -72,8 +72,8 @@ class BlocServer(object):
                                  Column('marketRootId', Integer),
                                  Column('marketBranchId', Integer),
                                  Column('marketId', Integer),
-                                 Column('marketMin', Float),
-                                 Column('marketMax', Float),
+                                 Column('marketMin', Integer),
+                                 Column('marketMax', Integer),
                                  Column('traderId', Integer),
                                  Column('previousSig', LargeBinary),
                                  Column('signature', LargeBinary),
@@ -87,8 +87,8 @@ class BlocServer(object):
                                   Column('marketBounds', Integer),
                                   Column('marketRootId', Integer),
                                   Column('marketBranchId', Integer),
-                                  Column('marketMin', Float),
-                                  Column('marketMax', Float),
+                                  Column('marketMin', Integer),
+                                  Column('marketMax', Integer),
                                   )
 
         # Market state (possible combinations)
@@ -96,8 +96,8 @@ class BlocServer(object):
                                          Column('outcomeId', Integer, primary_key=True),
                                          Column('marketRootId', Integer),
                                          Column('marketBranchId', Integer),
-                                         Column('marketMin', Float),
-                                         Column('marketMax', Float),
+                                         Column('marketMin', Integer),
+                                         Column('marketMax', Integer),
                                          )
 
 
@@ -203,8 +203,8 @@ class BlocServer(object):
             # Return new user
             return newUsrRow.loc[0].to_dict()
 
-    def createMarket(self, marketRootId: int, marketBranchId: int, marketMin: float,\
-                     marketMax: float, traderId: int, previousSig: bytes,\
+    def createMarket(self, marketRootId: int, marketBranchId: int, marketMin: int,\
+                     marketMax: int, traderId: int, previousSig: bytes,\
                      signature: bytes, verifyKey: str, marketDesc: str) -> bool:
             """
             Create a new row in marketTable. Update existing market
@@ -234,13 +234,13 @@ class BlocServer(object):
             try:
                 marketRootId = np.int64(marketRootId)
                 marketBranchId = np.int64(marketBranchId)
-                marketMin = float(marketMin)
-                marketMax = float(marketMax)
+                marketMin = np.int64(marketMin)
+                marketMax = np.int64(marketMax)
                 traderId = np.int64(traderId)
                 assert isinstance(marketRootId, np.int64) and marketRootId>0
                 assert isinstance(marketBranchId, np.int64) and marketBranchId >0
-                assert isinstance(marketMin, float)
-                assert isinstance(marketMax, float)
+                assert isinstance(marketMin, np.int64)
+                assert isinstance(marketMax, np.int64)
                 assert isinstance(traderId, np.int64) and traderId >0
                 inputChk = True
             except:
@@ -349,7 +349,7 @@ class BlocServer(object):
                             'ownerChk':ownerChk,  'timeChk': timeChk}
 
 
-    def createTrade(self, p_: float, q_: float, mInd_: int, tInd_: int, previousSig: bytes, signature: bytes, verifyKey: str)->bool:
+    def createTrade(self, p_: int, q_: int, mInd_: int, tInd_: int, previousSig: bytes, signature: bytes, verifyKey: str)->bool:
 
         """
         Create a new row in marketTable. Update existing market with new bounds if market already exists.
@@ -370,12 +370,14 @@ class BlocServer(object):
         # Force/check inputs
 
         try:
-            p_ = round(float(p_), self.DECIMAL_LIMIT)
-            q_ = round(float(q_), self.DECIMAL_LIMIT)
+            #p_ = round(float(p_), self.DECIMAL_LIMIT)
+            #q_ = round(float(q_), self.DECIMAL_LIMIT)
+            p_ = np.int64(p_)
+            q_ = np.int64(q_)
             mInd_ = np.int64(mInd_)
             tInd = np.int64(tInd_)
-            assert isinstance(p_, float)
-            assert isinstance(q_, float)
+            assert isinstance(p_, np.int64)
+            assert isinstance(q_, np.int64)
             assert isinstance(mInd_, np.int64) and mInd_ > 0
             assert isinstance(tInd, np.int64) and mInd_ > 0
             inputChk = True
@@ -505,10 +507,10 @@ class BlocServer(object):
         # Get p, q, mInd, tInd for trader
         data = pd.read_sql_query('SELECT "price", "quantity", "marketId", "traderId", "iMatched" FROM "orderBook" WHERE "traderId" = \'%s\' AND "iRemoved" = FALSE' % (tInd_),
                                                self.conn)
-        self.p = data['price']
-        self.q = data['quantity']
-        self.mInd = data['marketId']  # (sort out unique marketId)
-        self.tInd = data['traderId']
+        self.p = np.int64(data['price'])
+        self.q = np.int64(data['quantity'])
+        self.mInd = np.int64(data['marketId'])  # (sort out unique marketId)
+        self.tInd = np.int64(data['traderId'])
         self.iMatched = data['iMatched']
         # Test by appending test trade
         p = np.array(np.append(self.p, p_))
@@ -636,16 +638,16 @@ class BlocServer(object):
         # states.
         self.marketOutcomes = M
 
-    def updateBounds(self, L: float, U: float, l: float, u: float) -> object:
+    def updateBounds(self, L: int, U: int, l: int, u: int) -> object:
         """Update bounds from lower branches
 
         :param: L: (ndarray) lower bound for current market
         :param: U: (ndarray) upper bound for current market
-        :param: l: (float64) lower bound for lower branches
-        :param: u: (float64) upper bound for lower branches
+        :param: l: (int64) lower bound for lower branches
+        :param: u: (int64) upper bound for lower branches
 
-        :return: L_new: (float64) new lower bound
-        :return: U_new: (float64) new upper bound
+        :return: L_new: (int64) new lower bound
+        :return: U_new: (int64) new upper bound
 
 
         .. note::

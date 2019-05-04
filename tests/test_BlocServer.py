@@ -14,7 +14,7 @@ class TestBlocServer(unittest.TestCase):
         cls.bs = BlocServer()
         cls.bs.purgeTables()
         # Ovewrite with collateral = 2
-        cls.bs.COLLATERAL_LIMIT = 2
+        cls.bs.COLLATERAL_LIMIT = 2000
         # Pull user table to ensure is empty
         tmpUserTable = pd.read_sql_table('userTable', cls.bs.conn)
         # Generate signature keys for two traders
@@ -36,22 +36,22 @@ class TestBlocServer(unittest.TestCase):
         marketRow = pd.DataFrame({'marketRootId': [1],
                                   'marketBranchId': [1],
                                   'marketMin': [0],
-                                  'marketMax': [1],
+                                  'marketMax': [1000],
                                   'traderId': [int(self.trader0)],
                                   'marketDesc': 'This is a market with a name.'})
         self.bc1.createMarket_client(marketRow=marketRow, blocServer=self.bs)
 
         marketRow = pd.DataFrame({'marketRootId': [1],
                                   'marketBranchId': [2],
-                                  'marketMin': [0.1],
-                                  'marketMax': [0.9],
+                                  'marketMin': [100],
+                                  'marketMax': [900],
                                   'traderId': [int(self.trader0)]})
         self.bc1.createMarket_client(marketRow=marketRow, blocServer=self.bs)
 
         marketRow = pd.DataFrame({'marketRootId': [2],
                                   'marketBranchId': [1],
                                   'marketMin': [0],
-                                  'marketMax': [1],
+                                  'marketMax': [1000],
                                   'traderId': [int(self.trader0)]})
         self.bc1.createMarket_client(marketRow=marketRow, blocServer=self.bs)
         assert len(pd.read_sql_table('marketTable', self.bs.conn))==3
@@ -62,7 +62,7 @@ class TestBlocServer(unittest.TestCase):
         marketRow = pd.DataFrame({'marketRootId': [1],
                                   'marketBranchId': [1],
                                   'marketMin': [0],
-                                  'marketMax': [1],
+                                  'marketMax': [1000],
                                   'traderId': [int(self.trader1)]})
         self.bc2.createMarket_client(marketRow=marketRow, blocServer=self.bs)
         assert len(pd.read_sql_table('marketTable', self.bs.conn)) == 3
@@ -73,7 +73,7 @@ class TestBlocServer(unittest.TestCase):
         #  Make a trade
         prevTrade = self.bs.getPreviousOrder()
         tradeRow = pd.DataFrame({'marketId': [1],
-                                 'price': [0.5],
+                                 'price': [500],
                                  'quantity': [1],
                                  'traderId': [int(self.trader0)]})
         a = self.bc1.tradeMaker(prevTrade=prevTrade, tradeRow=tradeRow)
@@ -84,15 +84,15 @@ class TestBlocServer(unittest.TestCase):
     def testSettleMarketUp(self):
         marketRow = pd.DataFrame({'marketRootId': [1],
                                   'marketBranchId': [1],
-                                  'marketMin': [1],
-                                  'marketMax': [1],
+                                  'marketMin': [1000],
+                                  'marketMax': [1000],
                                   'traderId': [int(self.trader0)]})
         self.bc1.createMarket_client(marketRow=marketRow, blocServer=self.bs)
         marketBounds = pd.read_sql_table('marketBounds', self.bs.conn)
-        assert (marketBounds[['marketRootId', 'marketBranchId', 'marketMin', 'marketMax']].values == [[1, 1, 1, 1],
-                                                                                                      [1, 2, 0.9, 0.9],
+        assert (marketBounds[['marketRootId', 'marketBranchId', 'marketMin', 'marketMax']].values == [[1, 1, 1000, 1000],
+                                                                                                      [1, 2, 900, 900],
                                                                                                       [2, 1, 0,
-                                                                                                       1]] ).all()
+                                                                                                       1000]] ).all()
 
     def testSettleMarketDown(self):
         marketRow = pd.DataFrame({'marketRootId': [1],
@@ -103,25 +103,25 @@ class TestBlocServer(unittest.TestCase):
         check, allChecks = self.bc1.createMarket_client(marketRow=marketRow, blocServer=self.bs)
         marketBounds = pd.read_sql_table('marketBounds', self.bs.conn)
         assert (marketBounds[['marketRootId', 'marketBranchId', 'marketMin', 'marketMax']].values == [[1, 1, 0, 0],
-                                                                                                      [1, 2, 0.1, 0.1],
+                                                                                                      [1, 2, 100, 100],
                                                                                                       [2, 1, 0,
-                                                                                                       1]]).all()
+                                                                                                       1000]]).all()
 
     def testMatchTrade(self):
         tradeRow = pd.DataFrame({'marketId': [1],
-                                 'price': [0.515],
+                                 'price': [515],
                                  'quantity': [1],
                                  'traderId': [int(self.trader0)]})
         self.bc1.createTrade_client(tradeRow=tradeRow, blocServer=self.bs)
 
         tradeRow = pd.DataFrame({'marketId': [1],
-                                 'price': [0.515],
+                                 'price': [515],
                                  'quantity': [-1],
                                  'traderId': [int(self.trader1)]})
         self.bc2.createTrade_client(tradeRow=tradeRow, blocServer=self.bs)
 
         tradeRow = pd.DataFrame({'marketId': [1],
-                                 'price': [0.8],
+                                 'price': [800],
                                  'quantity': [-1],
                                  'traderId': [int(self.trader1)]})
 
@@ -131,7 +131,7 @@ class TestBlocServer(unittest.TestCase):
 
         prevTrade = self.bs.getPreviousOrder()
         tradeRow = pd.DataFrame({'marketId': [1],
-                                 'price': [0.9],
+                                 'price': [900],
                                  'quantity': [-1],
                                  'traderId': [int(self.trader1)]})
         tradePackage = self.bc2.tradeMaker(prevTrade=prevTrade,
@@ -151,7 +151,7 @@ class TestBlocServer(unittest.TestCase):
         # Trader 1 puts in five orders in market 1
         for iTrade in range(4):
             tradeRow = pd.DataFrame({'marketId': [1],
-                                     'price': [0.4],
+                                     'price': [400],
                                      'quantity': [1],
                                      'traderId': [int(self.trader0)]})
             self.bc1.createTrade_client(tradeRow=tradeRow, blocServer=self.bs)
@@ -160,13 +160,13 @@ class TestBlocServer(unittest.TestCase):
         for iTrade in range(5):
             # Trader 1 bid at 0.5
             tradeRow = pd.DataFrame({'marketId': [3],
-                                     'price': [0.5],
+                                     'price': [500],
                                      'quantity': [1],
                                      'traderId': [int(self.trader0)]})
             self.bc1.createTrade_client(tradeRow=tradeRow, blocServer=self.bs)
             # Trader 2 offer at 0.5
             tradeRow = pd.DataFrame({'marketId': [3],
-                                     'price': [0.5],
+                                     'price': [500],
                                      'quantity': [-1],
                                      'traderId': [int(self.trader1)]})
             self.bc2.createTrade_client(tradeRow=tradeRow, blocServer=self.bs)
@@ -183,21 +183,21 @@ class TestBlocServer(unittest.TestCase):
         for iTrade in range(3):
             # Trader 1 bid at 0.5
             tradeRow = pd.DataFrame({'marketId': [3],
-                                     'price': [0.5],
+                                     'price': [500],
                                      'quantity': [1],
                                      'traderId': [int(self.trader0)]})
             self.bc1.createTrade_client(tradeRow=tradeRow,
                                         blocServer=self.bs)
             # Trader 2 offer at 0.5
             tradeRow = pd.DataFrame({'marketId': [3],
-                                     'price': [0.5],
+                                     'price': [500],
                                      'quantity': [-1],
                                      'traderId': [int(self.trader1)]})
             self.bc2.createTrade_client(tradeRow=tradeRow,
                                         blocServer=self.bs)
             # Trader 2 bid at 0.5
             tradeRow = pd.DataFrame({'marketId': [3],
-                                     'price': [0.5],
+                                     'price': [500],
                                      'quantity': [1],
                                      'traderId': [int(self.trader1)]})
 
@@ -205,7 +205,7 @@ class TestBlocServer(unittest.TestCase):
                                         blocServer=self.bs)
             # Trader 2 offer at 0.5
             tradeRow = pd.DataFrame({'marketId': [3],
-                                     'price': [0.5],
+                                     'price': [500],
                                      'quantity': [-1],
                                      'traderId': [int(self.trader0)]})
             self.bc1.createTrade_client(tradeRow=tradeRow,
@@ -220,7 +220,7 @@ class TestBlocServer(unittest.TestCase):
             marketRow = pd.DataFrame({'marketRootId': [iMarket],
                                       'marketBranchId': [1],
                                       'marketMin': [0],
-                                      'marketMax': [1],
+                                      'marketMax': [1000],
                                       'traderId': [int(self.trader0)]})
             self.bc1.createMarket_client(marketRow=marketRow,
                                          blocServer=self.bs)

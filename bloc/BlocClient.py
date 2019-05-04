@@ -113,8 +113,8 @@ class BlocClient(object):
 
         # Generate primary trade
         t = pd.DataFrame({'marketId': [int(tradeRow.loc[0, 'marketId'])],
-                          'price': [float(tradeRow.loc[0, 'price'])],
-                          'quantity': [float(tradeRow.loc[0, 'quantity'])],
+                          'price': [int(tradeRow.loc[0, 'price'])],
+                          'quantity': [int(tradeRow.loc[0, 'quantity'])],
                           'traderId': [int(tradeRow.loc[0, 'traderId'])]})
         p = self.signOrderBook(orderRow=t, previousOrderRow=prevTrade,
                                signatureKey_hex=self.signingKey)
@@ -173,8 +173,10 @@ class BlocClient(object):
 
 
          """
-         tradeRow['price'] = round(float(tradeRow['price']),self.DECIMAL_LIMIT)
-         tradeRow['quantity'] = round(float(tradeRow['quantity']), self.DECIMAL_LIMIT)
+         #tradeRow['price'] = round(float(tradeRow['price']),self.DECIMAL_LIMIT)
+         #tradeRow['quantity'] = round(float(tradeRow['quantity']), self.DECIMAL_LIMIT)
+         tradeRow['price'] = np.int64(tradeRow['price'])
+         tradeRow['quantity'] = np.int64(tradeRow['quantity'])
          tradeRow['marketId'] = np.int64(tradeRow['marketId'])
          tradeRow['traderId'] = np.int64(tradeRow['traderId'])
          prevTrade = blocServer.getPreviousOrder()
@@ -214,8 +216,8 @@ class BlocClient(object):
 
         marketRow['marketRootId'] = np.int64(marketRow['marketRootId'])
         marketRow['marketBranchId'] = np.int64(marketRow['marketBranchId'])
-        marketRow['marketMin'] = float(marketRow['marketMin'])
-        marketRow['marketMax'] = float(marketRow['marketMax'] )
+        marketRow['marketMin'] = np.int64(marketRow['marketMin'])
+        marketRow['marketMax'] = np.int64(marketRow['marketMax'] )
         marketRow['traderId'] = np.int64(marketRow['traderId'] )
 
 

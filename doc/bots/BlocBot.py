@@ -13,6 +13,7 @@ class BlocBot(object):
     
     def __init__(self):
         # Price making parameters
+        self.multiplier = 1000 # Multiply quote units
         self.spread = 0.01
         self.updateFrequencySeconds = 180
         # Bloc user
@@ -45,7 +46,7 @@ class BlocBot(object):
 
 
     def getQuote(self):
-        # Get quote from source 
+        # Get quote from source and scale with mulitplier
         # In:
         # Out: {'Bid': 9,
         #     'Ask': 11,
@@ -57,11 +58,11 @@ class BlocBot(object):
             sourceurl = 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=BTC&to_currency=USD&apikey=VVOJSV9CUU9JRCSE'
             sourceheaders = {}
             response = requests.get(sourceurl, headers=sourceheaders)
-            q = float(response.json()['Realtime Currency Exchange Rate']['5. Exchange Rate'])
+            qt = float(response.json()['Realtime Currency Exchange Rate']['5. Exchange Rate'])*self.multiplier
             t = response.json()['Realtime Currency Exchange Rate']['6. Last Refreshed']
             tdt = datetime.datetime.strptime(t, '%Y-%m-%d %H:%M:%S')
             tUTC = pytz.utc.localize(tdt)
-            quote = {'Bid': [], 'Ask': [], 'Trade': q, 'TimeStampUTC': tUTC}
+            quote = {'Bid': [], 'Ask': [], 'Trade': qt*self.multiplier, 'TimeStampUTC': tUTC}
 
         if self.quoteSource == 'betfair':
             betfairurl = "https://api.betfair.com/exchange/betting/json-rpc/v1"
@@ -91,7 +92,7 @@ class BlocBot(object):
             else:
                 myTrade = (myBid + myAsk)/2
             # Use mid as traded
-            quote = {'Bid': myBid, 'Ask': myAsk, 'Trade': myTrade, 'TimeStampUTC': tUTC}
+            quote = {'Bid': myBid * self.multiplier, 'Ask': myAsk * self.multiplier, 'Trade': myTrade *self.multiplier, 'TimeStampUTC': tUTC}
         return quote
     
     def postQuote(self, p, q):
@@ -108,7 +109,7 @@ class BlocBot(object):
                              "quantity": q}
         response = requests.post(tradeurl, data=json.dumps(content_maketrade), headers=self.blocheaders)
         return response.json()
-    
+
     def getTradeSummary(self):
         # In: postQuote(0.43, -4)
         # Out: <Standard response from viewTradeSummary()>
