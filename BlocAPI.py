@@ -312,6 +312,10 @@ def checkCollateral():
     bs.updateOutcomeCombinations()
     colChk, collateralDetails = bs.checkCollateral(p_=price, q_=quantity, mInd_=marketId, tInd_= traderId )
 
+    if collateralDetails['worstCollateral'].size>0:
+        worstCollateral = np.min(collateralDetails['worstCollateral'])
+    else:
+        worstCollateral = []
 
     return jsonify({'colChk': str(colChk),
                     'traderId': traderId,
@@ -319,7 +323,7 @@ def checkCollateral():
                     'quantity': quantity,
                     'marketId': marketId,
                     'outcomes': str(collateralDetails['outcomes']),
-                    'worstCollateral': np.min(collateralDetails['worstCollateral'])})
+                    'worstCollateral': worstCollateral})
 
 # Local time server
 @application.route('/getSignedUTCTimestamp')

@@ -310,11 +310,11 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="BlocClient" value="723" />
-          <entry key="Python Console" value="2038" />
+          <entry key="Python Console" value="2283" />
           <entry key="cell" value="35" />
           <entry key="html" value="147" />
           <entry key="md" value="1248" />
-          <entry key="py" value="13113" />
+          <entry key="py" value="13218" />
           <entry key="sql" value="516" />
           <entry key="tmp" value="277" />
           <entry key="txt" value="1" />
@@ -327,7 +327,7 @@
           <entry key="JavaScript" value="1" />
           <entry key="Markdown" value="1223" />
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="16134" />
+          <entry key="Python" value="16484" />
           <entry key="SQL" value="516" />
           <entry key="Scratch" value="54" />
         </counts>
@@ -376,8 +376,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BlocAPI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="307" column="46" selection-start-line="307" selection-start-column="46" selection-end-line="307" selection-end-column="46" />
+            <state relative-caret-position="680">
+              <caret line="333" lean-forward="true" selection-start-line="333" selection-end-line="333" />
               <folding>
                 <element signature="e#1335#1376#0" expanded="true" />
               </folding>
@@ -1727,8 +1727,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BlocAPI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="307" column="46" selection-start-line="307" selection-start-column="46" selection-end-line="307" selection-end-column="46" />
+        <state relative-caret-position="680">
+          <caret line="333" lean-forward="true" selection-start-line="333" selection-end-line="333" />
           <folding>
             <element signature="e#1335#1376#0" expanded="true" />
           </folding>
