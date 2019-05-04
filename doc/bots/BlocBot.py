@@ -3,6 +3,7 @@ import json
 import time
 import datetime
 import pytz
+import numpy as np
 import pandas as pd
 import logging
 
@@ -26,6 +27,23 @@ class BlocBot(object):
         # Source setup
         self.quoteSource = 'alphavantage'
 
+        # Just betfair things. Betfair needs new token for each session.
+        # The appKey can be for demo (delayed) or live.
+        # Be careful with the live key.
+        self.betfairMarketId = '1.157292080'
+        self.betfairAppKey = ''
+        self.betfairSessionToken = ''
+
+    def getBetfairSessionToken(self, betfairAppKey, betfairPassword):
+        # Byzantine betfair authentiation process
+        url = 'https://identitysso.betfair.com/api/login/'
+        headers = {'X-Application': 'alpinechickenbetfair', 'Accept': 'application/json'}
+        content = 'username=alpinechicken&password=' + betfairPassword
+        response = requests.post(url, params=content, headers=headers)
+        self.betfairSessionToken = response.json()['token']
+        self.betfairAppKey = betfairAppKey
+
+
     def getQuote(self):
         # Get quote from source 
         # In:
@@ -44,7 +62,36 @@ class BlocBot(object):
             tdt = datetime.datetime.strptime(t, '%Y-%m-%d %H:%M:%S')
             tUTC = pytz.utc.localize(tdt)
             quote = {'Bid': [], 'Ask': [], 'Trade': q, 'TimeStampUTC': tUTC}
-        
+
+        if self.quoteSource == 'betfair':
+            betfairurl = "https://api.betfair.com/exchange/betting/json-rpc/v1"
+            betfairheaders = {'X-Application': self.betfairAppKey, 'X-Authentication': self.betfairSessionToken,
+                              'content-type': 'application/json'}
+
+            market_book_req = '{"jsonrpc": "2.0", "method": "SportsAPING/v1.0/listMarketBook", "params": {"marketIds":["' + self.betfairMarketId + '"],"priceProjection":{"priceData":["EX_BEST_OFFERS"]}}, "id": 1}'
+            response = requests.get(betfairurl, data=market_book_req, headers=betfairheaders)
+
+            bids = pd.DataFrame(response.json()['result'][0]['runners'][0]['ex']['availableToBack'])
+            asks = pd.DataFrame(response.json()['result'][0]['runners'][0]['ex']['availableToLay'])
+            tUTC = datetime.datetime.utcnow()
+            if 'price' in bids.columns:
+                maxBid = np.max(bids['price'])
+                myAsk = 1/maxBid
+            else:
+                myAsk = []
+
+            if 'price' in asks.columns:
+                minAsk = np.min(asks['price'])
+                myBid = 1/minAsk
+            else:
+                myBid = []
+
+            if not myBid and not myAsk:
+                myTrade = []
+            else:
+                myTrade = (myBid + myAsk)/2
+            # Use mid as traded
+            quote = {'Bid': myBid, 'Ask': myAsk, 'Trade': myTrade, 'TimeStampUTC': tUTC}
         return quote
     
     def postQuote(self, p, q):
@@ -116,6 +163,8 @@ class BlocBot(object):
                     stillQuoting = False
                 else:
                     prevQuote = quotePrice
+                    prevBidPrice = bidPrice
+                    prevAskPrice = askPrice
                     msg= '[Within cells interlinked]: ' + str(quotePrice)
                     print(msg)
 
