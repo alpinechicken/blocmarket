@@ -293,15 +293,20 @@ def viewTickHistory():
 def checkCollateral():
     # Will work with or without price/quantity/market
     data = request.get_json()
-    traderId = data['traderId']
+
     if 'price' in data:
         price = data['price']
         quantity = data['quantity']
         marketId = data['marketId']
-    else:
+        traderId = data['traderId']
+    elif 'traderId' in data:
         price = []
         quantity = []
         marketId = []
+        traderId = data['traderId']
+    else:
+        return jsonify({'colChk': 'No input'})
+
 
     bs = BlocServer()
     bs.updateOutcomeCombinations()
