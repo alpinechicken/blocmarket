@@ -516,7 +516,7 @@ class BlocServer(object):
         p = np.array(np.append(self.p, p_))
         q = np.array(np.append(self.q, q_))
         # If price is given, append.
-        if p_ and q_ and mInd_:
+        if p_:
             mInd = np.append(self.mInd, mInd_)
             tInd = np.append(self.tInd, tInd_)
             iMatched = np.append(self.iMatched, False)
@@ -524,10 +524,6 @@ class BlocServer(object):
             mInd = self.mInd
             tInd = self.tInd
             iMatched = self.iMatched
-
-        # If tInd is given ()
-        if tInd_:
-            tInd = np.append(self.tInd, tInd_)
 
         M = self.marketOutcomes
         C, N = M.shape
