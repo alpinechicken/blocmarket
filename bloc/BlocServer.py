@@ -520,14 +520,14 @@ class BlocServer(object):
             mInd = np.append(self.mInd, mInd_)
             tInd = np.append(self.tInd, tInd_)
             iMatched = np.append(self.iMatched, False)
-        elif tInd_:
-            mInd = self.mInd
-            tInd = np.append(self.tInd, tInd_)
-            iMatched = self.iMatched
         else:
             mInd = self.mInd
             tInd = self.tInd
             iMatched = self.iMatched
+
+        # If tInd is given ()
+        if tInd_:
+            tInd = np.append(self.tInd, tInd_)
 
         M = self.marketOutcomes
         C, N = M.shape
