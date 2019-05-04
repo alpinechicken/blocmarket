@@ -13,7 +13,7 @@ class BlocBot(object):
     
     def __init__(self):
         # Price making parameters
-        self.multiplier = 1000 # Multiply quote units
+        self.multiplier = 1000
         self.spread = 0.01
         self.updateFrequencySeconds = 180
         # Bloc user
@@ -58,7 +58,7 @@ class BlocBot(object):
             sourceurl = 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=BTC&to_currency=USD&apikey=VVOJSV9CUU9JRCSE'
             sourceheaders = {}
             response = requests.get(sourceurl, headers=sourceheaders)
-            qt = float(response.json()['Realtime Currency Exchange Rate']['5. Exchange Rate'])*self.multiplier
+            qt = float(response.json()['Realtime Currency Exchange Rate']['5. Exchange Rate'])
             t = response.json()['Realtime Currency Exchange Rate']['6. Last Refreshed']
             tdt = datetime.datetime.strptime(t, '%Y-%m-%d %H:%M:%S')
             tUTC = pytz.utc.localize(tdt)

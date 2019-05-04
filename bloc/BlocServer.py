@@ -106,7 +106,7 @@ class BlocServer(object):
         self.conn = self.engine.connect()
 
         # Collateral limit
-        self.COLLATERAL_LIMIT = 1e6
+        self.COLLATERAL_LIMIT = 1e9
         # Number of markets limit (too many will make too many outcome combinations)
         self.ROOT_MARKET_LIMIT = 5
         self.BRANCH_MARKET_LIMIT = 10
