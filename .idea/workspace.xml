@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f748aadd-a74f-4691-aa32-65bb3faaf10c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/44b3f4d7-b859-43f8-977b-3a83e5a88e6d.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/44b3f4d7-b859-43f8-977b-3a83e5a88e6d.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/44b3f4d7-b859-43f8-977b-3a83e5a88e6d/storage_v2/_src_/database/dfi33hnqjs2hjj.A2pisg/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/44b3f4d7-b859-43f8-977b-3a83e5a88e6d/storage_v2/_src_/database/dfi33hnqjs2hjj.A2pisg/schema/public.abK9xQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bloc/BlocServer.py" beforeDir="false" afterPath="$PROJECT_DIR$/bloc/BlocServer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/bots/BlocBot.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/doc/bots/BlocBot.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/bots/BlocBot.py" beforeDir="false" afterPath="$PROJECT_DIR$/doc/bots/BlocBot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/slate" beforeDir="false" afterPath="$PROJECT_DIR$/slate" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/slate/source/index.html.md" beforeDir="false" afterPath="$PROJECT_DIR$/slate/source/index.html.md" afterDir="false" />
     </list>
@@ -95,6 +91,15 @@
         <item name="blocparty: database" type="6d9b600a:PostgresImplModel$Database" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="public: schema" type="a16502c0:PostgresImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="blocparty@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="blocparty: database" type="6d9b600a:PostgresImplModel$Database" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="public: schema" type="a16502c0:PostgresImplModel$Schema" />
+        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
@@ -304,11 +309,11 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="BlocClient" value="723" />
-          <entry key="Python Console" value="1701" />
+          <entry key="Python Console" value="1979" />
           <entry key="cell" value="35" />
           <entry key="html" value="147" />
           <entry key="md" value="1248" />
-          <entry key="py" value="12895" />
+          <entry key="py" value="12924" />
           <entry key="sql" value="516" />
           <entry key="tmp" value="277" />
           <entry key="txt" value="1" />
@@ -321,7 +326,7 @@
           <entry key="JavaScript" value="1" />
           <entry key="Markdown" value="1223" />
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="15598" />
+          <entry key="Python" value="15905" />
           <entry key="SQL" value="516" />
           <entry key="Scratch" value="35" />
         </counts>
@@ -334,9 +339,9 @@
           <entry key="marketBounds" value="36" />
           <entry key="marketTable" value="53" />
           <entry key="md" value="6" />
-          <entry key="orderBook" value="42" />
+          <entry key="orderBook" value="43" />
           <entry key="outcomeCombinations" value="28" />
-          <entry key="py" value="30" />
+          <entry key="py" value="32" />
           <entry key="sh" value="1" />
           <entry key="sql" value="1" />
           <entry key="timeStampServerTable" value="8" />
@@ -347,13 +352,13 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Bash" value="1" />
-          <entry key="Database Element" value="208" />
+          <entry key="Database Element" value="209" />
           <entry key="HTML" value="1" />
           <entry key="IPNB" value="9" />
           <entry key="Log" value="1" />
           <entry key="Markdown" value="6" />
           <entry key="PLAIN_TEXT" value="17" />
-          <entry key="Python" value="30" />
+          <entry key="Python" value="32" />
           <entry key="Scratch" value="1" />
         </counts>
       </usages-collector>
@@ -368,6 +373,29 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BlocAPI.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="491">
+              <caret line="290" lean-forward="true" selection-start-line="290" selection-end-line="290" />
+              <folding>
+                <element signature="e#1335#1376#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/orderBook">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true">
+                <filter text="price = 4062.99" />
+              </filtering>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/dfi33hnqjs2hjj/schema/public/table/userTable">
           <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
             <state>
@@ -380,7 +408,7 @@
         <entry file="file://$PROJECT_DIR$/doc/bots/BlocBot.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="285">
-              <caret line="19" column="27" lean-forward="true" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
+              <caret line="19" column="27" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
                 <marker date="1556940486522" expanded="true" signature="145:217" ph="..." />
@@ -422,8 +450,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bloc/BlocServer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="475">
-              <caret line="108" column="35" lean-forward="true" selection-start-line="108" selection-start-column="35" selection-end-line="108" selection-end-column="35" />
+            <state relative-caret-position="480">
+              <caret line="524" column="46" lean-forward="true" selection-start-line="524" selection-start-column="46" selection-end-line="524" selection-end-column="46" />
               <folding>
                 <element signature="e#15#33#0" expanded="true" />
               </folding>
@@ -605,7 +633,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="4" />
     <option name="y" value="23" />
-    <option name="width" value="1858" />
+    <option name="width" value="1302" />
     <option name="height" value="1337" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -1133,10 +1161,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="4" y="23" width="1858" height="1337" extended-state="0" />
+    <frame x="4" y="23" width="1302" height="1337" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4686825" visible="true" weight="0.18447137" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4686825" visible="true" weight="0.26587301" />
       <window_info id="Structure" order="1" sideWeight="0.5313175" side_tool="true" weight="0.32030585" />
       <window_info id="Favorites" order="2" sideWeight="0.50385606" side_tool="true" weight="0.19170243" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -1153,14 +1181,14 @@
       <window_info anchor="bottom" id="Database Changes" order="11" sideWeight="0.49213162" weight="0.32199547" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="13" sideWeight="0.4971061" weight="0.32608697" />
-      <window_info anchor="bottom" id="Python Console" order="14" sideWeight="0.4945055" visible="true" weight="0.27309236" />
+      <window_info active="true" anchor="bottom" id="Python Console" order="14" sideWeight="0.4945055" visible="true" weight="0.27309236" />
       <window_info anchor="bottom" id="Inspection Results" order="15" weight="0.33333334" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Database" order="3" sideWeight="0.48883048" visible="true" weight="0.21035242" />
+      <window_info anchor="right" id="Database" order="3" sideWeight="0.48883048" visible="true" weight="0.13174604" />
       <window_info anchor="right" id="Coverage" order="4" side_tool="true" />
-      <window_info anchor="right" id="SciView" order="5" sideWeight="0.48357424" weight="0.24922886" />
+      <window_info anchor="right" id="SciView" order="5" sideWeight="0.48357424" weight="0.24920635" />
       <window_info anchor="right" id="Data View" order="6" weight="0.32861736" />
       <window_info anchor="right" x="0" y="0" width="353" height="713" id="Documentation" order="7" sideWeight="0.5111695" side_tool="true" weight="0.3363344" />
       <window_info anchor="right" id="R Graphics" order="8" weight="0.32905984" />
@@ -1401,13 +1429,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/venv/lib/python3.7/site-packages/pandas/core/generic.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="4375" selection-start-line="4375" selection-end-line="4375" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/doc/api.ipynb" />
     <entry file="file://$PROJECT_DIR$/api.py" />
     <entry file="file://$PROJECT_DIR$/Procfile">
@@ -1570,16 +1591,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BlocAPI.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="71" selection-start-line="71" selection-end-line="71" />
-          <folding>
-            <element signature="e#1335#1376#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/doc/bots/BlocBot.ipynb">
       <provider selected="true" editor-type-id="ipnb-editor">
         <state>
@@ -1611,15 +1622,6 @@
           <column-attributes>
             <column name="ctid" enabled="false" />
           </column-attributes>
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/orderBook">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true">
-            <filter text="price = 4062.99" />
-          </filtering>
         </state>
       </provider>
     </entry>
@@ -1685,6 +1687,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/doc/bots/BlocBot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="27" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+            <marker date="1556940486522" expanded="true" signature="145:217" ph="..." />
+            <marker date="1556940486522" expanded="true" signature="4715:4723" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/IPython/core/interactiveshell.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="3269" column="47" lean-forward="true" selection-start-line="3269" selection-start-column="47" selection-end-line="3269" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BlocAPI.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="491">
+          <caret line="290" lean-forward="true" selection-start-line="290" selection-end-line="290" />
+          <folding>
+            <element signature="e#1335#1376#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/orderBook">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true">
+            <filter text="price = 4062.99" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
     <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/dfi33hnqjs2hjj/schema/public/table/orderBook">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -1703,22 +1743,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/doc/bots/BlocBot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="27" lean-forward="true" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-            <marker date="1556940486522" expanded="true" signature="145:217" ph="..." />
-            <marker date="1556940486522" expanded="true" signature="4715:4723" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/bloc/BlocServer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="108" column="35" lean-forward="true" selection-start-line="108" selection-start-column="35" selection-end-line="108" selection-end-column="35" />
+        <state relative-caret-position="480">
+          <caret line="524" column="46" lean-forward="true" selection-start-line="524" selection-start-column="46" selection-end-line="524" selection-end-column="46" />
           <folding>
             <element signature="e#15#33#0" expanded="true" />
           </folding>
