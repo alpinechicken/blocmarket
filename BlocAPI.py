@@ -337,3 +337,34 @@ def getSignedUTCTimestamp():
                              'verifyKey': signedUTCNow['verifyKey']}
     return json.dumps(tsOutput)
 
+# SP functions
+
+@application.route('/createSPEvent', methods=['POST', 'GET'])
+def createSPEvent():
+    # Get event data and append to database
+    data = request.get_json()
+    bs = BlocServer()
+    try:
+        newEvent = pd.DataFrame({'sport': [data['sport']],
+                                  'league': [data['league']],
+                                  'competition': [data['competition']],
+                                  'stage': [data['stage']],
+                                  'runners': [data['runners']],
+                                  'starttimestamputc': [data['starttimestamputc']]})
+        newEvent.to_sql(name='spevent', con=bs.conn, if_exists='append', index=False)
+
+        eventid = pd.read_sql_query('select max("eventId") from "spevent"', bs.conn)['max'][0]
+
+
+        return jsonify({'eventid': eventid,
+                        'sport': data['sport'],
+                        'competition': data['competition'],
+                        'stage': data['stage'],
+                        'runners': data['runners'],
+                        'starttimestamputc': data['starttimestamputc']})
+    except:
+        # Event id is zero for an error
+        return jsonify({'eventid': 0})
+
+
+

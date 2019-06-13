@@ -9,11 +9,11 @@ import logging
 
 class BlocBot(object):
     
-    # Basic price making bot using external quote source
+    # Basic price making bot using external source
     
     def __init__(self):
         # Price making parameters
-        self.multiplier = 1000
+        self.multiplier = 10000
         self.spread = 0.01
         self.updateFrequencySeconds = 180
         # Bloc user
@@ -37,6 +37,7 @@ class BlocBot(object):
 
     def getBetfairSessionToken(self, betfairAppKey, betfairPassword):
         # Byzantine betfair authentiation process
+        
         url = 'https://identitysso.betfair.com/api/login/'
         headers = {'X-Application': 'alpinechickenbetfair', 'Accept': 'application/json'}
         content = 'username=alpinechicken&password=' + betfairPassword
@@ -123,8 +124,10 @@ class BlocBot(object):
         # Stream a quote bid/ask from source
         logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO, filename='botlog.log')
         logging.info('[Bot starting quote stream]: ' + json.dumps(vars(self)))
-        qt = self.getQuote()
-        prevQuote = qt['Trade']
+        #qt = self.getQuote()
+        prevQuote = 0
+        quotePrice = 0
+        ts = 0
         stillQuoting = True
         while stillQuoting:
             # Get a quote
@@ -137,8 +140,19 @@ class BlocBot(object):
 
             # Update market if quote has changed
             if prevQuote == quotePrice:
-                time.sleep(self.updateFrequencySeconds)
-            else:          
+                msg= '[Within cells interlinked]: No price change.' 
+                print(msg)   
+                time.sleep(self.updateFrequencySeconds)             
+            else:
+                if prevQuote!=0:
+                    # Remove bids and asks if not already matched
+                    if bidTdId not in ts[ts['iMatched']]:
+                        self.postQuote(bidPrice, -1)
+                        logging.info('[Bid]: ' + str(bidPrice))
+                    if askTdId not in ts[ts['iMatched']]:
+                        self.postQuote(askPrice, 1)
+                        logging.info('[Ask]: ' + str(askPrice))
+
                 bidPrice = quotePrice*(1-self.spread)
                 askPrice = quotePrice*(1+self.spread)
                 # Make quote
@@ -150,23 +164,18 @@ class BlocBot(object):
                 time.sleep(self.updateFrequencySeconds)
 
                 ts = pd.read_json(self.getTradeSummary())
-                
-                # Remove bids and asks if not already matched
-                if bidTdId not in ts[ts['iMatched']]:
-                    self.postQuote(bidPrice, -1)
-                    logging.info('[Bid]: ' + str(bidPrice))
-                if askTdId not in ts[ts['iMatched']]:
-                    self.postQuote(askPrice, 1)
-                    logging.info('[Ask]: ' + str(askPrice))
+
                 
                 # Check if trades still being accepted 
                 if (cbid['checks'] == 'False') or (cask['checks'] == 'False'):
                     stillQuoting = False
+                    msg = '[Within cells interlinked]: Quote stream stopped.'
+                    print(msg)
                 else:
                     prevQuote = quotePrice
                     prevBidPrice = bidPrice
                     prevAskPrice = askPrice
-                    msg= '[Within cells interlinked]: ' + str(quotePrice)
+                    msg= '[Within cells interlinked]: quote ' + str(quotePrice)
                     print(msg)
 
         # Return output if quote fails

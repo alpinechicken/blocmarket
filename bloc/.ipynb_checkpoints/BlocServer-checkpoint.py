@@ -2,7 +2,7 @@
 import numpy as np
 import pandas as pd
 from sqlalchemy import create_engine, Table, Column, Integer, Boolean, String, Float, \
-    VARCHAR, JSON, LargeBinary, BLOB, TIMESTAMP, MetaData, update, ForeignKey
+    LargeBinary, BLOB, TIMESTAMP, MetaData, update, ForeignKey
 from sqlalchemy.pool import NullPool
 import os, platform
 import datetime
@@ -99,35 +99,6 @@ class BlocServer(object):
                                          Column('marketMin', Integer),
                                          Column('marketMax', Integer),
                                          )
-
-        # SP tables
-        self.spevent = Table('spevent', self.metadata,
-                             Column('eventid', Integer, primary_key=True, autoincrement=True),
-                             Column('sport', VARCHAR(max)),
-                             Column('league', VARCHAR(max)),
-                             Column('competition', VARCHAR(max)),
-                             Column('stage', VARCHAR(max)),
-                             Column('runners', JSON),
-                             Column('starttimestamputc', TIMESTAMP),
-                             Column('outcome', JSON))
-
-        self.spmarket = Table('spmarket', self.metadata,
-                             Column('marketid', Integer, primary_key=True, autoincrement=True),
-                             Column('eventid', Integer),
-                             Column('marketype', VARCHAR(max)),
-                             Column('marketparameters', JSON),
-                             Column('notes', VARCHAR(max)))
-
-        self.sprecord = Table('sprecord', self.metadata,
-                             Column('recordid', Integer, primary_key=True, autoincrement=True),
-                             Column('source', VARCHAR(max)),
-                             Column('marketid', Integer),
-                             Column('timestamputc', TIMESTAMP),
-                             Column('odds', Float),
-                             Column('stake', Float),
-                             Column('islay', Boolean),
-                             Column('isplaced', Boolean),
-                             Column('notes', VARCHAR(max)))
 
 
         # Create all tables

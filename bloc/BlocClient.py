@@ -14,7 +14,6 @@ class BlocClient(object):
     def __init__(self):
         self.signingKey = []
         self.verifyKey = []
-        self.DECIMAL_LIMIT = 2
 
     def generateSignatureKeys(self):
         #  Generate signature key pairs.
@@ -165,7 +164,7 @@ class BlocClient(object):
          ...
          tradeRow = pd.DataFrame({'marketRootId': [1],
                                  'marketBranchId': [1],
-                                 'price': [[0.5, 0.4]],
+                                 'price': [[5000, 4000]],
                                  'quantity': [1],
                                  'traderId': [1]})
          mc.createTrade_client(tradeRow=tradeRow, BlocServer = bs)
@@ -173,8 +172,6 @@ class BlocClient(object):
 
 
          """
-         #tradeRow['price'] = round(float(tradeRow['price']),self.DECIMAL_LIMIT)
-         #tradeRow['quantity'] = round(float(tradeRow['quantity']), self.DECIMAL_LIMIT)
          tradeRow['price'] = np.int64(tradeRow['price'])
          tradeRow['quantity'] = np.int64(tradeRow['quantity'])
          tradeRow['marketId'] = np.int64(tradeRow['marketId'])
