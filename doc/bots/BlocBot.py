@@ -6,6 +6,7 @@ import pytz
 import numpy as np
 import pandas as pd
 import logging
+from IPython.core.debugger import set_trace
 
 class BlocBot(object):
     
@@ -23,7 +24,7 @@ class BlocBot(object):
         # Target market
         self.marketId = []
         # Bloc setup
-        self.blocurl = 'http://127.0.0.1:7000/'
+        self.blocurl = 'http://127.0.0.1:5000/'
         self.blocheaders = {'content-type': 'application/json'}
         # Source setup
         self.quoteSource = 'alphavantage'
@@ -31,9 +32,12 @@ class BlocBot(object):
         # Just betfair things. Betfair needs new token for each session.
         # The appKey can be for demo (delayed) or live.
         # Be careful with the live key.
-        self.betfairMarketId = '1.157292080'
+        self.betfairMarketId = ''
         self.betfairAppKey = ''
         self.betfairSessionToken = ''
+        
+        # spmarket
+        self.spmarketid = ''
 
     def getBetfairSessionToken(self, betfairAppKey, betfairPassword):
         # Byzantine betfair authentiation process
@@ -94,7 +98,38 @@ class BlocBot(object):
                 myTrade = (myBid + myAsk)/2
             # Use mid as traded
             quote = {'Bid': myBid * self.multiplier, 'Ask': myAsk * self.multiplier, 'Trade': myTrade *self.multiplier, 'TimeStampUTC': tUTC}
-        return quote
+        return quote, bids, asks
+    
+    def scrapeQuote(self, bid, ask):
+        # Post best bid and ask as sprecord from something with an attached spmarket
+        
+        # TODO: Give expicit datestr format
+        
+        tUTC = datetime.datetime.utcnow()
+        url = self.blocurl + 'createSPRecord'
+        headers = {'content-type': 'application/json'}
+
+        content_makerecord = {"source": self.quoteSource,
+                                "marketid": self.spmarketid,
+                                "timestamputc": str(tUTC),
+                                "odds": ask.loc[0, 'price'],
+                                "stake": ask.loc[0, 'size'], 
+                                "islay": False,
+                                "isplaced": False,
+                                "notes": ""}
+        # Post market
+        response = requests.post(url, data=json.dumps(content_makerecord), headers=headers)        
+
+        content_makerecord = {"source": self.quoteSource,
+                                "marketid": self.spmarketid,
+                                "timestamputc": str(tUTC),
+                                "odds": bid.loc[0, 'price'],
+                                "stake": bid.loc[0, 'size'], 
+                                "islay": True,
+                                "isplaced": False,
+                                "notes": ""}
+        # Post market
+        response = requests.post(url, data=json.dumps(content_makerecord), headers=headers)     
     
     def postQuote(self, p, q):
         # Create a trade
@@ -120,8 +155,17 @@ class BlocBot(object):
         response = requests.post(url, data=json.dumps(content), headers=self.blocheaders)
         return response.json()
         
-    def streamQuote(self):
-        # Stream a quote bid/ask from source
+    def streamQuote(self, scrapeOdds=True, postQuotes=True):
+        # Stream a quote bid/ask from source. Set scrapeOdds=True to write streaming odds to spmarket and
+        # postQuotes=True to post quotes to orderBook.
+        # to
+
+        '''
+        :param scrapeOdds:
+        :param postQuotes:
+        :return:
+        '''
+
         logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO, filename='botlog.log')
         logging.info('[Bot starting quote stream]: ' + json.dumps(vars(self)))
         #qt = self.getQuote()
@@ -132,11 +176,19 @@ class BlocBot(object):
         while stillQuoting:
             # Get a quote
             try:
-                qt = self.getQuote()
+                qt, bids, asks = self.getQuote()
                 quotePrice = qt['Trade']
                 logging.info('[Quote]: ' + str(quotePrice))
             except Exception as e:
-                logging.error('Exception trying getQuote()', exc_info=True)
+                logging.error('Exception trying getQuote().', exc_info=True)
+            
+            try:
+                bestAsk = asks[asks.price==min(asks.price)].reset_index()
+                bestBid = bids[bids.price==max(bids.price)].reset_index()
+            except Exception as e:
+                logging.error('No price field for bids/asks.')
+                
+            #set_trace()
 
             # Update market if quote has changed
             if prevQuote == quotePrice:
@@ -144,7 +196,7 @@ class BlocBot(object):
                 print(msg)   
                 time.sleep(self.updateFrequencySeconds)             
             else:
-                if prevQuote!=0:
+                if prevQuote!=0 and postQuotes:
                     # Remove bids and asks if not already matched
                     if bidTdId not in ts[ts['iMatched']]:
                         self.postQuote(bidPrice, -1)
@@ -156,11 +208,18 @@ class BlocBot(object):
                 bidPrice = quotePrice*(1-self.spread)
                 askPrice = quotePrice*(1+self.spread)
                 # Make quote
-                cbid = self.postQuote(bidPrice, 1)
-                cask = self.postQuote(askPrice, -1)
+                if postQuotes:
+                    cbid = self.postQuote(bidPrice, 1)
+                    cask = self.postQuote(askPrice, -1)
                 # Record trade numbers
                 bidTdId = cbid['tradeId']
                 askTdId = cask['tradeId']
+                
+                # Scrape sp record
+                if scrapeOdds:
+                    #set_trace()
+                    self.scrapeQuote(bestBid, bestAsk)
+                
                 time.sleep(self.updateFrequencySeconds)
 
                 ts = pd.read_json(self.getTradeSummary())
@@ -187,4 +246,3 @@ class BlocBot(object):
                 
 
                 
-    

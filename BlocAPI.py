@@ -344,27 +344,110 @@ def createSPEvent():
     # Get event data and append to database
     data = request.get_json()
     bs = BlocServer()
-    try:
-        newEvent = pd.DataFrame({'sport': [data['sport']],
+    newEvent = pd.DataFrame({'sport': [data['sport']],
                                   'league': [data['league']],
                                   'competition': [data['competition']],
                                   'stage': [data['stage']],
                                   'runners': [data['runners']],
                                   'starttimestamputc': [data['starttimestamputc']]})
-        newEvent.to_sql(name='spevent', con=bs.conn, if_exists='append', index=False)
+    newEvent.to_sql(name='spevent', con=bs.conn, if_exists='append', index=False)
 
-        eventid = pd.read_sql_query('select max("eventId") from "spevent"', bs.conn)['max'][0]
-
-
-        return jsonify({'eventid': eventid,
-                        'sport': data['sport'],
-                        'competition': data['competition'],
-                        'stage': data['stage'],
-                        'runners': data['runners'],
-                        'starttimestamputc': data['starttimestamputc']})
-    except:
-        # Event id is zero for an error
-        return jsonify({'eventid': 0})
+    eventid = pd.read_sql_query('select max("eventid") from "spevent"', bs.conn)['max'][0]
 
 
+    return jsonify({'eventid': str(eventid)})
 
+
+'''
+@application.route('/createSPOutcome', methods=['POST', 'GET'])
+def createSPOutcome():
+    # Get event data and append to database
+    data = request.get_json()
+    bs = BlocServer()
+    #TODO: this query doesn't work. Check on JSON updates
+    bs.conn.execute(
+        'update "spevent" set "outcome" = \' %s \' where "eventid" = %s' % (data['outcome'], data['eventid']))
+
+    #queryout = pd.read_sql_query('update "spevent" set "outcome" = json_build_object("0",10,"1",15) where "eventid"=%s' % (data['eventid']), bs.conn)
+    return jsonify({'updated': True})
+'''
+
+@application.route('/createSPMarket', methods=['POST', 'GET'])
+def createSPMarket():
+    # Get market data and append to database
+    data = request.get_json()
+    bs = BlocServer()
+    newMarket = pd.DataFrame({'eventid': [data['eventid']],
+                            'markettype': [data['markettype']],
+                            'marketparameters': [data['marketparameters']],
+                            'notes': [data['notes']]})
+    newMarket.to_sql(name='spmarket', con=bs.conn, if_exists='append', index=False)
+    marketid = pd.read_sql_query('select max("marketid") from "spmarket"', bs.conn)['max'][0]
+    return jsonify({'marketid': str(marketid)})
+
+@application.route('/createSPRecord', methods=['POST', 'GET'])
+def createSPRecord():
+    # Get record data and append to database
+    data = request.get_json()
+    bs = BlocServer()
+    newRecord = pd.DataFrame({'source': [data['source']],
+                            'marketid': [data['marketid']],
+                            'timestamputc': [data['timestamputc']],
+                            'odds': [data['odds']],
+                            'stake': [data['stake']],
+                            'islay': [data['islay']],
+                            'isplaced': [data['isplaced']],
+                            'notes': [data['notes']]})
+    newRecord.to_sql(name='sprecord', con=bs.conn, if_exists='append', index=False)
+    recordid = pd.read_sql_query('select max("recordid") from "sprecord"', bs.conn)['max'][0]
+    return jsonify({'recordid': str(recordid)})
+
+
+@application.route('/createSPScore', methods=['POST', 'GET'])
+def createSPScore():
+    # Get record data and append to database
+    data = request.get_json()
+    bs = BlocServer()
+    newScore = pd.DataFrame({'eventid': [data['eventid']],
+                            'runner': [data['runner']],
+                            'timestamputc': [data['timestamputc']],
+                            'measure': [data['measure']],
+                            'value': [data['value']],
+                            'isfinal': [data['isfinal']]})
+    newScore.to_sql(name='spscore', con=bs.conn, if_exists='append', index=False)
+    scoreid = pd.read_sql_query('select max("scoreid") from "spscore"', bs.conn)['max'][0]
+    return jsonify({'scoreid': str(scoreid)})
+
+# Views
+# Trade summary
+@application.route('/viewSPEvents', methods=['POST', 'GET'])
+def viewSPEvents():
+
+    data = request.get_json()
+    bs = BlocServer()
+    spevents = pd.read_sql_table('spevent', bs.conn)
+    return jsonify(spevents.to_json())
+
+@application.route('/viewSPMarkets', methods=['POST', 'GET'])
+def viewSPMarkets():
+
+    data = request.get_json()
+    bs = BlocServer()
+    spmarkets = pd.read_sql_table('spmarket', bs.conn)
+    return jsonify(spmarkets.to_json())
+
+@application.route('/viewSPRecords', methods=['POST', 'GET'])
+def viewSPRecords():
+
+    data = request.get_json()
+    bs = BlocServer()
+    sprecords = pd.read_sql_table('sprecord', bs.conn)
+    return jsonify(sprecords.to_json())
+
+@application.route('/viewSPScores', methods=['POST', 'GET'])
+def viewSPScores():
+
+    data = request.get_json()
+    bs = BlocServer()
+    spscores = pd.read_sql_table('spscore', bs.conn)
+    return jsonify(spscores.to_json())
