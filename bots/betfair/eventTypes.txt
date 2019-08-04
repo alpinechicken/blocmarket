@@ -1,0 +1,33 @@
+1	Soccer
+2	Tennis
+7	Horse Racing
+4	Cricket
+7511	Baseball
+26420387	Mixed Martial Arts
+4339	Greyhound Racing
+5	Rugby Union
+7522	Basketball
+7524	Ice Hockey
+468328	Handball
+3	Golf
+998918	Bowls
+6422	Snooker
+6	Boxing
+8	Motor Sport
+6423	American Football
+2378961	Politics
+1477	Rugby League
+2152880	Gaelic Games
+136332	Chess
+315220	Poker
+10	Special Bets
+11	Cycling
+3988	Athletics
+451485	Winter Sports
+27388198	Current Affairs
+27454571	E-Sports
+3503	Darts
+72382	Pool
+606611	Netball
+6231	Financial Bets
+627555	Badminton

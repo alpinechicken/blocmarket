@@ -110,16 +110,15 @@ class BlocServer(object):
         self.spevent = Table('spevent', self.metadata,
                              Column('eventid', Integer, primary_key=True, autoincrement=True),
                              Column('sport', VARCHAR),
-                             Column('league', VARCHAR),
                              Column('competition', VARCHAR),
-                             Column('stage', VARCHAR),
-                             Column('runners', JSON),
+                             Column('event', JSON),
                              Column('starttimestamputc', TIMESTAMP))
 
         self.spmarket = Table('spmarket', self.metadata,
                              Column('marketid', Integer, primary_key=True, autoincrement=True),
                              Column('eventid', Integer),
                              Column('markettype', VARCHAR),
+                             Column('runners', JSON),
                              Column('marketparameters', JSON),
                              Column('notes', VARCHAR))
 
@@ -127,7 +126,9 @@ class BlocServer(object):
                              Column('recordid', Integer, primary_key=True, autoincrement=True),
                              Column('source', VARCHAR),
                              Column('marketid', Integer),
+                             Column('runnerid', Integer),
                              Column('timestamputc', TIMESTAMP),
+                             Column('handicap', Float),
                              Column('odds', Float),
                              Column('stake', Float),
                              Column('islay', Boolean),
@@ -137,7 +138,7 @@ class BlocServer(object):
         self.spscore = Table('spscore', self.metadata,
                              Column('scoreid', Integer, primary_key=True, autoincrement=True),
                              Column('eventid', Integer),
-                             Column('runner', Integer),
+                             Column('runnerid', Integer),
                              Column('timestamputc', TIMESTAMP),
                              Column('measure', VARCHAR),
                              Column('value', Integer),

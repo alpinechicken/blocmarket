@@ -345,10 +345,8 @@ def createSPEvent():
     data = request.get_json()
     bs = BlocServer()
     newEvent = pd.DataFrame({'sport': [data['sport']],
-                                  'league': [data['league']],
                                   'competition': [data['competition']],
-                                  'stage': [data['stage']],
-                                  'runners': [data['runners']],
+                                  'event': [data['event']],
                                   'starttimestamputc': [data['starttimestamputc']]})
     newEvent.to_sql(name='spevent', con=bs.conn, if_exists='append', index=False)
 
@@ -379,6 +377,7 @@ def createSPMarket():
     bs = BlocServer()
     newMarket = pd.DataFrame({'eventid': [data['eventid']],
                             'markettype': [data['markettype']],
+                            'runners': [data['runners']],
                             'marketparameters': [data['marketparameters']],
                             'notes': [data['notes']]})
     newMarket.to_sql(name='spmarket', con=bs.conn, if_exists='append', index=False)
@@ -392,7 +391,9 @@ def createSPRecord():
     bs = BlocServer()
     newRecord = pd.DataFrame({'source': [data['source']],
                             'marketid': [data['marketid']],
+                            'runnerid': [data['runnerid']],
                             'timestamputc': [data['timestamputc']],
+                            'handicap': [data['handicap']],
                             'odds': [data['odds']],
                             'stake': [data['stake']],
                             'islay': [data['islay']],
@@ -409,7 +410,7 @@ def createSPScore():
     data = request.get_json()
     bs = BlocServer()
     newScore = pd.DataFrame({'eventid': [data['eventid']],
-                            'runner': [data['runner']],
+                            'runnerid': [data['runnerid']],
                             'timestamputc': [data['timestamputc']],
                             'measure': [data['measure']],
                             'value': [data['value']],
