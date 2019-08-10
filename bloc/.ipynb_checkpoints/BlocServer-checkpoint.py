@@ -2,7 +2,7 @@
 import numpy as np
 import pandas as pd
 from sqlalchemy import create_engine, Table, Column, Integer, Boolean, String, Float, \
-    LargeBinary, BLOB, TIMESTAMP, MetaData, update, ForeignKey
+    VARCHAR, JSON, LargeBinary, BLOB, TIMESTAMP, MetaData, update, ForeignKey
 from sqlalchemy.pool import NullPool
 import os, platform
 import datetime
@@ -33,6 +33,8 @@ class BlocServer(object):
 
         if platform.system() == 'Darwin':
             # Use local postgres if on mac
+            DATABASE_URL = "postgresql://alpine:3141592@localhost/blocparty"
+        elif platform.version().find('Ubuntu')!=-1:
             DATABASE_URL = "postgresql://alpine:3141592@localhost/blocparty"
         else:
             # Use DATABASE_URL from env otherwise
@@ -79,7 +81,7 @@ class BlocServer(object):
                                  Column('signature', LargeBinary),
                                  Column('timeStampUTC', TIMESTAMP),
                                  Column('timeStampUTCSignature', LargeBinary),
-                                 Column('marketDesc', String)
+                                 Column('marketDesc', JSON)
                                  )
 
         # Possible combinations of root market outcomes
@@ -99,6 +101,50 @@ class BlocServer(object):
                                          Column('marketMin', Integer),
                                          Column('marketMax', Integer),
                                          )
+
+        # SP tables
+        '''
+        spevent -  info for event
+        spmarket - markets on events
+        sprecord - odds records
+        spscore - score records
+        '''
+        self.spevent = Table('spevent', self.metadata,
+                             Column('eventid', Integer, primary_key=True, autoincrement=True),
+                             Column('sport', VARCHAR),
+                             Column('competition', VARCHAR),
+                             Column('event', JSON),
+                             Column('starttimestamputc', TIMESTAMP))
+
+        self.spmarket = Table('spmarket', self.metadata,
+                             Column('marketid', Integer, primary_key=True, autoincrement=True),
+                             Column('eventid', Integer),
+                             Column('markettype', VARCHAR),
+                             Column('runners', JSON),
+                             Column('marketparameters', JSON),
+                             Column('notes', VARCHAR))
+
+        self.sprecord = Table('sprecord', self.metadata,
+                             Column('recordid', Integer, primary_key=True, autoincrement=True),
+                             Column('source', VARCHAR),
+                             Column('marketid', Integer),
+                             Column('runnerid', Integer),
+                             Column('timestamputc', TIMESTAMP),
+                             Column('handicap', Float),
+                             Column('odds', Float),
+                             Column('stake', Float),
+                             Column('islay', Boolean),
+                             Column('isplaced', Boolean),
+                             Column('notes', VARCHAR))
+
+        self.spscore = Table('spscore', self.metadata,
+                             Column('scoreid', Integer, primary_key=True, autoincrement=True),
+                             Column('eventid', Integer),
+                             Column('runnerid', Integer),
+                             Column('timestamputc', TIMESTAMP),
+                             Column('measure', VARCHAR),
+                             Column('value', Integer),
+                             Column('isfinal', Boolean))
 
 
         # Create all tables
@@ -570,7 +616,7 @@ class BlocServer(object):
         taking each column D columns of the second term as the minimum unmatched collateral for all 
         trades for each trader. 
         
-        TODO: Do this as a table operation.
+        TODO: Do whole thing as a table operation. Also cuts down on 
         '''
 
         return colChk, collateralDetails
@@ -635,7 +681,8 @@ class BlocServer(object):
         # states.
         self.marketOutcomes = M
 
-    def updateBounds(self, L: int, U: int, l: int, u: int) -> object:
+    @staticmethod
+    def updateBounds(L: int, U: int, l: int, u: int) -> object:
         """Update bounds from lower branches
 
         :param: L: (ndarray) lower bound for current market
@@ -755,7 +802,8 @@ class BlocServer(object):
 
         return marketBounds.reset_index(drop=True)
 
-    def constructCartesianProduct(self, input: np.ndarray) -> list:
+    @staticmethod
+    def constructCartesianProduct(input: np.ndarray) -> list:
         """Construct all possible combinations of a set
 
         :param: input: (ndarray) input set
@@ -765,7 +813,8 @@ class BlocServer(object):
         cp = list(itertools.product(*input))
         return cp
 
-    def constructUnitVector(self, L: int, x: int):
+    @staticmethod
+    def constructUnitVector(L: int, x: int):
         """Make a vector of length L with a one in the x'th position
 
         :param: L: (int64) Length of unit vector
@@ -854,7 +903,8 @@ class BlocServer(object):
             verifyKey = 'null'
         return verifyKey
 
-    def signMessage(self, msg: object, signingKey: object) -> object:
+    @staticmethod
+    def signMessage(msg: object, signingKey: object) -> object:
         """Sign a message
 
         :param: msg: message to sign
@@ -873,7 +923,8 @@ class BlocServer(object):
         signed = signingKey.sign(msg)
         return signed
 
-    def verifyMessage(self, signature: bytes, signatureMsg: bytes, verifyKey: str) -> object:
+    @staticmethod
+    def verifyMessage(signature: bytes, signatureMsg: bytes, verifyKey: str) -> object:
         """Verify a signature
 
         :param: signature: (bytes) signature to check

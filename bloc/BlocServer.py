@@ -34,6 +34,8 @@ class BlocServer(object):
         if platform.system() == 'Darwin':
             # Use local postgres if on mac
             DATABASE_URL = "postgresql://alpine:3141592@localhost/blocparty"
+        elif platform.version().find('Ubuntu')!=-1:
+            DATABASE_URL = "postgresql://alpine:3141592@localhost/blocparty"
         else:
             # Use DATABASE_URL from env otherwise
             DATABASE_URL = os.environ['HEROKU_POSTGRESQL_JADE_URL']
