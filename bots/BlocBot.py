@@ -6,8 +6,10 @@ import pytz
 import numpy as np
 import pandas as pd
 import logging
-import betfair as bf
-
+try:
+    import betfair as bf
+except:
+    import bots.betfair as bf
 
 from IPython.core.debugger import set_trace
 
@@ -42,12 +44,13 @@ class BlocBot(object):
         
         # spmarket
         self.spmarketid = ''
-
-    def getBetfairSessionToken(self, betfairAppKey,  betfairPassword, betfairUserName = 'alpinechicken', betfairAppName = 'alpinechickenbetfair'):
+        
+    def getBetfairSessionToken(self, betfairPassword,  betfairAppKey = 'iw8UsiHCP1GSs213',  betfairUserName = 'alpinechicken', betfairAppName = 'alpinechickenbetfair'):
         # Byzantine betfair authentiation process        
-        sessionKey = bf.betfairLogin(username=betfairUserName,password=betfairPassword, appName=betfairAppName)
+        sessionKey = bf.betfairLogin(username=betfairUserName, password=betfairPassword, appName=betfairAppName)
         self.betfairSessionKey = sessionKey
         self.betfairAppKey = betfairAppKey
+        bf.betfairKeepAlive(sessionKey=self.betfairSessionKey, appKey=self.betfairAppKey)
 
 
     def getQuote(self):

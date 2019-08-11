@@ -12,18 +12,38 @@ except:
     import bots.betfair as bf
     
 
-
 from IPython.core.debugger import set_trace
 
 class BetfairBot(object):
     
-    # Basic betfair bot:
-    # - Gets session token
-    # Each updateFrequency seconds:
-    # - Pulls order book for market
-    # - Pulls current orders in market
-    # - Pulls market state
-    # - Trading rule: (orderBook x marketState x currentOrders ) -> Order cancels + new orders
+    '''
+    
+    Basic betfair robot:
+    getBetfairSessionToken(): Gets betfair session token
+    getMarketDetails(): Gets market details
+    getOrderBook(): Gets current order book
+    getCurrentOrders(): Gets current placed orders
+    setupLocalData(): Set up local blocmarket data (event, market)
+    
+    run():
+    Each updateFrequency seconds:
+    - Pulls order book for market
+    - Pulls current orders 
+    - Pulls market state (score, related markets, metrics etc. from sprecords and spscore)
+    - Trading rule: (orderBook x marketState x currentOrders ) -> Order cancels + new orders
+    - If TEST_MODE is true trades are saved to sprecords, otherwise sent to betfair.
+    
+    Notes:
+    Current trading logic makes bid/offer relative to current bbo. Can switch out run() for something fancier.
+    
+    Dependencies: 
+    betfair library
+    
+    TODO: 
+    Remove API keys from defaults for production (use local keys)
+    
+    
+    '''
     
     def __init__(self, betfairMarketId):
 
@@ -56,7 +76,7 @@ class BetfairBot(object):
 
     def getBetfairSessionToken(self, betfairPassword,  betfairAppKey = 'iw8UsiHCP1GSs213',  betfairUserName = 'alpinechicken', betfairAppName = 'alpinechickenbetfair'):
         # Byzantine betfair authentiation process        
-        sessionKey = bf.betfairLogin(username=betfairUserName,password=betfairPassword, appName=betfairAppName)
+        sessionKey = bf.betfairLogin(username=betfairUserName, password=betfairPassword, appName=betfairAppName)
         self.betfairSessionKey = sessionKey
         self.betfairAppKey = betfairAppKey
         bf.betfairKeepAlive(sessionKey=self.betfairSessionKey, appKey=self.betfairAppKey)
@@ -86,11 +106,6 @@ class BetfairBot(object):
 
         return self.orderBook
 
-        # bids = pd.DataFrame(self.orderBook['runners'][self.betfairRunnerId]['ex']['availableToBack'])
-        # asks = pd.DataFrame(self.orderBook['runners'][self.betfairRunnerId]['ex']['availableToLay'])
-
-        # return bids, asks
-
     def getCurrentOrders(self):
         # List current orders
         currentOrders = bf.listOrder(sessionKey=self.betfairSessionKey, appKey = self.betfairAppKey, marketIds=self.betfairMarketId)
@@ -103,7 +118,7 @@ class BetfairBot(object):
         return self.currentOrders
 
     def setupLocalData(self):
-        '''Sets up all local event/market. '''
+        # Sets up all local event/market. 
 
         if self.marketDetails == []:
             print('Market details not loaded or market is closed.')
@@ -120,6 +135,8 @@ class BetfairBot(object):
             content = {}
             response = requests.post(url, data=json.dumps(content), headers=headers)
             allMarkets = pd.read_json(response.json())
+            
+            # Get loca
 
             # Use betfair runners
             if self.marketDetails['marketName'] == 'Handicap':
@@ -139,7 +156,7 @@ class BetfairBot(object):
             allBetfairIds = [mkt['source']['betfair']['marketid'] for mkt in allMarkets['marketparameters']]
             marketExists = self.marketDetails['marketId'] in allBetfairIds
             if marketExists:
-                marketid = allMarkets.loc[allBetfairIds.index(self.marketDetails['marketId'] ), ['marketid']].marketid.item()
+                marketid = allMarkets.loc[allMarkets['marketparameters'].apply(lambda x: x['source']['betfair']['marketid'] == self.marketDetails['marketId']), ['marketid']].marketid.item()
 
             # Check if event exists
             eventCheck = (allEvents['sport'] == self.marketDetails['eventType']['name']) &\
@@ -228,13 +245,14 @@ class BetfairBot(object):
                 if len(allBids)>0 and len(allAsks)>0:
                     bestBid = max(allBids)
                     bestAsk = min(allAsks)
+                    midPrice = (bestBid + bestAsk)/2
                     spread = bestAsk - bestBid
                     spreadPrct = spread/bestBid
-                    # Create target
+                    # Create target (bet size standardized by mid odds)
                     targetBid = {'selectionId': runner['selectionId'], 'side': 'BACK', 'handicap': runner['handicap'],\
-                                 'price': bestBid + spreadTightner*spread, 'size': betSize}
+                                 'price': bestBid + spreadTightner*spread, 'size': betSize/midPrice}
                     targetAsk = {'selectionId': runner['selectionId'], 'side': 'LAY', 'handicap': runner['handicap'],\
-                                 'price': bestAsk - spreadTightner*spread, 'size':betSize}
+                                 'price': bestAsk - spreadTightner*spread, 'size':betSize/midPrice}
 
                     targetOrders.append(targetBid)
                     targetOrders.append(targetAsk)
@@ -249,6 +267,7 @@ class BetfairBot(object):
                                              side=order['side'], wallet=betfairWallet, price=order['price'],\
                                              size= order['size'], persistenceType='PERSIST')
                 else:
+                    # Record order in local 
                     tUTC = datetime.datetime.utcnow()
                     url = self.blocurl + 'createSPRecord'
                     headers = {'content-type': 'application/json'}
@@ -320,12 +339,12 @@ class BetfairBot(object):
 '''
 appKey = 'iw8UsiHCP1GSs213'
 #marketId = '1.159518463' # handicap
-marketId = '1.160788900' # match
+marketId = '1.160853913' # match
 
 # Set up bot
 bot = BetfairBot(betfairMarketId=marketId)
 # Get SOID token
-bot.getBetfairSessionToken(betfairPassword='ee', betfairAppKey = appKey)
+bot.getBetfairSessionToken(betfairPassword='eeis2718', betfairAppKey = appKey)
 # Get betfair market details
 bot.getMarketDetails()
 # Get current order book
@@ -356,3 +375,5 @@ bot.run()
 # 3. Document setup and running
 # 4. Tag trades in betfair
 # 5. Write bot that skews bid offer and hits anyone who comes in over (using arb bounds from related market)
+# 6. Spec some other basic bot types
+# 7. Package up betfair functions and import
