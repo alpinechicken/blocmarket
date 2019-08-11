@@ -49,6 +49,7 @@ class BetfairBot(object):
 
         # Test mode (only sends orders to local table)
         self.TEST_MODE = True
+        # Mirror mode creates local bloc market with same trades
 
         # Bot name
         self.botName = 'marketmaker'
@@ -108,6 +109,7 @@ class BetfairBot(object):
 
     def getCurrentOrders(self):
         # List current orders
+        
         currentOrders = bf.listOrder(sessionKey=self.betfairSessionKey, appKey = self.betfairAppKey, marketIds=self.betfairMarketId)
 
         if currentOrders == []:
@@ -344,7 +346,7 @@ marketId = '1.160853913' # match
 # Set up bot
 bot = BetfairBot(betfairMarketId=marketId)
 # Get SOID token
-bot.getBetfairSessionToken(betfairPassword='eeis2718', betfairAppKey = appKey)
+bot.getBetfairSessionToken(betfairPassword='e', betfairAppKey = appKey)
 # Get betfair market details
 bot.getMarketDetails()
 # Get current order book

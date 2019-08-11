@@ -346,7 +346,7 @@ marketId = '1.160853913' # match
 # Set up bot
 bot = BetfairBot(betfairMarketId=marketId)
 # Get SOID token
-bot.getBetfairSessionToken(betfairPassword='eeis2718', betfairAppKey = appKey)
+bot.getBetfairSessionToken(betfairPassword='e', betfairAppKey = appKey)
 # Get betfair market details
 bot.getMarketDetails()
 # Get current order book
