@@ -2,7 +2,7 @@ import requests
 import urllib
 import json
 import datetime
-from betfair.betfairLogin import betfairLogin
+#from bots.betfair.betfairLogin import betfairLogin
 
 def listMarketCatalogue(sessionKey, appKey, maxResults=10,  **kwargs):
 

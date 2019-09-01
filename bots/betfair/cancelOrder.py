@@ -115,7 +115,7 @@ def cancelOrder(sessionKey,appKey,**kwargs):
     cancelStatus = response.json()
 
     # output
-    return cancelStatus
+    return cancelStatus, content
     #TODO: create json directly and convert to string for the request rather than from the start
 
 
