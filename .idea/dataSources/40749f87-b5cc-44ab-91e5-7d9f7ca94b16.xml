@@ -245,223 +245,226 @@
       <ColNames>tradeId</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="69" parent="29" name="marketId">
+    <column id="69" parent="29" name="index">
       <Position>1</Position>
       <DataType>int8(19)|-5s</DataType>
     </column>
-    <column id="70" parent="29" name="marketRootId">
+    <column id="70" parent="29" name="marketId">
       <Position>2</Position>
       <DataType>int8(19)|-5s</DataType>
     </column>
-    <column id="71" parent="29" name="marketBranchId">
+    <column id="71" parent="29" name="marketRootId">
       <Position>3</Position>
       <DataType>int8(19)|-5s</DataType>
     </column>
-    <column id="72" parent="29" name="marketMin">
+    <column id="72" parent="29" name="marketBranchId">
       <Position>4</Position>
-      <DataType>float8(17,17)|8s</DataType>
+      <DataType>int8(19)|-5s</DataType>
     </column>
-    <column id="73" parent="29" name="marketMax">
+    <column id="73" parent="29" name="marketMin">
       <Position>5</Position>
       <DataType>float8(17,17)|8s</DataType>
     </column>
-    <column id="74" parent="29" name="outcomeId">
+    <column id="74" parent="29" name="marketMax">
       <Position>6</Position>
-      <DataType>int8(19)|-5s</DataType>
+      <DataType>float8(17,17)|8s</DataType>
     </column>
-    <column id="75" parent="29" name="blocId">
+    <column id="75" parent="29" name="outcomeId">
       <Position>7</Position>
       <DataType>int8(19)|-5s</DataType>
     </column>
-    <column id="76" parent="30" name="eventid">
+    <index id="76" parent="29" name="ix_outcomeCombinations_index">
+      <ColNames>index</ColNames>
+    </index>
+    <column id="77" parent="30" name="eventid">
       <Position>1</Position>
       <DataType>serial(10)|4s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>nextval(&apos;spevent_eventid_seq&apos;::regclass)</DefaultExpression>
     </column>
-    <column id="77" parent="30" name="sport">
+    <column id="78" parent="30" name="sport">
       <Position>2</Position>
       <DataType>varchar(max)|12s</DataType>
     </column>
-    <column id="78" parent="30" name="competition">
+    <column id="79" parent="30" name="competition">
       <Position>3</Position>
       <DataType>varchar(max)|12s</DataType>
     </column>
-    <column id="79" parent="30" name="event">
+    <column id="80" parent="30" name="event">
       <Position>4</Position>
       <DataType>json(max)|1111s</DataType>
     </column>
-    <column id="80" parent="30" name="starttimestamputc">
+    <column id="81" parent="30" name="starttimestamputc">
       <Position>5</Position>
       <DataType>timestamp(29,6)|93s</DataType>
     </column>
-    <index id="81" parent="30" name="spevent_pkey">
+    <index id="82" parent="30" name="spevent_pkey">
       <ColNames>eventid</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="82" parent="30" name="spevent_pkey">
+    <key id="83" parent="30" name="spevent_pkey">
       <ColNames>eventid</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="83" parent="31" name="marketid">
+    <column id="84" parent="31" name="marketid">
       <Position>1</Position>
       <DataType>serial(10)|4s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>nextval(&apos;spmarket_marketid_seq&apos;::regclass)</DefaultExpression>
     </column>
-    <column id="84" parent="31" name="eventid">
+    <column id="85" parent="31" name="eventid">
       <Position>2</Position>
       <DataType>int4(10)|4s</DataType>
     </column>
-    <column id="85" parent="31" name="markettype">
+    <column id="86" parent="31" name="markettype">
       <Position>3</Position>
       <DataType>varchar(max)|12s</DataType>
     </column>
-    <column id="86" parent="31" name="runners">
+    <column id="87" parent="31" name="runners">
       <Position>4</Position>
       <DataType>json(max)|1111s</DataType>
     </column>
-    <column id="87" parent="31" name="marketparameters">
+    <column id="88" parent="31" name="marketparameters">
       <Position>5</Position>
       <DataType>json(max)|1111s</DataType>
     </column>
-    <column id="88" parent="31" name="notes">
+    <column id="89" parent="31" name="notes">
       <Position>6</Position>
       <DataType>varchar(max)|12s</DataType>
     </column>
-    <index id="89" parent="31" name="spmarket_pkey">
+    <index id="90" parent="31" name="spmarket_pkey">
       <ColNames>marketid</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="90" parent="31" name="spmarket_pkey">
+    <key id="91" parent="31" name="spmarket_pkey">
       <ColNames>marketid</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="91" parent="32" name="recordid">
+    <column id="92" parent="32" name="recordid">
       <Position>1</Position>
       <DataType>serial(10)|4s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>nextval(&apos;sprecord_recordid_seq&apos;::regclass)</DefaultExpression>
     </column>
-    <column id="92" parent="32" name="source">
+    <column id="93" parent="32" name="source">
       <Position>2</Position>
       <DataType>varchar(max)|12s</DataType>
     </column>
-    <column id="93" parent="32" name="marketid">
+    <column id="94" parent="32" name="marketid">
       <Position>3</Position>
       <DataType>int4(10)|4s</DataType>
     </column>
-    <column id="94" parent="32" name="runnerid">
+    <column id="95" parent="32" name="runnerid">
       <Position>4</Position>
       <DataType>int4(10)|4s</DataType>
     </column>
-    <column id="95" parent="32" name="timestamputc">
+    <column id="96" parent="32" name="timestamputc">
       <Position>5</Position>
       <DataType>timestamp(29,6)|93s</DataType>
     </column>
-    <column id="96" parent="32" name="handicap">
+    <column id="97" parent="32" name="handicap">
       <Position>6</Position>
       <DataType>float8(17,17)|8s</DataType>
     </column>
-    <column id="97" parent="32" name="odds">
+    <column id="98" parent="32" name="odds">
       <Position>7</Position>
       <DataType>float8(17,17)|8s</DataType>
     </column>
-    <column id="98" parent="32" name="stake">
+    <column id="99" parent="32" name="stake">
       <Position>8</Position>
       <DataType>float8(17,17)|8s</DataType>
     </column>
-    <column id="99" parent="32" name="islay">
+    <column id="100" parent="32" name="islay">
       <Position>9</Position>
       <DataType>bool(1)|-7s</DataType>
     </column>
-    <column id="100" parent="32" name="isplaced">
+    <column id="101" parent="32" name="isplaced">
       <Position>10</Position>
       <DataType>bool(1)|-7s</DataType>
     </column>
-    <column id="101" parent="32" name="notes">
+    <column id="102" parent="32" name="notes">
       <Position>11</Position>
       <DataType>varchar(max)|12s</DataType>
     </column>
-    <index id="102" parent="32" name="sprecord_pkey">
+    <index id="103" parent="32" name="sprecord_pkey">
       <ColNames>recordid</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="103" parent="32" name="sprecord_pkey">
+    <key id="104" parent="32" name="sprecord_pkey">
       <ColNames>recordid</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="104" parent="33" name="scoreid">
+    <column id="105" parent="33" name="scoreid">
       <Position>1</Position>
       <DataType>serial(10)|4s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>nextval(&apos;spscore_scoreid_seq&apos;::regclass)</DefaultExpression>
     </column>
-    <column id="105" parent="33" name="eventid">
+    <column id="106" parent="33" name="eventid">
       <Position>2</Position>
       <DataType>int4(10)|4s</DataType>
     </column>
-    <column id="106" parent="33" name="runnerid">
+    <column id="107" parent="33" name="runnerid">
       <Position>3</Position>
       <DataType>int4(10)|4s</DataType>
     </column>
-    <column id="107" parent="33" name="timestamputc">
+    <column id="108" parent="33" name="timestamputc">
       <Position>4</Position>
       <DataType>timestamp(29,6)|93s</DataType>
     </column>
-    <column id="108" parent="33" name="measure">
+    <column id="109" parent="33" name="measure">
       <Position>5</Position>
       <DataType>varchar(max)|12s</DataType>
     </column>
-    <column id="109" parent="33" name="value">
+    <column id="110" parent="33" name="value">
       <Position>6</Position>
       <DataType>int4(10)|4s</DataType>
     </column>
-    <column id="110" parent="33" name="isfinal">
+    <column id="111" parent="33" name="isfinal">
       <Position>7</Position>
       <DataType>bool(1)|-7s</DataType>
     </column>
-    <index id="111" parent="33" name="spscore_pkey">
+    <index id="112" parent="33" name="spscore_pkey">
       <ColNames>scoreid</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="112" parent="33" name="spscore_pkey">
+    <key id="113" parent="33" name="spscore_pkey">
       <ColNames>scoreid</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="113" parent="34" name="tssId">
+    <column id="114" parent="34" name="tssId">
       <Position>1</Position>
       <DataType>serial(10)|4s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>nextval(&apos;&quot;timeStampServerTable_tssId_seq&quot;&apos;::regclass)</DefaultExpression>
     </column>
-    <column id="114" parent="34" name="verifyKey">
+    <column id="115" parent="34" name="verifyKey">
       <Position>2</Position>
       <DataType>varchar(max)|12s</DataType>
     </column>
-    <index id="115" parent="34" name="timeStampServerTable_pkey">
+    <index id="116" parent="34" name="timeStampServerTable_pkey">
       <ColNames>tssId</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="116" parent="34" name="timeStampServerTable_pkey">
+    <key id="117" parent="34" name="timeStampServerTable_pkey">
       <ColNames>tssId</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="117" parent="35" name="traderId">
+    <column id="118" parent="35" name="traderId">
       <Position>1</Position>
       <DataType>serial(10)|4s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>nextval(&apos;&quot;userTable_traderId_seq&quot;&apos;::regclass)</DefaultExpression>
     </column>
-    <column id="118" parent="35" name="verifyKey">
+    <column id="119" parent="35" name="verifyKey">
       <Position>2</Position>
       <DataType>varchar(max)|12s</DataType>
     </column>
-    <index id="119" parent="35" name="userTable_pkey">
+    <index id="120" parent="35" name="userTable_pkey">
       <ColNames>traderId</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="120" parent="35" name="userTable_pkey">
+    <key id="121" parent="35" name="userTable_pkey">
       <ColNames>traderId</ColNames>
       <Primary>1</Primary>
     </key>
