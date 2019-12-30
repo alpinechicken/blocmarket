@@ -2,13 +2,14 @@
 <project version="4">
   <component name="dataSourceStorageLocal">
     <data-source name="blocparty@localhost" uuid="40749f87-b5cc-44ab-91e5-7d9f7ca94b16">
-      <database-info product="PostgreSQL" version="10.5" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.2.5" family="POSTGRES" exact-version="10.5">
+      <database-info product="PostgreSQL" version="12.1" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.2.5" family="POSTGRES" exact-version="12.1">
         <identifier-quote-string>&quot;</identifier-quote-string>
       </database-info>
       <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
       <user-name>alpine</user-name>
       <introspection-schemas>@:@</introspection-schemas>
+      <legacy-introspector>true</legacy-introspector>
     </data-source>
     <data-source name="pmarket [2]" uuid="df1003dd-be15-4f8e-8000-774a3b7d481a">
       <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" family="SQLITE" exact-version="0.0" />

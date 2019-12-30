@@ -2,6 +2,7 @@ from bloc.BlocServer import BlocServer
 from bloc.BlocClient import BlocClient
 import unittest
 import pandas as pd
+import json
 
 
 class TestBlocServer(unittest.TestCase):
@@ -38,21 +39,23 @@ class TestBlocServer(unittest.TestCase):
                                   'marketMin': [0],
                                   'marketMax': [1000],
                                   'traderId': [int(self.trader0)],
-                                  'marketDesc': 'This is a market with a name.'})
+                                  'marketDesc': json.dumps({})})
         self.bc1.createMarket_client(marketRow=marketRow, blocServer=self.bs)
 
         marketRow = pd.DataFrame({'marketRootId': [1],
                                   'marketBranchId': [2],
                                   'marketMin': [100],
                                   'marketMax': [900],
-                                  'traderId': [int(self.trader0)]})
+                                  'traderId': [int(self.trader0)],
+                                  'marketDesc': json.dumps({})})
         self.bc1.createMarket_client(marketRow=marketRow, blocServer=self.bs)
 
         marketRow = pd.DataFrame({'marketRootId': [2],
                                   'marketBranchId': [1],
                                   'marketMin': [0],
                                   'marketMax': [1000],
-                                  'traderId': [int(self.trader0)]})
+                                  'traderId': [int(self.trader0)],
+                                  'marketDesc': json.dumps({})})
         self.bc1.createMarket_client(marketRow=marketRow, blocServer=self.bs)
         assert len(pd.read_sql_table('marketTable', self.bs.conn))==3
 
@@ -63,7 +66,8 @@ class TestBlocServer(unittest.TestCase):
                                   'marketBranchId': [1],
                                   'marketMin': [0],
                                   'marketMax': [1000],
-                                  'traderId': [int(self.trader1)]})
+                                  'traderId': [int(self.trader1)],
+                                  'marketDesc': json.dumps({})})
         self.bc2.createMarket_client(marketRow=marketRow, blocServer=self.bs)
         assert len(pd.read_sql_table('marketTable', self.bs.conn)) == 3
 
@@ -86,7 +90,8 @@ class TestBlocServer(unittest.TestCase):
                                   'marketBranchId': [1],
                                   'marketMin': [1000],
                                   'marketMax': [1000],
-                                  'traderId': [int(self.trader0)]})
+                                  'traderId': [int(self.trader0)],
+                                  'marketDesc': json.dumps({})})
         self.bc1.createMarket_client(marketRow=marketRow, blocServer=self.bs)
         marketBounds = pd.read_sql_table('marketBounds', self.bs.conn)
         assert (marketBounds[['marketRootId', 'marketBranchId', 'marketMin', 'marketMax']].values == [[1, 1, 1000, 1000],
@@ -99,7 +104,8 @@ class TestBlocServer(unittest.TestCase):
                                   'marketBranchId': [1],
                                   'marketMin': [0],
                                   'marketMax': [0],
-                                  'traderId': [int(self.trader0)]})
+                                  'traderId': [int(self.trader0)],
+                                  'marketDesc': json.dumps({})})
         check, allChecks = self.bc1.createMarket_client(marketRow=marketRow, blocServer=self.bs)
         marketBounds = pd.read_sql_table('marketBounds', self.bs.conn)
         assert (marketBounds[['marketRootId', 'marketBranchId', 'marketMin', 'marketMax']].values == [[1, 1, 0, 0],
@@ -111,7 +117,8 @@ class TestBlocServer(unittest.TestCase):
         tradeRow = pd.DataFrame({'marketId': [1],
                                  'price': [515],
                                  'quantity': [1],
-                                 'traderId': [int(self.trader0)]})
+                                 'traderId': [int(self.trader0)],
+                                 'marketDesc': json.dumps({})})
         self.bc1.createTrade_client(tradeRow=tradeRow, blocServer=self.bs)
 
         tradeRow = pd.DataFrame({'marketId': [1],
@@ -125,7 +132,7 @@ class TestBlocServer(unittest.TestCase):
                                  'quantity': [-1],
                                  'traderId': [int(self.trader1)]})
 
-        check, allChecks  =self.bc2.createTrade_client(tradeRow=tradeRow, blocServer=self.bs)
+        check, allChecks = self.bc2.createTrade_client(tradeRow=tradeRow, blocServer=self.bs)
         oB = pd.read_sql_table('orderBook', self.bs.conn)
         assert oB.shape[0] == 3
 
@@ -139,6 +146,8 @@ class TestBlocServer(unittest.TestCase):
 
 
         colChk, details = self.bs.checkCollateral(tradePackage['price'][0], tradePackage['quantity'][0], tradePackage['marketId'][0], tradePackage['traderId'][0])
+        colChk1, details1 = self.bs.checkCollateral_old(tradePackage['price'][0], tradePackage['quantity'][0], tradePackage['marketId'][0], tradePackage['traderId'][0])
+
         assert colChk == True
 
     def testRemoveTrade(self):
@@ -172,9 +181,11 @@ class TestBlocServer(unittest.TestCase):
             self.bc2.createTrade_client(tradeRow=tradeRow, blocServer=self.bs)
 
         colChk, details = self.bs.checkCollateral(tInd_=1)
+        colChk1, details1 = self.bs.checkCollateral_old(tInd_=1)
+
         oB = pd.read_sql_table("orderBook", self.bs.conn)
         #assert len(oB) == 12
-        assert len(oB.loc[oB['iRemoved'],:])==4
+        assert len(oB.loc[oB['iRemoved'],:])==5
         assert len(oB.loc[oB['iMatched'], :]) == 8
         assert colChk == True
 
@@ -210,21 +221,75 @@ class TestBlocServer(unittest.TestCase):
                                      'traderId': [int(self.trader0)]})
             self.bc1.createTrade_client(tradeRow=tradeRow,
                                         blocServer=self.bs)
-        colChk =self.bs.checkCollateral(tInd_=1)
+        colChk, colSummary =self.bs.checkCollateral(tInd_=1)
+        colChk1, colSummary1 = self.bs.checkCollateral_old(tInd_=1)
+
         assert len(pd.read_sql_table("orderBook", self.bs.conn))==12
         assert colChk
 
+
+    def testManyTrades2(self):
+        # Add bunch of matched trades in market 2
+        for iMarket in [1,2,3]:
+            for iTrade in range(3):
+                # Trader 1 bid at 0.5
+                tradeRow = pd.DataFrame({'marketId': [iMarket],
+                                         'price': [500],
+                                         'quantity': [1],
+                                         'traderId': [int(self.trader0)]})
+                self.bc1.createTrade_client(tradeRow=tradeRow,
+                                            blocServer=self.bs)
+                # Trader 2 offer at 0.5
+                tradeRow = pd.DataFrame({'marketId': [iMarket],
+                                         'price': [500],
+                                         'quantity': [-1],
+                                         'traderId': [int(self.trader1)]})
+                self.bc2.createTrade_client(tradeRow=tradeRow,
+                                            blocServer=self.bs)
+                # Trader 2 bid at 0.5
+                tradeRow = pd.DataFrame({'marketId': [iMarket],
+                                         'price': [500],
+                                         'quantity': [1],
+                                         'traderId': [int(self.trader1)]})
+
+                self.bc2.createTrade_client(tradeRow=tradeRow,
+                                            blocServer=self.bs)
+                # Trader 2 offer at 0.5
+                tradeRow = pd.DataFrame({'marketId': [iMarket],
+                                         'price': [500],
+                                         'quantity': [-1],
+                                         'traderId': [int(self.trader0)]})
+                self.bc1.createTrade_client(tradeRow=tradeRow,
+                                            blocServer=self.bs)
+        # Add some unmatched trades
+        for iTrade in range(3):
+            # Trader 1 bid at 0.5
+            tradeRow = pd.DataFrame({'marketId': [3],
+                                     'price': [500],
+                                     'quantity': [1],
+                                     'traderId': [int(self.trader0)]})
+            self.bc1.createTrade_client(tradeRow=tradeRow,
+                                        blocServer=self.bs)
+
+        colChk, collSummary =self.bs.checkCollateral(tInd_=1)
+        colChk1, collSummary1 = self.bs.checkCollateral_old(tInd_=1)
+
+        assert len(pd.read_sql_table("orderBook", self.bs.conn))==39
+        assert colChk
+
+
     def testsMakeManyMarkets(self):
 
-        for iMarket in [2, 3, 4, 5]:
+        for iMarket in [2, 3, 4, 5, 6]:
             marketRow = pd.DataFrame({'marketRootId': [iMarket],
                                       'marketBranchId': [1],
                                       'marketMin': [0],
                                       'marketMax': [1000],
-                                      'traderId': [int(self.trader0)]})
+                                      'traderId': [int(self.trader0)],
+                                      'marketDesc': json.dumps({})})
             self.bc1.createMarket_client(marketRow=marketRow,
                                          blocServer=self.bs)
-        assert len(pd.read_sql_table("marketBounds", self.bs.conn)) == 6
+        assert len(pd.read_sql_table("marketBounds", self.bs.conn)) == 7
 
 
 if __name__ == '__main__':

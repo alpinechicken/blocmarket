@@ -83,6 +83,10 @@ class BlocServer(object):
                                  Column('timeStampUTCSignature', LargeBinary),
                                  Column('marketDesc', JSON)
                                  )
+        # Bloc id across root market
+        self.blocTable = Table('blocTable', self.metadata,
+                               Column('blocId', Integer),
+                               Column('marketRootId', Integer, primary_key=True, unique=True))
 
         # Possible combinations of root market outcomes
         self.marketBounds = Table('marketBounds', self.metadata,
@@ -100,7 +104,7 @@ class BlocServer(object):
                                          Column('marketBranchId', Integer),
                                          Column('marketMin', Integer),
                                          Column('marketMax', Integer),
-                                         )
+                                         Column('blocId', Integer))
 
         # SP tables
         '''
@@ -159,12 +163,13 @@ class BlocServer(object):
 
         # Temporary local variables
         self.marketOutcomes = np.array([])  # Market corners
-        self.p = np.array([0])
-        self.q = np.array([0])
-        self.mInd = np.array([0])
-        self.tInd = np.array([0])
-        self.iMatched = np.array([False])
-        self.sig = np.array([0])
+        # Required for checkCollateral_old (hope to delete)
+        # self.p = np.array([0])
+        # self.q = np.array([0])
+        # self.mInd = np.array([0])
+        # self.tInd = np.array([0])
+        # self.iMatched = np.array([False])
+        # self.sig = np.array([0])
 
         # Time server
         self.TimeServer = BlocTime()
@@ -187,6 +192,7 @@ class BlocServer(object):
         self.marketTable.delete().execute()
         self.marketBounds.delete().execute()
         self.outcomeCombinations.delete().execute()
+        self.blocTable.delete().execute()
         print("All tables deleted.")
 
     def purgeNonUserTables(self):
@@ -195,6 +201,7 @@ class BlocServer(object):
         self.marketTable.delete().execute()
         self.marketBounds.delete().execute()
         self.outcomeCombinations.delete().execute()
+        self.blocTable.delete().execute()
         print("All tables except userTable deleted.")
 
 
@@ -267,7 +274,7 @@ class BlocServer(object):
             signatureMsg, signature]
             :return checks: (boolean) - True if checks pass
             :return self.marketTable: - new row in market table
-            :return self.outputCombinations: - updated output combinations  table
+            :return self.outcomeCombinations: - updated output combinations  table
             :return: self.marketBounds: - updated market bounds
 
             :Example:
@@ -384,6 +391,8 @@ class BlocServer(object):
             if checks:
                 # Append new market
                 newMarket.to_sql(name='marketTable', con=self.conn, if_exists='append', index=False)
+                # Update bloc table if necessary
+                self.createBloc(marketRootId=newMarket.loc[0, 'marketRootId'])
                 # Update all possible combinations of root markets
                 self.updateOutcomeCombinations()
             else:
@@ -392,6 +401,35 @@ class BlocServer(object):
             # Return True if checks pass and market added
             return checks, {'inputChk': inputChk,'marketLimitChk': marketLimitChk, 'traderIdChk': traderIdChk, 'marketId': str(marketId), 'marketRangeChk':marketRangeChk, 'marketIndChk': marketIndChk, 'sigChk': sigChk, 'chainChk':chainChk,\
                             'ownerChk':ownerChk,  'timeChk': timeChk}
+
+    def createBloc(self, marketRootId: int):
+        """
+        Create a new collateral bloc if necessary. The idea is to only consider collateral across blocs to avoid collateral calculations taking too long.
+
+        TODO: Currently this is not attached to anything because its too much of a pain to rewire collateral calcs to go bloc by bloc.
+        TODO: Do we need signatures/timestamps for the bloc register to avoid conflicts? For now this is probably fine.
+
+        :param marketRootId: market root id for new market
+        :return:
+        """
+        # Get bloc table
+        blocTable = pd.read_sql_table('blocTable', con=self.conn)
+        # If marketRootID hasn't been assigned a blocId
+        if not any(blocTable['marketRootId'] == marketRootId):
+            if not blocTable.empty:
+                maxBloc = max(blocTable['blocId'])
+            else:
+                maxBloc = 1
+
+            blocSubCount = len(blocTable.loc[blocTable['blocId']== maxBloc])
+            if blocSubCount < self.ROOT_MARKET_LIMIT:
+                # Use current blocId
+                newBloc = pd.DataFrame({'marketRootId': [marketRootId], 'blocId': [maxBloc]})
+            else:
+                # Use next blocId
+                newBloc = pd.DataFrame({'marketRootId': [marketRootId], 'blocId': [maxBloc+1]})
+
+            newBloc.to_sql(name='blocTable', con=self.conn, if_exists='append', index=False)
 
 
     def createTrade(self, p_: int, q_: int, mInd_: int, tInd_: int, previousSig: bytes, signature: bytes, verifyKey: str)->bool:
@@ -489,7 +527,7 @@ class BlocServer(object):
                 newTrade.to_sql(name='orderBook', con=self.conn, if_exists='append', index=False)
 
                 # Check newTrade is there and get its id.
-                # TODO: match signature directly in query if possible
+                # TODO: match signature directly in query if possible.
                 checkTrade = pd.read_sql_query('SELECT "tradeId", "signature" FROM "orderBook" WHERE "tradeId" = (SELECT max("tradeId") from "orderBook")', self.conn)
                 if bytes(checkTrade.loc[0, 'signature']) == signature:
                     newTradeId = checkTrade.loc[0, 'tradeId']
@@ -503,7 +541,7 @@ class BlocServer(object):
                 if not matchTrade.empty:
                     # Update iMatched for matching trades
                     self.conn.execute(
-                        'UPDATE "orderBook" SET "iMatched"= TRUE where "tradeId" IN (%s, (SELECT MAX("tradeId") FROM "orderBook"))' % (matchTrade['tradeId'][0]))
+                        'UPDATE "orderBook" SET "iMatched"= TRUE where "tradeId" IN (%s, %s)' % (matchTrade['tradeId'][0], checkTrade['tradeId'][0]))
 
             # Clean up trades causing collateral to fail
             allClear = False
@@ -519,8 +557,69 @@ class BlocServer(object):
 
     # Collateral check
 
-
     def checkCollateral(self, p_=[], q_=[], mInd_ = [], tInd_=None) -> object:
+        """
+        Check collateral for current and proposed trade. This uses the existing self.marketOutcomesTable with outcomes
+        across markets with the same blocId.
+        # TODO : turn this whole thing into a query
+
+
+        :param p_:
+        :param q_:
+        :param mInd_:
+        :param tInd_:
+        :return:
+        """
+
+
+        # Below is adapted from blocAPI - can be done as a single query
+
+        traderId = tInd_
+        oB = pd.read_sql_table('orderBook', self.conn)
+        oC = pd.read_sql_table('outcomeCombinations', self.conn)
+        # Add new trade (if there is one), select only for trader, ignore iRemoved=True
+        if p_ is None:
+            newTrade = pd.DataFrame()
+        else:
+            newTrade = pd.DataFrame({'price':[p_], 'quantity':[q_], 'marketId': [mInd_], 'traderId': [tInd_]})
+        oB = pd.concat([oB, newTrade], sort=False)
+        tradeSummary = oB[np.logical_and(np.logical_not(oB['iRemoved']), oB['traderId'] == traderId)]
+
+        # Merge trades with current oC on marketId
+        posSummary = pd.merge(
+            tradeSummary.loc[:, ['tradeId', 'marketId', 'price', 'quantity', 'traderId', 'iMatched', 'timeStampUTC']],
+            oC.loc[:, ['marketId', 'marketRootId', 'marketBranchId', 'marketMin', 'marketMax', 'outcomeId', 'blocId']], on='marketId',
+            how='left')
+
+        # marketMin=marketMax so we just choose one
+        posSummary['worstMarketOutcome'] = (posSummary['marketMin'] - posSummary['price']) * posSummary['quantity']
+
+        # Sum outcome payoffs in for matched trades, min for unmatched trades
+        groupedSummary = posSummary.groupby(['iMatched','outcomeId']).agg({'worstMarketOutcome':  ['sum', 'min']})['worstMarketOutcome'].reset_index()
+
+        # Total collateral is limit + sum of matched + min of unmatched
+        sumNCStar_matched = groupedSummary.loc[groupedSummary['iMatched']==True,'sum'].values
+        minNCStar_unmatched = groupedSummary.loc[groupedSummary['iMatched']==False,'min'].values
+        if sumNCStar_matched.size==0:
+            sumNCStar_matched = 0
+        if minNCStar_unmatched.size==0:
+            minNCStar_unmatched = 0
+
+        TC = sumNCStar_matched + minNCStar_unmatched
+        worstCollateral = self.COLLATERAL_LIMIT + TC
+        NCStar = posSummary['worstMarketOutcome']
+
+        colChk = np.all(worstCollateral >= 0)
+
+        collateralDetails = dict(price = tradeSummary.loc[:,'price'].values, quantity = tradeSummary.loc[:,'quantity'].values,
+                                 traderId =tradeSummary.loc[:,'traderId'].values, marketId = tradeSummary.loc[:,'marketId'].values,
+                                 iMatched = tradeSummary.loc[:,'iMatched'].values, outcomes=NCStar.values,
+                                 worstCollateral = worstCollateral)
+
+
+        return colChk, collateralDetails
+
+    def checkCollateral_old(self, p_=[], q_=[], mInd_ = [], tInd_=None) -> object:
         """Check collateral for new trade.
 
         :param p_: price
@@ -550,23 +649,19 @@ class BlocServer(object):
         # Get p, q, mInd, tInd for trader
         data = pd.read_sql_query('SELECT "price", "quantity", "marketId", "traderId", "iMatched" FROM "orderBook" WHERE "traderId" = \'%s\' AND "iRemoved" = FALSE' % (tInd_),
                                                self.conn)
-        self.p = np.int64(data['price'])
-        self.q = np.int64(data['quantity'])
-        self.mInd = np.int64(data['marketId'])  # (sort out unique marketId)
-        self.tInd = np.int64(data['traderId'])
-        self.iMatched = data['iMatched']
+        p = np.int64(data['price'])
+        q = np.int64(data['quantity'])
+        mInd = np.int64(data['marketId'])  # (sort out unique marketId)
+        tInd = np.int64(data['traderId'])
+        iMatched = data['iMatched']
         # Test by appending test trade
-        p = np.array(np.append(self.p, p_))
-        q = np.array(np.append(self.q, q_))
+        p = np.array(np.append(p, p_))
+        q = np.array(np.append(q, q_))
         # If price is given, append.
         if p_:
-            mInd = np.append(self.mInd, mInd_)
-            tInd = np.append(self.tInd, tInd_)
-            iMatched = np.append(self.iMatched, False)
-        else:
-            mInd = self.mInd
-            tInd = self.tInd
-            iMatched = self.iMatched
+            mInd = np.append(mInd, mInd_)
+            tInd = np.append(tInd, tInd_)
+            iMatched = np.append(iMatched, False)
 
         M = self.marketOutcomes
         C, N = M.shape
@@ -610,13 +705,14 @@ class BlocServer(object):
 
         colChk = np.all(worstCollateral>= 0)
 
-        collateralDetails = dict(price = self.p, quantity = self.q, traderId = self.tInd, marketId = self.mInd, iMatched = self.iMatched, outcomes=NCstar, worstCollateral = worstCollateral)
+        collateralDetails = dict(price = p, quantity = q, traderId = tInd, marketId = mInd, iMatched = iMatched, outcomes=NCstar, worstCollateral = worstCollateral)
         '''
         The collateral condition can be calculated simultaneously across all traders in one step by
         taking each column D columns of the second term as the minimum unmatched collateral for all 
         trades for each trader. 
         
-        TODO: Do whole thing as a table operation. Also cuts down on 
+        TODO: Do whole thing as a table operation. 
+        TODO: Do a version of this that doesn't need the whole chain for speed up.
         '''
 
         return colChk, collateralDetails
@@ -630,8 +726,8 @@ class BlocServer(object):
         """Update outcome combinations taking into account mins/maxes on
         branches.
 
-        :param: None
-        :return: self.outputCombinations:  (sql table) possible market states
+        :param: fromTrade: (bool) true if updating while adding a trade
+        :return: self.outcomeCombinations:  (sql table) possible market states
         :return: self.marketOutcomes: (numpy nd array) Matrix of market outcome in each state
         :return: self.marketBounds: (sql table) Upper and lower bounds for all markets
 
@@ -642,14 +738,21 @@ class BlocServer(object):
 
         """
         if not fromTrade:
+            bT = pd.read_sql_table('blocTable', self.conn)
             mT = pd.read_sql_table('marketTable', self.conn)
             # Root markets have marketBranchId ==1
-            rootMarkets = mT.loc[mT['marketBranchId'] == 1, :].reset_index(drop=True)
+            rootMarkets = pd.merge(mT.loc[mT['marketBranchId'] == 1, :], bT, on= 'marketRootId', how='left').reset_index(drop=True)
             # Construct outcome combinations in root markets
-            oC = self.constructOutcomeCombinations(rootMarkets)
+            # Outcomes are considered for root markets with the same blocId to avoid too many combinations being made.
+            oC = pd.DataFrame()
+            for iBloc in set(rootMarkets['blocId']):
+                oC_bloc = self.constructOutcomeCombinations(rootMarkets.loc[rootMarkets['blocId']==iBloc,:].reset_index())
+                oC_bloc['blocId'] = iBloc
+                oC = pd.concat([oC,oC_bloc])
             oC = oC.reset_index(drop=True)
             oC.to_sql('outcomeCombinations', self.conn, if_exists='replace', index=False)
             # Construct market bounds in all markets
+            # TODO: Work through by blocId
             mB = self.constructMarketBounds(mT)
             marketFields = ['marketId','marketRootId', 'marketBranchId', 'marketMin', 'marketMax']
             mB = mB.loc[:, marketFields].reset_index(drop=True)
@@ -664,22 +767,27 @@ class BlocServer(object):
         numStates = oC.loc[:, 'outcomeId'].max() + 1
 
         # Preallocate market outcomes
+        outcomeCombinations = pd.DataFrame()
         M = np.zeros((numStates, numMarkets))
         if not fromTrade:
             for iOutcome in range(numStates):
                 # Get outcome for root market
                 outcomeRow = oC.loc[oC['outcomeId'] == iOutcome, :]
                 # Add outcome to market table
-                # todo: more elegant way to do this
+                # TODO: more elegant way to do this
                 allOutcome = mT.loc[:, marketFields].append(outcomeRow[marketFields], ignore_index=True)
                 # Construct new bounds given outcome
                 settleOutcome = self.constructMarketBounds(allOutcome)
+                # Add outcome id
+                settleOutcome['outcomeId'] = iOutcome
                 # Markets settle at marketMin=marketMax so choose either
                 M[iOutcome,] = settleOutcome.loc[:, 'marketMin'].values
-                mTable = pd.DataFrame()
-        # marketOutcomes is a (numStates * numMarkets) matrix of extreme market
-        # states.
-        self.marketOutcomes = M
+                outcomeCombinations = outcomeCombinations.append(settleOutcome, ignore_index=True)
+            # marketOutcomes is a (numStates * numMarkets) matrix of extreme market
+            # states.
+            self.marketOutcomes = M
+            outcomeCombinations.to_sql(name='outcomeCombinations', con=self.conn, if_exists='replace', index=False)
+            outcomeCombinations.to_sql('outcomeCombinations', con=self.conn, if_exists='replace')
 
     @staticmethod
     def updateBounds(L: int, U: int, l: int, u: int) -> object:
@@ -765,7 +873,7 @@ class BlocServer(object):
         """
 
         # Pull market table
-        mT = pd.read_sql_table('marketTable', self.conn)
+        mT = marketTable
 
         mT = mT.loc[:, ['marketId','marketRootId', 'marketBranchId']].drop_duplicates().reset_index(drop=True)
         mT['marketMin'] = np.nan
@@ -847,6 +955,7 @@ class BlocServer(object):
 
     def killMarginalOpenTrade(self, tInd_: int) -> None:
         # Find earliest unmatched trade
+        # TODO: Can do this in one line
         data = pd.read_sql_query(
             'SELECT min("tradeId") FROM "orderBook" WHERE "traderId" = %s and "iMatched" = FALSE AND "iRemoved" = FALSE' % (tInd_), self.conn)  # Find a match
         # Kill earliest unmatched trade

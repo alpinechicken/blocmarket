@@ -84,7 +84,8 @@ def cancelOrder(sessionKey,appKey,**kwargs):
             raise ValueError( key + ' is not a valid input.')
 
     if inputParams['wallet'] == 'AUS':
-        url = urlAUS;
+        # AUS wallet depreciated
+        url = urlUK;
     else:
         url = urlUK;
 
@@ -95,20 +96,25 @@ def cancelOrder(sessionKey,appKey,**kwargs):
                         "params": {},
                         "id": 1}]
         else:
+            #{'marketId': 1.162462925, 'instructions': [{'betId': '179426928794', 'sizeReduction': 100}]}
             content = [{"jsonrpc": "2.0",
                         "method": "SportsAPING/v1.0/cancelOrders",
-                        "params": {"instructions":[{"betId":  inputParams['betId'],
-                                                    "sizeReduction":'null'}]}, "id": 1}]
+                        "params": {"instructions":[{"betId": inputParams['betId'][0],
+                                                    "sizeReduction":1000}]},
+                        "id": 1}]
 
     elif not 'betId' in inputParams and 'marketId' in inputParams:
         content = [{"jsonrpc": "2.0",
                     "method": "SportsAPING/v1.0/cancelOrders",
-                    "params": {"marketId": inputParams['marketId']},
+                    "params": {"marketId": inputParams['marketId'][0]},
                     "id": 1}]
     elif 'betId' in inputParams and 'marketId' in inputParams:
         content = [{"jsonrpc": "2.0",
                     "method": "SportsAPING/v1.0/cancelOrders",
-                    "params": {"betId": inputParams['betId'] }, "id": 1}]
+                    "params": {"marketId": inputParams['marketId'][0],
+                               "instructions": [{"betId": inputParams['betId'][0],
+                                                 "sizeReduction": 1000}]},
+                    "id": 1}]
 
     response = requests.post(url, data=json.dumps(content), headers=headers)
 
