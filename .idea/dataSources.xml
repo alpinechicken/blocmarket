@@ -30,11 +30,11 @@
         </library>
       </libraries>
     </data-source>
-    <data-source source="LOCAL" name="dfi33hnqjs2hjj@ec2-54-225-227-125.compute-1.amazonaws.com" uuid="44b3f4d7-b859-43f8-977b-3a83e5a88e6d">
+    <data-source source="LOCAL" name="ddvi31085f7cuu@ec2-174-129-33-196.compute-1.amazonaws.com" uuid="44b3f4d7-b859-43f8-977b-3a83e5a88e6d">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://ec2-54-225-227-125.compute-1.amazonaws.com:5432/dfi33hnqjs2hjj?sslmode=require</jdbc-url>
+      <jdbc-url>jdbc:postgresql://ec2-174-129-33-196.compute-1.amazonaws.com:5432/ddvi31085f7cuu?sslmode=require</jdbc-url>
     </data-source>
   </component>
 </project>

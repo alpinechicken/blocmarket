@@ -38,7 +38,7 @@ class BlocServer(object):
             DATABASE_URL = "postgresql://alpine:3141592@localhost/blocparty"
         else:
             # Use DATABASE_URL from env otherwise
-            DATABASE_URL = os.environ['HEROKU_POSTGRESQL_JADE_URL']
+            DATABASE_URL = os.environ['HEROKU_POSTGRESQL_AMBER_URL']
 
         self.engine = create_engine(DATABASE_URL, isolation_level="AUTOCOMMIT", poolclass=NullPool)
         self.engine.echo = False
@@ -318,11 +318,12 @@ class BlocServer(object):
                 # Market does exist
                 marketId = marketId[0]
 
+            marketLimitChk = True
             # Limit number of root markets
-            if marketBranchId >1:
-                marketLimitChk = (marketBranchId <= self.BRANCH_MARKET_LIMIT) and np.any(mT['marketRootId']==marketRootId)
-            else:
-                marketLimitChk = numRootMarkets <= self.ROOT_MARKET_LIMIT
+            #if marketBranchId >1:
+            #    marketLimitChk = (marketBranchId <= self.BRANCH_MARKET_LIMIT) and np.any(mT['marketRootId']==marketRootId)
+            #else:
+            #    marketLimitChk = numRootMarkets <= self.ROOT_MARKET_LIMIT
 
             # Sign current UTC timestamp
             ts = self.TimeServer.signedUTCNow()

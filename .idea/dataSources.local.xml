@@ -16,13 +16,13 @@
       <auth-required>false</auth-required>
       <introspection-schemas>*:</introspection-schemas>
     </data-source>
-    <data-source name="dfi33hnqjs2hjj@ec2-54-225-227-125.compute-1.amazonaws.com" uuid="44b3f4d7-b859-43f8-977b-3a83e5a88e6d">
-      <database-info product="PostgreSQL" version="10.11 (Ubuntu 10.11-1.pgdg16.04+1)" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.2.5" family="POSTGRES" exact-version="10.11">
+    <data-source name="ddvi31085f7cuu@ec2-174-129-33-196.compute-1.amazonaws.com" uuid="44b3f4d7-b859-43f8-977b-3a83e5a88e6d">
+      <database-info product="PostgreSQL" version="11.6 (Ubuntu 11.6-1.pgdg16.04+1)" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.2.5" family="POSTGRES" exact-version="11.6">
         <identifier-quote-string>&quot;</identifier-quote-string>
       </database-info>
       <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
-      <user-name>kedsxcnzezfikq</user-name>
+      <user-name>juplsayigkloqp</user-name>
       <introspection-schemas>@:@</introspection-schemas>
       <legacy-introspector>true</legacy-introspector>
       <ssl-config>

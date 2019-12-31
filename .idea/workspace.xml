@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f748aadd-a74f-4691-aa32-65bb3faaf10c" name="Default" comment="" />
+    <list default="true" id="f748aadd-a74f-4691-aa32-65bb3faaf10c" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/44b3f4d7-b859-43f8-977b-3a83e5a88e6d.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/44b3f4d7-b859-43f8-977b-3a83e5a88e6d.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/44b3f4d7-b859-43f8-977b-3a83e5a88e6d/storage_v2/_src_/database/dfi33hnqjs2hjj.A2pisg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/44b3f4d7-b859-43f8-977b-3a83e5a88e6d/storage_v2/_src_/database/dfi33hnqjs2hjj.A2pisg/schema/pg_temp_1.zkWuFg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/44b3f4d7-b859-43f8-977b-3a83e5a88e6d/storage_v2/_src_/database/dfi33hnqjs2hjj.A2pisg/schema/pg_toast.33HYYw.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/44b3f4d7-b859-43f8-977b-3a83e5a88e6d/storage_v2/_src_/database/dfi33hnqjs2hjj.A2pisg/schema/pg_toast_temp_1.5ixBaA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/44b3f4d7-b859-43f8-977b-3a83e5a88e6d/storage_v2/_src_/database/dfi33hnqjs2hjj.A2pisg/schema/public.abK9xQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloc/BlocServer.py" beforeDir="false" afterPath="$PROJECT_DIR$/bloc/BlocServer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bots/BetfairBot.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/bots/BetfairBot.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bots/BetfairDataTest.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/bots/BetfairDataTest.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bots/BetfairExample.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/bots/BetfairExample.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bots/BlocBot.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/bots/BlocBot.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bots/BotNetScratch.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/bots/BotNetScratch.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bots/MarketDataExamples.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/bots/MarketDataExamples.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bots/NRLComp.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/bots/NRLComp.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bots/betfair/Untitled.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/bots/betfair/Untitled.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/BlocAPI.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/doc/BlocAPI.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/BlocMarket.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/doc/BlocMarket.ipynb" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,33 +125,12 @@
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="dfi33hnqjs2hjj@ec2-54-225-227-125.compute-1.amazonaws.com" type="feb32156:DbDataSourceImpl" />
+        <item name="ddvi31085f7cuu@ec2-174-129-33-196.compute-1.amazonaws.com" type="feb32156:DbDataSourceImpl" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="dfi33hnqjs2hjj@ec2-54-225-227-125.compute-1.amazonaws.com" type="feb32156:DbDataSourceImpl" />
+        <item name="ddvi31085f7cuu@ec2-174-129-33-196.compute-1.amazonaws.com" type="feb32156:DbDataSourceImpl" />
         <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="dfi33hnqjs2hjj@ec2-54-225-227-125.compute-1.amazonaws.com" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="dfi33hnqjs2hjj: database" type="6d9b600a:PostgresImplModel$Database" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="dfi33hnqjs2hjj@ec2-54-225-227-125.compute-1.amazonaws.com" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="dfi33hnqjs2hjj: database" type="6d9b600a:PostgresImplModel$Database" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="dfi33hnqjs2hjj@ec2-54-225-227-125.compute-1.amazonaws.com" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="dfi33hnqjs2hjj: database" type="6d9b600a:PostgresImplModel$Database" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="public: schema" type="a16502c0:PostgresImplModel$Schema" />
       </path>
     </expand>
     <select />
@@ -307,7 +306,7 @@
           <entry key="listMarketCatalogue" value="141" />
           <entry key="m" value="4" />
           <entry key="md" value="2731" />
-          <entry key="py" value="45910" />
+          <entry key="py" value="45998" />
           <entry key="scratch" value="21" />
           <entry key="sql" value="649" />
           <entry key="tmp" value="277" />
@@ -321,14 +320,14 @@
           <entry key="JavaScript" value="1" />
           <entry key="Markdown" value="2679" />
           <entry key="PLAIN_TEXT" value="24" />
-          <entry key="Python" value="64002" />
+          <entry key="Python" value="64090" />
           <entry key="SQL" value="628" />
           <entry key="Scratch" value="631" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="blocTable" value="9" />
+          <entry key="blocTable" value="10" />
           <entry key="brin" value="1" />
           <entry key="btree" value="1" />
           <entry key="gin" value="1" />
@@ -338,13 +337,13 @@
           <entry key="ipynb" value="43" />
           <entry key="log" value="5" />
           <entry key="m" value="33" />
-          <entry key="marketBounds" value="69" />
-          <entry key="marketTable" value="96" />
+          <entry key="marketBounds" value="70" />
+          <entry key="marketTable" value="97" />
           <entry key="md" value="11" />
-          <entry key="orderBook" value="84" />
-          <entry key="outcomeCombinations" value="56" />
+          <entry key="orderBook" value="85" />
+          <entry key="outcomeCombinations" value="57" />
           <entry key="outputCombinations" value="1" />
-          <entry key="py" value="238" />
+          <entry key="py" value="239" />
           <entry key="sh" value="1" />
           <entry key="spevent" value="38" />
           <entry key="spgist" value="1" />
@@ -361,13 +360,13 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Bash" value="1" />
-          <entry key="Database Element" value="544" />
+          <entry key="Database Element" value="549" />
           <entry key="HTML" value="1" />
           <entry key="IPNB" value="43" />
           <entry key="Log" value="1" />
           <entry key="Markdown" value="11" />
           <entry key="PLAIN_TEXT" value="57" />
-          <entry key="Python" value="234" />
+          <entry key="Python" value="235" />
           <entry key="SQL" value="8" />
           <entry key="Scratch" value="7" />
         </counts>
@@ -385,11 +384,29 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bloc/BlocServer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="11983">
-              <caret line="799" selection-start-line="799" selection-end-line="799" />
+            <state relative-caret-position="362">
+              <caret line="40" column="66" selection-start-line="40" selection-start-column="66" selection-end-line="40" selection-end-column="66" />
               <folding>
                 <element signature="e#15#33#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BlocAPI.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="403">
+              <caret line="84" column="28" selection-start-line="84" selection-start-column="28" selection-end-line="84" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/blocTable">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
             </state>
           </provider>
         </entry>
@@ -399,18 +416,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state>
               <caret column="25" selection-start-column="25" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bloc/BlocClient.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3330">
-              <caret line="228" selection-start-line="228" selection-end-line="228" />
-              <folding>
-                <element signature="e#1#20#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -450,8 +455,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>%</find>
-      <find>marketId</find>
       <find>setupLoc</find>
       <find>netMatchedProfit</find>
       <find>customerRef</find>
@@ -480,6 +483,8 @@
       <find>eeis2718</find>
       <find>ee</find>
       <find>eeis</find>
+      <find>3.7</find>
+      <find>marketLimit</find>
     </findStrings>
     <replaceStrings>
       <replace>value</replace>
@@ -553,7 +558,6 @@
         <option value="$PROJECT_DIR$/bots/betfair/betfairLogin.py" />
         <option value="$PROJECT_DIR$/bots/betfair/createAppKeys.py" />
         <option value="$PROJECT_DIR$/bots/betfair/betfairKeepAlive.py" />
-        <option value="$PROJECT_DIR$/BlocAPI.py" />
         <option value="$PROJECT_DIR$/bots/BlocBot.py" />
         <option value="$PROJECT_DIR$/slate/source/index.html.md" />
         <option value="$PROJECT_DIR$/bots/BotNetScratch.ipynb" />
@@ -570,9 +574,10 @@
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
         <option value="$PROJECT_DIR$/bots/BetfairBot.py" />
         <option value="$PROJECT_DIR$/tests/test_BlocServer.py" />
-        <option value="$PROJECT_DIR$/bloc/BlocServer.py" />
         <option value="$PROJECT_DIR$/bots/tmp3.py" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/40749f87-b5cc-44ab-91e5-7d9f7ca94b16/console.sql" />
+        <option value="$PROJECT_DIR$/BlocAPI.py" />
+        <option value="$PROJECT_DIR$/bloc/BlocServer.py" />
       </list>
     </option>
   </component>
@@ -587,9 +592,11 @@
       <path value="$PROJECT_DIR$/testenv/lib/python3.8/site-packages/matplotlib/backends/web_backend/jquery-ui-1.12.1/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="width" value="1680" />
-    <option name="height" value="1050" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="797" />
+    <option name="y" value="23" />
+    <option name="width" value="1034" />
+    <option name="height" value="963" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -1108,9 +1115,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1680" height="960" extended-state="6" />
+    <frame x="797" y="23" width="1034" height="963" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.46696034" visible="true" weight="0.093406595" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.46696034" visible="true" weight="0.15423387" />
       <window_info id="Structure" order="1" sideWeight="0.5330396" side_tool="true" weight="0.11608094" />
       <window_info id="Favorites" order="2" sideWeight="0.50385606" side_tool="true" weight="0.0042735045" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -1132,7 +1140,7 @@
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Database" order="3" sideWeight="0.48883048" visible="true" weight="0.1923077" />
+      <window_info active="true" anchor="right" id="Database" order="3" sideWeight="0.48883048" visible="true" weight="0.31754032" />
       <window_info anchor="right" id="Coverage" order="4" side_tool="true" />
       <window_info anchor="right" id="SciView" order="5" sideWeight="0.48357424" weight="0.31868133" />
       <window_info anchor="right" id="Data View" order="6" weight="0.32861736" />
@@ -1335,7 +1343,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/bloc/BlocServer.py</url>
-          <line>588</line>
+          <line>589</line>
           <option name="timeStamp" value="1138" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1345,7 +1353,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/bloc/BlocServer.py</url>
-          <line>788</line>
+          <line>789</line>
           <option name="timeStamp" value="1140" />
         </line-breakpoint>
       </breakpoints>
@@ -1602,13 +1610,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/orderBook">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/timeStampServerTable">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -1643,41 +1644,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BlocAPI.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="149" column="88" selection-start-line="149" selection-start-column="88" selection-end-line="149" selection-end-column="88" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/blocTable">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/marketBounds">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-          <column-attributes>
-            <column name="ctid" enabled="false" />
-          </column-attributes>
-        </state>
-      </provider>
-    </entry>
     <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/outputCombinations">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-          <column-attributes>
-            <column name="ctid" enabled="false" />
-          </column-attributes>
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/outcomeCombinations">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
@@ -1705,17 +1672,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="10" column="9" lean-forward="true" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/marketTable">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-          <column-attributes>
-            <column name="marketDesc" languageId="JSON" />
-            <column name="ctid" enabled="false" />
-          </column-attributes>
         </state>
       </provider>
     </entry>
@@ -1812,10 +1768,62 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/BlocAPI.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="403">
+          <caret line="84" column="28" selection-start-line="84" selection-start-column="28" selection-end-line="84" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/marketTable">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+          <column-attributes>
+            <column name="marketDesc" languageId="JSON" />
+            <column name="ctid" enabled="false" />
+          </column-attributes>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/orderBook">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/outcomeCombinations">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+          <column-attributes>
+            <column name="ctid" enabled="false" />
+          </column-attributes>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/marketBounds">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+          <column-attributes>
+            <column name="ctid" enabled="false" />
+          </column-attributes>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/blocTable">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/bloc/BlocServer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11983">
-          <caret line="799" selection-start-line="799" selection-end-line="799" />
+        <state relative-caret-position="362">
+          <caret line="40" column="66" selection-start-line="40" selection-start-column="66" selection-end-line="40" selection-end-column="66" />
           <folding>
             <element signature="e#15#33#0" expanded="true" />
           </folding>
