@@ -38,7 +38,7 @@ class BlocServer(object):
             DATABASE_URL = "postgresql://alpine:3141592@localhost/blocparty"
         else:
             # Use DATABASE_URL from env otherwise
-            DATABASE_URL = os.environ['HEROKU_POSTGRESQL_AMBER_URLq']
+            DATABASE_URL = os.environ['DATABASE_URL']
 
         self.engine = create_engine(DATABASE_URL, isolation_level="AUTOCOMMIT", poolclass=NullPool)
         self.engine.echo = False

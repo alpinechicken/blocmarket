@@ -301,7 +301,7 @@
           <entry key="listMarketCatalogue" value="141" />
           <entry key="m" value="4" />
           <entry key="md" value="2731" />
-          <entry key="py" value="45999" />
+          <entry key="py" value="46011" />
           <entry key="scratch" value="21" />
           <entry key="sql" value="649" />
           <entry key="tmp" value="277" />
@@ -315,7 +315,7 @@
           <entry key="JavaScript" value="1" />
           <entry key="Markdown" value="2679" />
           <entry key="PLAIN_TEXT" value="24" />
-          <entry key="Python" value="64091" />
+          <entry key="Python" value="64103" />
           <entry key="SQL" value="628" />
           <entry key="Scratch" value="631" />
         </counts>
@@ -379,8 +379,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bloc/BlocServer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="282">
-              <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+            <state relative-caret-position="402">
+              <caret line="40" column="51" selection-start-line="40" selection-start-column="51" selection-end-line="40" selection-end-column="51" />
               <folding>
                 <element signature="e#15#33#0" expanded="true" />
               </folding>
@@ -1817,8 +1817,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bloc/BlocServer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+        <state relative-caret-position="402">
+          <caret line="40" column="51" selection-start-line="40" selection-start-column="51" selection-end-line="40" selection-end-column="51" />
           <folding>
             <element signature="e#15#33#0" expanded="true" />
           </folding>
