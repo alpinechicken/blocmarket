@@ -1,0 +1,109 @@
+
+{% extends 'site.html' %}
+
+{% block body %}
+
+<div class="login-container">
+  <div>
+    <a href="{{ url_for('markets')}}">&#x3c; Back to Markets</a>
+  <div>
+
+  <h3 class="login-title">Market Id: {{num}}</h3>
+
+  <div class="tab-container">
+    <div class="tab active-tab" onclick="tab('orderbook')" id="orderbooktab">Order Book</div>
+    <div class="tab" onclick="tab('opentrades')" id="opentradestab">Open Trades</div>
+  </div>
+
+
+  <div class="login-form-cont">
+    <div id="orderbook">
+      Order book
+      <table id="myTable">
+        <thead>
+          <tr>
+            <th>Trade id</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Trader id</th>
+            <th>Matched</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for index in orderbookData.tradeId %}
+          <tr>
+            <td class="orderCell">{{orderbookData.tradeId[index]}}</td>
+            <td class="orderCell">{{orderbookData.price[index]}}</td>
+            <td class="orderCell">{{orderbookData.quantity[index]}}</td>
+            <td class="orderCell">{{orderbookData.traderId[index]}}</td>
+            <td class="orderCell">{{orderbookData.iMatched[index]}}</td>
+            <td class="orderCell">{{orderbookData.timeStampUTC[index] }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div id="opentrades" class="hidden">
+      Open Trades
+      <table id="myTable2">
+        <thead>
+          <tr>
+            <th>Trade id</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Trader id</th>
+            <th>Matched</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for index in orderbookData.tradeId %}
+          <tr>
+            <td class="orderCell">{{openTradesData.tradeId[index]}}</td>
+            <td class="orderCell">{{openTradesData.price[index]}}</td>
+            <td class="orderCell">{{openTradesData.quantity[index]}}</td>
+            <td class="orderCell">{{openTradesData.traderId[index]}}</td>
+            <td class="orderCell">{{openTradesData.iMatched[index]}}</td>
+            <td class="orderCell">{{openTradesData.timeStampUTC[index] }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+
+  </div>
+</div>
+
+<script type="text/javascript">
+  // var data = "{{markets | safe}}"
+  // console.log((data))
+  // console.log(JSON.parse(data))
+  var data = "{{openTradesData | safe}}"
+  console.log((data))
+
+  $(document).ready( function () {
+    $('#myTable').DataTable();
+    $('#myTable2').DataTable();
+} );
+
+
+  function tab(setactive) {
+    document.getElementById("opentradestab").classList.remove('active-tab')
+    document.getElementById("orderbooktab").classList.remove('active-tab')
+    document.getElementById(setactive+'tab').classList.add('active-tab')
+    if (setactive === "opentrades") {
+      document.getElementById("orderbook").classList.add('hidden')
+      document.getElementById("opentrades").classList.remove('hidden')
+    } else {
+      document.getElementById("opentrades").classList.add('hidden')
+      document.getElementById("orderbook").classList.remove('hidden')
+    }
+  }
+
+</script>
+
+
+{% endblock %}

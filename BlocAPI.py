@@ -38,7 +38,12 @@
 # response = requests.post(url, data=json.dumps(content), headers=headers)
 # pd.DataFrame(response.json(), index=[0])
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template, redirect, url_for
+from flask_wtf import FlaskForm
+from wtforms import validators, StringField, PasswordField
+from wtforms.fields.html5 import EmailField
+import requests
+
 from bloc.BlocServer import BlocServer
 from bloc.BlocClient import BlocClient
 from bloc.BlocTime import BlocTime
@@ -48,30 +53,115 @@ import pandas as pd
 import traceback
 from datetime import datetime
 
-application = Flask(__name__)
+app = Flask(__name__)
 
-if __name__ == "__main__":
-    application.run()
+# set later as Herokou env variable
+app.config['SECRET_KEY'] = "ASNDFC283RYCOIWSJFCASR73CRASFCW3HRCNIWHRCIASHC73HRC";
+
+# Running this in the end to avoid issues
+def runapp():
+    if __name__ == "__main__":
+        app.jinja_env.auto_reload = True
+        app.config['TEMPLATES_AUTO_RELOAD'] = True
+        app.run(debug=True)
 
 
-@application.route('/')
-def hello_world():
-    return 'This is an exchange API. Documentation and examples <a href="https://github.com/alpinechicken/blocmarket">here</a> and <a href="https://alpinechicken.github.io/slate">here</a> <br><br> If anything breaks, or if you need to talk, leave an <a href="https://github.com/alpinechicken/blocmarket/issues">issue</a>.'
+class SignupForm(FlaskForm):
+    first_name = StringField('First Name', [validators.DataRequired()])
+    last_name = StringField('Last Name', [validators.DataRequired()])
+    email = EmailField('Email', [validators.DataRequired(), validators.Email()])
+    password = PasswordField('Password', [validators.DataRequired()])
+    confirm_password = PasswordField('Confirm Password', [validators.DataRequired(),validators.EqualTo('password', message='Passwords must match')])
 
-@application.route('/createUser', methods=['POST', 'GET'])
+class LoginForm(FlaskForm):
+    email = EmailField('Email', [validators.DataRequired()])
+    password = PasswordField('Password', [validators.DataRequired()])
+
+
+"""
+/////////////////////////////
+//  Template ROUTES
+/////////////////////////////
+"""
+
+@app.route('/')
+def index():
+    return render_template('home.html')
+
+@app.route('/markets')
+def markets():
+    url = 'https://blocmarket.herokuapp.com/viewMarketBounds'
+    response = requests.post(url, data=json.dumps({}), headers={'content-type': 'application/json'})
+    jsonData = json.loads(response.json())
+    return render_template('markets.html', markets=jsonData)
+
+@app.route('/markets/<num>')
+def market(num):
+    # url = 'https://blocmarket.herokuapp.com/viewMarketBounds'
+    # response = requests.post(url, data=json.dumps({}), headers={'content-type': 'application/json'})
+    # jsonData = json.loads(response.json())
+    url = 'https://blocmarket.herokuapp.com/viewOrderBook'
+    content = {'marketId': int(num)}
+    response = requests.post(url, data=json.dumps(content), headers={'content-type': 'application/json'})
+    orderbookData = json.loads(response.json())
+    url2 = 'https://blocmarket.herokuapp.com/viewOpenTrades'
+    response2 = requests.post(url, data=json.dumps(content), headers={'content-type': 'application/json'})
+    openTradesData = json.loads(response.json())
+    # print(orderbookData)
+
+    return render_template('market.html', num=num, orderbookData=orderbookData, openTradesData=openTradesData)
+
+@app.route('/signup', methods = ['POST','GET'])
+def signup():
+    form = SignupForm()
+    if form.validate_on_submit():
+        print('is successful')
+        first_name = form.first_name.data
+        last_name = form.last_name.data
+        email = form.email.data
+        password = form.password.data
+        confirm_password = form.confirm_password.data
+
+        # return redirect(url_for('index'))
+
+    # if request.method == 'POST':
+    #     print(request.form.get('first_name'))
+    return render_template('/accounts/signup.html', form=form)
+
+@app.route('/login', methods = ['POST'])
+def login():
+    form = SignupForm()
+    if form.validate_on_submit():
+        print('is successful')
+
+    return render_template('/accounts/login.html', form=form)
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+
+"""
+/////////////////////////////
+//  API ROUTES
+/////////////////////////////
+"""
+
+@app.route('/createUser', methods=['POST', 'GET'])
 def createUser():
     bs = BlocServer()
     bc = BlocClient()
     bc.generateSignatureKeys()
     newUsr = bc.createUser_client(blocServer=bs)
     bs.conn.close()
-     
+
     return jsonify({'traderId': str(newUsr['traderId']),
                     'verifyKey': newUsr['verifyKey'],
                     'signingKey': bc.signingKey})
 
 
-@application.route('/createMarket', methods=['POST'])
+
+@app.route('/createMarket', methods=['POST'])
 def createMarket():
     #  Get request data
     data = request.get_json()
@@ -95,7 +185,7 @@ def createMarket():
         allChecks = {'Boned':True, 'marketId':0}
 
     bs.conn.close()
-     
+
     return jsonify({'checks': str(checks),
                     'marketId': int(allChecks['marketId']),
                     'marketRootId': data['marketRootId'],
@@ -106,7 +196,7 @@ def createMarket():
                     'allChecks': str(allChecks)})
 
 
-@application.route('/createTrade', methods=['POST'])
+@app.route('/createTrade', methods=['POST'])
 def createTrade():
     #  Get request data
     data = request.get_json()
@@ -125,11 +215,11 @@ def createTrade():
         allChecks = {'Boned':True}
 
 
-        
+
     bs.conn.close()
     if np.isnan(allChecks['tradeId']):
         allChecks['tradeId'] = 0
-     
+
     return jsonify({'checks': str(checks),
                     'tradeId': int(allChecks['tradeId']),
                     'marketId': data['marketId'],
@@ -139,7 +229,7 @@ def createTrade():
                     'allChecks': str(allChecks)})
 
 # View market bounds
-@application.route('/viewMarketBounds', methods=['POST'])
+@app.route('/viewMarketBounds', methods=['POST'])
 def viewMarkets():
     # Return market bounds
     bs = BlocServer()
@@ -152,11 +242,11 @@ def viewMarkets():
     mB = mB.merge(originalMarketDescriptions, on='marketId',how='left')
 
     bs.conn.close()
-     
+
     return jsonify(mB.loc[:,['marketId', 'marketRootId', 'marketBranchId', 'marketMin', 'marketMax', 'marketDesc']].to_json())
 
 # View order book
-@application.route('/viewOrderBook', methods=['POST'])
+@app.route('/viewOrderBook', methods=['POST'])
 def viewOrderBook():
     #  Get request data
     data = request.get_json()
@@ -166,12 +256,12 @@ def viewOrderBook():
     oB = pd.read_sql_table('orderBook', bs.conn)
     oB = oB[np.logical_not( oB['iRemoved']) & (oB['marketId']==marketId)]
     bs.conn.close()
-     
+
     return jsonify(oB.loc[:,['tradeId','marketId', 'price', 'quantity', 'traderId', 'iMatched', 'timeStampUTC']].to_json())
 
 
 # View order book
-@application.route('/viewOpenTrades', methods=['POST'])
+@app.route('/viewOpenTrades', methods=['POST'])
 def viewOpenTrades():
     #  Get request data
     data = request.get_json()
@@ -184,11 +274,11 @@ def viewOpenTrades():
     openTrades = oB[np.logical_not(oB['iMatched']) & np.logical_not(oB['iRemoved']) & (oB['marketId']==marketId)]
 
     bs.conn.close()
-     
+
     return jsonify(openTrades.loc[:,['tradeId','marketId', 'price', 'quantity', 'traderId', 'timeStampUTC']].to_json())
 
 # View order book
-@application.route('/viewMatchedTrades', methods=['POST'])
+@app.route('/viewMatchedTrades', methods=['POST'])
 def viewMatchedTrades():
     #  Get request data
     data = request.get_json()
@@ -202,12 +292,12 @@ def viewMatchedTrades():
     # Sum orders with same price by quantity
     matchedTrades_sum = matchedTrades.groupby(['marketId', 'price', 'traderId'], as_index=False).agg({"quantity": "sum"})
     bs.conn.close()
-     
+
     return jsonify(matchedTrades_sum.loc[:, ['marketId', 'price', 'quantity', 'traderId']].to_json())
 
 
 # Trade summary
-@application.route('/viewTradeSummary', methods=['POST'])
+@app.route('/viewTradeSummary', methods=['POST'])
 def viewTradeSummary():
 
     data = request.get_json()
@@ -226,7 +316,7 @@ def viewTradeSummary():
 
     return jsonify(posSummary.to_json())
 
-@application.route('/viewTickHistory', methods=['POST'])
+@app.route('/viewTickHistory', methods=['POST'])
 def viewTickHistory():
     #  Processed tick data with self
     data = request.get_json()
@@ -289,7 +379,7 @@ def viewTickHistory():
 
     return jsonify(tickHistory[['tickType','tradeId', 'xTradeId' ,'marketId', 'price', 'quantity', 'traderId', 'iMatched', 'timeStampUTC']].to_json())
 
-@application.route('/checkCollateral', methods=['POST'])
+@app.route('/checkCollateral', methods=['POST'])
 def checkCollateral():
     # Will work with or without price/quantity/market
     data = request.get_json()
@@ -322,7 +412,7 @@ def checkCollateral():
                     'worstCollateral': worstCollateral})
 
 # Local time server
-@application.route('/getSignedUTCTimestamp')
+@app.route('/getSignedUTCTimestamp')
 def getSignedUTCTimestamp():
     # Get a signed timestamp
     bt = BlocTime()
@@ -335,7 +425,7 @@ def getSignedUTCTimestamp():
 
 # SP functions
 
-@application.route('/createSPEvent', methods=['POST', 'GET'])
+@app.route('/createSPEvent', methods=['POST', 'GET'])
 def createSPEvent():
     # Get event data and append to database
     data = request.get_json()
@@ -353,7 +443,7 @@ def createSPEvent():
 
 
 '''
-@application.route('/createSPOutcome', methods=['POST', 'GET'])
+@app.route('/createSPOutcome', methods=['POST', 'GET'])
 def createSPOutcome():
     # Get event data and append to database
     data = request.get_json()
@@ -366,7 +456,7 @@ def createSPOutcome():
     return jsonify({'updated': True})
 '''
 
-@application.route('/createSPMarket', methods=['POST', 'GET'])
+@app.route('/createSPMarket', methods=['POST', 'GET'])
 def createSPMarket():
     # Get market data and append to database
     data = request.get_json()
@@ -380,7 +470,7 @@ def createSPMarket():
     marketid = pd.read_sql_query('select max("marketid") from "spmarket"', bs.conn)['max'][0]
     return jsonify({'marketid': str(marketid)})
 
-@application.route('/createSPRecord', methods=['POST', 'GET'])
+@app.route('/createSPRecord', methods=['POST', 'GET'])
 def createSPRecord():
     # Get record data and append to database
     data = request.get_json()
@@ -400,7 +490,7 @@ def createSPRecord():
     return jsonify({'recordid': str(recordid)})
 
 
-@application.route('/createSPScore', methods=['POST', 'GET'])
+@app.route('/createSPScore', methods=['POST', 'GET'])
 def createSPScore():
     # Get record data and append to database
     data = request.get_json()
@@ -417,7 +507,7 @@ def createSPScore():
 
 # Views
 # Trade summary
-@application.route('/viewSPEvents', methods=['POST', 'GET'])
+@app.route('/viewSPEvents', methods=['POST', 'GET'])
 def viewSPEvents():
 
     data = request.get_json()
@@ -425,7 +515,7 @@ def viewSPEvents():
     spevents = pd.read_sql_table('spevent', bs.conn)
     return jsonify(spevents.to_json())
 
-@application.route('/viewSPMarkets', methods=['POST', 'GET'])
+@app.route('/viewSPMarkets', methods=['POST', 'GET'])
 def viewSPMarkets():
 
     data = request.get_json()
@@ -433,7 +523,7 @@ def viewSPMarkets():
     spmarkets = pd.read_sql_table('spmarket', bs.conn)
     return jsonify(spmarkets.to_json())
 
-@application.route('/viewSPRecords', methods=['POST', 'GET'])
+@app.route('/viewSPRecords', methods=['POST', 'GET'])
 def viewSPRecords():
 
     data = request.get_json()
@@ -441,10 +531,14 @@ def viewSPRecords():
     sprecords = pd.read_sql_table('sprecord', bs.conn)
     return jsonify(sprecords.to_json())
 
-@application.route('/viewSPScores', methods=['POST', 'GET'])
+@app.route('/viewSPScores', methods=['POST', 'GET'])
 def viewSPScores():
 
     data = request.get_json()
     bs = BlocServer()
     spscores = pd.read_sql_table('spscore', bs.conn)
     return jsonify(spscores.to_json())
+
+
+
+runapp()
