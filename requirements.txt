@@ -3,6 +3,7 @@ gunicorn
 django-heroku
 flask
 flask_wtf
+requests
 numpy
 pandas
 sqlalchemy
