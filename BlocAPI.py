@@ -275,7 +275,7 @@ def viewOpenTrades():
 
     bs.conn.close()
 
-    return jsonify(openTrades.loc[:,['tradeId','marketId', 'price', 'quantity', 'traderId', 'timeStampUTC']].to_json())
+    return jsonify(openTrades.loc[:,['tradeId','marketId', 'price', 'quantity', 'traderId', 'iMatched', 'timeStampUTC']].to_json())
 
 # View order book
 @app.route('/viewMatchedTrades', methods=['POST'])
