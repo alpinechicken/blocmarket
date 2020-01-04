@@ -105,7 +105,7 @@ def market(num):
     response = requests.post(url, data=json.dumps(content), headers={'content-type': 'application/json'})
     orderbookData = json.loads(response.json())
     url2 = 'https://blocmarket.herokuapp.com/viewOpenTrades'
-    response2 = requests.post(url, data=json.dumps(content), headers={'content-type': 'application/json'})
+    response2 = requests.post(url2, data=json.dumps(content), headers={'content-type': 'application/json'})
     openTradesData = json.loads(response2.json())
     # print(orderbookData)
 
