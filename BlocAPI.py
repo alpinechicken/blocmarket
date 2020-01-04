@@ -243,7 +243,7 @@ def viewMarketBounds():
 
     bs.conn.close()
 
-    return jsonify(mB.loc[:,['marketId', 'marketRootId', 'marketBranchId', 'marketMin', 'marketMax', 'marketDesc']].to_json())
+    return jsonify(mB.loc[:,['marketId', 'marketRootId', 'marketBranchId', 'marketMin', 'marketMax', 'marketDesc']].reset_index().to_json())
 
 # View order book
 @app.route('/viewOrderBook', methods=['POST'])
@@ -257,7 +257,7 @@ def viewOrderBook():
     oB = oB[np.logical_not( oB['iRemoved']) & (oB['marketId']==marketId)]
     bs.conn.close()
 
-    return jsonify(oB.loc[:,['tradeId','marketId', 'price', 'quantity', 'traderId', 'iMatched', 'timeStampUTC']].to_json())
+    return jsonify(oB.loc[:,['tradeId','marketId', 'price', 'quantity', 'traderId', 'iMatched', 'timeStampUTC']].reset_index().to_json())
 
 
 # View order book
@@ -275,7 +275,7 @@ def viewOpenTrades():
 
     bs.conn.close()
 
-    return jsonify(openTrades.loc[:,['tradeId','marketId', 'price', 'quantity', 'traderId', 'iMatched', 'timeStampUTC']].to_json())
+    return jsonify(openTrades.loc[:,['tradeId','marketId', 'price', 'quantity', 'traderId', 'iMatched', 'timeStampUTC']].reset_index().to_json())
 
 # View order book
 @app.route('/viewMatchedTrades', methods=['POST'])
@@ -293,7 +293,7 @@ def viewMatchedTrades():
     matchedTrades_sum = matchedTrades.groupby(['marketId', 'price', 'traderId'], as_index=False).agg({"quantity": "sum"})
     bs.conn.close()
 
-    return jsonify(matchedTrades_sum.loc[:, ['marketId', 'price', 'quantity', 'traderId']].to_json())
+    return jsonify(matchedTrades_sum.loc[:, ['marketId', 'price', 'quantity', 'traderId']].reset_index().to_json())
 
 
 # Trade summary
@@ -314,7 +314,7 @@ def viewTradeSummary():
     posSummary['marketMinOutcome'] = (posSummary['marketMin'] - posSummary['price'])*posSummary['quantity']
     posSummary['marketMaxOutcome'] = (posSummary['marketMax'] - posSummary['price'])*posSummary['quantity']
 
-    return jsonify(posSummary.to_json())
+    return jsonify(posSummary.reset_index().to_json())
 
 @app.route('/viewTickHistory', methods=['POST'])
 def viewTickHistory():
@@ -377,7 +377,7 @@ def viewTickHistory():
 
     bs.conn.close()
 
-    return jsonify(tickHistory[['tickType','tradeId', 'xTradeId' ,'marketId', 'price', 'quantity', 'traderId', 'iMatched', 'timeStampUTC']].to_json())
+    return jsonify(tickHistory[['tickType','tradeId', 'xTradeId' ,'marketId', 'price', 'quantity', 'traderId', 'iMatched', 'timeStampUTC']].reset_index().to_json())
 
 @app.route('/checkCollateral', methods=['POST'])
 def checkCollateral():
