@@ -42944,3 +42944,81 @@ requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.betfair.com',
 2019-08-10 19:26:44,222 - [Quote]: 4295.7227138643075
 2019-08-10 19:26:46,044 - [Bid]: 4067.02025072324
 2019-08-10 19:26:47,783 - [Ask]: 4233.0210772833725
+2019-12-12 19:01:04,057 - [Bot starting quote stream]: {"multiplier": 10000, "spread": 0.02, "updateFrequencySeconds": 30, "verifyKey": "7f8f43796ea8a13e60704a52bb03e3e5ce30bfd639f71d3680cd2f2752082f9e", "signingKey": "ef924f6b656a087d3fb583877df9347803b1b1332b049c1d34b093831119a086", "traderId": 20, "marketId": 20, "blocurl": "https://blocmarket.herokuapp.com/", "blocheaders": {"content-type": "application/json"}, "quoteSource": "betfair", "betfairMarketId": "1.166248726", "betfairRunnerId": 0, "betfairAppKey": "iw8UsiHCP1GSs213", "betfairSessionKey": "khwKsvRauZI6ZFP1uXqKmZUUGO3Q6EQ7+cxWpMtI7TY=", "spmarketid": ""}
+2019-12-12 19:01:06,003 - [Quote]: 4808.136846971798
+2019-12-12 19:01:42,385 - [Bot stopping quote stream]: , Bot def:{"multiplier": 10000, "spread": 0.02, "updateFrequencySeconds": 30, "verifyKey": "7f8f43796ea8a13e60704a52bb03e3e5ce30bfd639f71d3680cd2f2752082f9e", "signingKey": "ef924f6b656a087d3fb583877df9347803b1b1332b049c1d34b093831119a086", "traderId": 20, "marketId": 20, "blocurl": "https://blocmarket.herokuapp.com/", "blocheaders": {"content-type": "application/json"}, "quoteSource": "betfair", "betfairMarketId": "1.166248726", "betfairRunnerId": 0, "betfairAppKey": "iw8UsiHCP1GSs213", "betfairSessionKey": "khwKsvRauZI6ZFP1uXqKmZUUGO3Q6EQ7+cxWpMtI7TY=", "spmarketid": ""}
+2019-12-12 19:01:42,386 - [You're pretty far off baseline]: Bid checks:{'tradeId': 0, 'inputChk': True, 'traderIdChk': True, 'marketChk': False, 'sigChk': True, 'chainChk': True, 'timeChk': True, 'colChk': False},  Ask checks: {'tradeId': 0, 'inputChk': True, 'traderIdChk': True, 'marketChk': False, 'sigChk': True, 'chainChk': True, 'timeChk': True, 'colChk': False}
+2019-12-12 19:03:02,749 - [Bot starting quote stream]: {"multiplier": 10000, "spread": 0.02, "updateFrequencySeconds": 30, "verifyKey": "7f8f43796ea8a13e60704a52bb03e3e5ce30bfd639f71d3680cd2f2752082f9e", "signingKey": "ef924f6b656a087d3fb583877df9347803b1b1332b049c1d34b093831119a086", "traderId": 20, "marketId": 20, "blocurl": "https://blocmarket.herokuapp.com/", "blocheaders": {"content-type": "application/json"}, "quoteSource": "betfair", "betfairMarketId": "1.166248726", "betfairRunnerId": 0, "betfairAppKey": "iw8UsiHCP1GSs213", "betfairSessionKey": "khwKsvRauZI6ZFP1uXqKmZUUGO3Q6EQ7+cxWpMtI7TY=", "spmarketid": ""}
+2019-12-12 21:10:27,963 - [Bot starting quote stream]: {"multiplier": 10000, "spread": 0.001, "updateFrequencySeconds": 30, "verifyKey": "7f8f43796ea8a13e60704a52bb03e3e5ce30bfd639f71d3680cd2f2752082f9e", "signingKey": "ef924f6b656a087d3fb583877df9347803b1b1332b049c1d34b093831119a086", "traderId": 20, "marketId": 1, "blocurl": "https://blocmarket.herokuapp.com/", "blocheaders": {"content-type": "application/json"}, "quoteSource": "alphavantage", "betfairMarketId": "", "betfairRunnerId": 0, "betfairAppKey": "", "betfairSessionKey": "", "spmarketid": ""}
+2019-12-12 21:10:29,132 - Exception trying getQuote().
+Traceback (most recent call last):
+  File "/Users/josephclark/src/blocmarket/bots/BlocBot.py", line 181, in streamQuote
+    qt, bids, asks = self.getQuote()
+  File "/Users/josephclark/src/blocmarket/bots/BlocBot.py", line 101, in getQuote
+    return quote, bids, asks
+UnboundLocalError: local variable 'bids' referenced before assignment
+2019-12-12 21:10:29,133 - No price field for bids/asks.
+2019-12-12 21:11:00,881 - Exception trying getQuote().
+Traceback (most recent call last):
+  File "/Users/josephclark/src/blocmarket/bots/BlocBot.py", line 181, in streamQuote
+    qt, bids, asks = self.getQuote()
+  File "/Users/josephclark/src/blocmarket/bots/BlocBot.py", line 101, in getQuote
+    return quote, bids, asks
+UnboundLocalError: local variable 'bids' referenced before assignment
+2019-12-12 21:11:00,881 - No price field for bids/asks.
+2019-12-12 21:11:32,134 - Exception trying getQuote().
+Traceback (most recent call last):
+  File "/Users/josephclark/src/blocmarket/bots/BlocBot.py", line 181, in streamQuote
+    qt, bids, asks = self.getQuote()
+  File "/Users/josephclark/src/blocmarket/bots/BlocBot.py", line 101, in getQuote
+    return quote, bids, asks
+UnboundLocalError: local variable 'bids' referenced before assignment
+2019-12-12 21:11:32,134 - No price field for bids/asks.
+2019-12-12 21:12:03,621 - Exception trying getQuote().
+Traceback (most recent call last):
+  File "/Users/josephclark/src/blocmarket/bots/BlocBot.py", line 181, in streamQuote
+    qt, bids, asks = self.getQuote()
+  File "/Users/josephclark/src/blocmarket/bots/BlocBot.py", line 101, in getQuote
+    return quote, bids, asks
+UnboundLocalError: local variable 'bids' referenced before assignment
+2019-12-12 21:12:03,621 - No price field for bids/asks.
+2019-12-12 21:12:40,272 - Exception trying getQuote().
+Traceback (most recent call last):
+  File "/Users/josephclark/src/blocmarket/bots/BlocBot.py", line 181, in streamQuote
+    qt, bids, asks = self.getQuote()
+  File "/Users/josephclark/src/blocmarket/bots/BlocBot.py", line 101, in getQuote
+    return quote, bids, asks
+UnboundLocalError: local variable 'bids' referenced before assignment
+2019-12-12 21:12:40,272 - No price field for bids/asks.
+2019-12-12 21:13:12,813 - Exception trying getQuote().
+Traceback (most recent call last):
+  File "/Users/josephclark/src/blocmarket/bots/BlocBot.py", line 181, in streamQuote
+    qt, bids, asks = self.getQuote()
+  File "/Users/josephclark/src/blocmarket/bots/BlocBot.py", line 101, in getQuote
+    return quote, bids, asks
+UnboundLocalError: local variable 'bids' referenced before assignment
+2019-12-12 21:13:12,813 - No price field for bids/asks.
+2019-12-12 21:13:45,922 - Exception trying getQuote().
+Traceback (most recent call last):
+  File "/Users/josephclark/src/blocmarket/bots/BlocBot.py", line 181, in streamQuote
+    qt, bids, asks = self.getQuote()
+  File "/Users/josephclark/src/blocmarket/bots/BlocBot.py", line 101, in getQuote
+    return quote, bids, asks
+UnboundLocalError: local variable 'bids' referenced before assignment
+2019-12-12 21:13:45,923 - No price field for bids/asks.
+2019-12-12 21:14:18,424 - Exception trying getQuote().
+Traceback (most recent call last):
+  File "/Users/josephclark/src/blocmarket/bots/BlocBot.py", line 181, in streamQuote
+    qt, bids, asks = self.getQuote()
+  File "/Users/josephclark/src/blocmarket/bots/BlocBot.py", line 101, in getQuote
+    return quote, bids, asks
+UnboundLocalError: local variable 'bids' referenced before assignment
+2019-12-12 21:14:18,424 - No price field for bids/asks.
+2019-12-12 21:14:49,942 - Exception trying getQuote().
+Traceback (most recent call last):
+  File "/Users/josephclark/src/blocmarket/bots/BlocBot.py", line 181, in streamQuote
+    qt, bids, asks = self.getQuote()
+  File "/Users/josephclark/src/blocmarket/bots/BlocBot.py", line 101, in getQuote
+    return quote, bids, asks
+UnboundLocalError: local variable 'bids' referenced before assignment
+2019-12-12 21:14:49,942 - No price field for bids/asks.

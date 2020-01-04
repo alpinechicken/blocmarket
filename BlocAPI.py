@@ -401,11 +401,7 @@ def checkCollateral():
     bs = BlocServer()
     bs.updateOutcomeCombinations()
     colChk, collateralDetails = bs.checkCollateral(p_=price, q_=quantity, mInd_=marketId, tInd_= traderId )
-
-    if collateralDetails['worstCollateral'].size>0:
-        worstCollateral = np.min(collateralDetails['worstCollateral'])
-    else:
-        worstCollateral = []
+    worstCollateral = np.min(collateralDetails['worstCollateral'])
 
     return jsonify({'colChk': str(colChk),
                     'traderId': traderId,

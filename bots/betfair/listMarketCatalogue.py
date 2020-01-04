@@ -134,13 +134,14 @@ def listMarketCatalogue(sessionKey, appKey, maxResults=10,  **kwargs):
     for key, value in kwargs.items():
         if key in bodyFields.keys() and type(value)==dict or type(value)==list :
             inputParams[key] = value
-        elif key in bodyFields.keys():
+        elif key in bodyFields.keys() and not key == 'turnInPlayEnabled':
             inputParams[key] = [value]
+        elif key == 'turnInPlayEnabled':
+            inputParams[key] = value
         elif key == 'maxResults':
             maxResults = str(value)
         else:
             raise ValueError( key + ' is not a valid input.')
-
 
     # define the body of the http-request:
     #content = '{"jsonrpc": "2.0", "method": "SportsAPING/v1.0/listMarketCatalogue", "params":{ "filter":{"eventTypeIds": ["1"], "marketBettingTypes":["ODDS"], "marketTypeCodes": ["MATCH_ODDS"]} , "maxResults": "' + str(maxResults) + '", "marketProjection":["COMPETITION","EVENT","EVENT_TYPE","MARKET_DESCRIPTION","RUNNER_DESCRIPTION","RUNNER_METADATA","MARKET_START_TIME"]}, "id": 1}'

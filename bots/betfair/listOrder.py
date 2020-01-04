@@ -120,7 +120,7 @@ def listOrder(sessionKey,appKey,**kwargs):
     # output
     return orderStatus
 
-# sessionKey = betfairLogin('alpinechicken', 'e')
+# sessionKey = betfairLogin('alpinechicken', 'e', 'alpinechickenbetfair)
 # appKey = 'iw8UsiHCP1GSs213'
 # orders1 = listOrder(sessionKey,appKey,betIds="ALL")
 # orders2 = listOrder(sessionKey,appKey,betIds=169751223110)

@@ -111,11 +111,10 @@ def placeOrder(sessionKey,appKey,**kwargs):
     headers = {'X-Authentication': sessionKey, 'X-Application': appKey, 'content-type': 'application/json'}
     
     # # Create and check formattingf the http request body:
-    
-    #Default ref
-    customerRef = ''
 
-    
+    # Default customerStrategyRef
+    customerStrategyRef = ''
+
     bodyFields = {'marketId': '',
                   'orderType': '',
                   'selectionId': '',
@@ -124,7 +123,7 @@ def placeOrder(sessionKey,appKey,**kwargs):
                   'price': '',
                   'size': '',
                   'persistenceType': ''
-                  'customerRef'}
+                  'customerStrategyRef'}
     
     # Assign
     inputParams = {}
@@ -135,12 +134,12 @@ def placeOrder(sessionKey,appKey,**kwargs):
             inputParams[key] = [value]
         elif key == 'maxResults':
             maxResults = str(value)
-        elif key == 'customerRef':
-            customerRef = value
+        elif key == 'customerStrategyRef':
+            customerStrategyRef = value
         else:
             raise ValueError( key + ' is not a valid input.')
-    
-    
+
+
     ## Set up request to send to Betfair API via HTTP:
     
 
@@ -231,7 +230,8 @@ def placeOrder(sessionKey,appKey,**kwargs):
                                          "side": inputParams['side'][0],
                                          "limitOrder": {"size": betSize,
                                                         "price": betPrice,
-                                                        "persistenceType": inputParams['persistenceType'][0]}}]
+                                                        "persistenceType": inputParams['persistenceType'][0]}}],
+                         "customerStrategyRef": customerStrategyRef
                          }
               }
 
@@ -249,7 +249,7 @@ demoAppKey = ''
 liveAppKey = ''
 #sessionKey = '1UJRe6TXKpb0qMXFbN7hVULz7HODbBdbRBU6dfzGBFY'
 appKey = 'iw8UsiHCP1GSs213'
-marketId = '1.160877308'
+marketId = '1.162374928'
 selectionId = 62523
 oddsToPlace = 3
 size = 5

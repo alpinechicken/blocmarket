@@ -2,47 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f748aadd-a74f-4691-aa32-65bb3faaf10c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/bots/betfairlightweight/.idea/betfairlightweight.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bots/betfairlightweight/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bots/betfairlightweight/.idea/libraries/R_User_Library.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bots/betfairlightweight/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bots/betfairlightweight/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bots/betfairlightweight/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bots/betfairlightweight/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.ipynb_checkpoints/Untitled-checkpoint.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Untitled.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bots/BetfairExample-Copy1.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/bots/BetfairExample-Copy1.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bots/BetfairPriceMakingBot.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bots/BlocBot.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/bots/BlocBot.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bots/BotNetScratch.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/bots/BotNetScratch.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bots/betfair/cancelOrder.py" beforeDir="false" afterPath="$PROJECT_DIR$/bots/betfair/cancelOrder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bots/betfair/listMarketBook.py" beforeDir="false" afterPath="$PROJECT_DIR$/bots/betfair/listMarketBook.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bots/betfair/listMarketCatalogue.py" beforeDir="false" afterPath="$PROJECT_DIR$/bots/betfair/listMarketCatalogue.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bots/betfair/listOrder.py" beforeDir="false" afterPath="$PROJECT_DIR$/bots/betfair/listOrder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bots/betfair/placeOrder.py" beforeDir="false" afterPath="$PROJECT_DIR$/bots/betfair/placeOrder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bots/pandas-videos-master/.github/FUNDING.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bots/pandas-videos-master/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bots/pandas-videos-master/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bots/pandas-videos-master/data/chipotle.tsv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bots/pandas-videos-master/data/drinks.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bots/pandas-videos-master/data/drinks1.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bots/pandas-videos-master/data/drinks2.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bots/pandas-videos-master/data/imdb_1000.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bots/pandas-videos-master/data/stocks.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bots/pandas-videos-master/data/stocks1.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bots/pandas-videos-master/data/stocks2.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bots/pandas-videos-master/data/stocks3.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bots/pandas-videos-master/data/titanic_test.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bots/pandas-videos-master/data/titanic_train.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bots/pandas-videos-master/data/u.user" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bots/pandas-videos-master/data/ufo.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bots/pandas-videos-master/environment.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bots/pandas-videos-master/pandas.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bots/pandas-videos-master/pandas_changes.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bots/pandas-videos-master/pandas_multiindex.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bots/pandas-videos-master/pandas_tricks.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bots/pandas-videos-master/top_25_pandas_tricks.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/44b3f4d7-b859-43f8-977b-3a83e5a88e6d.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/44b3f4d7-b859-43f8-977b-3a83e5a88e6d.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlocAPI.py" beforeDir="false" afterPath="$PROJECT_DIR$/BlocAPI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bots/BetfairExample.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/bots/BetfairExample.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/BlocAPI.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/doc/BlocAPI.ipynb" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -60,6 +23,7 @@
     <SUITE FILE_PATH="coverage/pmarket$tricks.coverage" NAME="tricks Coverage Results" MODIFIED="1481354581096" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pmarket$MarketServer.coverage" NAME="MarketServer Coverage Results" MODIFIED="1526762668991" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pmarket$Unittests_for_test_MarketServer_TestMarketServer_testRemoveTrade.coverage" NAME="Unittests for test_MarketServer.TestMarketServer.testRemoveTrade Coverage Results" MODIFIED="1538289456892" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/blocmarket$Unittests_for_test_BlocServer_TestBlocServer.coverage" NAME="Unittests for test_BlocServer.TestBlocServer Coverage Results" MODIFIED="1577411397760" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/pmarket$Unittests_for_test_BlocServer_TestBlocServer_testMatchTrade.coverage" NAME="Unittests for test_BlocServer.TestBlocServer.testMatchTrade Coverage Results" MODIFIED="1547981735267" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/blocmarket$betfairLogin.coverage" NAME="betfairLogin Coverage Results" MODIFIED="1562459949431" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/betfair" />
     <SUITE FILE_PATH="coverage/blocmarket$BlocClient.coverage" NAME="BlocClient Coverage Results" MODIFIED="1550304033566" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bloc" />
@@ -68,6 +32,7 @@
     <SUITE FILE_PATH="coverage/blocmarket$Unittests_for_test_BlocServer_TestBlocServer_testSettleMarketUp.coverage" NAME="Unittests for test_BlocServer.TestBlocServer.testSettleMarketUp Coverage Results" MODIFIED="1552709702608" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/blocmarket$tmp.coverage" NAME="tmp Coverage Results" MODIFIED="1550303627442" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bloc" />
     <SUITE FILE_PATH="coverage/pmarket$scratch.coverage" NAME="scratch Coverage Results" MODIFIED="1481360955794" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/blocmarket$BlocServer.coverage" NAME="BlocServer Coverage Results" MODIFIED="1570683727597" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bloc" />
     <SUITE FILE_PATH="coverage/pmarket$Unittests_in_test_marketObjectSQL.coverage" NAME="Unittests in test_marketObjectSQL Coverage Results" MODIFIED="1509918137100" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pmarket$BlocServer.coverage" NAME="BlocServer Coverage Results" MODIFIED="1548236171472" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bloc" />
     <SUITE FILE_PATH="coverage/blocmarket$tmp2.coverage" NAME="tmp2 Coverage Results" MODIFIED="1560662977359" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/doc/bots" />
@@ -79,9 +44,11 @@
     <SUITE FILE_PATH="coverage/pmarket$BlocMarket.coverage" NAME="BlocMarket Coverage Results" MODIFIED="1547289022191" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bloc" />
     <SUITE FILE_PATH="coverage/blocmarket$createAppKeys.coverage" NAME="createAppKeys Coverage Results" MODIFIED="1562739166985" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/betfair" />
     <SUITE FILE_PATH="coverage/pmarket$MarketClient.coverage" NAME="MarketClient Coverage Results" MODIFIED="1527907311959" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/blocmarket$scratch.coverage" NAME="scratch Coverage Results" MODIFIED="1556954337524" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
+    <SUITE FILE_PATH="coverage/blocmarket$scratch.coverage" NAME="scratch Coverage Results" MODIFIED="1570683393877" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
     <SUITE FILE_PATH="coverage/pmarket$bob.coverage" NAME="bob Coverage Results" MODIFIED="1528008925763" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/blocmarket$scratch2.coverage" NAME="scratch2 Coverage Results" MODIFIED="1569121332282" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
     <SUITE FILE_PATH="coverage/pmarket$Unittests_in_test_BlocServer_py.coverage" NAME="Unittests in test_BlocServer.py Coverage Results" MODIFIED="1548539682979" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/blocmarket$tmp3.coverage" NAME="tmp3 Coverage Results" MODIFIED="1575773857759" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bots" />
     <SUITE FILE_PATH="coverage/pmarket$sqltest2.coverage" NAME="sqltest2 Coverage Results" MODIFIED="1482555234549" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/blocmarket$listOrder.coverage" NAME="listOrder Coverage Results" MODIFIED="1562760246984" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/betfair" />
     <SUITE FILE_PATH="coverage/blocmarket$betfairAPI__1_.coverage" NAME="betfairAPI (1) Coverage Results" MODIFIED="1562469236867" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bots" />
@@ -91,8 +58,8 @@
     <SUITE FILE_PATH="coverage/blocmarket$listMarketCatalogue.coverage" NAME="listMarketCatalogue Coverage Results" MODIFIED="1562843483868" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/betfair" />
     <SUITE FILE_PATH="coverage/pmarket$untitled.coverage" NAME="untitled Coverage Results" MODIFIED="1539865728573" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/pmarket$Unittests_for_test_MarketServer_TestMarketServer_testMatchTrade.coverage" NAME="Unittests for test_MarketServer.TestMarketServer.testMatchTrade Coverage Results" MODIFIED="1530704993613" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/blocmarket$Unittests_in_test_BlocServer_py.coverage" NAME="Unittests in test_BlocServer.py Coverage Results" MODIFIED="1556934815662" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/blocmarket$tmp__1_.coverage" NAME="tmp (1) Coverage Results" MODIFIED="1560662927353" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/doc/bots" />
+    <SUITE FILE_PATH="coverage/blocmarket$Unittests_in_test_BlocServer_py.coverage" NAME="Unittests in test_BlocServer.py Coverage Results" MODIFIED="1578094236325" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/pmarket$Unittests_for_test_MarketServer_TestMarketServer_test_tradeMaker.coverage" NAME="Unittests for test_MarketServer.TestMarketServer.test_tradeMaker Coverage Results" MODIFIED="1530704793624" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pmarket$MarketObjectSQL.coverage" NAME="MarketObjectSQL Coverage Results" MODIFIED="1487486462183" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
@@ -131,14 +98,6 @@
         <item name="blocparty@localhost" type="feb32156:DbDataSourceImpl" />
         <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="blocparty: database" type="6d9b600a:PostgresImplModel$Database" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="blocparty@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="blocparty: database" type="6d9b600a:PostgresImplModel$Database" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="public: schema" type="a16502c0:PostgresImplModel$Schema" />
       </path>
       <path>
@@ -146,55 +105,38 @@
         <item name="blocparty@localhost" type="feb32156:DbDataSourceImpl" />
         <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="blocparty: database" type="6d9b600a:PostgresImplModel$Database" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="public: schema" type="a16502c0:PostgresImplModel$Schema" />
         <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="dfi33hnqjs2hjj@ec2-54-225-227-125.compute-1.amazonaws.com" type="feb32156:DbDataSourceImpl" />
+        <item name="ddvi31085f7cuu@ec2-174-129-33-196.compute-1.amazonaws.com" type="feb32156:DbDataSourceImpl" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="dfi33hnqjs2hjj@ec2-54-225-227-125.compute-1.amazonaws.com" type="feb32156:DbDataSourceImpl" />
+        <item name="ddvi31085f7cuu@ec2-174-129-33-196.compute-1.amazonaws.com" type="feb32156:DbDataSourceImpl" />
         <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="dfi33hnqjs2hjj@ec2-54-225-227-125.compute-1.amazonaws.com" type="feb32156:DbDataSourceImpl" />
+        <item name="ddvi31085f7cuu@ec2-174-129-33-196.compute-1.amazonaws.com" type="feb32156:DbDataSourceImpl" />
         <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="dfi33hnqjs2hjj: database" type="6d9b600a:PostgresImplModel$Database" />
+        <item name="ddvi31085f7cuu: database" type="6d9b600a:PostgresImplModel$Database" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="dfi33hnqjs2hjj@ec2-54-225-227-125.compute-1.amazonaws.com" type="feb32156:DbDataSourceImpl" />
+        <item name="ddvi31085f7cuu@ec2-174-129-33-196.compute-1.amazonaws.com" type="feb32156:DbDataSourceImpl" />
         <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="dfi33hnqjs2hjj: database" type="6d9b600a:PostgresImplModel$Database" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="dfi33hnqjs2hjj@ec2-54-225-227-125.compute-1.amazonaws.com" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="dfi33hnqjs2hjj: database" type="6d9b600a:PostgresImplModel$Database" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="ddvi31085f7cuu: database" type="6d9b600a:PostgresImplModel$Database" />
         <item name="public: schema" type="a16502c0:PostgresImplModel$Schema" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="dfi33hnqjs2hjj@ec2-54-225-227-125.compute-1.amazonaws.com" type="feb32156:DbDataSourceImpl" />
+        <item name="ddvi31085f7cuu@ec2-174-129-33-196.compute-1.amazonaws.com" type="feb32156:DbDataSourceImpl" />
         <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="dfi33hnqjs2hjj: database" type="6d9b600a:PostgresImplModel$Database" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="ddvi31085f7cuu: database" type="6d9b600a:PostgresImplModel$Database" />
         <item name="public: schema" type="a16502c0:PostgresImplModel$Schema" />
         <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="dfi33hnqjs2hjj@ec2-54-225-227-125.compute-1.amazonaws.com" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="dfi33hnqjs2hjj: database" type="6d9b600a:PostgresImplModel$Database" />
-        <item name="access methods" type="d4e8921:DatabaseStructure$FamilyGroup" />
       </path>
     </expand>
     <select />
@@ -346,30 +288,35 @@
     <session id="-1997051828">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="17" />
-          <entry key="project.open.time.0" value="5" />
+          <entry key="project.closed" value="26" />
+          <entry key="project.open.time.0" value="6" />
           <entry key="project.open.time.1" value="2" />
-          <entry key="project.open.time.6" value="5" />
-          <entry key="project.open.time.7" value="8" />
-          <entry key="project.open.time.8" value="2" />
+          <entry key="project.open.time.10" value="2" />
+          <entry key="project.open.time.11" value="1" />
+          <entry key="project.open.time.13" value="1" />
+          <entry key="project.open.time.5" value="1" />
+          <entry key="project.open.time.6" value="6" />
+          <entry key="project.open.time.7" value="10" />
+          <entry key="project.open.time.8" value="3" />
           <entry key="project.open.time.9" value="2" />
-          <entry key="project.opened" value="24" />
+          <entry key="project.opened" value="34" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="BlocClient" value="723" />
-          <entry key="Python Console" value="9573" />
+          <entry key="Python Console" value="17044" />
           <entry key="cell" value="35" />
           <entry key="html" value="147" />
           <entry key="listMarketBook" value="750" />
           <entry key="listMarketCatalogue" value="141" />
           <entry key="m" value="4" />
           <entry key="md" value="2731" />
-          <entry key="py" value="33905" />
-          <entry key="sql" value="628" />
+          <entry key="py" value="46027" />
+          <entry key="scratch" value="21" />
+          <entry key="sql" value="649" />
           <entry key="tmp" value="277" />
-          <entry key="txt" value="19" />
+          <entry key="txt" value="20" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -378,54 +325,56 @@
           <entry key="JSON" value="27" />
           <entry key="JavaScript" value="1" />
           <entry key="Markdown" value="2679" />
-          <entry key="PLAIN_TEXT" value="23" />
-          <entry key="Python" value="45356" />
+          <entry key="PLAIN_TEXT" value="24" />
+          <entry key="Python" value="64432" />
           <entry key="SQL" value="628" />
-          <entry key="Scratch" value="72" />
+          <entry key="Scratch" value="631" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
+          <entry key="blocTable" value="12" />
           <entry key="brin" value="1" />
           <entry key="btree" value="1" />
           <entry key="gin" value="1" />
           <entry key="gist" value="1" />
           <entry key="hash" value="2" />
           <entry key="html" value="1" />
-          <entry key="ipynb" value="36" />
+          <entry key="ipynb" value="43" />
           <entry key="log" value="5" />
-          <entry key="m" value="30" />
-          <entry key="marketBounds" value="51" />
-          <entry key="marketTable" value="78" />
-          <entry key="md" value="10" />
-          <entry key="orderBook" value="72" />
-          <entry key="outcomeCombinations" value="40" />
-          <entry key="py" value="168" />
+          <entry key="m" value="33" />
+          <entry key="marketBounds" value="72" />
+          <entry key="marketTable" value="100" />
+          <entry key="md" value="11" />
+          <entry key="orderBook" value="89" />
+          <entry key="outcomeCombinations" value="58" />
+          <entry key="outputCombinations" value="1" />
+          <entry key="py" value="243" />
           <entry key="sh" value="1" />
-          <entry key="spevent" value="27" />
+          <entry key="spevent" value="41" />
           <entry key="spgist" value="1" />
-          <entry key="spmarket" value="33" />
-          <entry key="sprecord" value="30" />
+          <entry key="spmarket" value="46" />
+          <entry key="sprecord" value="44" />
           <entry key="sprecord_recordid_seq" value="1" />
-          <entry key="spscore" value="15" />
-          <entry key="sql" value="1" />
-          <entry key="timeStampServerTable" value="14" />
-          <entry key="txt" value="19" />
-          <entry key="userTable" value="50" />
+          <entry key="spscore" value="23" />
+          <entry key="sql" value="3" />
+          <entry key="timeStampServerTable" value="21" />
+          <entry key="txt" value="20" />
+          <entry key="userTable" value="61" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Bash" value="1" />
-          <entry key="Database Element" value="410" />
+          <entry key="Database Element" value="568" />
           <entry key="HTML" value="1" />
-          <entry key="IPNB" value="36" />
+          <entry key="IPNB" value="43" />
           <entry key="Log" value="1" />
-          <entry key="Markdown" value="10" />
-          <entry key="PLAIN_TEXT" value="53" />
-          <entry key="Python" value="166" />
+          <entry key="Markdown" value="11" />
+          <entry key="PLAIN_TEXT" value="57" />
+          <entry key="Python" value="239" />
           <entry key="SQL" value="8" />
-          <entry key="Scratch" value="3" />
+          <entry key="Scratch" value="7" />
         </counts>
       </usages-collector>
     </session>
@@ -439,94 +388,28 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bots/betfair/placeOrder.py">
+        <entry file="file://$PROJECT_DIR$/bloc/BlocServer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="291">
-              <caret line="220" column="4" selection-start-line="220" selection-start-column="4" selection-end-line="220" selection-end-column="4" />
+            <state relative-caret-position="124">
+              <caret line="617" column="66" selection-start-line="617" selection-start-column="66" selection-end-line="617" selection-end-column="66" />
               <folding>
-                <element signature="e#0#15#0" expanded="true" />
-                <marker date="1567293415157" expanded="true" signature="246:257" ph="..." />
+                <element signature="e#15#33#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bots/betfair/betfairlightweight.ipynb">
-          <provider selected="true" editor-type-id="ipnb-editor">
-            <state>
-              <selected id="0" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/bots/betfair/Untitled.ipynb">
-          <provider selected="true" editor-type-id="ipnb-editor">
-            <state>
-              <selected id="0" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bots/betfair/betfairLogin.py">
+        <entry file="file://$PROJECT_DIR$/BlocAPI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="406">
-              <caret line="30" selection-start-line="30" selection-end-line="30" />
-              <folding>
-                <marker date="1562847527449" expanded="true" signature="62:63" ph="..." />
-                <marker date="1562847527449" expanded="true" signature="62:64" ph="..." />
-              </folding>
+            <state relative-caret-position="179">
+              <caret line="315" column="42" lean-forward="true" selection-start-line="315" selection-start-column="42" selection-end-line="315" selection-end-column="42" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bots/betfair/listMarketBook.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="458">
-              <caret line="136" column="21" selection-start-line="136" selection-start-column="21" selection-end-line="136" selection-end-column="21" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-                <marker date="1566118462302" expanded="true" signature="125:127" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bots/betfair/listMarketCatalogue.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-136">
-              <caret line="134" column="10" selection-start-line="134" selection-start-column="10" selection-end-line="134" selection-end-column="80" />
-              <folding>
-                <element signature="e#0#15#0" expanded="true" />
-                <marker date="1566118446682" expanded="true" signature="181:183" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bots/botdefs.txt">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bots/BlocBot.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2175">
-              <caret line="145" column="39" selection-start-line="145" selection-start-column="39" selection-end-line="145" selection-end-column="39" />
-              <folding>
-                <element signature="e#0#15#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/spmarket">
+        <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/orderBook">
           <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
             <state>
               <filtering enabled="true" />
@@ -535,10 +418,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/marketTable">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
+        <entry file="file://$PROJECT_DIR$/tests/test_BlocServer.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="441">
+              <caret line="59" selection-start-line="59" selection-end-line="59" />
+              <folding>
+                <element signature="e#0#38#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file:///Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/unittest/case.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="132">
+              <caret line="672" selection-start-line="672" selection-end-line="672" />
             </state>
           </provider>
         </entry>
@@ -557,36 +452,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>blocTime</find>
-      <find>TimeServer</find>
-      <find>sign</find>
-      <find>signMessage</find>
-      <find>signature =</find>
-      <find>signmessage</find>
-      <find>err</find>
-      <find>checkColl</find>
-      <find>updateOut</find>
-      <find>DEC</find>
-      <find>decim</find>
-      <find>int</find>
-      <find>float</find>
-      <find>decimal</find>
-      <find>insert</find>
-      <find>select ma</find>
-      <find>(max)</find>
-      <find>update</find>
-      <find>spevent</find>
-      <find>spmarket</find>
-      <find>sprecord</find>
-      <find>sp</find>
-      <find>;</find>
-      <find>...</find>
-      <find>max</find>
-      <find>elseif</find>
-      <find>body</find>
-      <find>%</find>
-      <find>marketId</find>
       <find>setupLoc</find>
+      <find>netMatchedProfit</find>
+      <find>customerRef</find>
+      <find>outcomeCom</find>
+      <find>grou</find>
+      <find>outcomeCombin</find>
+      <find>outcomeCombinat</find>
+      <find>blocTa</find>
+      <find>marketOutcomes</find>
+      <find>marketOutcomesTa</find>
+      <find>_new</find>
+      <find>self.market</find>
+      <find>self.p</find>
+      <find>self.sig</find>
+      <find>self.q</find>
+      <find>self.mInd</find>
+      <find>self.tInd</find>
+      <find>self.iMatc</find>
+      <find>outcomeComb</find>
+      <find>marketOutcomesTable</find>
+      <find>marketOutcomesT</find>
+      <find>settleT</find>
+      <find>settleTa</find>
+      <find>outcomeCombinations</find>
+      <find>outputComb</find>
+      <find>eeis2718</find>
+      <find>ee</find>
+      <find>eeis</find>
+      <find>3.7</find>
+      <find>marketLimit</find>
     </findStrings>
     <replaceStrings>
       <replace>value</replace>
@@ -613,6 +508,7 @@
       <replace>elif</replace>
       <replace>content</replace>
       <replace>#</replace>
+      <replace>marketState</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -628,17 +524,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/bloc/BlocTime.py" />
-        <option value="$PROJECT_DIR$/blocAPI_borto.py" />
-        <option value="$PROJECT_DIR$/bloc/tmp.py" />
-        <option value="$PROJECT_DIR$/forms/createMarket.html" />
-        <option value="$PROJECT_DIR$/doc/Rise.py" />
         <option value="$PROJECT_DIR$/doc/bots/botdefs.txt" />
         <option value="$PROJECT_DIR$/doc/bots/botlog.log" />
         <option value="$PROJECT_DIR$/doc/bots/Rise.py" />
         <option value="$PROJECT_DIR$/doc/bots/scratch/BetfairQuoteBot.ipynb" />
-        <option value="$PROJECT_DIR$/tests/test_BlocServer.py" />
-        <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
         <option value="$PROJECT_DIR$/doc/BlocAPI.ipynb" />
         <option value="$PROJECT_DIR$/doc/matlabinterface.txt" />
         <option value="$PROJECT_DIR$/bloc/BlocClient.py" />
@@ -666,19 +555,26 @@
         <option value="$PROJECT_DIR$/bots/betfair/betfairLogin.py" />
         <option value="$PROJECT_DIR$/bots/betfair/createAppKeys.py" />
         <option value="$PROJECT_DIR$/bots/betfair/betfairKeepAlive.py" />
-        <option value="$PROJECT_DIR$/bots/betfair/listOrder.py" />
-        <option value="$PROJECT_DIR$/bots/betfair/cancelOrder.py" />
-        <option value="$PROJECT_DIR$/BlocAPI.py" />
-        <option value="$PROJECT_DIR$/bloc/BlocServer.py" />
         <option value="$PROJECT_DIR$/bots/BlocBot.py" />
-        <option value="$PROJECT_DIR$/bots/BetfairBot.py" />
         <option value="$PROJECT_DIR$/slate/source/index.html.md" />
         <option value="$PROJECT_DIR$/bots/BotNetScratch.ipynb" />
-        <option value="$PROJECT_DIR$/bots/betfair/listMarketCatalogue.py" />
         <option value="$PROJECT_DIR$/bots/betfair/listMarketBook.py" />
-        <option value="$PROJECT_DIR$/bots/betfair/placeOrder.py" />
         <option value="$PROJECT_DIR$/bots/BetfairExample-Copy1.ipynb" />
         <option value="$PROJECT_DIR$/bots/betfair/Untitled.ipynb" />
+        <option value="$PROJECT_DIR$/bots/betfair/retrieveAppKeys.py" />
+        <option value="$PROJECT_DIR$/bots/betfair/betfairlightweight.ipynb" />
+        <option value="$PROJECT_DIR$/bots/betfair/listOrder.py" />
+        <option value="$PROJECT_DIR$/bots/betfair/placeOrder.py" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch2.py" />
+        <option value="$PROJECT_DIR$/bots/betfair/cancelOrder.py" />
+        <option value="$PROJECT_DIR$/bots/betfair/listMarketCatalogue.py" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
+        <option value="$PROJECT_DIR$/bots/BetfairBot.py" />
+        <option value="$PROJECT_DIR$/tests/test_BlocServer.py" />
+        <option value="$PROJECT_DIR$/bots/tmp3.py" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/40749f87-b5cc-44ab-91e5-7d9f7ca94b16/console.sql" />
+        <option value="$PROJECT_DIR$/bloc/BlocServer.py" />
+        <option value="$PROJECT_DIR$/BlocAPI.py" />
       </list>
     </option>
   </component>
@@ -688,11 +584,16 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="x" value="684" />
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths>
+      <path value="$PROJECT_DIR$/testenv/lib/python3.8/site-packages/matplotlib/backends/web_backend/jquery-ui-1.12.1/package.json" />
+    </packageJsonPaths>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="466" />
     <option name="y" value="23" />
-    <option name="width" value="996" />
-    <option name="height" value="958" />
+    <option name="width" value="1214" />
+    <option name="height" value="960" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -700,7 +601,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -711,18 +611,17 @@
             <path>
               <item name="blocmarket" type="b2602c69:ProjectViewProjectNode" />
               <item name="blocmarket" type="462c0819:PsiDirectoryNode" />
-              <item name="bots" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="blocmarket" type="b2602c69:ProjectViewProjectNode" />
-              <item name="blocmarket" type="462c0819:PsiDirectoryNode" />
-              <item name="bots" type="462c0819:PsiDirectoryNode" />
-              <item name="betfair" type="462c0819:PsiDirectoryNode" />
+              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -771,7 +670,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.placeOrder">
+  <component name="RunManager" selected="Python tests.Unittests in test_BlocServer.py">
     <configuration default="true" type="tests" factoryName="Attests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -810,7 +709,7 @@
       <option name="ipnbPort" value="8888" />
       <method v="2" />
     </configuration>
-    <configuration name="BetfairBot" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="BlocServer" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="untitled" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -818,12 +717,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/bots" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/bloc" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/bots/BetfairBot.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/bloc/BlocServer.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -898,7 +797,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="listMarketBook" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="scratch" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="untitled" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -906,78 +805,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/betfair" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="WORKING_DIRECTORY" value="$APPLICATION_CONFIG_DIR$/scratches" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/betfair/listMarketBook.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="listMarketCatalogue" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="untitled" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/betfair" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/betfair/listMarketCatalogue.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="listOrder" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="untitled" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/betfair" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/betfair/listOrder.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="placeOrder" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="untitled" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/bots/betfair" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/bots/betfair/placeOrder.py" />
+      <option name="SCRIPT_NAME" value="$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -1008,6 +841,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="tmp3" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="untitled" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/bots" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/bots/tmp3.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
       <node-interpreter>project</node-interpreter>
       <node-options />
@@ -1015,6 +870,21 @@
       <tasks />
       <arguments />
       <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for test_BlocServer.TestBlocServer" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="untitled" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_BlocServer.TestBlocServer&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <configuration name="Unittests for test_MarketServer.TestMarketServer" type="tests" factoryName="Unittests" editBeforeRun="true">
@@ -1063,25 +933,40 @@
       <option name="_new_target" value="&quot;test_MarketServer.TestMarketServer&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
     </configuration>
+    <configuration name="Unittests in test_BlocServer.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="untitled" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/test_BlocServer.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Python.MarketServer" />
       <item itemvalue="Python.MarketClient" />
       <item itemvalue="Python tests.Unittests for test_MarketServer.TestMarketServer" />
       <item itemvalue="Jupyter Notebook.untitled" />
       <item itemvalue="Python.tmp" />
-      <item itemvalue="Python.listMarketCatalogue" />
-      <item itemvalue="Python.listMarketBook" />
-      <item itemvalue="Python.listOrder" />
-      <item itemvalue="Python.BetfairBot" />
-      <item itemvalue="Python.placeOrder" />
+      <item itemvalue="Python.scratch" />
+      <item itemvalue="Python tests.Unittests for test_BlocServer.TestBlocServer" />
+      <item itemvalue="Python.BlocServer" />
+      <item itemvalue="Python.tmp3" />
+      <item itemvalue="Python tests.Unittests in test_BlocServer.py" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.placeOrder" />
-        <item itemvalue="Python.BetfairBot" />
-        <item itemvalue="Python.listMarketBook" />
-        <item itemvalue="Python.listMarketCatalogue" />
-        <item itemvalue="Python.listOrder" />
+        <item itemvalue="Python tests.Unittests in test_BlocServer.py" />
+        <item itemvalue="Python tests.Unittests for test_BlocServer.TestBlocServer" />
+        <item itemvalue="Python.tmp3" />
+        <item itemvalue="Python.BlocServer" />
+        <item itemvalue="Python.scratch" />
       </list>
     </recent_temporary>
   </component>
@@ -1191,34 +1076,34 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_in_test_BlocServer_py - 2019.05.04 at 11h 39m 49s.xml">
+    <history-entry file="Unittests_in_test_BlocServer_py - 2019.12.29 at 18h 22m 43s.xml">
       <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_BlocServer_py - 2019.05.04 at 11h 42m 02s.xml">
+    <history-entry file="Unittests_in_test_BlocServer_py - 2019.12.29 at 18h 24m 10s.xml">
       <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_BlocServer_py - 2019.05.04 at 11h 42m 13s.xml">
+    <history-entry file="Unittests_in_test_BlocServer_py - 2019.12.29 at 18h 24m 49s.xml">
       <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_BlocServer_py - 2019.05.04 at 11h 43m 47s.xml">
+    <history-entry file="Unittests_in_test_BlocServer_py - 2019.12.29 at 18h 26m 09s.xml">
       <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_BlocServer_py - 2019.05.04 at 11h 45m 36s.xml">
+    <history-entry file="Unittests_in_test_BlocServer_py - 2019.12.29 at 18h 32m 07s.xml">
       <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_BlocServer_py - 2019.05.04 at 11h 45m 51s.xml">
+    <history-entry file="Unittests_in_test_BlocServer_py - 2019.12.29 at 18h 32m 12s.xml">
       <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_BlocServer_py - 2019.05.04 at 11h 48m 11s.xml">
+    <history-entry file="Unittests_in_test_BlocServer_py - 2019.12.29 at 18h 39m 07s.xml">
       <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_BlocServer_py - 2019.05.04 at 11h 51m 29s.xml">
+    <history-entry file="Unittests_in_test_BlocServer_py - 2019.12.29 at 18h 39m 29s.xml">
       <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_BlocServer_py - 2019.05.04 at 11h 53m 20s.xml">
+    <history-entry file="Unittests_in_test_BlocServer_py - 2019.12.30 at 17h 27m 23s.xml">
       <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_BlocServer_py - 2019.05.04 at 11h 53m 44s.xml">
+    <history-entry file="Unittests_in_test_BlocServer_py - 2019.12.30 at 17h 27m 47s.xml">
       <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
     </history-entry>
   </component>
@@ -1232,38 +1117,38 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
+    <frame x="466" y="23" width="1214" height="960" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4686825" visible="true" weight="0.08657665" />
-      <window_info id="Structure" order="1" sideWeight="0.5313175" side_tool="true" weight="0.32030585" />
-      <window_info id="Favorites" order="2" sideWeight="0.50385606" side_tool="true" weight="0.19170243" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.46696034" visible="true" weight="0.13054608" />
+      <window_info id="Structure" order="1" sideWeight="0.5330396" side_tool="true" weight="0.11608094" />
+      <window_info id="Favorites" order="2" sideWeight="0.50385606" side_tool="true" weight="0.0042735045" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info active="true" anchor="bottom" id="Find" order="1" sideWeight="0.49682286" visible="true" weight="0.32627738" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.53907204" weight="0.17349398" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.52700555" weight="0.19343066" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.496337" weight="0.4556213" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.53663003" weight="0.3704142" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.7185592" visible="true" weight="0.52426034" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49499285" weight="0.32244897" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5031771" side_tool="true" visible="true" weight="0.32627738" />
-      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49642345" weight="0.19679634" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49428275" weight="0.32213116" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.2814408" side_tool="true" weight="0.52426034" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4954912" weight="0.19614148" />
       <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.6163522" weight="0.32032147" />
-      <window_info anchor="bottom" id="Database Console" order="10" sideWeight="0.51211363" weight="0.30612245" />
+      <window_info anchor="bottom" id="Database Console" order="10" sideWeight="0.51090986" weight="0.30532545" />
       <window_info anchor="bottom" id="Database Changes" order="11" sideWeight="0.491453" weight="0.32142857" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="13" sideWeight="0.4971061" weight="0.32608697" />
-      <window_info anchor="bottom" id="Python Console" order="14" sideWeight="0.639413" weight="0.27210104" />
+      <window_info anchor="bottom" id="Python Console" order="14" sideWeight="0.64896214" weight="0.215256" />
       <window_info anchor="bottom" id="Inspection Results" order="15" weight="0.33333334" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Database" order="3" sideWeight="0.48883048" weight="0.1898657" />
+      <window_info anchor="right" id="Database" order="3" sideWeight="0.48883048" weight="0.26877132" />
       <window_info anchor="right" id="Coverage" order="4" side_tool="true" />
-      <window_info anchor="right" id="SciView" order="5" sideWeight="0.48357424" weight="0.17094018" />
+      <window_info anchor="right" id="SciView" order="5" sideWeight="0.48357424" visible="true" weight="0.3182594" />
       <window_info anchor="right" id="Data View" order="6" weight="0.32861736" />
       <window_info anchor="right" x="0" y="0" width="353" height="713" id="Documentation" order="7" sideWeight="0.5111695" side_tool="true" weight="0.3363344" />
       <window_info anchor="right" id="R Graphics" order="8" weight="0.32905984" />
-      <window_info anchor="right" id="R Packages" order="9" weight="0.32905984" />
+      <window_info anchor="right" id="R Packages" order="9" weight="0.32844934" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1344,21 +1229,6 @@
           <option name="timeStamp" value="882" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/tests/test_BlocServer.py</url>
-          <line>91</line>
-          <option name="timeStamp" value="884" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/tests/test_BlocServer.py</url>
-          <line>74</line>
-          <option name="timeStamp" value="887" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py</url>
-          <line>3</line>
-          <option name="timeStamp" value="888" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/doc/bots/tmp.py</url>
           <line>66</line>
           <option name="timeStamp" value="892" />
@@ -1424,54 +1294,69 @@
           <option name="timeStamp" value="941" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/bots/betfair/placeOrder.py</url>
-          <line>259</line>
-          <option name="timeStamp" value="950" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/bots/betfair/demoScript.py</url>
           <line>23</line>
           <option name="timeStamp" value="961" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/bots/BetfairBot.py</url>
-          <line>306</line>
-          <option name="timeStamp" value="986" />
+          <url>file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py</url>
+          <line>43</line>
+          <option name="timeStamp" value="1019" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$APPLICATION_CONFIG_DIR$/scratches/scratch2.py</url>
+          <line>19</line>
+          <option name="timeStamp" value="1074" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$APPLICATION_CONFIG_DIR$/scratches/scratch2.py</url>
+          <line>13</line>
+          <option name="timeStamp" value="1075" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/tests/test_BlocServer.py</url>
+          <line>114</line>
+          <option name="timeStamp" value="1080" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/bots/tmp3.py</url>
+          <line>5</line>
+          <option name="timeStamp" value="1084" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/bots/BetfairBot.py</url>
-          <line>177</line>
-          <option name="timeStamp" value="1000" />
+          <line>269</line>
+          <option name="timeStamp" value="1090" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/bots/BetfairBot.py</url>
-          <line>119</line>
-          <option name="timeStamp" value="1003" />
+          <line>356</line>
+          <option name="timeStamp" value="1092" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/bots/BetfairBot.py</url>
-          <line>157</line>
-          <option name="timeStamp" value="1005" />
+          <url>file://$PROJECT_DIR$/tests/test_BlocServer.py</url>
+          <line>150</line>
+          <option name="timeStamp" value="1124" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/bots/betfair/placeOrder.py</url>
-          <line>273</line>
-          <option name="timeStamp" value="1012" />
+          <url>file://$PROJECT_DIR$/tests/test_BlocServer.py</url>
+          <line>291</line>
+          <option name="timeStamp" value="1136" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/bots/betfair/placeOrder.py</url>
-          <line>239</line>
-          <option name="timeStamp" value="1013" />
+          <url>file://$PROJECT_DIR$/bloc/BlocServer.py</url>
+          <line>589</line>
+          <option name="timeStamp" value="1138" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/bots/betfair/placeOrder.py</url>
-          <line>246</line>
-          <option name="timeStamp" value="1014" />
+          <url>file://$PROJECT_DIR$/tests/test_BlocServer.py</url>
+          <line>59</line>
+          <option name="timeStamp" value="1139" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/bots/betfair/placeOrder.py</url>
-          <line>223</line>
-          <option name="timeStamp" value="1015" />
+          <url>file://$PROJECT_DIR$/bloc/BlocServer.py</url>
+          <line>601</line>
+          <option name="timeStamp" value="1141" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -1491,48 +1376,52 @@
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
       <expression>
-        <expression-string>marketBounds[['marketRootId', 'marketBranchId', 'marketMin', 'marketMax']].values</expression-string>
+        <expression-string>tInd_ = 2</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>(marketBounds[['marketRootId', 'marketBranchId', 'marketMin', 'marketMax']].values</expression-string>
+        <expression-string>groupedSummary.loc[groupedSummary['iMatched']==True,'sum'].values</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>len(oB.loc[oB['iMatched'], :])</expression-string>
+        <expression-string>outputCombinations</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>len(oB.loc[oB['iMatched'], :]) == 8</expression-string>
+        <expression-string>outputCombinations.to_sql('outputCombinations', con=self.conn, if_exists='replace')</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>en(oB.loc[oB['iMatched'], :]) == 8</expression-string>
+        <expression-string>newBloc.to_sql(name='blocTable', con=self.conn, if_exists='append', index=False)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>len(oB.loc[oB['iRemoved'],:])</expression-string>
+        <expression-string>pd.concat([oB, newTrade])</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>np.append(self.tInd, tInd_)</expression-string>
+        <expression-string>pd.concat(oB, newTrade)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>tInd.max()</expression-string>
+        <expression-string>pd.DataFrame({'price':[p_], 'quantity':[q_], 'marketId': [mInd_], 'traderId': [tInd_]})</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>tInd.max()
-        # Derived</expression-string>
+        <expression-string>newMarket.to_sql(name='marketTable', con=self.conn, if_exists='append', index=False)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>newMarket</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
@@ -1623,137 +1512,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/bots/betfair/listOrder.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2595">
-          <caret line="173" column="52" selection-start-line="173" selection-end-line="174" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bots/betfair/listMarketBook.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="256" column="55" selection-start-line="256" selection-start-column="55" selection-end-line="256" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bots/betfair/demoScript.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="23" column="32" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bots/betfair/createAppKeys.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-110">
-          <caret line="13" column="43" selection-start-line="13" selection-start-column="43" selection-end-line="13" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bots/betfair/betfairLogout.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bots/betfair/betfairLogin.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-170">
-          <caret column="8" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bots/betfair/betfairLogout.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bots/betfair/retrieveAppKeys.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="424">
-          <caret line="38" selection-start-line="38" selection-end-line="38" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bots/betfair/createAppKeys.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="1" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bots/betfair/betfairKeepAlive.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="1" selection-start-line="1" selection-start-column="1" selection-end-line="1" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/doc/BlocMarket.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bots/MarketDataExamples.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bots/betfair/listOrder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="847">
-          <caret line="61" column="67" selection-start-line="61" selection-start-column="67" selection-end-line="61" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/marketBounds">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-          <column-attributes>
-            <column name="ctid" enabled="false" />
-          </column-attributes>
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/outcomeCombinations">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-          <column-attributes>
-            <column name="ctid" enabled="false" />
-          </column-attributes>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bots/NRLComp.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/doc/BlocAPI.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/bots/BlocBot.ipynb">
       <provider selected="true" editor-type-id="ipnb-editor">
         <state>
@@ -1761,48 +1519,154 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bots/betfairAPI.py">
+    <entry file="file://$PROJECT_DIR$/bots/tmp2.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bots/BlocBot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2609">
-          <caret line="31" column="47" selection-start-line="31" selection-start-column="47" selection-end-line="31" selection-end-column="47" />
+        <state relative-caret-position="-2575">
+          <caret line="47" column="49" lean-forward="true" selection-start-line="47" selection-start-column="49" selection-end-line="47" selection-end-column="49" />
           <folding>
-            <element signature="e#24#37#0" expanded="true" />
+            <element signature="e#0#15#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/codecs.py">
+    <entry file="file://$PROJECT_DIR$/bots/betfair/listOrder.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="309" selection-start-line="309" selection-end-line="309" />
+        <state relative-caret-position="156">
+          <caret line="115" selection-start-line="115" selection-end-line="115" />
         </state>
       </provider>
     </entry>
-    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/userTable">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BlocAPI.py">
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/ssl.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5415">
-          <caret line="369" column="37" selection-start-line="369" selection-start-column="37" selection-end-line="369" selection-end-column="37" />
+        <state relative-caret-position="16260">
+          <caret line="1098" selection-start-line="1098" selection-end-line="1098" />
         </state>
       </provider>
     </entry>
-    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/dfi33hnqjs2hjj/schema/public/table/userTable">
+    <entry file="file://$PROJECT_DIR$/bots/betfair/placeOrder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="341">
+          <caret line="239" selection-start-line="239" selection-end-line="239" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bots/BetfairBot.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bots/tmp.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="20" column="22" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bots/betfairAPI.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bloc/BlocTime.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-80">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Untitled.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/spscore">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
         </state>
       </provider>
     </entry>
-    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/dfi33hnqjs2hjj/schema/public/table/sprecord">
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/unittest/suite.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="162" selection-start-line="162" selection-end-line="162" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/timeStampServerTable">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/dfi33hnqjs2hjj/schema/public/table/outcomeCombinations">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+          <column-attributes>
+            <column name="ctid" enabled="false" />
+          </column-attributes>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bots/BetfairBot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="191" column="65" selection-start-line="191" selection-start-column="65" selection-end-line="191" selection-end-column="65" />
+          <folding>
+            <marker date="1575775403838" expanded="true" signature="2557:2566" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/outputCombinations">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+          <column-attributes>
+            <column name="ctid" enabled="false" />
+          </column-attributes>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bots/.ipynb_checkpoints/BetfairExample-checkpoint.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bots/betfair/loadjson.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="71" selection-start-line="10" selection-start-column="71" selection-end-line="10" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bots/tmp3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="9" lean-forward="true" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
         </state>
       </provider>
     </entry>
@@ -1816,14 +1680,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bloc/BlocServer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
+    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/dfi33hnqjs2hjj/schema/public/table/orderBook">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
-    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/orderBook">
+    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/dfi33hnqjs2hjj/schema/public/table/sprecord">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
@@ -1840,21 +1704,67 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/sprecord">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/spscore">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/dfi33hnqjs2hjj/schema/public/table/marketTable">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+          <column-attributes>
+            <column name="marketDesc" languageId="JSON" />
+            <column name="ctid" enabled="false" />
+          </column-attributes>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/dfi33hnqjs2hjj/schema/public/table/userTable">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/userTable">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bloc/BlocClient.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3330">
+          <caret line="228" selection-start-line="228" selection-end-line="228" />
+          <folding>
+            <element signature="e#1#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/40749f87-b5cc-44ab-91e5-7d9f7ca94b16/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="25" selection-start-column="25" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/spmarket">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+          <column-attributes>
+            <column name="runners" languageId="JSON" />
+            <column name="marketparameters" languageId="JSON" />
+          </column-attributes>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/ddvi31085f7cuu/schema/public/table/timeStampServerTable">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/ddvi31085f7cuu/schema/public/table/marketBounds">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
@@ -1864,30 +1774,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/dfi33hnqjs2hjj/schema/public/table/orderBook">
+    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/sprecord">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/slate/source/index.html.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="345">
-            <caret line="366" column="62" lean-forward="true" selection-start-line="366" selection-start-column="62" selection-end-line="366" selection-end-column="62" />
-          </first_editor>
-          <second_editor />
+    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/marketBounds">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+          <column-attributes>
+            <column name="ctid" enabled="false" />
+          </column-attributes>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/slate/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="285">
-            <caret line="19" column="80" lean-forward="true" selection-start-line="19" selection-start-column="80" selection-end-line="19" selection-end-column="80" />
-          </first_editor>
-          <second_editor />
+    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/ddvi31085f7cuu/schema/public/table/blocTable">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
@@ -1901,55 +1808,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bots/BetfairPriceMakingBot.py" />
-    <entry file="file://$PROJECT_DIR$/bots/BetfairBot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3030">
-          <caret line="202" column="50" selection-start-line="202" selection-start-column="50" selection-end-line="202" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bots/BetfairExample.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bots/BotNetScratch.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bots/betfair/cancelOrder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1155">
-          <caret line="77" column="36" selection-start-line="77" selection-start-column="36" selection-end-line="77" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bots/botdefs.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bots/BlocBot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2175">
-          <caret line="145" column="39" selection-start-line="145" selection-start-column="39" selection-end-line="145" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/spmarket">
+    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/outcomeCombinations">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
+          <column-attributes>
+            <column name="ctid" enabled="false" />
+          </column-attributes>
         </state>
       </provider>
     </entry>
@@ -1957,71 +1822,97 @@
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
+          <column-attributes>
+            <column name="marketDesc" languageId="JSON" />
+            <column name="ctid" enabled="false" />
+          </column-attributes>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bots/betfair/betfairLogin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="30" selection-start-line="30" selection-end-line="30" />
-          <folding>
-            <marker date="1562847527449" expanded="true" signature="62:63" ph="..." />
-            <marker date="1562847527449" expanded="true" signature="62:64" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bots/betfair/listMarketCatalogue.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-136">
-          <caret line="134" column="10" selection-start-line="134" selection-start-column="10" selection-end-line="134" selection-end-column="80" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-            <marker date="1566118446682" expanded="true" signature="181:183" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bots/betfair/listMarketBook.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="458">
-          <caret line="136" column="21" selection-start-line="136" selection-start-column="21" selection-end-line="136" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-            <marker date="1566118462302" expanded="true" signature="125:127" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bots/BetfairExample-Copy1.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
+    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/blocTable">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
-          <selected id="0" />
+          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bots/betfair/placeOrder.py">
+    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/ddvi31085f7cuu/schema/public/table/spevent">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+          <column-attributes>
+            <column name="event" languageId="JSON" />
+          </column-attributes>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/ddvi31085f7cuu/schema/public/table/spmarket">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+          <column-attributes>
+            <column name="runners" languageId="JSON" />
+            <column name="marketparameters" languageId="JSON" />
+          </column-attributes>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/ddvi31085f7cuu/schema/public/table/orderBook">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/ddvi31085f7cuu/schema/public/table/marketTable">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+          <column-attributes>
+            <column name="marketDesc" languageId="JSON" />
+            <column name="ctid" enabled="false" />
+          </column-attributes>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_BlocServer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="220" column="4" selection-start-line="220" selection-start-column="4" selection-end-line="220" selection-end-column="4" />
+        <state relative-caret-position="441">
+          <caret line="59" selection-start-line="59" selection-end-line="59" />
           <folding>
-            <element signature="e#0#15#0" expanded="true" />
-            <marker date="1567293415157" expanded="true" signature="246:257" ph="..." />
+            <element signature="e#0#38#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bots/betfair/betfairlightweight.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
+    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/orderBook">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
-          <selected id="0" />
+          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bots/betfair/Untitled.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="0" />
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/unittest/case.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="672" selection-start-line="672" selection-end-line="672" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bloc/BlocServer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="617" column="66" selection-start-line="617" selection-start-column="66" selection-end-line="617" selection-end-column="66" />
+          <folding>
+            <element signature="e#15#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BlocAPI.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="315" column="42" lean-forward="true" selection-start-line="315" selection-start-column="42" selection-end-line="315" selection-end-column="42" />
         </state>
       </provider>
     </entry>

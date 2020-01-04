@@ -1,5 +1,5 @@
 import requests
-from betfair.betfairLogin import betfairLogin
+#from betfairLogin import betfairLogin
 
 def retrieveAppKeys(sessionKey):
 
