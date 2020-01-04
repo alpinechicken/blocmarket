@@ -90,7 +90,7 @@ def index():
 
 @app.route('/markets')
 def markets():
-    url = 'https://blocmarket.herokuapp.com/viewMarketBounds'
+    url = request.url_root + 'viewMarketBounds'
     response = requests.post(url, data=json.dumps({}), headers={'content-type': 'application/json'})
     jsonData = json.loads(response.json())
     return render_template('markets.html', markets=jsonData)
@@ -100,11 +100,11 @@ def market(num):
     # url = 'https://blocmarket.herokuapp.com/viewMarketBounds'
     # response = requests.post(url, data=json.dumps({}), headers={'content-type': 'application/json'})
     # jsonData = json.loads(response.json())
-    url = 'https://blocmarket.herokuapp.com/viewOrderBook'
+    url = request.url_root  + 'viewOrderBook'
     content = {'marketId': int(num)}
     response = requests.post(url, data=json.dumps(content), headers={'content-type': 'application/json'})
     orderbookData = json.loads(response.json())
-    url2 = 'https://blocmarket.herokuapp.com/viewOpenTrades'
+    url2 = request.url_root  + 'viewOpenTrades'
     response2 = requests.post(url2, data=json.dumps(content), headers={'content-type': 'application/json'})
     openTradesData = json.loads(response2.json())
     # print(orderbookData)
@@ -230,7 +230,7 @@ def createTrade():
 
 # View market bounds
 @app.route('/viewMarketBounds', methods=['POST'])
-def viewMarkets():
+def viewMarketBounds():
     # Return market bounds
     bs = BlocServer()
     mB = pd.read_sql_table('marketBounds', bs.conn)
