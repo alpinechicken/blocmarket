@@ -1,0 +1,84 @@
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+nav {
+  background: #2c2c2c;
+}
+
+.page-footer {
+  background: #2c2c2c;
+}
+
+.logo {
+  height: 64px;
+  padding: 5px;
+}
+
+.home-background {
+  background: linear-gradient(45deg, #971717, #803939);
+  height: 400px;
+  color: white;
+  display: flex;
+}
+
+.home-title {
+  margin: auto;
+}
+
+.home-information {
+  padding: 20px 5%;
+}
+
+.login-container {
+  padding: 20px 5%;
+}
+
+.login-title {
+  text-align: center
+}
+
+.login-form-cont {
+  padding: 0 10%;
+}
+
+.marketFlex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.markets-market-cont {
+  display: flex;
+}
+
+.markets-market-info {
+  margin: 0 16px;
+}
+
+.card-content {
+  padding: 8px 25px !important;
+}
+
+.tab-container {
+  display: flex;
+}
+
+.tab {
+  margin: 8px 0;
+  padding: 8px;
+}
+
+.active-tab {
+  border-bottom: solid 4px indianred;
+  background: #ff848417;
+}
+
+.hidden {
+  display: none
+}

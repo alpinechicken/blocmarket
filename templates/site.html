@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>BlocMarket</title>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename = './css/styles.css') }}">
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="/" class="brand-logo">
+            <div>
+              <img src="{{ url_for('static', filename = './images/logo.png') }}" alt="Logo" class="logo">
+            </div>
+          </a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="{{ url_for('index')}}">Home</a></li>
+            <li><a href="{{ url_for('markets')}}">Markets</a></li>
+            <!-- <li><a href="{{ url_for('signup')}}">Signup</a></li> -->
+            <!-- <li><a href="{{ url_for('login')}}">Login</a></li> -->
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      {% block body %}
+
+
+      {% endblock %}
+    </main>
+
+    <footer class="page-footer">
+      <!-- <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Footer Content</h5>
+            <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Links</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
+      <div class="footer-copyright">
+        <div class="container">
+        © 2020 BlocMarket
+        <a style="margin-left: 16px" class="grey-text text-lighten-4 right" href="https://github.com/alpinechicken/blocmarket" target="_blank">GitHub</a>
+        <a class="grey-text text-lighten-4 right" href="https://alpinechicken.github.io/slate/" target="_blank">Docs</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
