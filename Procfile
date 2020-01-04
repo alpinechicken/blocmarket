@@ -1,1 +1,1 @@
-web: gunicorn BlocAPI --log-file -
+web: gunicorn BlocAPI:app --log-file -

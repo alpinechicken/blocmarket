@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f748aadd-a74f-4691-aa32-65bb3faaf10c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/44b3f4d7-b859-43f8-977b-3a83e5a88e6d.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/44b3f4d7-b859-43f8-977b-3a83e5a88e6d.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BlocAPI.py" beforeDir="false" afterPath="$PROJECT_DIR$/BlocAPI.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bots/BetfairExample.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/bots/BetfairExample.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/BlocAPI.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/doc/BlocAPI.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Procfile" beforeDir="false" afterPath="$PROJECT_DIR$/Procfile" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -305,6 +303,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="BlocClient" value="723" />
+          <entry key="Procfile" value="19" />
           <entry key="Python Console" value="17044" />
           <entry key="cell" value="35" />
           <entry key="html" value="147" />
@@ -325,7 +324,7 @@
           <entry key="JSON" value="27" />
           <entry key="JavaScript" value="1" />
           <entry key="Markdown" value="2679" />
-          <entry key="PLAIN_TEXT" value="24" />
+          <entry key="PLAIN_TEXT" value="43" />
           <entry key="Python" value="64432" />
           <entry key="SQL" value="628" />
           <entry key="Scratch" value="631" />
@@ -333,9 +332,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="blocTable" value="12" />
+          <entry key="Procfile" value="1" />
+          <entry key="blocTable" value="13" />
           <entry key="brin" value="1" />
           <entry key="btree" value="1" />
+          <entry key="coverage" value="1" />
+          <entry key="env" value="1" />
           <entry key="gin" value="1" />
           <entry key="gist" value="1" />
           <entry key="hash" value="2" />
@@ -343,13 +345,13 @@
           <entry key="ipynb" value="43" />
           <entry key="log" value="5" />
           <entry key="m" value="33" />
-          <entry key="marketBounds" value="72" />
-          <entry key="marketTable" value="100" />
+          <entry key="marketBounds" value="73" />
+          <entry key="marketTable" value="102" />
           <entry key="md" value="11" />
-          <entry key="orderBook" value="89" />
+          <entry key="orderBook" value="90" />
           <entry key="outcomeCombinations" value="58" />
           <entry key="outputCombinations" value="1" />
-          <entry key="py" value="243" />
+          <entry key="py" value="244" />
           <entry key="sh" value="1" />
           <entry key="spevent" value="41" />
           <entry key="spgist" value="1" />
@@ -359,20 +361,20 @@
           <entry key="spscore" value="23" />
           <entry key="sql" value="3" />
           <entry key="timeStampServerTable" value="21" />
-          <entry key="txt" value="20" />
+          <entry key="txt" value="22" />
           <entry key="userTable" value="61" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Bash" value="1" />
-          <entry key="Database Element" value="568" />
+          <entry key="Database Element" value="573" />
           <entry key="HTML" value="1" />
           <entry key="IPNB" value="43" />
           <entry key="Log" value="1" />
           <entry key="Markdown" value="11" />
-          <entry key="PLAIN_TEXT" value="57" />
-          <entry key="Python" value="239" />
+          <entry key="PLAIN_TEXT" value="62" />
+          <entry key="Python" value="240" />
           <entry key="SQL" value="8" />
           <entry key="Scratch" value="7" />
         </counts>
@@ -402,8 +404,59 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BlocAPI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
-              <caret line="315" column="42" lean-forward="true" selection-start-line="315" selection-start-column="42" selection-end-line="315" selection-end-column="42" />
+            <state relative-caret-position="-541">
+              <caret line="76" column="50" selection-start-line="76" selection-start-column="50" selection-end-line="76" selection-end-column="50" />
+              <folding>
+                <element signature="e#1335#1412#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/setup.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Procfile">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="38" lean-forward="true" selection-start-column="38" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/blocTable">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/marketBounds">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
+              <column-attributes>
+                <column name="ctid" enabled="false" />
+              </column-attributes>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/marketTable">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
+              <column-attributes>
+                <column name="marketDesc" languageId="JSON" />
+                <column name="ctid" enabled="false" />
+              </column-attributes>
             </state>
           </provider>
         </entry>
@@ -418,22 +471,23 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/test_BlocServer.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
-              <caret line="59" selection-start-line="59" selection-end-line="59" />
-              <folding>
-                <element signature="e#0#38#0" expanded="true" />
-              </folding>
+        <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/ddvi31085f7cuu/schema/public/table/orderBook">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file:///Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/unittest/case.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="672" selection-start-line="672" selection-end-line="672" />
+        <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/ddvi31085f7cuu/schema/public/table/marketTable">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
+              <column-attributes>
+                <column name="marketDesc" languageId="JSON" />
+                <column name="ctid" enabled="false" />
+              </column-attributes>
             </state>
           </provider>
         </entry>
@@ -452,7 +506,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>setupLoc</find>
       <find>netMatchedProfit</find>
       <find>customerRef</find>
       <find>outcomeCom</find>
@@ -482,6 +535,7 @@
       <find>eeis</find>
       <find>3.7</find>
       <find>marketLimit</find>
+      <find>applica</find>
     </findStrings>
     <replaceStrings>
       <replace>value</replace>
@@ -524,7 +578,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/doc/bots/botdefs.txt" />
         <option value="$PROJECT_DIR$/doc/bots/botlog.log" />
         <option value="$PROJECT_DIR$/doc/bots/Rise.py" />
         <option value="$PROJECT_DIR$/doc/bots/scratch/BetfairQuoteBot.ipynb" />
@@ -575,6 +628,7 @@
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/40749f87-b5cc-44ab-91e5-7d9f7ca94b16/console.sql" />
         <option value="$PROJECT_DIR$/bloc/BlocServer.py" />
         <option value="$PROJECT_DIR$/BlocAPI.py" />
+        <option value="$PROJECT_DIR$/Procfile" />
       </list>
     </option>
   </component>
@@ -589,11 +643,11 @@
       <path value="$PROJECT_DIR$/testenv/lib/python3.8/site-packages/matplotlib/backends/web_backend/jquery-ui-1.12.1/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="466" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="15" />
     <option name="y" value="23" />
-    <option name="width" value="1214" />
-    <option name="height" value="960" />
+    <option name="width" value="1665" />
+    <option name="height" value="961" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -1117,16 +1171,16 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="466" y="23" width="1214" height="960" extended-state="0" />
+    <frame x="0" y="23" width="1680" height="961" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.46696034" visible="true" weight="0.13054608" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.46696034" visible="true" weight="0.093406595" />
       <window_info id="Structure" order="1" sideWeight="0.5330396" side_tool="true" weight="0.11608094" />
       <window_info id="Favorites" order="2" sideWeight="0.50385606" side_tool="true" weight="0.0042735045" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.496337" weight="0.4556213" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.53663003" weight="0.3704142" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.7185592" visible="true" weight="0.52426034" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.7185592" visible="true" weight="0.52364063" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49428275" weight="0.32213116" />
@@ -1142,9 +1196,9 @@
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Database" order="3" sideWeight="0.48883048" weight="0.26877132" />
+      <window_info anchor="right" id="Database" order="3" sideWeight="0.48883048" visible="true" weight="0.1923077" />
       <window_info anchor="right" id="Coverage" order="4" side_tool="true" />
-      <window_info anchor="right" id="SciView" order="5" sideWeight="0.48357424" visible="true" weight="0.3182594" />
+      <window_info anchor="right" id="SciView" order="5" sideWeight="0.48357424" weight="0.3182594" />
       <window_info anchor="right" id="Data View" order="6" weight="0.32861736" />
       <window_info anchor="right" x="0" y="0" width="353" height="713" id="Documentation" order="7" sideWeight="0.5111695" side_tool="true" weight="0.3363344" />
       <window_info anchor="right" id="R Graphics" order="8" weight="0.32905984" />
@@ -1512,33 +1566,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/bots/BlocBot.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bots/tmp2.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bots/BlocBot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2575">
-          <caret line="47" column="49" lean-forward="true" selection-start-line="47" selection-start-column="49" selection-end-line="47" selection-end-column="49" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bots/betfair/listOrder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="115" selection-start-line="115" selection-end-line="115" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/ssl.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="16260">
@@ -1585,18 +1612,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/Untitled.ipynb">
       <provider selected="true" editor-type-id="ipnb-editor">
         <state>
           <selected id="0" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup.py">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/spscore">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
@@ -1781,16 +1802,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/marketBounds">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-          <column-attributes>
-            <column name="ctid" enabled="false" />
-          </column-attributes>
-        </state>
-      </provider>
-    </entry>
     <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/ddvi31085f7cuu/schema/public/table/blocTable">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -1818,24 +1829,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/marketTable">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-          <column-attributes>
-            <column name="marketDesc" languageId="JSON" />
-            <column name="ctid" enabled="false" />
-          </column-attributes>
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/blocTable">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/ddvi31085f7cuu/schema/public/table/spevent">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -1857,24 +1850,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/ddvi31085f7cuu/schema/public/table/orderBook">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/ddvi31085f7cuu/schema/public/table/marketTable">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-          <column-attributes>
-            <column name="marketDesc" languageId="JSON" />
-            <column name="ctid" enabled="false" />
-          </column-attributes>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/test_BlocServer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="441">
@@ -1882,13 +1857,6 @@
           <folding>
             <element signature="e#0#38#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/orderBook">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
@@ -1909,10 +1877,88 @@
         </state>
       </provider>
     </entry>
+    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/blocTable">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/marketBounds">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+          <column-attributes>
+            <column name="ctid" enabled="false" />
+          </column-attributes>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/marketTable">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+          <column-attributes>
+            <column name="marketDesc" languageId="JSON" />
+            <column name="ctid" enabled="false" />
+          </column-attributes>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/orderBook">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/ddvi31085f7cuu/schema/public/table/orderBook">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/ddvi31085f7cuu/schema/public/table/marketTable">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+          <column-attributes>
+            <column name="marketDesc" languageId="JSON" />
+            <column name="ctid" enabled="false" />
+          </column-attributes>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.coverage">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/runtime.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Procfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="38" lean-forward="true" selection-start-column="38" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/BlocAPI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="315" column="42" lean-forward="true" selection-start-line="315" selection-start-column="42" selection-end-line="315" selection-end-column="42" />
+        <state relative-caret-position="-541">
+          <caret line="76" column="50" selection-start-line="76" selection-start-column="50" selection-end-line="76" selection-end-column="50" />
+          <folding>
+            <element signature="e#1335#1412#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
