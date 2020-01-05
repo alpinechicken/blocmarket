@@ -110,7 +110,7 @@ def market(num):
     url = request.url_root  + 'viewTradeSummary'
     response = requests.post(url, data=json.dumps(content), headers={'content-type': 'application/json'})
     tradeSummaryData = json.loads(response.json())
-    url = request.url_root  + 'viewTickData'
+    url = request.url_root  + 'viewTickHistory'
     response = requests.post(url, data=json.dumps(content), headers={'content-type': 'application/json'})
     tickHistoryData = json.loads(response.json())
     # print(orderbookData)
