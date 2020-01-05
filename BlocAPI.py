@@ -101,7 +101,7 @@ def market(num):
     # response = requests.post(url, data=json.dumps({}), headers={'content-type': 'application/json'})
     # jsonData = json.loads(response.json())
     url = request.url_root  + 'viewOrderBook'
-    content = {'marketId': int(num), 'traderId': int(2)} # TODO: attach this to trader or impossible condition if not logged in
+    content = {'marketId': int(num), 'traderId': int(2), 'startTime': 0, 'endTime': 2e9*1000} # TODO: proper inputs for these
     response = requests.post(url, data=json.dumps(content), headers={'content-type': 'application/json'})
     orderbookData = json.loads(response.json())
     url = request.url_root  + 'viewOpenTrades'
