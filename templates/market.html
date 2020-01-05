@@ -6,13 +6,15 @@
 <div class="login-container">
   <div>
     <a href="{{ url_for('markets')}}">&#x3c; Back to Markets</a>
-  <div>
+  </div>
 
   <h3 class="login-title">Market Id: {{num}}</h3>
 
   <div class="tab-container">
-    <div class="tab active-tab" onclick="tab('orderbook')" id="orderbooktab">Order Book</div>
-    <div class="tab" onclick="tab('opentrades')" id="opentradestab">Open Trades</div>
+      <div class="tab active-tab" onclick="tab('orderbook')" id="orderbooktab">Order Book</div>
+      <div class="tab" onclick="tab('opentrades')" id="opentradestab">Open Trades</div>
+      <div class="tab" onclick="tab('tradesummary')" id="tradesummarytab">Trade summary</div>
+      <div class="tab" onclick="tab('tickhistory')" id="tickhistorytab">Tick history</div>
   </div>
 
 
@@ -31,14 +33,14 @@
           </tr>
         </thead>
         <tbody>
-          {% for index in orderbookData.tradeId %}
+          {% for index in orderBookData.tradeId %}
           <tr>
-            <td class="orderCell">{{orderbookData.tradeId[index]}}</td>
-            <td class="orderCell">{{orderbookData.price[index]}}</td>
-            <td class="orderCell">{{orderbookData.quantity[index]}}</td>
-            <td class="orderCell">{{orderbookData.traderId[index]}}</td>
-            <td class="orderCell">{{orderbookData.iMatched[index]}}</td>
-            <td class="orderCell">{{orderbookData.timeStampUTC[index] }}</td>
+            <td class="orderCell">{{orderBookData.tradeId[index]}}</td>
+            <td class="orderCell">{{orderBookData.price[index]}}</td>
+            <td class="orderCell">{{orderBookData.quantity[index]}}</td>
+            <td class="orderCell">{{orderBookData.traderId[index]}}</td>
+            <td class="orderCell">{{orderBookData.iMatched[index]}}</td>
+            <td class="orderCell">{{orderBookData.timeStampUTC[index] }}</td>
           </tr>
           {% endfor %}
         </tbody>
@@ -73,6 +75,81 @@
       </table>
     </div>
 
+    <div id="tradesummary" class="hidden">
+      Open Trades
+      <table id="myTable3">
+        <thead>
+          <tr>
+            <th>Trade id</th>
+            <th>Market id</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Trader id</th>
+            <th>Matched</th>
+            <th>Date</th>
+            <th>Market root id</th>
+            <th>Market branch id</th>
+            <th>Market minimum</th>
+            <th>Market maximum</th>
+            <th>Outcome at market minimum</th>
+            <th>Outcome at market maximum</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for index in tradeSummaryData.tradeId %}
+          <tr>
+            <td class="orderCell">{{tradeSummaryData.tradeId[index]}}</td>
+            <td class="orderCell">{{tradeSummaryData.marketId[index]}}</td>
+            <td class="orderCell">{{tradeSummaryData.price[index]}}</td>
+            <td class="orderCell">{{tradeSummaryData.quantity[index]}}</td>
+            <td class="orderCell">{{tradeSummaryData.traderId[index]}}</td>
+            <td class="orderCell">{{tradeSummaryData.iMatched[index]}}</td>
+            <td class="orderCell">{{tradeSummaryData.timeStampUTC[index] }}</td>
+            <td class="orderCell">{{tradeSummaryData.marketRootId[index]}}</td>
+            <td class="orderCell">{{tradeSummaryData.marketBranchId[index]}}</td>
+            <td class="orderCell">{{tradeSummaryData.marketMin[index]}}</td>
+            <td class="orderCell">{{tradeSummaryData.marketMax[index]}}</td>
+            <td class="orderCell">{{tradeSummaryData.marketMinOutcome[index] }}</td>
+            <td class="orderCell">{{tradeSummaryData.marketMaxOutcome[index] }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div id="tickhistory" class="hidden">
+      Open Trades
+      <table id="myTable4">
+        <thead>
+          <tr>
+            <th>Tick type</th>
+            <th>Trade id</th>
+            <th>Crossing trade id</th>
+            <th>Market id</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Trader id/th>
+            <th>Matched</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for index in tickHistoryData.tradeId %}
+           <tr>
+            <td class="orderCell">{{tickHistoryData.tickType[index]}}</td>
+            <td class="orderCell">{{tickHistoryData.tradeId[index]}}</td>
+            <td class="orderCell">{{tickHistoryData.xTradeId[index]}}</td>
+            <td class="orderCell">{{tickHistoryData.marketId[index]}}</td>
+            <td class="orderCell">{{tickHistoryData.price[index]}}</td>
+            <td class="orderCell">{{tickHistoryData.quantity[index] }}</td>
+            <td class="orderCell">{{tickHistoryData.traderId[index]}}</td>
+            <td class="orderCell">{{tickHistoryData.iMatched[index]}}</td>
+            <td class="orderCell">{{tickHistoryData.timeStampUTC[index] }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
 
   </div>
 </div>
@@ -87,20 +164,36 @@
   $(document).ready( function () {
     $('#myTable').DataTable();
     $('#myTable2').DataTable();
+    $('#myTable3').DataTable();
+    $('#myTable4').DataTable();
 } );
 
 
   function tab(setactive) {
-    document.getElementById("opentradestab").classList.remove('active-tab')
-    document.getElementById("orderbooktab").classList.remove('active-tab')
-    document.getElementById(setactive+'tab').classList.add('active-tab')
-    if (setactive === "opentrades") {
-      document.getElementById("orderbook").classList.add('hidden')
-      document.getElementById("opentrades").classList.remove('hidden')
-    } else {
-      document.getElementById("opentrades").classList.add('hidden')
+      document.getElementById("orderbooktab").classList.remove('active-tab')
+      document.getElementById("opentradestab").classList.remove('active-tab')
+      document.getElementById("tradesummarytab").classList.remove('active-tab')
+      document.getElementById("tickhistorytab").classList.remove('active-tab')
+      document.getElementById(setactive+'tab').classList.add('active-tab')
+    if (setactive === "orderbook") {
       document.getElementById("orderbook").classList.remove('hidden')
+      document.getElementById("opentrades").classList.add('hidden')
+      document.getElementById("tradesummary").classList.add('hidden')
+      document.getElementById("tickhistory").classList.add('hidden')
     }
+    if (setactive === "tradesummary") {
+      document.getElementById("orderbook").classList.remove('hidden')
+      document.getElementById("opentrades").classList.add('hidden')
+      document.getElementById("tradesummary").classList.add('hidden')
+      document.getElementById("tickhistory").classList.add('hidden')
+    }
+   if (setactive === "tickhistory") {
+      document.getElementById("orderbook").classList.add('hidden')
+      document.getElementById("opentrades").classList.add('hidden')
+      document.getElementById("tradesummary").classList.add('hidden')
+      document.getElementById("tickhistory").classList.remove('hidden')
+    }
+
   }
 
 </script>

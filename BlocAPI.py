@@ -101,15 +101,22 @@ def market(num):
     # response = requests.post(url, data=json.dumps({}), headers={'content-type': 'application/json'})
     # jsonData = json.loads(response.json())
     url = request.url_root  + 'viewOrderBook'
-    content = {'marketId': int(num)}
+    content = {'marketId': int(num), 'traderId': int(2)} # TODO: attach this to trader or impossible condition if not logged in
     response = requests.post(url, data=json.dumps(content), headers={'content-type': 'application/json'})
     orderbookData = json.loads(response.json())
-    url2 = request.url_root  + 'viewOpenTrades'
-    response2 = requests.post(url2, data=json.dumps(content), headers={'content-type': 'application/json'})
-    openTradesData = json.loads(response2.json())
+    url = request.url_root  + 'viewOpenTrades'
+    response = requests.post(url, data=json.dumps(content), headers={'content-type': 'application/json'})
+    openTradesData = json.loads(response.json())
+    url = request.url_root  + 'viewTradeSummary'
+    response = requests.post(url, data=json.dumps(content), headers={'content-type': 'application/json'})
+    tradeSummaryData = json.loads(response.json())
+    url = request.url_root  + 'viewTickData'
+    response = requests.post(url, data=json.dumps(content), headers={'content-type': 'application/json'})
+    tickHistoryData = json.loads(response.json())
     # print(orderbookData)
 
-    return render_template('market.html', num=num, orderbookData=orderbookData, openTradesData=openTradesData)
+    return render_template('market.html', num=num, orderBookData=orderbookData, openTradesData=openTradesData,
+                           tradeSummaryData=tradeSummaryData, tickHistoryData=tickHistoryData)
 
 @app.route('/signup', methods = ['POST','GET'])
 def signup():
