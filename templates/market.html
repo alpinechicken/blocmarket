@@ -181,10 +181,16 @@
       document.getElementById("tradesummary").classList.add('hidden')
       document.getElementById("tickhistory").classList.add('hidden')
     }
-    if (setactive === "tradesummary") {
-      document.getElementById("orderbook").classList.remove('hidden')
-      document.getElementById("opentrades").classList.add('hidden')
+    if (setactive === "opentrades") {
+      document.getElementById("orderbook").classList.add('hidden')
+      document.getElementById("opentrades").classList.remove('hidden')
       document.getElementById("tradesummary").classList.add('hidden')
+      document.getElementById("tickhistory").classList.add('hidden')
+    }
+    if (setactive === "tradesummary") {
+      document.getElementById("orderbook").classList.add('hidden')
+      document.getElementById("opentrades").classList.add('hidden')
+      document.getElementById("tradesummary").classList.remove('hidden')
       document.getElementById("tickhistory").classList.add('hidden')
     }
    if (setactive === "tickhistory") {
