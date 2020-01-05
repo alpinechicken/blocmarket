@@ -94,6 +94,7 @@ def markets():
     response = requests.post(url, data=json.dumps({}), headers={'content-type': 'application/json'})
     jsonData = json.loads(response.json())
     return render_template('markets.html', markets=jsonData)
+    #return render_template('404.html')
 
 @app.route('/markets/<num>')
 def market(num):

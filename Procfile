@@ -1,1 +1,1 @@
-web: gunicorn BlocAPI:app --log-file -
+web: gunicorn --workers=3 BlocAPI:app --log-file -
