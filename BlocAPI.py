@@ -76,17 +76,18 @@ class SignupForm(FlaskForm):
 
 class CreateMarket(FlaskForm):
     signingKey = StringField('Signing Key', [validators.DataRequired()])
+    traderId = IntegerField('Trader Id', [validators.DataRequired()])
     verifyKey = StringField('Verify Key', [validators.DataRequired()])
     marketRootId = IntegerField("Market Root Id", [validators.DataRequired()])
     marketBranchId = IntegerField("Market Branch Id", [validators.DataRequired()])
-    marketMin = DecimalField("Market Min", [validators.DataRequired()])
-    marketMax = DecimalField("Market Max", [validators.DataRequired()])
+    marketMin = StringField("Market Min", [validators.DataRequired()])
+    marketMax = StringField("Market Max", [validators.DataRequired()])
     marketDesc = StringField('marketDesc', [validators.DataRequired()])
 
 
 class CreateTrade(FlaskForm):
     signingKey = StringField('Signing Key', [validators.DataRequired()])
-    traderId = StringField('Trader Id', [validators.DataRequired()])
+    traderId = IntegerField('Trader Id', [validators.DataRequired()])
     verifyKey =StringField('Verify Key', [validators.DataRequired()])
     price = IntegerField("Price", [validators.DataRequired()])
     marketId = IntegerField("Market Id", [validators.DataRequired()])
@@ -110,20 +111,22 @@ def index():
 @app.route('/markets', methods = ['POST','GET'])
 def markets():
     form = CreateMarket()
-    createMarketResponse = {}
+    cmResponse = {}
+    createMarketResponse = 'nothing yet'
     if form.validate_on_submit():
         url = request.url_root + 'createMarket'
-        content = {'signingKey': form.signingKey.data, 'verifyKey': form.verifyKey.data, 'marketRootId': form.marketRootId.data,
-                   'marketBranchId': form.marketBranchId.data, 'marketMin': form.marketMin.data, 'marketMax': form.marketMax.data,
-                   'marketDesc': json.dumps(form.marketDesc.data)}
+        content = {'signingKey':form.signingKey.data, 'traderId': form.traderId.data,
+                   'verifyKey': form.signingKey.raw_data,
+                   'marketRootId': form.marketRootId.data, 'marketBranchId': form.marketBranchId.data,
+                   'marketMin': form.marketMin.data, 'marketMax': form.marketMax.data, 'marketDesc': json.dumps({})}
         response = requests.post(url, data=json.dumps(content), headers={'content-type': 'application/json'})
-        createMarketResponse = json.loads(response.json())
+        createMarketResponse = response.json()
         print('Market responded:' + createMarketResponse)
 
     url = request.url_root + 'viewMarketBounds'
     response = requests.post(url, data=json.dumps({}), headers={'content-type': 'application/json'})
     marketBoundsData = json.loads(response.json())
-    return render_template('markets.html', markets=marketBoundsData, form=form)
+    return render_template('markets.html', markets=marketBoundsData, form=form, createMarketResponse=createMarketResponse)
     #return render_template('404.html')
 
 @app.route('/markets/<num>')

@@ -5,7 +5,8 @@
 
 <div class="login-container">
 
-  <h1 class="login-title">Markets</h1>
+  <h1 class="login-title">Markets {{createMarketResponse}}</h1>
+
 
   <div class="login-form-cont">
     {% for index in markets.marketId %}
@@ -46,14 +47,15 @@
     <div class="row">
 
       <form class="" method="post">
-        {{ form.csrf_token }}
-        {{ form.signingKey.label }}{{ form.signingKey }}
-        {{ form.verifyKey.label }}{{ form.verifyKey }}
-        {{ form.marketRootId.label }}{{ form.marketRootId }}
-        {{ form.marketBranchId.label }}{{ form.marketBranchId }}
-        {{ form.marketMin.label }}{{ form.marketMin }}
-        {{ form.marketMax.label }}{{ form.marketMax }}
-        {{ form.marketDesc.label }}{{ form.marketDesc }}
+          {{ form.csrf_token }}
+          {{ form.signingKey.label }}{{ form.signingKey }}
+          {{ form.traderId.label }}{{ form.traderId }}
+          {{ form.verifyKey.label }}{{ form.verifyKey }}
+          {{ form.marketRootId.label }}{{ form.marketRootId }}
+          {{ form.marketBranchId.label }}{{ form.marketBranchId }}
+          {{ form.marketMin.label }}{{ form.marketMin }}
+          {{ form.marketMax.label }}{{ form.marketMax }}
+          {{ form.marketDesc.label }}{{ form.marketDesc }}
         <button type="submit" name="button" class="waves-effect waves-light btn">Create/Update Market</button>
       </form>
     </div>
