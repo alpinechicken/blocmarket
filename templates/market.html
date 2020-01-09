@@ -3,10 +3,59 @@
 
 {% block body %}
 
+
+
+
 <div class="login-container">
   <div>
     <a href="{{ url_for('markets')}}">&#x3c; Back to Markets</a>
   <div>
+
+
+  <div class="login-form-cont">
+    <div class="row">
+      <!-- <form class="col s12" method="post">
+        <div class="row">
+          <div class="input-field col s6">
+            <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+            <label for="first_name">First Name</label>
+          </div>
+          <div class="input-field col s6">
+            <input id="last_name" type="text" class="validate">
+            <label for="last_name">Last Name</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="email" type="email" class="validate">
+            <label for="email">Email</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="password" type="password" class="validate">
+            <label for="password">Password</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="password2" type="password" class="validate">
+            <label for="password">Confirm Password</label>
+          </div>
+        </div>
+        <button type="submit" name="button" class="waves-effect waves-light btn">Create Account</button>
+      </form> -->
+      <form class="" method="post">
+        {{ form.csrf_token }}
+        {{ form.first_name.label }}{{ form.first_name }}
+        {{ form.last_name.label }}{{ form.last_name }}
+        {{ form.email.label }}{{ form.email }}
+        {{ form.password.label }}{{ form.password }}
+        {{ form.confirm_password.label }}{{ form.confirm_password }}
+        <button type="submit" name="button" class="waves-effect waves-light btn">Create Account</button>
+      </form>
+    </div>
+
 
   <h3 class="login-title">Market Id: {{num}}</h3>
 

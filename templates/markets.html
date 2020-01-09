@@ -41,6 +41,23 @@
 
 
   </div>
+
+    <div class="createmarket-form">
+    <div class="row">
+
+      <form class="" method="post">
+        {{ form.csrf_token }}
+        {{ form.signingKey.label }}{{ form.signingKey }}
+        {{ form.verifyKey.label }}{{ form.verifyKey }}
+        {{ form.marketRootId.label }}{{ form.marketRootId }}
+        {{ form.marketBranchId.label }}{{ form.marketBranchId }}
+        {{ form.marketMin.label }}{{ form.marketMin }}
+        {{ form.marketMax.label }}{{ form.marketMax }}
+        {{ form.marketDesc.label }}{{ form.marketDesc }}
+        <button type="submit" name="button" class="waves-effect waves-light btn">Create/Update Market</button>
+      </form>
+    </div>
+
 </div>
 
 <script type="text/javascript">

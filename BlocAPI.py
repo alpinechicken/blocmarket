@@ -40,7 +40,7 @@
 
 from flask import Flask, request, jsonify, render_template, redirect, url_for
 from flask_wtf import FlaskForm
-from wtforms import validators, StringField, PasswordField
+from wtforms import validators, StringField, PasswordField, IntegerField, DecimalField
 from wtforms.fields.html5 import EmailField
 import requests
 
@@ -73,6 +73,25 @@ class SignupForm(FlaskForm):
     password = PasswordField('Password', [validators.DataRequired()])
     confirm_password = PasswordField('Confirm Password', [validators.DataRequired(),validators.EqualTo('password', message='Passwords must match')])
 
+
+class CreateMarket(FlaskForm):
+    signingKey = StringField('Signing Key', [validators.DataRequired()])
+    verifyKey = StringField('Verify Key', [validators.DataRequired()])
+    marketRootId = IntegerField("Market Root Id", [validators.DataRequired()])
+    marketBranchId = IntegerField("Market Branch Id", [validators.DataRequired()])
+    marketMin = DecimalField("Market Min", [validators.DataRequired()])
+    marketMax = DecimalField("Market Max", [validators.DataRequired()])
+    marketDesc = StringField('marketDesc', [validators.DataRequired()])
+
+
+class CreateTrade(FlaskForm):
+    signingKey = StringField('Signing Key', [validators.DataRequired()])
+    traderId = StringField('Trader Id', [validators.DataRequired()])
+    verifyKey =StringField('Verify Key', [validators.DataRequired()])
+    price = IntegerField("Price", [validators.DataRequired()])
+    marketId = IntegerField("Market Id", [validators.DataRequired()])
+    quantity = IntegerField("Quantity", [validators.DataRequired()])
+
 class LoginForm(FlaskForm):
     email = EmailField('Email', [validators.DataRequired()])
     password = PasswordField('Password', [validators.DataRequired()])
@@ -88,12 +107,23 @@ class LoginForm(FlaskForm):
 def index():
     return render_template('home.html')
 
-@app.route('/markets')
+@app.route('/markets', methods = ['POST','GET'])
 def markets():
+    form = CreateMarket()
+    createMarketResponse = {}
+    if form.validate_on_submit():
+        url = request.url_root + 'createMarket'
+        content = {'signingKey': form.signingKey.data, 'verifyKey': form.verifyKey.data, 'marketRootId': form.marketRootId.data,
+                   'marketBranchId': form.marketBranchId.data, 'marketMin': form.marketMin.data, 'marketMax': form.marketMax.data,
+                   'marketDesc': json.dumps(form.marketDesc.data)}
+        response = requests.post(url, data=json.dumps(content), headers={'content-type': 'application/json'})
+        createMarketResponse = json.loads(response.json())
+        print('Market responded:' + createMarketResponse)
+
     url = request.url_root + 'viewMarketBounds'
     response = requests.post(url, data=json.dumps({}), headers={'content-type': 'application/json'})
-    jsonData = json.loads(response.json())
-    return render_template('markets.html', markets=jsonData)
+    marketBoundsData = json.loads(response.json())
+    return render_template('markets.html', markets=marketBoundsData, form=form)
     #return render_template('404.html')
 
 @app.route('/markets/<num>')
