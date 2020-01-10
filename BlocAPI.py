@@ -115,13 +115,12 @@ def markets():
     createMarketResponse = 'nothing yet'
     if form.validate_on_submit():
         url = request.url_root + 'createMarket'
-        content = {'signingKey':form.signingKey.data, 'traderId': form.traderId.data,
-                   'verifyKey': form.signingKey.raw_data,
+        content = {'signingKey':str(form.signingKey.raw_data[0]), 'traderId': form.traderId.data,
+                   'verifyKey': str(form.verifyKey.raw_data[0]),
                    'marketRootId': form.marketRootId.data, 'marketBranchId': form.marketBranchId.data,
                    'marketMin': form.marketMin.data, 'marketMax': form.marketMax.data, 'marketDesc': json.dumps({})}
         response = requests.post(url, data=json.dumps(content), headers={'content-type': 'application/json'})
         createMarketResponse = response.json()
-        print('Market responded:' + createMarketResponse)
 
     url = request.url_root + 'viewMarketBounds'
     response = requests.post(url, data=json.dumps({}), headers={'content-type': 'application/json'})

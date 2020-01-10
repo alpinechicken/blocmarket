@@ -5,8 +5,9 @@
 
 <div class="login-container">
 
-  <h1 class="login-title">Markets {{createMarketResponse}}</h1>
-
+  <h1 class="login-title">Markets </h1>
+    <p>Server responds: {{createMarketResponse}}</p>
+    <p> Verify key: {{form.verifyKey.raw_data[0]}}</p>
 
   <div class="login-form-cont">
     {% for index in markets.marketId %}
