@@ -111,7 +111,7 @@ def index():
 def markets():
     form = CreateMarket()
     cmResponse = {}
-    createMarketResponse = 'nothing yet'
+    createMarketResponse = 'no trade submitted.'
     if form.validate_on_submit():
         url = request.url_root + 'createMarket'
         content = {'signingKey':str(form.signingKey.raw_data[0]), 'traderId': int(form.traderId.data),
@@ -119,7 +119,10 @@ def markets():
                    'marketRootId': int(form.marketRootId.data), 'marketBranchId': int(form.marketBranchId.data),
                    'marketMin': form.marketMin.data, 'marketMax': form.marketMax.data, 'marketDesc': json.dumps({})}
         response = requests.post(url, data=json.dumps(content), headers={'content-type': 'application/json'})
-        createMarketResponse = response.json()
+        try:
+            createMarketResponse = response.json()
+        except:
+            createMarketResponse = 'Failed to create/modify market. One of the keys is probably invalid.'
 
     url = request.url_root + 'viewMarketBounds'
     response = requests.post(url, data=json.dumps({}), headers={'content-type': 'application/json'})
@@ -134,7 +137,7 @@ def market(num):
     # jsonData = json.loads(response.json())
     tradeForm = CreateTrade()
     ctResponse = {}
-    createTradeResponse = 'nothing yet' + str(tradeForm.validate_on_submit())
+    createTradeResponse = 'no market created/changed.'
     if tradeForm.validate_on_submit():
         url = request.url_root + 'createTrade'
         content = {'signingKey':str(tradeForm.signingKey.raw_data[0]), 'traderId': tradeForm.traderId.data,
@@ -142,7 +145,11 @@ def market(num):
                    'marketId': int(num), 'price': int(tradeForm.price.data),
                    'quantity': int(tradeForm.quantity.data)}
         response = requests.post(url, data=json.dumps(content), headers={'content-type': 'application/json'})
-        createTradeResponse = response.json()
+        try:
+            createTradeResponse = response.json()
+        except:
+            # TODO:
+            createTradeResponse = 'Failed to create trade. One of the keys is probably invalid.'
 
     url = request.url_root  + 'viewOrderBook'
     content = {'marketId': int(num), 'traderId': int(2), 'startTime': 0, 'endTime': 2e9*1000} # TODO: proper inputs for these
@@ -256,11 +263,13 @@ def createTrade():
     # Retrieve keys from session and assign in client
     bc.signingKey = data['signingKey']
     bc.verifyKey = data['verifyKey']
+
     tradeRow = pd.DataFrame(data, index=[0])[['marketId', 'price', 'quantity', 'traderId']]
     # Call createMarket_client
     try:
         checks, allChecks = bc.createTrade_client(tradeRow=tradeRow, blocServer=bs)
     except Exception as err:
+        # TODO: This doesnt need the full error. If it fails its probably because the sig key is invalid
         checks = traceback.format_exc()
         allChecks = {'Boned':True}
 

@@ -10,36 +10,12 @@
   <div>
     <a href="{{ url_for('markets')}}">&#x3c; Back to Markets</a>
     <p>Server response for createTrade: {{createTradeResponse}}</p>
-      <p>For debugging:</p>
-    <p> Verify key: {{tradeForm.verifyKey.raw_data[0]}}</p>
-      <p> Sig key: {{tradeForm.signingKey.raw_data[0]}}</p>
-      <p> Trader Id: {{tradeForm.traderId.data}}</p>
-      <p> Market id: {{num}}</p>
-      <p> Quantity: {{tradeForm.quantity.data}}</p>
-      <p> Price: {{tradeForm.price.data}}</p>
   <div>
 
 
 
-   <div class="createtrade-form">
-    <div class="row">
 
-
-      <form class="" method="post">
-          {{ tradeForm.csrf_token }}
-          {{ tradeForm.signingKey.label }}{{ tradeForm.signingKey }}
-          {{ tradeForm.traderId.label }}{{ tradeForm.traderId }}
-          {{ tradeForm.verifyKey.label }}{{ tradeForm.verifyKey }}
-          {{ tradeForm.price.label }}{{ tradeForm.price }}
-          {{ tradeForm.quantity.label }}{{ tradeForm.quantity }}
-
-        <button type="submit" name="button" class="waves-effect waves-light btn">Create trade </button>
-      </form>
-    </div>
-
-
-
-  <h3 class="login-title">Market Id: {{num}}</h3>
+  <h3 class="login-title"> Market Id: {{num}}</h3>
 
   <div class="tab-container">
       <div class="tab active-tab" onclick="tab('orderbook')" id="orderbooktab">Order Book</div>
@@ -179,6 +155,30 @@
     </div>
 
   </div>
+
+
+      <br>
+      <br>
+
+       <div class="createtrade-form">
+       <h3> Create a new trade: {{num}}</h3>
+        <div class="row">
+
+      <form class="" method="post">
+          {{ tradeForm.csrf_token }}
+          {{ tradeForm.signingKey.label }}{{ tradeForm.signingKey }}
+          {{ tradeForm.traderId.label }}{{ tradeForm.traderId }}
+          {{ tradeForm.verifyKey.label }}{{ tradeForm.verifyKey }}
+          {{ tradeForm.price.label }}{{ tradeForm.price }}
+          {{ tradeForm.quantity.label }}{{ tradeForm.quantity }}
+
+        <button type="submit" name="button" class="waves-effect waves-light btn">Create trade </button>
+      </form>
+
+        </div>
+    </div>
+
+
 </div>
 
 <script type="text/javascript">
