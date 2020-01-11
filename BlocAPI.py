@@ -88,9 +88,8 @@ class CreateMarket(FlaskForm):
 class CreateTrade(FlaskForm):
     signingKey = StringField('Signing Key', [validators.DataRequired()])
     traderId = IntegerField('Trader Id', [validators.DataRequired()])
-    verifyKey =StringField('Verify Key', [validators.DataRequired()])
+    verifyKey = StringField('Verify Key', [validators.DataRequired()])
     price = IntegerField("Price", [validators.DataRequired()])
-    marketId = IntegerField("Market Id", [validators.DataRequired()])
     quantity = IntegerField("Quantity", [validators.DataRequired()])
 
 class LoginForm(FlaskForm):
@@ -115,9 +114,9 @@ def markets():
     createMarketResponse = 'nothing yet'
     if form.validate_on_submit():
         url = request.url_root + 'createMarket'
-        content = {'signingKey':str(form.signingKey.raw_data[0]), 'traderId': form.traderId.data,
+        content = {'signingKey':str(form.signingKey.raw_data[0]), 'traderId': int(form.traderId.data),
                    'verifyKey': str(form.verifyKey.raw_data[0]),
-                   'marketRootId': form.marketRootId.data, 'marketBranchId': form.marketBranchId.data,
+                   'marketRootId': int(form.marketRootId.data), 'marketBranchId': int(form.marketBranchId.data),
                    'marketMin': form.marketMin.data, 'marketMax': form.marketMax.data, 'marketDesc': json.dumps({})}
         response = requests.post(url, data=json.dumps(content), headers={'content-type': 'application/json'})
         createMarketResponse = response.json()
@@ -128,11 +127,23 @@ def markets():
     return render_template('markets.html', markets=marketBoundsData, form=form, createMarketResponse=createMarketResponse)
     #return render_template('404.html')
 
-@app.route('/markets/<num>')
+@app.route('/markets/<num>', methods = ['POST','GET'])
 def market(num):
     # url = 'https://blocmarket.herokuapp.com/viewMarketBounds'
     # response = requests.post(url, data=json.dumps({}), headers={'content-type': 'application/json'})
     # jsonData = json.loads(response.json())
+    tradeForm = CreateTrade()
+    ctResponse = {}
+    createTradeResponse = 'nothing yet' + str(tradeForm.validate_on_submit())
+    if tradeForm.validate_on_submit():
+        url = request.url_root + 'createTrade'
+        content = {'signingKey':str(tradeForm.signingKey.raw_data[0]), 'traderId': tradeForm.traderId.data,
+                   'verifyKey': str(tradeForm.verifyKey.raw_data[0]),
+                   'marketId': int(num), 'price': int(tradeForm.price.data),
+                   'quantity': int(tradeForm.quantity.data)}
+        response = requests.post(url, data=json.dumps(content), headers={'content-type': 'application/json'})
+        createTradeResponse = response.json()
+
     url = request.url_root  + 'viewOrderBook'
     content = {'marketId': int(num), 'traderId': int(2), 'startTime': 0, 'endTime': 2e9*1000} # TODO: proper inputs for these
     response = requests.post(url, data=json.dumps(content), headers={'content-type': 'application/json'})
@@ -146,10 +157,9 @@ def market(num):
     url = request.url_root  + 'viewTickHistory'
     response = requests.post(url, data=json.dumps(content), headers={'content-type': 'application/json'})
     tickHistoryData = json.loads(response.json())
-    # print(orderbookData)
 
     return render_template('market.html', num=num, orderBookData=orderbookData, openTradesData=openTradesData,
-                           tradeSummaryData=tradeSummaryData, tickHistoryData=tickHistoryData)
+                           tradeSummaryData=tradeSummaryData, tickHistoryData=tickHistoryData, tradeForm=tradeForm, createTradeResponse=createTradeResponse)
 
 @app.route('/signup', methods = ['POST','GET'])
 def signup():
