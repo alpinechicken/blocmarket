@@ -150,6 +150,15 @@ class BlocServer(object):
                              Column('value', Integer),
                              Column('isfinal', Boolean))
 
+        # This authtable is just for testing authentication for front end. Should NOT be here long term
+        self.authTable = Table('authTable', self.metadata,
+                               Column('traderId', Integer, primary_key=True),
+                               Column('verifyKey', String),
+                               Column('signingKey', String),
+                               Column('email', String),
+                               Column('hashedPassword', String)
+                               )
+
 
         # Create all tables
         self.metadata.create_all(self.engine)

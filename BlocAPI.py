@@ -38,11 +38,13 @@
 # response = requests.post(url, data=json.dumps(content), headers=headers)
 # pd.DataFrame(response.json(), index=[0])
 
-from flask import Flask, request, jsonify, render_template, redirect, url_for
+from flask import Flask, request, jsonify, render_template, redirect, url_for, make_response
 from flask_wtf import FlaskForm
 from wtforms import validators, StringField, PasswordField, IntegerField, DecimalField
 from wtforms.fields.html5 import EmailField
 import requests
+from functools import wraps
+import hashlib
 
 from bloc.BlocServer import BlocServer
 from bloc.BlocClient import BlocClient
@@ -66,18 +68,21 @@ def runapp():
         app.run(debug=True)
 
 
+
+"""
+/////////////////////////////
+//  Forms
+/////////////////////////////
+"""
+
 class SignupForm(FlaskForm):
-    first_name = StringField('First Name', [validators.DataRequired()])
-    last_name = StringField('Last Name', [validators.DataRequired()])
     email = EmailField('Email', [validators.DataRequired(), validators.Email()])
     password = PasswordField('Password', [validators.DataRequired()])
-    confirm_password = PasswordField('Confirm Password', [validators.DataRequired(),validators.EqualTo('password', message='Passwords must match')])
-
 
 class CreateMarket(FlaskForm):
-    signingKey = StringField('Signing Key', [validators.DataRequired()])
-    traderId = IntegerField('Trader Id', [validators.DataRequired()])
-    verifyKey = StringField('Verify Key', [validators.DataRequired()])
+    #signingKey = StringField('Signing Key', [validators.DataRequired()])
+    #traderId = IntegerField('Trader Id', [validators.DataRequired()])
+    #verifyKey = StringField('Verify Key', [validators.DataRequired()])
     marketRootId = IntegerField("Market Root Id", [validators.DataRequired()])
     marketBranchId = IntegerField("Market Branch Id", [validators.DataRequired()])
     marketMin = StringField("Market Min", [validators.DataRequired()])
@@ -86,9 +91,9 @@ class CreateMarket(FlaskForm):
 
 
 class CreateTrade(FlaskForm):
-    signingKey = StringField('Signing Key', [validators.DataRequired()])
-    traderId = IntegerField('Trader Id', [validators.DataRequired()])
-    verifyKey = StringField('Verify Key', [validators.DataRequired()])
+    #signingKey = StringField('Signing Key', [validators.DataRequired()])
+    #traderId = IntegerField('Trader Id', [validators.DataRequired()])
+    #verifyKey = StringField('Verify Key', [validators.DataRequired()])
     price = IntegerField("Price", [validators.DataRequired()])
     quantity = IntegerField("Quantity", [validators.DataRequired()])
 
@@ -103,19 +108,41 @@ class LoginForm(FlaskForm):
 /////////////////////////////
 """
 
+def auth_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        auth = request.authorization
+        # Ask for hashed password
+        if auth:
+            bs = BlocServer()
+            aT = pd.read_sql_query('select "hashedPassword" from "authTable" where email = \'%s\' ' % (auth.username), bs.conn)
+            hashedPassword = hashlib.md5(auth.password.encode('utf-8')).hexdigest()
+
+        if auth and not aT.empty and aT.loc[0, 'hashedPassword'] == hashedPassword:
+            return f(*args, **kwargs)
+
+        return make_response('Could not verify login!', 401, {'WWW-Authenticate': 'Basic realm="Login Required"'} )
+
+    return decorated
+
 @app.route('/')
 def index():
     return render_template('home.html')
 
 @app.route('/markets', methods = ['POST','GET'])
+@auth_required
 def markets():
+    # Get user keys
+    bs = BlocServer()
+    aT = pd.read_sql_query('select * from "authTable" where email = \'%s\' ' % (request.authorization.username),
+                           bs.conn)
+
     form = CreateMarket()
-    cmResponse = {}
     createMarketResponse = 'no trade submitted.'
     if form.validate_on_submit():
         url = request.url_root + 'createMarket'
-        content = {'signingKey':str(form.signingKey.raw_data[0]), 'traderId': int(form.traderId.data),
-                   'verifyKey': str(form.verifyKey.raw_data[0]),
+        content = {'signingKey':str(aT.loc[0,'signingKey']), 'traderId': int(aT.loc[0,'traderId']),
+                   'verifyKey': str(aT.loc[0,'verifyKey']),
                    'marketRootId': int(form.marketRootId.data), 'marketBranchId': int(form.marketBranchId.data),
                    'marketMin': form.marketMin.data, 'marketMax': form.marketMax.data, 'marketDesc': json.dumps({})}
         response = requests.post(url, data=json.dumps(content), headers={'content-type': 'application/json'})
@@ -128,20 +155,23 @@ def markets():
     response = requests.post(url, data=json.dumps({}), headers={'content-type': 'application/json'})
     marketBoundsData = json.loads(response.json())
     return render_template('markets.html', markets=marketBoundsData, form=form, createMarketResponse=createMarketResponse)
-    #return render_template('404.html')
 
 @app.route('/markets/<num>', methods = ['POST','GET'])
+@auth_required
 def market(num):
-    # url = 'https://blocmarket.herokuapp.com/viewMarketBounds'
-    # response = requests.post(url, data=json.dumps({}), headers={'content-type': 'application/json'})
-    # jsonData = json.loads(response.json())
+    # Get user keys
+    bs = BlocServer()
+    aT = pd.read_sql_query('select * from "authTable" where email = \'%s\' ' % (request.authorization.username),
+                           bs.conn)
+
     tradeForm = CreateTrade()
     ctResponse = {}
     createTradeResponse = 'no market created/changed.'
     if tradeForm.validate_on_submit():
+
         url = request.url_root + 'createTrade'
-        content = {'signingKey':str(tradeForm.signingKey.raw_data[0]), 'traderId': tradeForm.traderId.data,
-                   'verifyKey': str(tradeForm.verifyKey.raw_data[0]),
+        content = {'signingKey':str(aT.loc[0,'signingKey']), 'traderId': int(aT.loc[0,'traderId']),
+                   'verifyKey': str(aT.loc[0,'verifyKey']),
                    'marketId': int(num), 'price': int(tradeForm.price.data),
                    'quantity': int(tradeForm.quantity.data)}
         response = requests.post(url, data=json.dumps(content), headers={'content-type': 'application/json'})
@@ -152,7 +182,7 @@ def market(num):
             createTradeResponse = 'Failed to create trade. One of the keys is probably invalid.'
 
     url = request.url_root  + 'viewOrderBook'
-    content = {'marketId': int(num), 'traderId': int(2), 'startTime': 0, 'endTime': 2e9*1000} # TODO: proper inputs for these
+    content = {'marketId': int(num), 'traderId': int(aT.loc[0,'traderId']), 'startTime': 0, 'endTime': 2e9*1000} # TODO: proper inputs for these
     response = requests.post(url, data=json.dumps(content), headers={'content-type': 'application/json'})
     orderbookData = json.loads(response.json())
     url = request.url_root  + 'viewOpenTrades'
@@ -171,19 +201,39 @@ def market(num):
 @app.route('/signup', methods = ['POST','GET'])
 def signup():
     form = SignupForm()
+    registerSuccess = False
     if form.validate_on_submit():
-        print('is successful')
-        first_name = form.first_name.data
-        last_name = form.last_name.data
+        # Get form data
         email = form.email.data
         password = form.password.data
-        confirm_password = form.confirm_password.data
 
-        # return redirect(url_for('index'))
+        # Check if user exists
+        bs = BlocServer()
+        aT = pd.read_sql_query('select email from "authTable" where email = \'%s\' ' % (email), bs.conn)
 
-    # if request.method == 'POST':
-    #     print(request.form.get('first_name'))
-    return render_template('/accounts/signup.html', form=form)
+        if aT.empty:
+            # If user doesn't exist, make a new user
+            url = request.url_root + 'createUser'
+            content = {}
+            response = requests.post(url, data=json.dumps(content), headers={'content-type': 'application/json'})
+            newUsr = response.json()
+            traderId = newUsr['traderId']
+            verifyKey = newUsr['verifyKey']
+            signingKey = newUsr['signingKey']
+
+            # Insert new user into authTable
+            newUsr = dict(traderId=newUsr['traderId'], verifyKey=newUsr['verifyKey'],
+                          signingKey=newUsr['signingKey'], email=email,
+                          hashedPassword= hashlib.md5(password.encode('utf-8')).hexdigest())
+            bs.conn.execute(bs.authTable.insert(), [newUsr, ])
+            bs.conn.close()
+            registerSuccess = True
+
+        else:
+            registerSuccess = False
+
+
+    return render_template('/accounts/signup.html', form=form, registerSuccess=registerSuccess)
 
 @app.route('/login', methods = ['POST'])
 def login():
