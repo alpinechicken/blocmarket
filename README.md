@@ -40,6 +40,10 @@ The three main classes are BlocServer, BlocClient, and BlocTime in /bloc
 
 bloc stands for '(b)loc is a (l)imit (o)rder (c)hain'.
 
+## Frontend
+
+Basic web interface at https://blocmarket.herokuapp.com/. This wraps all the api endpoints and allows market creating/adjusting and trade creating through forms. At some point this will have account management so users don't have to put in keys for each new api call.
+
 ## License
 
 bloc is licensed under the GNU LGPL v2.1.  A copy of which is included in [LICENSE](LICENSE)
