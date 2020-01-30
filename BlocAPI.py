@@ -316,6 +316,25 @@ def createTrade():
 
     tradeRow = pd.DataFrame(data, index=[0])[['marketId', 'price', 'quantity', 'traderId']]
     # Call createMarket_client
+      
+    # Get price of proposed trade
+    tPrice = pd.DataFrame(data, index=[0])['price']
+
+    # Check market bounds 
+    mI = data['marketId']
+    mB = pd.read_sql_table('marketBounds', bs.conn)
+
+    # Assign min and max market bounds
+    mBmin = mB.loc[mB.marketId==mI, 'marketMin']
+    mBMax = mB.loc[mB.marketId==mI, 'marketMax']
+    
+    # Check if tPrice is within the bounds (Didnt know how to handle the error:(...)
+    while True:
+        if tPrice >= mBmin and tPrice <= mBmax:
+            break
+        else:
+            return render_template('404.html'), 404
+
     try:
         checks, allChecks = bc.createTrade_client(tradeRow=tradeRow, blocServer=bs)
     except Exception as err:
