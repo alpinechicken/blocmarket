@@ -318,25 +318,24 @@ def createTrade():
     # Call createMarket_client
       
     # Get price of proposed trade
-    tPrice = pd.DataFrame(data, index=[0])['price']
+    tPrice = data['price']
 
     # Check market bounds 
     mI = data['marketId']
     mB = pd.read_sql_table('marketBounds', bs.conn)
 
     # Assign min and max market bounds
-    mBmin = mB.loc[mB.marketId==mI, 'marketMin']
-    mBMax = mB.loc[mB.marketId==mI, 'marketMax']
+    mBmin = mB.loc[mB.marketId==mI, 'marketMin'][0]
+    mBMax = mB.loc[mB.marketId==mI, 'marketMax'][0]
     
-    # Check if tPrice is within the bounds (Didnt know how to handle the error:(...)
-    while True:
-        if tPrice >= mBmin and tPrice <= mBmax:
-            break
-        else:
-            return render_template('404.html'), 404
-
+    # Check if tPrice is within the bounds 
     try:
-        checks, allChecks = bc.createTrade_client(tradeRow=tradeRow, blocServer=bs)
+        if not (tPrice >= mBmin and tPrice <= mBmax):
+            checked = False
+            allChecks = {'tradeId': np.nan}
+        else:
+            checks, allChecks = bc.createTrade_client(tradeRow=tradeRow, blocServer=bs)
+
     except Exception as err:
         # TODO: This doesnt need the full error. If it fails its probably because the sig key is invalid
         checks = traceback.format_exc()
