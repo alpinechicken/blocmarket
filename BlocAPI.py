@@ -321,18 +321,17 @@ def createTrade():
     tPrice = data['price']
 
     # Check market bounds 
-    mI = data['marketId']
     mB = pd.read_sql_table('marketBounds', bs.conn)
 
     # Assign min and max market bounds
-    mBmin = mB.loc[mB.marketId==mI, 'marketMin'][0]
-    mBMax = mB.loc[mB.marketId==mI, 'marketMax'][0]
+    mBmin = mB.loc[mB.marketId==data['marketId'], 'marketMin'].values[0]
+    mBMax = mB.loc[mB.marketId==data['marketId'], 'marketMax'].values[0]
     
     # Check if tPrice is within the bounds 
     try:
-        if not (tPrice >= mBmin and tPrice <= mBmax):
-            checked = False
-            allChecks = {'tradeId': np.nan}
+        if (tPrice < mBmin) or (tPrice > mBMax):
+            checks = False
+            allChecks = {'tradeId': np.nan, 'priceCheck': 'Price less than minimum or more than maximum'}
         else:
             checks, allChecks = bc.createTrade_client(tradeRow=tradeRow, blocServer=bs)
 
