@@ -294,7 +294,7 @@ class SpotMarket:
     def __init__(self):
         self.quoteSource = 'alphavantage'
         self.multiplier = 1
-        self.curreny = 'BTC'
+        self.currency = 'BTC'
 
     def getQuote(self):
         # Get quote from source and scale with mulitplier
@@ -306,7 +306,7 @@ class SpotMarket:
 
         if self.quoteSource == 'alphavantage':
             # setup for alphavantage
-            sourceurl = 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency='+ self.curreny+ '&to_currency=USD&apikey=VVOJSV9CUU9JRCSE'
+            sourceurl = 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency='+ self.currency+ '&to_currency=USD&apikey=VVOJSV9CUU9JRCSE'
             sourceheaders = {}
             response = requests.get(sourceurl, headers=sourceheaders)
             qt = float(response.json()['Realtime Currency Exchange Rate']['5. Exchange Rate'])
