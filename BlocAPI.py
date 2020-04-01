@@ -667,6 +667,7 @@ def viewSPScores():
     spscores = pd.read_sql_table('spscore', bs.conn)
     return jsonify(spscores.to_json())
 
+''' Here api end points for agecon game'''
 
 @app.route('/game/getQuote', methods=['POST', 'GET'])
 def getQuote():
@@ -674,6 +675,7 @@ def getQuote():
     data = request.get_json()
     bs = BlocServer()
     s = SpotMarket()
+    s.currency = 'ETH'
     return jsonify(s.getQuote())
 
 

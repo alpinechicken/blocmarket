@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f748aadd-a74f-4691-aa32-65bb3faaf10c" name="Default" comment="Market Server">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/untitled.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/untitled.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BlocAPI.py" beforeDir="false" afterPath="$PROJECT_DIR$/BlocAPI.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloc/BlocServer.py" beforeDir="false" afterPath="$PROJECT_DIR$/bloc/BlocServer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bots/BetfairBot.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/bots/BetfairBot.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bots/BlocBot.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/bots/BlocBot.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bots/MarketDataExamples.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/bots/MarketDataExamples.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/BlocMarket.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/doc/BlocMarket.ipynb" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -319,7 +311,7 @@
           <entry key="listMarketCatalogue" value="141" />
           <entry key="m" value="4" />
           <entry key="md" value="2731" />
-          <entry key="py" value="51652" />
+          <entry key="py" value="51724" />
           <entry key="scratch" value="21" />
           <entry key="sql" value="733" />
           <entry key="tmp" value="277" />
@@ -333,7 +325,7 @@
           <entry key="JavaScript" value="1" />
           <entry key="Markdown" value="2679" />
           <entry key="PLAIN_TEXT" value="123" />
-          <entry key="Python" value="70181" />
+          <entry key="Python" value="70253" />
           <entry key="SQL" value="712" />
           <entry key="Scratch" value="631" />
         </counts>
@@ -410,12 +402,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BlocAPI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="452">
-              <caret line="677" lean-forward="true" selection-start-line="677" selection-end-line="677" />
+            <state relative-caret-position="437">
+              <caret line="676" column="20" lean-forward="true" selection-start-line="676" selection-start-column="20" selection-end-line="676" selection-end-column="20" />
               <folding>
                 <element signature="e#1335#1427#0" expanded="true" />
-                <marker date="1585704853300" expanded="true" signature="3142:3524" ph="..." />
-                <marker date="1585704853300" expanded="true" signature="3795:4439" ph="..." />
+                <marker date="1585706140943" expanded="true" signature="3142:3524" ph="..." />
+                <marker date="1585706140943" expanded="true" signature="3795:4439" ph="..." />
               </folding>
             </state>
           </provider>
@@ -1870,12 +1862,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BlocAPI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="452">
-          <caret line="677" lean-forward="true" selection-start-line="677" selection-end-line="677" />
+        <state relative-caret-position="437">
+          <caret line="676" column="20" lean-forward="true" selection-start-line="676" selection-start-column="20" selection-end-line="676" selection-end-column="20" />
           <folding>
             <element signature="e#1335#1427#0" expanded="true" />
-            <marker date="1585704853300" expanded="true" signature="3142:3524" ph="..." />
-            <marker date="1585704853300" expanded="true" signature="3795:4439" ph="..." />
+            <marker date="1585706140943" expanded="true" signature="3142:3524" ph="..." />
+            <marker date="1585706140943" expanded="true" signature="3795:4439" ph="..." />
           </folding>
         </state>
       </provider>
