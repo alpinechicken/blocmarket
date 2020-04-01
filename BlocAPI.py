@@ -55,6 +55,8 @@ import pandas as pd
 import traceback
 from datetime import datetime
 
+from game.MarketObjects import SpotMarket
+
 app = Flask(__name__)
 
 # set later as Herokou env variable
@@ -665,6 +667,14 @@ def viewSPScores():
     spscores = pd.read_sql_table('spscore', bs.conn)
     return jsonify(spscores.to_json())
 
+
+@app.route('/game/getQuote', methods=['POST', 'GET'])
+def getQuote():
+
+    data = request.get_json()
+    bs = BlocServer()
+    s = SpotMarket()
+    return jsonify(s.getQuote())
 
 
 runapp()

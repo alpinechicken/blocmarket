@@ -159,6 +159,14 @@ class BlocServer(object):
                                Column('hashedPassword', String)
                                )
 
+        # Test table for ag econ. Temporary to run api.
+        self.store = Table('store', self.metadata,
+                               Column('object', VARCHAR),
+                               Column('id', Integer),
+                               Column('utc', Float),
+                               Column('msg', VARCHAR),
+                               Column('state', JSON)
+        )
 
         # Create all tables
         self.metadata.create_all(self.engine)
