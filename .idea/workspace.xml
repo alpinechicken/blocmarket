@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f748aadd-a74f-4691-aa32-65bb3faaf10c" name="Default" comment="Market Server" />
+    <list default="true" id="f748aadd-a74f-4691-aa32-65bb3faaf10c" name="Default" comment="Market Server">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/scratch.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/scratch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/scratch2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/scratch3.py" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -284,7 +289,7 @@
           <entry key="listMarketCatalogue" value="141" />
           <entry key="m" value="4" />
           <entry key="md" value="2731" />
-          <entry key="py" value="83296" />
+          <entry key="py" value="83304" />
           <entry key="scratch" value="21" />
           <entry key="scratch3" value="128" />
           <entry key="sql" value="733" />
@@ -299,7 +304,7 @@
           <entry key="JavaScript" value="1" />
           <entry key="Markdown" value="2679" />
           <entry key="PLAIN_TEXT" value="123" />
-          <entry key="Python" value="104389" />
+          <entry key="Python" value="104397" />
           <entry key="SQL" value="712" />
           <entry key="Scratch" value="631" />
         </counts>
@@ -327,7 +332,7 @@
           <entry key="orderBook" value="94" />
           <entry key="outcomeCombinations" value="59" />
           <entry key="outputCombinations" value="1" />
-          <entry key="py" value="298" />
+          <entry key="py" value="300" />
           <entry key="sh" value="1" />
           <entry key="spevent" value="43" />
           <entry key="spgist" value="1" />
@@ -351,7 +356,7 @@
           <entry key="Log" value="1" />
           <entry key="Markdown" value="11" />
           <entry key="PLAIN_TEXT" value="64" />
-          <entry key="Python" value="294" />
+          <entry key="Python" value="296" />
           <entry key="SQL" value="12" />
           <entry key="Scratch" value="7" />
         </counts>
@@ -416,7 +421,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/test_MarketObjects.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1228">
@@ -428,11 +433,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/game/scratch3.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/game/scratch.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="263">
-              <caret line="74" column="14" selection-start-line="74" selection-start-column="10" selection-end-line="74" selection-end-column="14" />
+            <state relative-caret-position="270">
+              <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -540,7 +545,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/betfair/betfairLogin.m" />
         <option value="$PROJECT_DIR$/bots/betfairAPI.py" />
         <option value="$PROJECT_DIR$/betfair/placeOrder.m" />
         <option value="$PROJECT_DIR$/betfair/retrieveAppKeys.py" />
@@ -591,6 +595,7 @@
         <option value="$PROJECT_DIR$/game/scratch3.py" />
         <option value="$PROJECT_DIR$/tests/test_MarketObjects.py" />
         <option value="$PROJECT_DIR$/game/MarketObjects.py" />
+        <option value="$PROJECT_DIR$/game/scratch.py" />
       </list>
     </option>
   </component>
@@ -1127,13 +1132,13 @@
     <frame x="0" y="23" width="1680" height="960" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.46696034" visible="true" weight="0.124542125" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.46696034" visible="true" weight="0.124542125" />
       <window_info id="Structure" order="1" sideWeight="0.5330396" side_tool="true" weight="0.11608094" />
       <window_info id="Favorites" order="2" sideWeight="0.50385606" side_tool="true" weight="0.0042735045" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.496337" weight="0.4556213" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.53663003" weight="0.3704142" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.7148962" visible="true" weight="0.4189349" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.7148962" visible="true" weight="0.4189349" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4933613" weight="0.32189348" />
@@ -1397,16 +1402,6 @@
           <option name="timeStamp" value="1141" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/game/scratch3.py</url>
-          <line>86</line>
-          <option name="timeStamp" value="1240" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/game/scratch3.py</url>
-          <line>75</line>
-          <option name="timeStamp" value="1242" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/tests/test_MarketObjects.py</url>
           <line>128</line>
           <option name="timeStamp" value="1258" />
@@ -1575,14 +1570,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="10" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/ddvi31085f7cuu/schema/public/table/marketBounds" />
     <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/ddvi31085f7cuu/schema/public/table/marketTable" />
     <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/ddvi31085f7cuu/schema/public/table/orderBook" />
     <entry file="file://$PROJECT_DIR$/Procfile">
@@ -1953,6 +1940,16 @@
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game/scratch2.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game/scratch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
         </state>
       </provider>
     </entry>
