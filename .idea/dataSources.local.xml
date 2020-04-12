@@ -12,12 +12,15 @@
       <legacy-introspector>true</legacy-introspector>
     </data-source>
     <data-source name="pmarket [2]" uuid="df1003dd-be15-4f8e-8000-774a3b7d481a">
-      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" family="SQLITE" exact-version="0.0" />
+      <database-info product="SQLite" version="3.25.1" jdbc-version="2.1" driver-name="SQLite JDBC" driver-version="3.25.1" family="SQLITE" exact-version="3.25.1">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
       <auth-required>false</auth-required>
       <introspection-schemas>*:</introspection-schemas>
     </data-source>
     <data-source name="ddvi31085f7cuu@ec2-174-129-33-196.compute-1.amazonaws.com" uuid="44b3f4d7-b859-43f8-977b-3a83e5a88e6d">
-      <database-info product="PostgreSQL" version="11.6 (Ubuntu 11.6-1.pgdg16.04+1)" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.2.5" family="POSTGRES" exact-version="11.6">
+      <database-info product="PostgreSQL" version="11.7 (Ubuntu 11.7-2.pgdg16.04+1)" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.2.5" family="POSTGRES" exact-version="11.7">
         <identifier-quote-string>&quot;</identifier-quote-string>
       </database-info>
       <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
@@ -28,6 +31,22 @@
       <ssl-config>
         <enabled>true</enabled>
       </ssl-config>
+    </data-source>
+    <data-source name="agecondata" uuid="a6a72deb-45cd-42b1-978d-7b148f452672">
+      <database-info product="SQLite" version="3.25.1" jdbc-version="2.1" driver-name="SQLite JDBC" driver-version="3.25.1" family="SQLITE" exact-version="3.25.1">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
+      <auth-required>false</auth-required>
+      <introspection-schemas>*:@</introspection-schemas>
+    </data-source>
+    <data-source name="agecondata [2]" uuid="48cd0232-3d03-4e43-9aab-7557880e6331">
+      <database-info product="SQLite" version="3.25.1" jdbc-version="2.1" driver-name="SQLite JDBC" driver-version="3.25.1" family="SQLITE" exact-version="3.25.1">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
+      <auth-required>false</auth-required>
+      <introspection-schemas>*:@</introspection-schemas>
     </data-source>
   </component>
 </project>

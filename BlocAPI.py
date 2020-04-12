@@ -55,7 +55,7 @@ import pandas as pd
 import traceback
 from datetime import datetime
 
-from game.MarketObjects import SpotMarket
+from game.MarketObjects import SpotMarket, MarginPosition
 
 app = Flask(__name__)
 
@@ -68,7 +68,6 @@ def runapp():
         app.jinja_env.auto_reload = True
         app.config['TEMPLATES_AUTO_RELOAD'] = True
         app.run(debug=True)
-
 
 
 """

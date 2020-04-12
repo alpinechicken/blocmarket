@@ -11,9 +11,13 @@ import datetime
 
 class DStore:
     # Datastore for test agecon environment
-    def __init__(self):
+    def __init__(self, sqlfilename = []):
 
-        DATABASE_URL = 'sqlite:///agecondata.db'
+        if sqlfilename == []:
+            DATABASE_URL = 'sqlite:///agecondata.db'
+        else:
+            DATABASE_URL = 'sqlite:///' + sqlfilename + '.db'
+
         self.engine = create_engine(DATABASE_URL, poolclass=NullPool)
         self.engine.echo = False
         self.metadata = MetaData(self.engine)

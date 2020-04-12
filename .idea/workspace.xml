@@ -2,8 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f748aadd-a74f-4691-aa32-65bb3faaf10c" name="Default" comment="Market Server">
+      <change afterPath="$PROJECT_DIR$/tests/test_MarketObjects.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/44b3f4d7-b859-43f8-977b-3a83e5a88e6d.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/44b3f4d7-b859-43f8-977b-3a83e5a88e6d.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlocAPI.py" beforeDir="false" afterPath="$PROJECT_DIR$/BlocAPI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/DataStore.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/DataStore.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game/MarketObjects.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/MarketObjects.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/agecondata.db" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,52 +20,55 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/blocmarket$betfairAPI.coverage" NAME="betfairAPI Coverage Results" MODIFIED="1562375711878" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/doc/bots" />
-    <SUITE FILE_PATH="coverage/blocmarket$retrieveAppKeys.coverage" NAME="retrieveAppKeys Coverage Results" MODIFIED="1562460864230" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/betfair" />
-    <SUITE FILE_PATH="coverage/pmarket$tmp.coverage" NAME="tmp Coverage Results" MODIFIED="1547272381180" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bloc" />
-    <SUITE FILE_PATH="coverage/pmarket$test.coverage" NAME="test Coverage Results" MODIFIED="1481378461844" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/blocmarket$listMarketBook.coverage" NAME="listMarketBook Coverage Results" MODIFIED="1562844065997" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/betfair" />
     <SUITE FILE_PATH="coverage/pmarket$Unittests_in_test_MarketClient_py.coverage" NAME="Unittests in test_MarketClient.py Coverage Results" MODIFIED="1527916815368" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/pmarket$tricks.coverage" NAME="tricks Coverage Results" MODIFIED="1481354581096" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/blocmarket$Unittests_for_test_MarketObjects_TestMarketObjects.coverage" NAME="Unittests for test_MarketObjects.TestMarketObjects Coverage Results" MODIFIED="1586652521293" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/pmarket$MarketServer.coverage" NAME="MarketServer Coverage Results" MODIFIED="1526762668991" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pmarket$Unittests_for_test_MarketServer_TestMarketServer_testRemoveTrade.coverage" NAME="Unittests for test_MarketServer.TestMarketServer.testRemoveTrade Coverage Results" MODIFIED="1538289456892" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/blocmarket$Unittests_for_test_BlocServer_TestBlocServer.coverage" NAME="Unittests for test_BlocServer.TestBlocServer Coverage Results" MODIFIED="1577411397760" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/pmarket$Unittests_for_test_BlocServer_TestBlocServer_testMatchTrade.coverage" NAME="Unittests for test_BlocServer.TestBlocServer.testMatchTrade Coverage Results" MODIFIED="1547981735267" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/blocmarket$betfairLogin.coverage" NAME="betfairLogin Coverage Results" MODIFIED="1562459949431" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/betfair" />
     <SUITE FILE_PATH="coverage/blocmarket$BlocClient.coverage" NAME="BlocClient Coverage Results" MODIFIED="1550304033566" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bloc" />
-    <SUITE FILE_PATH="coverage/pmarket$BlocClient.coverage" NAME="BlocClient Coverage Results" MODIFIED="1547373041826" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bloc" />
-    <SUITE FILE_PATH="coverage/pmarket$pynacltests.coverage" NAME="pynacltests Coverage Results" MODIFIED="1507970611880" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/blocmarket$Unittests_for_test_BlocServer_TestBlocServer_testSettleMarketUp.coverage" NAME="Unittests for test_BlocServer.TestBlocServer.testSettleMarketUp Coverage Results" MODIFIED="1552709702608" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/blocmarket$tmp.coverage" NAME="tmp Coverage Results" MODIFIED="1550303627442" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bloc" />
+    <SUITE FILE_PATH="coverage/blocmarket$Unittests_for_test_MarketObjects_TestMarketObjects_test_ConstantProductMarket.coverage" NAME="Unittests for test_MarketObjects.TestMarketObjects.test_ConstantProductMarket Coverage Results" MODIFIED="1586299851217" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/pmarket$scratch.coverage" NAME="scratch Coverage Results" MODIFIED="1481360955794" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/blocmarket$BlocServer.coverage" NAME="BlocServer Coverage Results" MODIFIED="1570683727597" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bloc" />
     <SUITE FILE_PATH="coverage/pmarket$Unittests_in_test_marketObjectSQL.coverage" NAME="Unittests in test_marketObjectSQL Coverage Results" MODIFIED="1509918137100" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/pmarket$BlocServer.coverage" NAME="BlocServer Coverage Results" MODIFIED="1548236171472" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bloc" />
-    <SUITE FILE_PATH="coverage/blocmarket$tmp2.coverage" NAME="tmp2 Coverage Results" MODIFIED="1560662977359" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/doc/bots" />
     <SUITE FILE_PATH="coverage/blocmarket$BetfairBot.coverage" NAME="BetfairBot Coverage Results" MODIFIED="1565261461419" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bots" />
-    <SUITE FILE_PATH="coverage/pmarket$Unittests_in_test_MarketServer_py.coverage" NAME="Unittests in test_MarketServer.py Coverage Results" MODIFIED="1547948057106" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/pmarket$MarketObject.coverage" NAME="MarketObject Coverage Results" MODIFIED="1481374997762" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pmarket$Unittests_for_test_MarketServer_TestMarketServer.coverage" NAME="Unittests for test_MarketServer.TestMarketServer Coverage Results" MODIFIED="1544398839757" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/" />
     <SUITE FILE_PATH="coverage/pmarket$scratch2.coverage" NAME="scratch2 Coverage Results" MODIFIED="1484467853736" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pmarket$BlocMarket.coverage" NAME="BlocMarket Coverage Results" MODIFIED="1547289022191" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bloc" />
-    <SUITE FILE_PATH="coverage/blocmarket$createAppKeys.coverage" NAME="createAppKeys Coverage Results" MODIFIED="1562739166985" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/betfair" />
-    <SUITE FILE_PATH="coverage/pmarket$MarketClient.coverage" NAME="MarketClient Coverage Results" MODIFIED="1527907311959" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/blocmarket$scratch.coverage" NAME="scratch Coverage Results" MODIFIED="1570683393877" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
-    <SUITE FILE_PATH="coverage/pmarket$bob.coverage" NAME="bob Coverage Results" MODIFIED="1528008925763" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/blocmarket$scratch2.coverage" NAME="scratch2 Coverage Results" MODIFIED="1569121332282" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
-    <SUITE FILE_PATH="coverage/pmarket$Unittests_in_test_BlocServer_py.coverage" NAME="Unittests in test_BlocServer.py Coverage Results" MODIFIED="1548539682979" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/blocmarket$tmp3.coverage" NAME="tmp3 Coverage Results" MODIFIED="1575773857759" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bots" />
     <SUITE FILE_PATH="coverage/pmarket$sqltest2.coverage" NAME="sqltest2 Coverage Results" MODIFIED="1482555234549" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/blocmarket$listOrder.coverage" NAME="listOrder Coverage Results" MODIFIED="1562760246984" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/betfair" />
     <SUITE FILE_PATH="coverage/blocmarket$betfairAPI__1_.coverage" NAME="betfairAPI (1) Coverage Results" MODIFIED="1562469236867" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bots" />
-    <SUITE FILE_PATH="coverage/blocmarket$Unittests_for_test_MarketServer_TestMarketServer.coverage" NAME="Unittests for test_MarketServer.TestMarketServer Coverage Results" MODIFIED="1552709817910" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/" />
     <SUITE FILE_PATH="coverage/pmarket$BlocTime.coverage" NAME="BlocTime Coverage Results" MODIFIED="1548236041091" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bloc" />
     <SUITE FILE_PATH="coverage/blocmarket$placeOrder.coverage" NAME="placeOrder Coverage Results" MODIFIED="1566120662067" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bots/betfair" />
     <SUITE FILE_PATH="coverage/blocmarket$listMarketCatalogue.coverage" NAME="listMarketCatalogue Coverage Results" MODIFIED="1562843483868" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/betfair" />
     <SUITE FILE_PATH="coverage/pmarket$untitled.coverage" NAME="untitled Coverage Results" MODIFIED="1539865728573" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/pmarket$Unittests_for_test_MarketServer_TestMarketServer_testMatchTrade.coverage" NAME="Unittests for test_MarketServer.TestMarketServer.testMatchTrade Coverage Results" MODIFIED="1530704993613" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/blocmarket$tmp__1_.coverage" NAME="tmp (1) Coverage Results" MODIFIED="1560662927353" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/doc/bots" />
-    <SUITE FILE_PATH="coverage/blocmarket$Unittests_in_test_BlocServer_py.coverage" NAME="Unittests in test_BlocServer.py Coverage Results" MODIFIED="1578094236325" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/pmarket$Unittests_for_test_MarketServer_TestMarketServer_test_tradeMaker.coverage" NAME="Unittests for test_MarketServer.TestMarketServer.test_tradeMaker Coverage Results" MODIFIED="1530704793624" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/blocmarket$retrieveAppKeys.coverage" NAME="retrieveAppKeys Coverage Results" MODIFIED="1562460864230" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/betfair" />
+    <SUITE FILE_PATH="coverage/pmarket$tmp.coverage" NAME="tmp Coverage Results" MODIFIED="1547272381180" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bloc" />
+    <SUITE FILE_PATH="coverage/pmarket$test.coverage" NAME="test Coverage Results" MODIFIED="1481378461844" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/blocmarket$listMarketBook.coverage" NAME="listMarketBook Coverage Results" MODIFIED="1562844065997" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/betfair" />
+    <SUITE FILE_PATH="coverage/pmarket$tricks.coverage" NAME="tricks Coverage Results" MODIFIED="1481354581096" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pmarket$Unittests_for_test_BlocServer_TestBlocServer_testMatchTrade.coverage" NAME="Unittests for test_BlocServer.TestBlocServer.testMatchTrade Coverage Results" MODIFIED="1547981735267" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/pmarket$BlocClient.coverage" NAME="BlocClient Coverage Results" MODIFIED="1547373041826" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bloc" />
+    <SUITE FILE_PATH="coverage/pmarket$pynacltests.coverage" NAME="pynacltests Coverage Results" MODIFIED="1507970611880" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/blocmarket$Unittests_for_test_BlocServer_TestBlocServer_testSettleMarketUp.coverage" NAME="Unittests for test_BlocServer.TestBlocServer.testSettleMarketUp Coverage Results" MODIFIED="1552709702608" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/pmarket$BlocServer.coverage" NAME="BlocServer Coverage Results" MODIFIED="1548236171472" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bloc" />
+    <SUITE FILE_PATH="coverage/blocmarket$tmp2.coverage" NAME="tmp2 Coverage Results" MODIFIED="1560662977359" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/doc/bots" />
+    <SUITE FILE_PATH="coverage/pmarket$Unittests_in_test_MarketServer_py.coverage" NAME="Unittests in test_MarketServer.py Coverage Results" MODIFIED="1547948057106" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/blocmarket$createAppKeys.coverage" NAME="createAppKeys Coverage Results" MODIFIED="1562739166985" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/betfair" />
+    <SUITE FILE_PATH="coverage/pmarket$MarketClient.coverage" NAME="MarketClient Coverage Results" MODIFIED="1527907311959" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pmarket$bob.coverage" NAME="bob Coverage Results" MODIFIED="1528008925763" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/blocmarket$scratch2.coverage" NAME="scratch2 Coverage Results" MODIFIED="1569121332282" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
+    <SUITE FILE_PATH="coverage/pmarket$Unittests_in_test_BlocServer_py.coverage" NAME="Unittests in test_BlocServer.py Coverage Results" MODIFIED="1548539682979" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/blocmarket$tmp3.coverage" NAME="tmp3 Coverage Results" MODIFIED="1575773857759" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bots" />
+    <SUITE FILE_PATH="coverage/blocmarket$listOrder.coverage" NAME="listOrder Coverage Results" MODIFIED="1562760246984" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/betfair" />
+    <SUITE FILE_PATH="coverage/blocmarket$Unittests_for_test_MarketServer_TestMarketServer.coverage" NAME="Unittests for test_MarketServer.TestMarketServer Coverage Results" MODIFIED="1552709817910" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/" />
+    <SUITE FILE_PATH="coverage/blocmarket$scratch3.coverage" NAME="scratch3 Coverage Results" MODIFIED="1586261038250" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/game" />
+    <SUITE FILE_PATH="coverage/blocmarket$tmp__1_.coverage" NAME="tmp (1) Coverage Results" MODIFIED="1560662927353" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/doc/bots" />
+    <SUITE FILE_PATH="coverage/blocmarket$Unittests_in_test_BlocServer_py.coverage" NAME="Unittests in test_BlocServer.py Coverage Results" MODIFIED="1585719883152" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/pmarket$MarketObjectSQL.coverage" NAME="MarketObjectSQL Coverage Results" MODIFIED="1487486462183" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="CreatePatchCommitExecutor">
@@ -78,63 +88,33 @@
     <expand>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="blocparty@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="agecondata" type="feb32156:DbDataSourceImpl" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="blocparty@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="agecondata" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="blocparty@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="blocparty: database" type="6d9b600a:PostgresImplModel$Database" />
+        <item name="agecondata" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="main: schema" type="90513b60:SqliteImplModel$Schema" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="blocparty@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="blocparty: database" type="6d9b600a:PostgresImplModel$Database" />
-        <item name="public: schema" type="a16502c0:PostgresImplModel$Schema" />
+        <item name="agecondata [2]" type="feb32156:DbDataSourceImpl" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="blocparty@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="blocparty: database" type="6d9b600a:PostgresImplModel$Database" />
-        <item name="public: schema" type="a16502c0:PostgresImplModel$Schema" />
-        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="agecondata [2]" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="ddvi31085f7cuu@ec2-174-129-33-196.compute-1.amazonaws.com" type="feb32156:DbDataSourceImpl" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="ddvi31085f7cuu@ec2-174-129-33-196.compute-1.amazonaws.com" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="ddvi31085f7cuu@ec2-174-129-33-196.compute-1.amazonaws.com" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="ddvi31085f7cuu: database" type="6d9b600a:PostgresImplModel$Database" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="ddvi31085f7cuu@ec2-174-129-33-196.compute-1.amazonaws.com" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="ddvi31085f7cuu: database" type="6d9b600a:PostgresImplModel$Database" />
-        <item name="public: schema" type="a16502c0:PostgresImplModel$Schema" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="ddvi31085f7cuu@ec2-174-129-33-196.compute-1.amazonaws.com" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="ddvi31085f7cuu: database" type="6d9b600a:PostgresImplModel$Database" />
-        <item name="public: schema" type="a16502c0:PostgresImplModel$Schema" />
-        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="agecondata [2]" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="main: schema" type="90513b60:SqliteImplModel$Schema" />
       </path>
     </expand>
     <select />
@@ -286,34 +266,37 @@
     <session id="-1997051828">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="31" />
+          <entry key="project.closed" value="36" />
           <entry key="project.open.time.0" value="6" />
           <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.10" value="3" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.13" value="1" />
+          <entry key="project.open.time.14" value="1" />
+          <entry key="project.open.time.16" value="2" />
           <entry key="project.open.time.17" value="1" />
-          <entry key="project.open.time.5" value="1" />
+          <entry key="project.open.time.5" value="2" />
           <entry key="project.open.time.6" value="7" />
           <entry key="project.open.time.7" value="12" />
           <entry key="project.open.time.8" value="4" />
-          <entry key="project.open.time.9" value="2" />
-          <entry key="project.opened" value="40" />
+          <entry key="project.open.time.9" value="3" />
+          <entry key="project.opened" value="45" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="BlocClient" value="723" />
           <entry key="Procfile" value="64" />
-          <entry key="Python Console" value="17168" />
+          <entry key="Python Console" value="19604" />
           <entry key="cell" value="35" />
           <entry key="html" value="2031" />
           <entry key="listMarketBook" value="750" />
           <entry key="listMarketCatalogue" value="141" />
           <entry key="m" value="4" />
           <entry key="md" value="2731" />
-          <entry key="py" value="51724" />
+          <entry key="py" value="83296" />
           <entry key="scratch" value="21" />
+          <entry key="scratch3" value="128" />
           <entry key="sql" value="733" />
           <entry key="tmp" value="277" />
           <entry key="txt" value="55" />
@@ -326,7 +309,7 @@
           <entry key="JavaScript" value="1" />
           <entry key="Markdown" value="2679" />
           <entry key="PLAIN_TEXT" value="123" />
-          <entry key="Python" value="70253" />
+          <entry key="Python" value="104389" />
           <entry key="SQL" value="712" />
           <entry key="Scratch" value="631" />
         </counts>
@@ -339,6 +322,7 @@
           <entry key="brin" value="1" />
           <entry key="btree" value="1" />
           <entry key="coverage" value="1" />
+          <entry key="db" value="3" />
           <entry key="env" value="1" />
           <entry key="gin" value="1" />
           <entry key="gist" value="1" />
@@ -353,7 +337,7 @@
           <entry key="orderBook" value="94" />
           <entry key="outcomeCombinations" value="59" />
           <entry key="outputCombinations" value="1" />
-          <entry key="py" value="256" />
+          <entry key="py" value="298" />
           <entry key="sh" value="1" />
           <entry key="spevent" value="43" />
           <entry key="spgist" value="1" />
@@ -362,6 +346,7 @@
           <entry key="sprecord_recordid_seq" value="1" />
           <entry key="spscore" value="24" />
           <entry key="sql" value="4" />
+          <entry key="store" value="34" />
           <entry key="timeStampServerTable" value="22" />
           <entry key="txt" value="23" />
           <entry key="userTable" value="62" />
@@ -370,14 +355,14 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Bash" value="1" />
-          <entry key="Database Element" value="598" />
+          <entry key="Database Element" value="632" />
           <entry key="HTML" value="20" />
           <entry key="IPNB" value="43" />
           <entry key="Log" value="1" />
           <entry key="Markdown" value="11" />
           <entry key="PLAIN_TEXT" value="64" />
-          <entry key="Python" value="252" />
-          <entry key="SQL" value="9" />
+          <entry key="Python" value="294" />
+          <entry key="SQL" value="12" />
           <entry key="Scratch" value="7" />
         </counts>
       </usages-collector>
@@ -392,42 +377,60 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/accounts/signup.html">
+        <entry file="file://$PROJECT_DIR$/bloc/BlocServer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="35" selection-start-line="6" selection-start-column="35" selection-end-line="6" selection-end-column="35" />
+            <state relative-caret-position="1940">
+              <caret line="163" column="57" selection-start-line="163" selection-start-column="57" selection-end-line="163" selection-end-column="57" />
+              <folding>
+                <element signature="e#15#33#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/BlocAPI.py">
+        <entry file="file://$PROJECT_DIR$/game/MarketObjects.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="452">
-              <caret line="677" column="22" lean-forward="true" selection-start-line="677" selection-start-column="22" selection-end-line="677" selection-end-column="22" />
+            <state relative-caret-position="406">
+              <caret line="957" column="48" selection-start-line="957" selection-start-column="48" selection-end-line="957" selection-end-column="48" />
               <folding>
-                <element signature="e#1335#1427#0" expanded="true" />
-                <marker date="1585706140943" expanded="true" signature="3142:3524" ph="..." />
-                <marker date="1585706140943" expanded="true" signature="3795:4439" ph="..." />
+                <element signature="e#0#18#0" expanded="true" />
+                <element signature="e#1059#1256#0" />
+                <element signature="e#1332#3132#0" />
+                <element signature="e#6254#6868#0" />
+                <element signature="e#6898#8105#0" />
+                <element signature="e#19172#20237#0" />
+                <element signature="e#20538#20552#0" />
+                <element signature="e#20314#20571#0" />
+                <element signature="e#20614#21525#0" />
+                <element signature="e#21588#22999#0" />
+                <element signature="e#23039#24816#0" />
+                <element signature="e#24853#26891#0" />
+                <element signature="e#26930#27822#0" />
+                <element signature="e#27852#29186#0" />
+                <element signature="e#29382#29926#0" />
+                <element signature="e#32509#36784#0" />
+                <element signature="e#36823#37631#0" />
+                <element signature="e#37661#39134#0" />
+                <element signature="e#39876#40118#0" />
+                <element signature="e#40152#41056#0" />
+                <element signature="e#41106#42630#0" />
+                <element signature="e#42669#43315#0" />
+                <element signature="e#43345#44144#0" />
+                <marker date="1586652521286" expanded="true" signature="18691:18696" ph="..." />
+                <marker date="1586652521286" expanded="false" signature="20518:20520" ph="..." />
+                <marker date="1586652521286" expanded="true" signature="30516:30522" ph="..." />
+                <marker date="1586652521286" expanded="true" signature="32042:32680" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/game/DataStore.py">
+        <entry file="file://$PROJECT_DIR$/tests/test_MarketObjects.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="19" selection-start-line="19" selection-end-line="26" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bots/BlocBot.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1241">
-              <caret line="100" column="23" lean-forward="true" selection-start-line="100" selection-start-column="23" selection-end-line="100" selection-end-column="23" />
+            <state relative-caret-position="2550">
+              <caret line="170" column="45" selection-start-line="170" selection-start-column="45" selection-end-line="170" selection-end-column="45" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -436,56 +439,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bloc/BlocClient.py">
+        <entry file="file://$PROJECT_DIR$/game/scratch3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
+            <state relative-caret-position="263">
+              <caret line="74" column="14" selection-start-line="74" selection-start-column="10" selection-end-line="74" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/test_BlocServer.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="9" selection-start-line="9" selection-end-line="30" selection-end-column="18" />
               <folding>
-                <element signature="e#1#20#0" expanded="true" />
-                <marker date="1578712193572" expanded="true" signature="238:243" ph="..." />
+                <element signature="e#0#38#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bloc/BlocServer.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="163" column="57" lean-forward="true" selection-start-line="163" selection-start-column="57" selection-end-line="163" selection-end-column="57" />
-              <folding>
-                <element signature="e#15#33#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/game/MarketObjects.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="298" column="23" lean-forward="true" selection-start-line="298" selection-start-column="23" selection-end-line="298" selection-end-column="23" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/spmarket">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/markets.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="855">
-              <caret line="57" column="58" selection-start-line="57" selection-start-column="58" selection-end-line="57" selection-end-column="58" />
             </state>
           </provider>
         </entry>
@@ -497,43 +466,43 @@
       <list>
         <option value="yet_unknown" />
         <option value="Jupyter Notebook" />
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>outcomeCombinat</find>
-      <find>blocTa</find>
-      <find>marketOutcomes</find>
-      <find>marketOutcomesTa</find>
-      <find>_new</find>
-      <find>self.market</find>
-      <find>self.p</find>
-      <find>self.sig</find>
-      <find>self.q</find>
-      <find>self.mInd</find>
-      <find>self.tInd</find>
-      <find>self.iMatc</find>
-      <find>outcomeComb</find>
-      <find>marketOutcomesTable</find>
-      <find>marketOutcomesT</find>
-      <find>settleT</find>
-      <find>settleTa</find>
-      <find>outcomeCombinations</find>
-      <find>outputComb</find>
-      <find>eeis2718</find>
-      <find>ee</find>
-      <find>eeis</find>
-      <find>3.7</find>
-      <find>marketLimit</find>
-      <find>applica</find>
-      <find>requests</find>
-      <find>insert</find>
       <find>select</find>
       <find>where</find>
       <find>@</find>
+      <find>uid</find>
+      <find>User</find>
+      <find>setattr</find>
+      <find>getid</find>
+      <find>getnextid</find>
+      <find>nexti</find>
+      <find>self.lenderid</find>
+      <find>dRa_subscribe</find>
+      <find>self.user</find>
+      <find>self.userid</find>
+      <find>max</find>
+      <find>for</find>
+      <find>self.swap</find>
+      <find>cpm.sw</find>
+      <find>cpm.swa</find>
+      <find>stableco</find>
+      <find>burne</find>
+      <find>iterrows</find>
+      <find>process</find>
+      <find>60</find>
+      <find>forceL</find>
+      <find>wind</find>
+      <find>WIND</find>
+      <find>Rc</find>
+      <find>scmid</find>
+      <find>def write</find>
+      <find>proc</find>
     </findStrings>
     <replaceStrings>
       <replace>value</replace>
@@ -561,6 +530,11 @@
       <replace>content</replace>
       <replace>#</replace>
       <replace>marketState</replace>
+      <replace>userid</replace>
+      <replace>Purse</replace>
+      <replace>getnextid</replace>
+      <replace>nextit</replace>
+      <replace>nextid</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -576,11 +550,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/doc/bots/tmp.py" />
-        <option value="$PROJECT_DIR$/doc/bots/tmp2.py" />
-        <option value="$PROJECT_DIR$/doc/bots/BetfairPriceMakingBot.py" />
-        <option value="$PROJECT_DIR$/doc/bots/BlocBot.py" />
-        <option value="$PROJECT_DIR$/doc/bots/betfairAPI.py" />
         <option value="$PROJECT_DIR$/betfair/betfairLogin.m" />
         <option value="$PROJECT_DIR$/bots/betfairAPI.py" />
         <option value="$PROJECT_DIR$/betfair/placeOrder.m" />
@@ -627,6 +596,11 @@
         <option value="$PROJECT_DIR$/templates/site.html" />
         <option value="$PROJECT_DIR$/bloc/BlocServer.py" />
         <option value="$PROJECT_DIR$/BlocAPI.py" />
+        <option value="$PROJECT_DIR$/game/DataStore.py" />
+        <option value="$PROJECT_DIR$/game/tests/test_MarketObjects.py" />
+        <option value="$PROJECT_DIR$/game/scratch3.py" />
+        <option value="$PROJECT_DIR$/tests/test_MarketObjects.py" />
+        <option value="$PROJECT_DIR$/game/MarketObjects.py" />
       </list>
     </option>
   </component>
@@ -642,10 +616,9 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="160" />
-    <option name="y" value="113" />
-    <option name="width" value="1473" />
-    <option name="height" value="907" />
+    <option name="y" value="23" />
+    <option name="width" value="1680" />
+    <option name="height" value="960" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -668,6 +641,11 @@
             </path>
             <path>
               <item name="blocmarket" type="b2602c69:ProjectViewProjectNode" />
+              <item name="blocmarket" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="blocmarket" type="b2602c69:ProjectViewProjectNode" />
               <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
             </path>
           </expand>
@@ -677,37 +655,38 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="DatabaseDriversLRU" value="sqlite&#10;postgresql" />
+    <property name="DatabaseDriversLRU" value="postgresql&#10;sqlite" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/josephclark/src/blocmarket/betfair/listMarketCatalogue.py" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="Sqlite (Xerial)" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/Change SQL Dialect" value="SQLite" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Python" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$2/Languages" value="Python" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$2/SQL Dialects" value="SQLite" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="js.eslint.eslintPackage" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
     <property name="settings.editor.splitter.proportion" value="0.2375852" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myShowDebugConsoleByDefault" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/bots" />
-      <recent name="$PROJECT_DIR$/doc/bots" />
-      <recent name="$PROJECT_DIR$/doc" />
-      <recent name="$PROJECT_DIR$/previousversions" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/doc" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/tests" />
       <recent name="$PROJECT_DIR$/bloc" />
       <recent name="C:\Users\Joe\PycharmProjects\myflaskproject\venv\Scripts" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/tests" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/bots" />
+      <recent name="$PROJECT_DIR$/doc/bots" />
+      <recent name="$PROJECT_DIR$/doc" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -722,7 +701,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests in test_BlocServer.py">
+  <component name="RunManager" selected="Python tests.Unittests for test_MarketObjects.TestMarketObjects">
     <configuration default="true" type="tests" factoryName="Attests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -759,28 +738,6 @@
       <option name="additionalOptions" value="" />
       <option name="ipnbHost" value="127.0.0.1" />
       <option name="ipnbPort" value="8888" />
-      <method v="2" />
-    </configuration>
-    <configuration name="BlocServer" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="untitled" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/bloc" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/bloc/BlocServer.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
     <configuration name="MarketClient" type="PythonConfigurationType" factoryName="Python">
@@ -849,7 +806,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="scratch" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="scratch3" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="untitled" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -857,12 +814,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$APPLICATION_CONFIG_DIR$/scratches" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/game" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/game/scratch3.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -893,28 +850,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="tmp3" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="untitled" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/bots" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/bots/tmp3.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
       <node-interpreter>project</node-interpreter>
       <node-options />
@@ -936,6 +871,36 @@
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;test_BlocServer.TestBlocServer&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for test_MarketObjects.TestMarketObjects" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="untitled" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_MarketObjects.TestMarketObjects&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for test_MarketObjects.TestMarketObjects.test_ConstantProductMarket" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="untitled" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_MarketObjects.TestMarketObjects.test_ConstantProductMarket&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -1006,19 +971,19 @@
       <item itemvalue="Python tests.Unittests for test_MarketServer.TestMarketServer" />
       <item itemvalue="Jupyter Notebook.untitled" />
       <item itemvalue="Python.tmp" />
-      <item itemvalue="Python.scratch" />
       <item itemvalue="Python tests.Unittests for test_BlocServer.TestBlocServer" />
-      <item itemvalue="Python.BlocServer" />
-      <item itemvalue="Python.tmp3" />
       <item itemvalue="Python tests.Unittests in test_BlocServer.py" />
+      <item itemvalue="Python.scratch3" />
+      <item itemvalue="Python tests.Unittests for test_MarketObjects.TestMarketObjects.test_ConstantProductMarket" />
+      <item itemvalue="Python tests.Unittests for test_MarketObjects.TestMarketObjects" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Unittests for test_MarketObjects.TestMarketObjects" />
+        <item itemvalue="Python tests.Unittests for test_MarketObjects.TestMarketObjects.test_ConstantProductMarket" />
+        <item itemvalue="Python.scratch3" />
         <item itemvalue="Python tests.Unittests in test_BlocServer.py" />
         <item itemvalue="Python tests.Unittests for test_BlocServer.TestBlocServer" />
-        <item itemvalue="Python.tmp3" />
-        <item itemvalue="Python.BlocServer" />
-        <item itemvalue="Python.scratch" />
       </list>
     </recent_temporary>
   </component>
@@ -1128,35 +1093,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_in_test_BlocServer_py - 2019.12.29 at 18h 24m 10s.xml">
-      <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
+    <history-entry file="Unittests_for_test_MarketObjects_TestMarketObjects - 2020.04.10 at 18h 21m 16s.xml">
+      <configuration name="Unittests for test_MarketObjects.TestMarketObjects" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_BlocServer_py - 2019.12.29 at 18h 24m 49s.xml">
-      <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
+    <history-entry file="Unittests_for_test_MarketObjects_TestMarketObjects - 2020.04.10 at 18h 22m 30s.xml">
+      <configuration name="Unittests for test_MarketObjects.TestMarketObjects" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_BlocServer_py - 2019.12.29 at 18h 26m 09s.xml">
-      <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
+    <history-entry file="Unittests_for_test_MarketObjects_TestMarketObjects - 2020.04.11 at 11h 52m 24s.xml">
+      <configuration name="Unittests for test_MarketObjects.TestMarketObjects" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_BlocServer_py - 2019.12.29 at 18h 32m 07s.xml">
-      <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
+    <history-entry file="Unittests_for_test_MarketObjects_TestMarketObjects - 2020.04.11 at 13h 46m 06s.xml">
+      <configuration name="Unittests for test_MarketObjects.TestMarketObjects" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_BlocServer_py - 2019.12.29 at 18h 32m 12s.xml">
-      <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
+    <history-entry file="Unittests_for_test_MarketObjects_TestMarketObjects - 2020.04.11 at 13h 47m 52s.xml">
+      <configuration name="Unittests for test_MarketObjects.TestMarketObjects" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_BlocServer_py - 2019.12.29 at 18h 39m 07s.xml">
-      <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
+    <history-entry file="Unittests_for_test_MarketObjects_TestMarketObjects - 2020.04.11 at 13h 49m 28s.xml">
+      <configuration name="Unittests for test_MarketObjects.TestMarketObjects" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_BlocServer_py - 2019.12.29 at 18h 39m 29s.xml">
-      <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
+    <history-entry file="Unittests_for_test_MarketObjects_TestMarketObjects - 2020.04.11 at 13h 54m 54s.xml">
+      <configuration name="Unittests for test_MarketObjects.TestMarketObjects" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_BlocServer_py - 2019.12.30 at 17h 27m 23s.xml">
-      <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
+    <history-entry file="Unittests_for_test_MarketObjects_TestMarketObjects - 2020.04.11 at 14h 28m 02s.xml">
+      <configuration name="Unittests for test_MarketObjects.TestMarketObjects" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_BlocServer_py - 2019.12.30 at 17h 27m 47s.xml">
-      <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
+    <history-entry file="Unittests_for_test_MarketObjects_TestMarketObjects - 2020.04.11 at 14h 34m 53s.xml">
+      <configuration name="Unittests for test_MarketObjects.TestMarketObjects" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_BlocServer_py - 2020.01.04 at 17h 54m 19s.xml">
-      <configuration name="Unittests in test_BlocServer.py" configurationId="tests" />
+    <history-entry file="Unittests_for_test_MarketObjects_TestMarketObjects - 2020.04.12 at 10h 49m 07s.xml">
+      <configuration name="Unittests for test_MarketObjects.TestMarketObjects" configurationId="tests" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -1169,36 +1134,35 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="160" y="113" width="1473" height="907" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="23" width="1680" height="960" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.46696034" visible="true" weight="0.11320755" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.46696034" visible="true" weight="0.124542125" />
       <window_info id="Structure" order="1" sideWeight="0.5330396" side_tool="true" weight="0.11608094" />
       <window_info id="Favorites" order="2" sideWeight="0.50385606" side_tool="true" weight="0.0042735045" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.496337" weight="0.4556213" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.53663003" weight="0.3704142" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.7185592" weight="0.52364063" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.7148962" visible="true" weight="0.4189349" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4933613" weight="0.3219697" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5059399" side_tool="true" visible="true" weight="0.19570707" />
-      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4940601" visible="true" weight="0.19570707" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.6156534" weight="0.31944445" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4933613" weight="0.32189348" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.2851038" side_tool="true" weight="0.4745562" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4932845" weight="0.1954023" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.6147741" weight="0.3183432" />
       <window_info anchor="bottom" id="Database Console" order="10" sideWeight="0.50807756" weight="0.039772727" />
-      <window_info anchor="bottom" id="Database Changes" order="11" sideWeight="0.4884696" weight="0.31944445" />
+      <window_info anchor="bottom" id="Database Changes" order="11" sideWeight="0.4884696" weight="0.3183432" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Concurrent Activities Diagram" order="13" sideWeight="0.4971061" weight="0.32608697" />
-      <window_info anchor="bottom" id="Python Console" order="14" sideWeight="0.6939203" weight="0.21212122" />
+      <window_info anchor="bottom" id="Concurrent Activities Diagram" order="13" sideWeight="0.496337" weight="0.3260188" />
+      <window_info anchor="bottom" id="Python Console" order="14" sideWeight="0.6898657" weight="0.2998955" />
       <window_info anchor="bottom" id="Inspection Results" order="15" weight="0.33333334" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Database" order="3" sideWeight="0.4866562" visible="true" weight="0.22012578" />
+      <window_info anchor="right" id="Database" order="3" sideWeight="0.47861508" visible="true" weight="0.1923077" />
       <window_info anchor="right" id="Coverage" order="4" side_tool="true" />
-      <window_info anchor="right" id="SciView" order="5" sideWeight="0.48357424" weight="0.31807083" />
+      <window_info anchor="right" id="SciView" order="5" sideWeight="0.9470468" weight="0.31684983" />
       <window_info anchor="right" id="Data View" order="6" weight="0.32861736" />
-      <window_info anchor="right" x="0" y="0" width="353" height="713" id="Documentation" order="7" sideWeight="0.5133438" side_tool="true" visible="true" weight="0.22012578" />
+      <window_info anchor="right" x="0" y="0" width="353" height="713" id="Documentation" order="7" sideWeight="0.52138495" side_tool="true" visible="true" weight="0.1923077" />
       <window_info anchor="right" id="R Graphics" order="8" weight="0.32905984" />
       <window_info anchor="right" id="R Packages" order="9" weight="0.32844934" />
     </layout>
@@ -1441,6 +1405,36 @@
           <line>618</line>
           <option name="timeStamp" value="1141" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/game/scratch3.py</url>
+          <line>86</line>
+          <option name="timeStamp" value="1240" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/game/scratch3.py</url>
+          <line>75</line>
+          <option name="timeStamp" value="1242" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/tests/test_MarketObjects.py</url>
+          <line>128</line>
+          <option name="timeStamp" value="1258" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/game/MarketObjects.py</url>
+          <line>837</line>
+          <option name="timeStamp" value="1266" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/tests/test_MarketObjects.py</url>
+          <line>161</line>
+          <option name="timeStamp" value="1267" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/game/MarketObjects.py</url>
+          <line>829</line>
+          <option name="timeStamp" value="1271" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
@@ -1543,102 +1537,53 @@
     </expressions>
     <expressions id="evaluateExpression">
       <expression>
-        <expression-string>NCstar_matched.ndim</expression-string>
+        <expression-string>z = self.store.loc[(self.store['object'] == 'User') &amp; (self.store['id'] == self.user.id), :]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>[].size</expression-string>
+        <expression-string>z['state']</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>marketId.size</expression-string>
+        <expression-string>z</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>NC[:,np.where(iMatched)]</expression-string>
+        <expression-string>[x['Ra'] for x in z.loc['state']]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>NC[iMatched]</expression-string>
+        <expression-string>myTradeHistory = pd.DataFrame({'utc': z['utc'], 'Ra': [x['Ra'] for x in z['state']], 'Rb': [x['Ra'] for x in z['state']]})</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>(Mstar[:, iOwnUnmatched] - Pstar[:, iOwnUnmatched])*Qstar</expression-string>
+        <expression-string>myTradeHistory = pd.dataFrame({'utc': z['utc'], 'Ra': [x['Ra'] for x in z['state']], 'Rb': [x['Ra'] for x in z['state']]})</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>Mstar[:, iOwnUnmatched] - Pstar[:, iOwnUnmatched]</expression-string>
+        <expression-string>self.assertEqual(c.Rs_prop.tolist(),  [1,0])</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>np.matmul(Mstar[:, iOwnUnmatched] - Pstar[:, iOwnUnmatched], Qstar[iOwnUnmatched, :])</expression-string>
+        <expression-string>self.assertEqual(c.Rs_prop.tolist(),  [1.,0.])</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>np.multiply(Mstar[:, iOwnUnmatched] - Pstar[:, iOwnUnmatched], Qstar[iOwnUnmatched, :])</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>np.min(np.multiply(Mstar[:, iOwnUnmatched] - Pstar[:, iOwnUnmatched], Qstar[iOwnUnmatched, :]), axis=1)</expression-string>
+        <expression-string>self.assertEqual(c.Rs_prop,  np.array([1.,0.]))</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/bots/betfair/loadjson.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="71" selection-start-line="10" selection-start-column="71" selection-end-line="10" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bots/tmp3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="9" lean-forward="true" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/dfi33hnqjs2hjj/schema/public/table/spmarket" />
-    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/dfi33hnqjs2hjj/schema/public/table/orderBook" />
-    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/dfi33hnqjs2hjj/schema/public/table/sprecord" />
-    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/dfi33hnqjs2hjj/schema/public/table/marketBounds" />
-    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/dfi33hnqjs2hjj/schema/public/table/marketTable" />
-    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/dfi33hnqjs2hjj/schema/public/table/userTable" />
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/40749f87-b5cc-44ab-91e5-7d9f7ca94b16/console.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="25" selection-start-column="25" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/ddvi31085f7cuu/schema/public/table/timeStampServerTable" />
-    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/ddvi31085f7cuu/schema/public/table/blocTable" />
-    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/ddvi31085f7cuu/schema/public/table/spevent" />
-    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/ddvi31085f7cuu/schema/public/table/spmarket" />
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/unittest/case.py" />
-    <entry file="file://$PROJECT_DIR$/.coverage">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/runtime.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -1665,13 +1610,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/404.html">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_BlocServer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-15">
-          <caret line="2" column="13" lean-forward="true" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
     </entry>
     <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/userTable">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
@@ -1784,20 +1722,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/markets.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="855">
-          <caret line="57" column="58" selection-start-line="57" selection-start-column="58" selection-end-line="57" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/accounts/signup.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="35" selection-start-line="6" selection-start-column="35" selection-end-line="6" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://40749f87-b5cc-44ab-91e5-7d9f7ca94b16/database/blocparty/schema/public/table/spevent">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -1808,9 +1732,92 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/accounts/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://64290c43-f0f8-4cae-a45f-1a5b20670b1b/schema/main/table/store" />
+    <entry file="das://44b3f4d7-b859-43f8-977b-3a83e5a88e6d/database/ddvi31085f7cuu/schema/public/table/store">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+          <column-attributes>
+            <column name="state" languageId="JSON" />
+            <column name="ctid" enabled="false" />
+          </column-attributes>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game/agecondata.db" />
+    <entry file="file://$PROJECT_DIR$/templates/accounts/signup.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="35" selection-start-line="6" selection-start-column="35" selection-end-line="6" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python3.7/site-packages/requests/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="809" selection-start-line="809" selection-end-line="809" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python3.7/site-packages/requests/sessions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="109">
+          <caret line="386" selection-start-line="386" selection-end-line="386" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python3.7/site-packages/requests/api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="109">
+          <caret line="58" selection-start-line="58" selection-end-line="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python3.7/site-packages/pandas/core/ops/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="525" selection-start-line="525" selection-end-line="525" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BlocAPI.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="404">
+          <caret line="678" lean-forward="true" selection-start-line="678" selection-end-line="678" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/markets.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="377">
+          <caret line="57" column="58" selection-start-line="57" selection-start-column="58" selection-end-line="57" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="422">
+          <caret line="1663" selection-start-line="1663" selection-end-line="1663" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/Cellar/python/3.7.6_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/json/encoder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="178" selection-start-line="178" selection-end-line="178" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/bloc/BlocClient.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
+        <state relative-caret-position="30">
           <caret line="8" selection-start-line="8" selection-end-line="8" />
           <folding>
             <element signature="e#1#20#0" expanded="true" />
@@ -1821,8 +1828,84 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bots/BlocBot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1241">
-          <caret line="100" column="23" lean-forward="true" selection-start-line="100" selection-start-column="23" selection-end-line="100" selection-end-column="23" />
+        <state relative-caret-position="-513">
+          <caret line="100" column="23" selection-start-line="100" selection-start-column="23" selection-end-line="100" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/Cellar/python/3.7.6_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/unittest/suite.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1200">
+          <caret line="83" selection-start-line="83" selection-end-line="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/Cellar/python/3.7.6_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/unittest/runner.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2940">
+          <caret line="201" selection-start-line="201" selection-end-line="201" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_BlocServer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="9" selection-start-line="9" selection-end-line="30" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/Cellar/python/3.7.6_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/codecs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4650">
+          <caret line="311" selection-start-line="311" selection-end-line="311" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://a6a72deb-45cd-42b1-978d-7b148f452672/schema/main/table/store">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://48cd0232-3d03-4e43-9aab-7557880e6331/schema/main/table/store">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game/scratch3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="74" column="14" selection-start-line="74" selection-start-column="10" selection-end-line="74" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/Cellar/python/3.7.6_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/unittest/case.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="628" selection-start-line="628" selection-end-line="628" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_MarketObjects.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2550">
+          <caret line="170" column="45" selection-start-line="170" selection-start-column="45" selection-end-line="170" selection-end-column="45" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
@@ -1831,49 +1914,71 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/game/DataStore.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="19" selection-start-line="19" selection-end-line="26" selection-end-column="9" />
+        <state relative-caret-position="2">
+          <caret line="15" column="29" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bloc/BlocServer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="163" column="57" lean-forward="true" selection-start-line="163" selection-start-column="57" selection-end-line="163" selection-end-column="57" />
+        <state relative-caret-position="1940">
+          <caret line="163" column="57" selection-start-line="163" selection-start-column="57" selection-end-line="163" selection-end-column="57" />
           <folding>
             <element signature="e#15#33#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/accounts/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/game/MarketObjects.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="298" column="23" lean-forward="true" selection-start-line="298" selection-start-column="23" selection-end-line="298" selection-end-column="23" />
+        <state relative-caret-position="406">
+          <caret line="957" column="48" selection-start-line="957" selection-start-column="48" selection-end-line="957" selection-end-column="48" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#1059#1256#0" />
+            <element signature="e#1332#3132#0" />
+            <element signature="e#6254#6868#0" />
+            <element signature="e#6898#8105#0" />
+            <element signature="e#19172#20237#0" />
+            <element signature="e#20538#20552#0" />
+            <element signature="e#20314#20571#0" />
+            <element signature="e#20614#21525#0" />
+            <element signature="e#21588#22999#0" />
+            <element signature="e#23039#24816#0" />
+            <element signature="e#24853#26891#0" />
+            <element signature="e#26930#27822#0" />
+            <element signature="e#27852#29186#0" />
+            <element signature="e#29382#29926#0" />
+            <element signature="e#32509#36784#0" />
+            <element signature="e#36823#37631#0" />
+            <element signature="e#37661#39134#0" />
+            <element signature="e#39876#40118#0" />
+            <element signature="e#40152#41056#0" />
+            <element signature="e#41106#42630#0" />
+            <element signature="e#42669#43315#0" />
+            <element signature="e#43345#44144#0" />
+            <marker date="1586652521286" expanded="true" signature="18691:18696" ph="..." />
+            <marker date="1586652521286" expanded="false" signature="20518:20520" ph="..." />
+            <marker date="1586652521286" expanded="true" signature="30516:30522" ph="..." />
+            <marker date="1586652521286" expanded="true" signature="32042:32680" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BlocAPI.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="452">
-          <caret line="677" column="22" lean-forward="true" selection-start-line="677" selection-start-column="22" selection-end-line="677" selection-end-column="22" />
-          <folding>
-            <element signature="e#1335#1427#0" expanded="true" />
-            <marker date="1585706140943" expanded="true" signature="3142:3524" ph="..." />
-            <marker date="1585706140943" expanded="true" signature="3795:4439" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>
